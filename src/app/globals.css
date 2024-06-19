@@ -22,6 +22,11 @@ body {
     rgb(var());
 }
 
+nav {
+  height: 60px;
+  background-color: #ffffff;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
