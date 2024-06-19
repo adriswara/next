@@ -41,18 +41,20 @@ export default function RootLayout({
         <section>
           <nav style={headerStyle}>
             <div style={imageHeader}>
+              <a href="\">
               <Image
                 src="/header.png"
                 width={230}
                 height={64}
                 alt="Picture of the author"
               />
+              </a>
             </div>
-            <div className={sourceSans.className} style={headerContent}><button>Product</button></div>
-            <div className={sourceSans.className} style={headerContent}><button>Showcase</button></div>
-            <div className={sourceSans.className} style={headerContent}><button>Voucher/Reward</button></div>
-            <div className={sourceSans.className} style={headerContent}><button>Profile</button></div>
-            <div className={sourceSans.className} style={headerContent}><button>About</button></div>
+            <div className={sourceSans.className} style={headerContent}><a href="\product">Product</a></div>
+            <div className={sourceSans.className} style={headerContent}><a href="\showcase">Showcase</a></div>
+            <div className={sourceSans.className} style={headerContent}><a href="\voucher">Voucher/Reward</a></div>
+            <div className={sourceSans.className} style={headerContent}><a href="\profile">Profile</a></div>
+            <div className={sourceSans.className} style={headerContent}><a href="\about">About</a></div>
             <div className={sourceSans.className} style={headerContent}><button style={loginButton}>Login/Signup</button></div>
           </nav>
         </section>
