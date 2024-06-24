@@ -47,6 +47,24 @@ export default function Home() {
     marginRight: 145
   }
 
+  const profileFieldTable = {
+    marginLeft:10,
+    marginRight:0,
+    marginTop:10,
+    marginBottom:0,
+  }
+
+  const profileTableTD = {
+    paddingTop:25
+  }
+  const profileTableTD2 = {
+    paddingTop:25,
+    paddingLeft: 300
+  }
+  const profileTableTR ={
+    borderTop:"1px solid lightGrey"
+  }
+
   return (
     <div style={profileStyle}>
       <div style={navProfileCard}>
@@ -60,27 +78,25 @@ export default function Home() {
         </ul>
       </div>
       <div style={profileCard}>
-        <table>
+        <table style={profileFieldTable}>
           <thead>
             <tr>
               <th colSpan={1}><p>Profile</p></th>
-
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Name</td>
-              <td>Name Field</td>
+              <td style={profileTableTD}>Name</td>
+              <td style={profileTableTD2}>Name Field</td>
             </tr>
-            <tr>
-              <td>Email</td>
-              <td>emailfield@mail.com</td>
+            <tr style={profileTableTR}>
+              <td style={profileTableTD}>Email</td>
+              <td style={profileTableTD2}>emailfield@mail.com</td>
             </tr>
-            <tr>
-              <td>Phone</td>
-              <td>+62812345678</td>
+            <tr style={profileTableTR}>
+              <td style={profileTableTD}>Phone</td>
+              <td style={profileTableTD2}>+62812345678</td>
             </tr>
-
           </tbody>
         </table>
       </div>
