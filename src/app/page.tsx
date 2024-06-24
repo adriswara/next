@@ -12,7 +12,7 @@ export default function Home() {
     border: "2px solid lightGrey",
     borderRadius: 5,
     marginLeft: 140,
-    marginRight: 510
+    marginRight: 850
   }
 
   const unselectedNavText = {
@@ -28,8 +28,8 @@ export default function Home() {
   const profileCard = {
     border: "2px solid lightGrey",
     borderRadius: 5,
-    marginLeft: -488  ,
-    marginRight: 400
+    marginLeft: -825  ,
+    marginRight: 145
   }
 
   return (
@@ -42,7 +42,7 @@ export default function Home() {
           <li><a href=""><p style={unselectedNavText}>Logout</p></a></li>
         </ul>
       </div>
-      <div style={profileCard}>
+      <table style={profileCard}>
         <tr>
           <th><p>Profile</p></th>
           <th></th>
@@ -59,7 +59,7 @@ export default function Home() {
           <td>Phone</td>
           <td>+62812345678</td>
         </tr>
-      </div>
+      </table>
     </div>
   );
 }
