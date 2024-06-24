@@ -69,12 +69,12 @@ export default function RootLayout({
     gridTemplateColumns: "auto auto auto",
     borderTop: "1px solid lightgrey"
   }
-  const footerDiv ={
-    paddingLeft:140,
-    marginTop:30
+  const footerDiv = {
+    paddingLeft: 140,
+    marginTop: 30
   }
   const footerDivShared = {
-    marginTop:30
+    marginTop: 30
   }
 
   return (
@@ -100,6 +100,26 @@ export default function RootLayout({
             <div><h1 style={footerDiv}>Online Shoping Guide</h1></div>
             <div><h1 style={footerDivShared}>Store Locator</h1></div>
             <div><h1 style={footerDivShared}>About</h1></div>
+            <div><h1></h1></div>
+            <div><h1></h1></div>
+            <div><h1></h1></div>
+            <div><h1></h1></div>
+            <div><h1></h1></div>
+            <div><h1></h1></div>
+            <div><h1></h1></div>
+            <div><h1></h1></div>
+            <div><h1></h1></div>
+            <div><h1></h1></div>
+            <div><h1></h1></div>
+            <div><h1></h1></div>
+            <div><h1></h1></div>
+            <div><h1></h1></div>
+            <div><h1></h1></div>
+            <div><h1></h1></div>
+            <div><h1></h1></div>
+            <div><h1></h1></div>
+            <div><h1></h1></div>
+            <div><h1></h1></div>
           </div>
         </section>
       </body>
