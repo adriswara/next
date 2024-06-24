@@ -42,12 +42,7 @@ export default function RootLayout({
           <nav style={headerStyle}>
             <div style={imageHeader}>
               <a href="\">
-              <Image
-                src="/header.png"
-                width={230}
-                height={64}
-                alt="Picture of the author"
-              />
+                <Image src="/header.png" width={230} height={64} alt="Picture of the author"/>
               </a>
             </div>
             <div className={sourceSans.className} style={headerContent}><a href="\product">Product</a></div>
@@ -55,7 +50,7 @@ export default function RootLayout({
             <div className={sourceSans.className} style={headerContent}><a href="\voucher">Voucher/Reward</a></div>
             <div className={sourceSans.className} style={headerContent}><a href="\profile">Profile</a></div>
             <div className={sourceSans.className} style={headerContent}><a href="\about">About</a></div>
-            <div className={sourceSans.className} style={headerContent}><button style={loginButton}>Login/Signup</button></div>
+            <div className={sourceSans.className} style={headerContent}><a href="\login"><button style={loginButton}>Login/Signup</button></a></div>
           </nav>
         </section>
         {children}
