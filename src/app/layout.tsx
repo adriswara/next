@@ -19,12 +19,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const imageHeader = {
-    marginLeft: 64,
+    marginLeft: 130,
     paddingTop: 16
   }
   const headerStyle = {
     display: "grid",
     gridTemplateColumns: "auto auto auto auto auto auto auto",
+    border: "2px solid lightgrey",
+
   }
   const headerContent = {
     paddingTop: 16,
