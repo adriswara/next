@@ -3,10 +3,10 @@ import Image from "next/image";
 export default function Home() {
   type logoutcolor = `rgb(${239},${77},${68})`
   const profileStyle = {
-
     display: "grid",
     gridTemplateColumns: "auto auto",
-    paddingTop: 20
+    paddingTop: 20,
+    paddingBottom: 20
   }
 
   const navProfileCard = {

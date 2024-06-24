@@ -18,15 +18,18 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const imageHeader = {
-    marginLeft: 130,
-    paddingTop: 16
-  }
+
+
+  // header
   const headerStyle = {
     display: "grid",
     gridTemplateColumns: "auto auto auto auto auto auto auto",
     border: "2px solid lightgrey",
 
+  }
+  const imageHeader = {
+    marginLeft: 130,
+    paddingTop: 16
   }
   const headerContent = {
     paddingTop: 16,
@@ -34,21 +37,18 @@ export default function RootLayout({
     marginLeft: 90,
     marginRight: 80
   }
-
   const photoStudio = {
     paddingTop: 16,
     paddingBottom: 16,
     marginLeft: 350,
     marginRight: -160
   }
-
-  const photoPrint ={
+  const photoPrint = {
     paddingTop: 16,
     paddingBottom: 16,
     marginLeft: 90,
     marginRight: -160
   }
-
   const checkoutButton = {
     paddingTop: 16,
     paddingBottom: 16,
@@ -60,6 +60,21 @@ export default function RootLayout({
     paddingBottom: 16,
     marginRight: -24,
     marginLeft: -50
+  }
+
+  // footer
+
+  const footerMain = {
+    display: "grid",
+    gridTemplateColumns: "auto auto auto",
+    borderTop: "1px solid lightgrey"
+  }
+  const footerDiv ={
+    paddingLeft:140,
+    marginTop:30
+  }
+  const footerDivShared = {
+    marginTop:30
   }
 
   return (
@@ -80,6 +95,13 @@ export default function RootLayout({
           </nav>
         </section>
         {children}
+        <section>
+          <div style={footerMain}>
+            <div><h1 style={footerDiv}>Online Shoping Guide</h1></div>
+            <div><h1 style={footerDivShared}>Store Locator</h1></div>
+            <div><h1 style={footerDivShared}>About</h1></div>
+          </div>
+        </section>
       </body>
     </html>
   );
