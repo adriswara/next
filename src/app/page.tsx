@@ -41,8 +41,8 @@ export default function Home() {
   }
 
   const profileCard = {
-    border: "0.1px solid lightGrey",
-    borderRadius: 5,
+    border: "1px solid lightGrey",
+    borderRadius: 10,
     marginLeft: -825,
     marginRight: 145
   }
@@ -59,29 +59,31 @@ export default function Home() {
           <li style={navCardField}><a href=""><p style={logoutButton}>Logout</p></a></li>
         </ul>
       </div>
-      <table style={profileCard}>
-        <thead>
-          <tr>
-            <th colSpan={1}><p>Profile</p></th>
-            
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Name</td>
-            <td>Name Field</td>
-          </tr>
-          <tr>
-            <td>Email</td>
-            <td>emailfield@mail.com</td>
-          </tr>
-          <tr>
-            <td>Phone</td>
-            <td>+62812345678</td>
-          </tr>
+      <div style={profileCard}>
+        <table>
+          <thead>
+            <tr>
+              <th colSpan={1}><p>Profile</p></th>
 
-        </tbody>
-      </table>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Name</td>
+              <td>Name Field</td>
+            </tr>
+            <tr>
+              <td>Email</td>
+              <td>emailfield@mail.com</td>
+            </tr>
+            <tr>
+              <td>Phone</td>
+              <td>+62812345678</td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
