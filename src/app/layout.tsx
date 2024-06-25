@@ -71,10 +71,10 @@ export default function RootLayout({
   }
   const footerDiv = {
     paddingLeft: 140,
-    marginTop: 30
+    marginTop: 10
   }
   const footerDivShared = {
-    marginTop: 30
+    marginTop: 10
   }
 
   return (
@@ -100,26 +100,46 @@ export default function RootLayout({
             <div><h1 style={footerDiv}>Online Shoping Guide</h1></div>
             <div><h1 style={footerDivShared}>Store Locator</h1></div>
             <div><h1 style={footerDivShared}>About</h1></div>
-            <div><h1></h1></div>
-            <div><h1></h1></div>
-            <div><h1></h1></div>
-            <div><h1></h1></div>
-            <div><h1></h1></div>
-            <div><h1></h1></div>
-            <div><h1></h1></div>
-            <div><h1></h1></div>
-            <div><h1></h1></div>
-            <div><h1></h1></div>
-            <div><h1></h1></div>
-            <div><h1></h1></div>
-            <div><h1></h1></div>
-            <div><h1></h1></div>
-            <div><h1></h1></div>
-            <div><h1></h1></div>
-            <div><h1></h1></div>
-            <div><h1></h1></div>
-            <div><h1></h1></div>
-            <div><h1></h1></div>
+            <div><h1 style={footerDiv}>Photo Studio Reservation</h1></div>
+            <div><h1 style={footerDivShared}>Jonas Banda</h1></div>
+            <div><h1 style={footerDivShared}>Jonas Photo</h1></div>
+            <div><h1 style={footerDiv}>Photo Printing</h1></div>
+            <div><h1 style={footerDivShared}>Jonas Buah Batu</h1></div>
+            <div><h1 style={footerDivShared}>Term and Condition</h1></div>
+            <div><h1 style={footerDiv}>Photo Frame</h1></div>
+            <div><h1 style={footerDivShared}>Jonas Ciwalk</h1></div>
+            <div><h1 style={footerDivShared}>Privacy Policy</h1></div>
+            <div><h1 style={footerDiv}></h1></div>
+            <div><h1 style={footerDivShared}>Jonas Feslink</h1></div>
+            <div><h1 style={footerDivShared}>FAQs</h1></div>
+            <div><h1 style={footerDiv}></h1></div>
+            <div><h1 style={footerDivShared}>Jonas Jatinangor</h1></div>
+            <div><h1 style={footerDivShared}>Official Account</h1></div>
+            <div><h1 style={footerDiv}></h1></div>
+            <div><h1 style={footerDivShared}>Jonas Cimahi</h1></div>
+            <div><h1 style={footerDivShared}>POSISI LOGO</h1></div>
+            <div><h1 style={footerDiv}></h1></div>
+            <div><h1 style={footerDivShared}>Jonas KBP</h1></div>
+            <div><h1 style={footerDivShared}></h1></div>
+            <div><h1 style={footerDiv}></h1></div>
+            <div><h1 style={footerDivShared}>Jonas Summarecon Mall Serpong</h1></div>
+            <div><h1 style={footerDivShared}></h1></div>
+            <div><h1 style={footerDiv}></h1></div>
+            <div><h1 style={footerDivShared}>Jonas Alam Sutera (Coming Soon)</h1></div>
+            <div><h1 style={footerDivShared}></h1></div>
+            <div><h1 style={footerDiv}></h1></div>
+            <div><h1 style={footerDivShared}>Jonas Semarang</h1></div>
+            <div><h1 style={footerDivShared}></h1></div>
+            <div><h1 style={footerDiv}></h1></div>
+            <div><h1 style={footerDivShared}></h1></div>
+            <div><h1 style={footerDivShared}></h1></div>
+            <div><h1 style={footerDiv}></h1></div>
+            <div><h1 style={footerDivShared}></h1></div>
+            <div><h1 style={footerDivShared}></h1></div>
+            <div><h1 style={footerDiv}></h1></div>
+            <div><h1 style={footerDivShared}></h1></div>
+            <div><h1 style={footerDivShared}></h1></div>
+            <div><h1 style={footerDiv}>2024 Jonasphoto. All Rights reserved.</h1></div>
           </div>
         </section>
       </body>
