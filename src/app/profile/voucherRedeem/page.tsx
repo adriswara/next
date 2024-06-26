@@ -45,18 +45,19 @@ export default function Home() {
     const voucherList = {
         border: "1px solid lightGrey",
         borderRadius: 5,
-        marginLeft: 20,
-        marginRight: 20,
-        marginTop: 20
+        margin: 20
     }
 
     const voucherObject = {
         display: "grid",
         gridTemplateColumns: "auto auto",
+        marginTop: 20,
+        marginBottom: 20,
+        borderRadius: 10,
     }
 
     const voucherLeftComponent = {
-       
+        marginLeft: 20
     }
 
     const voucherRightComponent = {
@@ -69,6 +70,32 @@ export default function Home() {
 
     const voucherRightStatus = {
 
+    }
+
+    const hugetextVoucher = {
+        fontSize: 30
+    }
+    const bigTextVoucher = {
+        fontSize: 14
+    }
+    const descTextVoucher = {
+        fontSize: 12,
+        color: "grey"
+    }
+
+    const voucherCodeLine = {
+        color: "darkblue",
+        fontSize: 14,
+        marginLeft : 150,
+        marginRight: -30
+    }
+
+    const voucherCodeCopy = {
+        fontSize: 14,
+        display: "grid",
+        gridTemplateColumns: "auto auto",
+        width: 70,
+        marginRight: -70
     }
 
 
@@ -95,16 +122,21 @@ export default function Home() {
             <div style={voucherList}>
                 <div style={voucherObject}>
                     <div style={voucherLeftComponent}>
-                        <div>Discount nominal</div>
-                        <div>for what</div>
-                        <div>expire date</div>
-                        <div>product desc</div>
-                        <div>detail voucher</div>
+                        <div style={hugetextVoucher}>X% OFF</div>
+                        <div style={bigTextVoucher}>FOR WHOLE ORDER</div>
+                        <div style={descTextVoucher}>XX/XX/XXXX XX:XX - XX/XX/XXXX XX:XX</div>
+                        <div style={descTextVoucher}>For All products</div>
+                        <div style={descTextVoucher}>Combination: get xx% off when....</div>
                     </div>
                     <div style={voucherRightComponent}>
                         <div style={voucherRightCode}>
-                            <div>voucher code</div>
-                            <div> copy button</div>
+                            <div style={voucherCodeLine}>Code: CODE_123sksdiof</div>
+                            <div style={voucherCodeCopy}>
+                                <svg fill="#000000" width="20px" height="20px" viewBox="0 0 36 36" version="1.1" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" >
+                                    <title>copy-line</title>
+                                    <path d="M29.5,7h-19A1.5,1.5,0,0,0,9,8.5v24A1.5,1.5,0,0,0,10.5,34h19A1.5,1.5,0,0,0,31,32.5V8.5A1.5,1.5,0,0,0,29.5,7ZM29,32H11V9H29Z"></path><path d="M26,3.5A1.5,1.5,0,0,0,24.5,2H5.5A1.5,1.5,0,0,0,4,3.5v24A1.5,1.5,0,0,0,5.5,29H6V4H26Z" class="clr-i-outline clr-i-outline-path-2"></path>
+                                    <rect x="0" y="0" width="36" height="36" fill-opacity="0" />
+                                </svg> Copy</div>
                         </div>
                         <div style={voucherRightStatus}>active non active</div>
                     </div>
