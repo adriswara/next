@@ -38,13 +38,16 @@ export default function Home() {
         border: "1px solid lightGrey",
         borderRadius: 5,
         backgroundColor: "white",
-        marginRight: 10,
+        marginRight: 20,
         paddingLeft: 10,
         paddingRight: 10
     }
     const voucherList = {
         border: "1px solid lightGrey",
-        borderRadius: 5
+        borderRadius: 5,
+        marginLeft: 20,
+        marginRight: 20,
+        marginTop: 20
     }
 
     const voucherObject = {
@@ -53,7 +56,7 @@ export default function Home() {
     }
 
     const voucherLeftComponent = {
-
+       
     }
 
     const voucherRightComponent = {
@@ -64,7 +67,7 @@ export default function Home() {
         gridTemplateColumns: "auto auto"
     }
 
-    const voucherRightStatus ={
+    const voucherRightStatus = {
 
     }
 
