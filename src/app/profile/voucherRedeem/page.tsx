@@ -43,10 +43,28 @@ export default function Home() {
         paddingRight: 10
     }
     const voucherList = {
-
+        border: "1px solid lightGrey",
+        borderRadius: 5
     }
 
     const voucherObject = {
+        display: "grid",
+        gridTemplateColumns: "auto auto",
+    }
+
+    const voucherLeftComponent = {
+
+    }
+
+    const voucherRightComponent = {
+
+    }
+    const voucherRightCode = {
+        display: "grid",
+        gridTemplateColumns: "auto auto"
+    }
+
+    const voucherRightStatus ={
 
     }
 
@@ -71,7 +89,24 @@ export default function Home() {
                     <option value=""></option>
                 </select>
             </div>
-            <div></div>
+            <div style={voucherList}>
+                <div style={voucherObject}>
+                    <div style={voucherLeftComponent}>
+                        <div>Discount nominal</div>
+                        <div>for what</div>
+                        <div>expire date</div>
+                        <div>product desc</div>
+                        <div>detail voucher</div>
+                    </div>
+                    <div style={voucherRightComponent}>
+                        <div style={voucherRightCode}>
+                            <div>voucher code</div>
+                            <div> copy button</div>
+                        </div>
+                        <div style={voucherRightStatus}>active non active</div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
