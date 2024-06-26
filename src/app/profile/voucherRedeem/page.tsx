@@ -69,7 +69,10 @@ export default function Home() {
     }
 
     const voucherRightStatus = {
-
+        paddingTop: 75,
+        paddingLeft: 190,
+        width: 280,
+        float: "Right"
     }
 
     const hugetextVoucher = {
@@ -138,7 +141,7 @@ export default function Home() {
                                     <rect x="0" y="0" width="36" height="36" fill-opacity="0" />
                                 </svg> Copy</div>
                         </div>
-                        <div style={voucherRightStatus}>active non active</div>
+                        <div style={voucherRightStatus}><button type="button" disabled>ACTIVE</button></div>
                     </div>
                 </div>
             </div>
