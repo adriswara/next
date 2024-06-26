@@ -6,7 +6,7 @@ export default function Home() {
     display: "grid",
     gridTemplateColumns: "auto auto",
     paddingTop: 20,
-    paddingBottom: 20
+    paddingBottom: 150
   }
 
   const navProfileCard = {

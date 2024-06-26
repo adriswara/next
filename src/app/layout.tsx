@@ -67,7 +67,8 @@ export default function RootLayout({
   const footerMain = {
     display: "grid",
     gridTemplateColumns: "auto auto auto",
-    borderTop: "1px solid lightgrey"
+    borderTop: "1px solid lightgrey",
+    marginBottom: 50
   }
   const footerDiv = {
     paddingLeft: 140,
