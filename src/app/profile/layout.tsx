@@ -19,7 +19,7 @@ export default function profile({
     borderRadius: 10,
     marginLeft: 140,
     marginRight: 850,
-    marginBottom:40
+    marginBottom:230
   }
   const navCardField = {
     borderTop: "1px solid lightGrey",
