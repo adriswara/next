@@ -72,7 +72,17 @@ export default function Home() {
         paddingTop: 75,
         paddingLeft: 190,
         width: 280,
-        float: "Right"
+        float: "right",
+    }
+    const buttonVoucherRightStatus = {
+        border: "1px solid lightGrey",
+        borderRadius: 15,
+        backgroundColor: "darkGreen",
+        color: "white",
+        fontSize: 13,
+        width: 60,
+        height: 30
+
     }
 
     const hugetextVoucher = {
@@ -89,7 +99,7 @@ export default function Home() {
     const voucherCodeLine = {
         color: "darkblue",
         fontSize: 14,
-        marginLeft : 150,
+        marginLeft: 150,
         marginRight: -30
     }
 
@@ -137,11 +147,11 @@ export default function Home() {
                             <div style={voucherCodeCopy}>
                                 <svg fill="#000000" width="20px" height="20px" viewBox="0 0 36 36" version="1.1" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" >
                                     <title>copy-line</title>
-                                    <path d="M29.5,7h-19A1.5,1.5,0,0,0,9,8.5v24A1.5,1.5,0,0,0,10.5,34h19A1.5,1.5,0,0,0,31,32.5V8.5A1.5,1.5,0,0,0,29.5,7ZM29,32H11V9H29Z"></path><path d="M26,3.5A1.5,1.5,0,0,0,24.5,2H5.5A1.5,1.5,0,0,0,4,3.5v24A1.5,1.5,0,0,0,5.5,29H6V4H26Z" class="clr-i-outline clr-i-outline-path-2"></path>
+                                    <path d="M29.5,7h-19A1.5,1.5,0,0,0,9,8.5v24A1.5,1.5,0,0,0,10.5,34h19A1.5,1.5,0,0,0,31,32.5V8.5A1.5,1.5,0,0,0,29.5,7ZM29,32H11V9H29Z"></path><path d="M26,3.5A1.5,1.5,0,0,0,24.5,2H5.5A1.5,1.5,0,0,0,4,3.5v24A1.5,1.5,0,0,0,5.5,29H6V4H26Z" ></path>
                                     <rect x="0" y="0" width="36" height="36" fill-opacity="0" />
                                 </svg> Copy</div>
                         </div>
-                        <div style={voucherRightStatus}><button type="button" disabled>ACTIVE</button></div>
+                        <div style={voucherRightStatus}><button type="button" disabled style={buttonVoucherRightStatus}>ACTIVE</button></div>
                     </div>
                 </div>
             </div>
