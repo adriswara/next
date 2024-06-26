@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function VoucherList() {
+export default function Home() {
     const profileCard = {
         border: "1px solid lightGrey",
         borderRadius: 10,
@@ -11,7 +11,7 @@ export default function VoucherList() {
 
     return (
         <div style={profileCard}>
-            test
+            changePassword
         </div>
     );
 }

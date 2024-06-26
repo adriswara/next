@@ -50,12 +50,12 @@ export default function profile({
     <div style={profileStyle}>
       <div style={navProfileCard}>
         <ul>
-          <li><a href=""><p style={unselectedNavText}>Profile</p></a></li>
-          <li style={navCardField}><a href=""><p style={unselectedNavText}>Change Password</p></a></li>
-          <li style={navCardField}><a href=""><p style={unselectedNavText}>Transaction</p></a></li>
-          <li style={navCardField}><a href="/profile/"><p style={unselectedNavText}>Voucher List</p></a></li>
-          <li style={navCardField}><a href=""><p style={unselectedNavText}>Voucher Redeem</p></a></li>
-          <li style={navCardField}><a href=""><p style={logoutButton}>Logout</p></a></li>
+          <li><a href="/profile"><p style={unselectedNavText}>Profile</p></a></li>
+          <li style={navCardField}><a href="profile/changePassword"><p style={unselectedNavText}>Change Password</p></a></li>
+          <li style={navCardField}><a href="profile/transactionList"><p style={unselectedNavText}>Transaction</p></a></li>
+          <li style={navCardField}><a href="profile/voucherList/"><p style={unselectedNavText}>Voucher List</p></a></li>
+          <li style={navCardField}><a href="profile/voucherRedeem/"><p style={unselectedNavText}>Voucher Redeem</p></a></li>
+          <li style={navCardField}><a href="profile/logout"><p style={logoutButton}>Logout</p></a></li>
         </ul>
       </div>
       {children}
