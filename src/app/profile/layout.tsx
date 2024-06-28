@@ -13,7 +13,6 @@ export default function profile({
     paddingTop: 20,
     paddingBottom: 150
   }
-
   const navProfileCard = {
     border: "1px solid lightGrey",
     borderRadius: 10,
