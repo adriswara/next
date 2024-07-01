@@ -1,4 +1,3 @@
-import Image from "next/image";
 
 export default function Home() {
     const profileCard = {
@@ -135,6 +134,13 @@ export default function Home() {
         marginRight: -70
     }
 
+    const priceDiv = {
+        backgroundColor: "lightgrey"
+    }
+
+    const buttonDiv = {
+        backgroundColor: "lightgrey"
+    }
 
     return (
         <div style={profileCard}>
@@ -180,6 +186,8 @@ export default function Home() {
                             </div>
                             <div style={voucherRightStatus}><button type="button" disabled style={buttonVoucherRightStatusActive}>ACTIVE</button></div>
                         </div>
+                        <div style={priceDiv}>90 Points</div>
+                        <div style={buttonDiv}><link rel="stylesheet" href="" /><button>Redeem</button></div>
                     </div>
                     <div style={voucherObject}>
                         <div style={voucherLeftComponent}>
@@ -204,6 +212,7 @@ export default function Home() {
                             <div style={voucherRightStatus}><button type="button" disabled style={buttonVoucherRightStatusActive}>ACTIVE</button></div>
                         </div>
                     </div>
+
                 </div>
                 <div style={voucherList}>
                     <div style={voucherGrid}>
