@@ -2,6 +2,7 @@ package main
 
 import (
 	"database/sql"
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -89,8 +90,24 @@ func main() {
 	// fmt.Printf("ID of added album: %v\n", vouID)
 
 	//integration
-	resp, err := http.PostForm("http://example.com/form",
-		url.Values{"key": {"Value"}, "id": {"123"}})
+	data := url.Values{
+		"name":       {"John Doe"},
+		"occupation": {"test"},
+	}
+
+	resp, err := http.PostForm("https://httpbin.org/post", data)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer resp.Body.Close()
+
+	var res map[string]interface{}
+
+	json.NewDecoder(resp.Body).Decode(&res)
+
+	fmt.Println(res["form"])
 
 }
 
