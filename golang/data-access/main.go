@@ -4,6 +4,8 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"net/http"
+	"net/url"
 
 	"github.com/go-sql-driver/mysql"
 )
@@ -49,11 +51,11 @@ func main() {
 	}
 	fmt.Println("Connected!")
 
-	voucher, err := voucherByTitle("Photo Studio")
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Printf("Voucher found by name: %v\n", voucher)
+	// voucher, err := voucherByTitle("Photo Studio")
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// fmt.Printf("Voucher found by name: %v\n", voucher)
 
 	vou, err := voucherByID(1)
 	if err != nil {
@@ -85,6 +87,10 @@ func main() {
 	// 	log.Fatal(err)
 	// }
 	// fmt.Printf("ID of added album: %v\n", vouID)
+
+	//integration
+	resp, err := http.PostForm("http://example.com/form",
+		url.Values{"key": {"Value"}, "id": {"123"}})
 
 }
 
