@@ -95,9 +95,14 @@ export default function Home() {
         height: 30,
     }
 
-    const hugetextVoucher = {
+    const hugetextVoucher1 = {
         fontSize: 30
     }
+    const hugetextVoucher2 = {
+        fontSize: 30,
+        width:240
+    }
+
     const bigTextVoucher = {
         fontSize: 14
     }
@@ -132,7 +137,7 @@ export default function Home() {
                     <input type="text" name="" placeholder="Cari Voucher" style={searchBarInput} />
                 </label>
                 <select name="" id="" style={dropdown}>
-                    <option value="" disabled selected>Jenis Photo</option>
+                    <option value="" disabled selected>Jenis Voucher</option>
                     <option value=""></option>
                     <option value=""></option>
                 </select>
@@ -145,7 +150,7 @@ export default function Home() {
             <div style={voucherList}>
                 <div style={voucherObject}>
                     <div style={voucherLeftComponent}>
-                        <div style={hugetextVoucher}>X% OFF</div>
+                        <div style={hugetextVoucher1}>X% OFF</div>
                         <div style={bigTextVoucher}>FOR WHOLE ORDER</div>
                         <div style={descTextVoucher}>XX/XX/XXXX XX:XX - XX/XX/XXXX XX:XX</div>
                         <div style={descTextVoucher}>For All products</div>
@@ -168,7 +173,7 @@ export default function Home() {
                 </div>
                 <div style={voucherObject}>
                     <div style={voucherLeftComponent}>
-                        <div style={hugetextVoucher}>X% OFF</div>
+                        <div style={hugetextVoucher2}>BUY x GET x FREE</div>
                         <div style={bigTextVoucher}>FOR WHOLE ORDER</div>
                         <div style={descTextVoucher}>XX/XX/XXXX XX:XX - XX/XX/XXXX XX:XX</div>
                         <div style={descTextVoucher}>For All products</div>
