@@ -61,30 +61,30 @@ func main() {
 	}
 	fmt.Printf("Voucher found by id: %v\n", vou)
 
-	// toBeDelete, err := sDeleteVoucherByID(2)
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	// fmt.Printf("Voucher deleted by id: %v\n", toBeDelete)
+	toBeDelete, err := sDeleteVoucherByID(2)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("Voucher deleted by id: %v\n", toBeDelete)
 
-	// vouID, err := addVoucher(Voucher{
-	// 	title:       "Book 1 photo get 1 free print",
-	// 	status:      1,
-	// 	discount:    0,
-	// 	description: "book any photo get free any print",
-	// 	buyReq:      1,
-	// 	itemFree:    1,
-	// 	voucherType: 1,
-	// 	dateStart:   "2024-09-09",
-	// 	dateEnd:     "2025-01-01",
-	// 	productRage: "for any frame",
-	// 	code:        "vch_010101",
-	// 	isDelete:    0,
-	// })
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	// fmt.Printf("ID of added album: %v\n", vouID)
+	vouID, err := addVoucher(Voucher{
+		title:       "Test",
+		status:      1,
+		discount:    0,
+		description: "Test",
+		buyReq:      1,
+		itemFree:    1,
+		voucherType: 1,
+		dateStart:   "2024-09-09",
+		dateEnd:     "2025-01-01",
+		productRage: "for any frame",
+		code:        "vch_01010zzc1",
+		isDelete:    0,
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("ID of added album: %v\n", vouID)
 
 }
 
