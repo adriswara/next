@@ -16,6 +16,13 @@ type Voucher struct {
 	discount    int64
 	status      int64
 	description string
+	buyReq      int64
+	itemFree    int64
+	voucherType int64
+	dateStart   string
+	dateEnd     string
+	productRage string
+	code        string
 }
 
 func main() {
@@ -67,7 +74,6 @@ func main() {
 }
 
 func voucherByTitle(title string) ([]Voucher, error) {
-	fmt.Printf("test")
 	// An vouums slice to hold data from returned rows.
 	var voucher []Voucher
 
@@ -79,7 +85,7 @@ func voucherByTitle(title string) ([]Voucher, error) {
 	// Loop through rows, using Scan to assign column data to struct fields.
 	for rows.Next() {
 		var vou Voucher
-		if err := rows.Scan(&vou.ID, &vou.title, &vou.discount, &vou.status, &vou.description); err != nil {
+		if err := rows.Scan(&vou.ID, &vou.title, &vou.discount, &vou.status, &vou.description, &vou.buyReq, &vou.itemFree, &vou.voucherType, &vou.dateStart, &vou.dateEnd, &vou.productRage, &vou.code); err != nil {
 			return nil, fmt.Errorf("voucherByTitle %q: %v", title, err)
 		}
 
@@ -96,7 +102,7 @@ func voucherByID(id int64) (Voucher, error) {
 	var vou Voucher
 
 	rows := db.QueryRow("SELECT * FROM voucher WHERE id = ?", id)
-	if err := rows.Scan(&vou.ID, &vou.title, &vou.discount, &vou.status, &vou.description); err != nil {
+	if err := rows.Scan(&vou.ID, &vou.title, &vou.discount, &vou.status, &vou.description, &vou.buyReq, &vou.itemFree, &vou.voucherType, &vou.dateStart, &vou.dateEnd, &vou.productRage, &vou.code); err != nil {
 		if err == sql.ErrNoRows {
 			return vou, fmt.Errorf("voucherById %d: no such voucher", id)
 		}
@@ -106,7 +112,7 @@ func voucherByID(id int64) (Voucher, error) {
 }
 
 func addVoucher(vou Voucher) (int64, error) {
-	result, err := db.Exec("INSERT INTO voucher (title, discount, status, description) VALUES (?, ?, ?, ?)", vou.title, vou.discount, vou.status, vou.description)
+	result, err := db.Exec("INSERT INTO voucher (title, discount, status, description, buyReq, itemFree, voucherType, dateStart, dateEnd, productRange, code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", vou.title, vou.discount, vou.status, vou.description, vou.title, vou.discount, vou.status, vou.description, vou.buyReq, vou.itemFree, vou.voucherType, vou.dateStart, vou.dateEnd, vou.productRage, vou.code)
 	if err != nil {
 		return 0, fmt.Errorf("addVoucher: %v", err)
 	}
