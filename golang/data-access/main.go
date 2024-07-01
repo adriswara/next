@@ -61,30 +61,30 @@ func main() {
 	}
 	fmt.Printf("Voucher found by id: %v\n", vou)
 
-	toBeDelete, err := sDeleteVoucherByID(2)
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Printf("Voucher deleted by id: %v\n", toBeDelete)
+	// toBeDelete, err := sDeleteVoucherByID(2)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// fmt.Printf("Voucher deleted by id: %v\n", toBeDelete)
 
-	vouID, err := addVoucher(Voucher{
-		title:       "Book 1 photo get 1 free print",
-		status:      1,
-		discount:    0,
-		description: "book any photo get free any print",
-		buyReq:      1,
-		itemFree:    1,
-		voucherType: 1,
-		dateStart:   "2024-09-09",
-		dateEnd:     "2025-01-01",
-		productRage: "for any frame",
-		code:        "vch_010101",
-		isDelete:    0,
-	})
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Printf("ID of added album: %v\n", vouID)
+	// vouID, err := addVoucher(Voucher{
+	// 	title:       "Book 1 photo get 1 free print",
+	// 	status:      1,
+	// 	discount:    0,
+	// 	description: "book any photo get free any print",
+	// 	buyReq:      1,
+	// 	itemFree:    1,
+	// 	voucherType: 1,
+	// 	dateStart:   "2024-09-09",
+	// 	dateEnd:     "2025-01-01",
+	// 	productRage: "for any frame",
+	// 	code:        "vch_010101",
+	// 	isDelete:    0,
+	// })
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// fmt.Printf("ID of added album: %v\n", vouID)
 
 }
 
@@ -92,7 +92,7 @@ func voucherByTitle(title string) ([]Voucher, error) {
 	// An vouums slice to hold data from returned rows.
 	var voucher []Voucher
 
-	rows, err := db.Query("SELECT * FROM voucher WHERE title = ?", title)
+	rows, err := db.Query("SELECT * FROM voucher WHERE isDelete = 0 AND title = ?", title)
 	if err != nil {
 		return nil, fmt.Errorf("voucherByTitle %q: %v", title, err)
 	}
@@ -116,7 +116,7 @@ func voucherByID(id int64) (Voucher, error) {
 	// An Voucher to hold data from the returned row.
 	var vou Voucher
 
-	rows := db.QueryRow("SELECT * FROM voucher WHERE id = ?", id)
+	rows := db.QueryRow("SELECT * FROM voucher  WHERE isDelete = 0 AND id = ?", id)
 	if err := rows.Scan(&vou.ID, &vou.title, &vou.discount, &vou.status, &vou.description, &vou.buyReq, &vou.itemFree, &vou.voucherType, &vou.dateStart, &vou.dateEnd, &vou.productRage, &vou.code, &vou.isDelete); err != nil {
 		if err == sql.ErrNoRows {
 			return vou, fmt.Errorf("voucherById %d: no such voucher", id)
