@@ -61,10 +61,17 @@ func main() {
 	fmt.Printf("Voucher found by id: %v\n", vou)
 
 	vouID, err := addVoucher(Voucher{
-		title:       "Free 1 photo box",
+		title:       "Book 1 photo get 1 free frame",
 		status:      1,
-		discount:    100,
-		description: "Free 1 Photo box for one transaction, valid until july",
+		discount:    0,
+		description: "book any photo get free any frame",
+		buyReq:      1,
+		itemFree:    1,
+		voucherType: 1,
+		dateStart:   "2024-09-09",
+		dateEnd:     "2025-01-01",
+		productRage: "for any frame",
+		code:        "vch_010101",
 	})
 	if err != nil {
 		log.Fatal(err)
@@ -112,7 +119,7 @@ func voucherByID(id int64) (Voucher, error) {
 }
 
 func addVoucher(vou Voucher) (int64, error) {
-	result, err := db.Exec("INSERT INTO voucher (title, discount, status, description, buyReq, itemFree, voucherType, dateStart, dateEnd, productRange, code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", vou.title, vou.discount, vou.status, vou.description, vou.title, vou.discount, vou.status, vou.description, vou.buyReq, vou.itemFree, vou.voucherType, vou.dateStart, vou.dateEnd, vou.productRage, vou.code)
+	result, err := db.Exec("INSERT INTO voucher (title, discount, status, description, buyReq, itemFree, voucherType, dateStart, dateEnd, productRange, code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", vou.title, vou.discount, vou.status, vou.description, vou.buyReq, vou.itemFree, vou.voucherType, vou.dateStart, vou.dateEnd, vou.productRage, vou.code)
 	if err != nil {
 		return 0, fmt.Errorf("addVoucher: %v", err)
 	}
