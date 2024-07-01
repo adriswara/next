@@ -12,10 +12,10 @@ var db *sql.DB
 
 type Voucher struct {
 	ID          int64
-	description int64
-	discount    string
 	title       string
+	discount    int64
 	status      int64
+	description string
 }
 
 func main() {
@@ -45,28 +45,74 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("Voucher found: %v\n", voucher)
+	fmt.Printf("Voucher found by name: %v\n", voucher)
+
+	vou, err := voucherByID(1)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("Voucher found by id: %v\n", vou)
+
+	vouID, err := addVoucher(Voucher{
+		title:       "Free 1 photo box",
+		status:      1,
+		discount:    100,
+		description: "Free 1 Photo box for one transaction, valid until july",
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("ID of added album: %v\n", vouID)
+
 }
 
-func voucherByTitle(name string) ([]Voucher, error) {
-	// An albums slice to hold data from returned rows.
+func voucherByTitle(title string) ([]Voucher, error) {
+	fmt.Printf("test")
+	// An vouums slice to hold data from returned rows.
 	var voucher []Voucher
 
-	rows, err := db.Query("SELECT * FROM voucher WHERE title = ?", name)
+	rows, err := db.Query("SELECT * FROM voucher WHERE title = ?", title)
 	if err != nil {
-		return nil, fmt.Errorf("voucherByTitle %q: %v", name, err)
+		return nil, fmt.Errorf("voucherByTitle %q: %v", title, err)
 	}
 	defer rows.Close()
 	// Loop through rows, using Scan to assign column data to struct fields.
 	for rows.Next() {
-		var alb Voucher
-		if err := rows.Scan(&alb.ID, &alb.title, &alb.description, &alb.status, &alb.discount); err != nil {
-			return nil, fmt.Errorf("voucherByTitle %q: %v", name, err)
+		var vou Voucher
+		if err := rows.Scan(&vou.ID, &vou.title, &vou.discount, &vou.status, &vou.description); err != nil {
+			return nil, fmt.Errorf("voucherByTitle %q: %v", title, err)
 		}
-		voucher = append(voucher, alb)
+
+		voucher = append(voucher, vou)
 	}
 	if err := rows.Err(); err != nil {
-		return nil, fmt.Errorf("voucherByTitle %q: %v", name, err)
+		return nil, fmt.Errorf("voucherByTitle %q: %v", title, err)
 	}
 	return voucher, nil
+}
+
+func voucherByID(id int64) (Voucher, error) {
+	// An Voucher to hold data from the returned row.
+	var vou Voucher
+
+	rows := db.QueryRow("SELECT * FROM voucher WHERE id = ?", id)
+	if err := rows.Scan(&vou.ID, &vou.title, &vou.discount, &vou.status, &vou.description); err != nil {
+		if err == sql.ErrNoRows {
+			return vou, fmt.Errorf("voucherById %d: no such voucher", id)
+		}
+		return vou, fmt.Errorf("voucherById %d: %v", id, err)
+	}
+	return vou, nil
+}
+
+func addVoucher(vou Voucher) (int64, error) {
+	result, err := db.Exec("INSERT INTO voucher (title, discount, status, description) VALUES (?, ?, ?, ?)", vou.title, vou.discount, vou.status, vou.description)
+	if err != nil {
+		return 0, fmt.Errorf("addVoucher: %v", err)
+	}
+	id, err := result.LastInsertId()
+	if err != nil {
+		return 0, fmt.Errorf("addVoucher: %v", err)
+	}
+	return id, nil
 }
