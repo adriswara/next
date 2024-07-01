@@ -23,6 +23,7 @@ type Voucher struct {
 	dateEnd     string
 	productRage string
 	code        string
+	isDelete    int
 }
 
 func main() {
@@ -60,11 +61,17 @@ func main() {
 	}
 	fmt.Printf("Voucher found by id: %v\n", vou)
 
+	toBeDelete, err := sDeleteVoucherByID(2)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("Voucher deleted by id: %v\n", toBeDelete)
+
 	vouID, err := addVoucher(Voucher{
-		title:       "Book 1 photo get 1 free frame",
+		title:       "Book 1 photo get 1 free print",
 		status:      1,
 		discount:    0,
-		description: "book any photo get free any frame",
+		description: "book any photo get free any print",
 		buyReq:      1,
 		itemFree:    1,
 		voucherType: 1,
@@ -72,6 +79,7 @@ func main() {
 		dateEnd:     "2025-01-01",
 		productRage: "for any frame",
 		code:        "vch_010101",
+		isDelete:    0,
 	})
 	if err != nil {
 		log.Fatal(err)
@@ -92,7 +100,7 @@ func voucherByTitle(title string) ([]Voucher, error) {
 	// Loop through rows, using Scan to assign column data to struct fields.
 	for rows.Next() {
 		var vou Voucher
-		if err := rows.Scan(&vou.ID, &vou.title, &vou.discount, &vou.status, &vou.description, &vou.buyReq, &vou.itemFree, &vou.voucherType, &vou.dateStart, &vou.dateEnd, &vou.productRage, &vou.code); err != nil {
+		if err := rows.Scan(&vou.ID, &vou.title, &vou.discount, &vou.status, &vou.description, &vou.buyReq, &vou.itemFree, &vou.voucherType, &vou.dateStart, &vou.dateEnd, &vou.productRage, &vou.code, &vou.isDelete); err != nil {
 			return nil, fmt.Errorf("voucherByTitle %q: %v", title, err)
 		}
 
@@ -109,7 +117,7 @@ func voucherByID(id int64) (Voucher, error) {
 	var vou Voucher
 
 	rows := db.QueryRow("SELECT * FROM voucher WHERE id = ?", id)
-	if err := rows.Scan(&vou.ID, &vou.title, &vou.discount, &vou.status, &vou.description, &vou.buyReq, &vou.itemFree, &vou.voucherType, &vou.dateStart, &vou.dateEnd, &vou.productRage, &vou.code); err != nil {
+	if err := rows.Scan(&vou.ID, &vou.title, &vou.discount, &vou.status, &vou.description, &vou.buyReq, &vou.itemFree, &vou.voucherType, &vou.dateStart, &vou.dateEnd, &vou.productRage, &vou.code, &vou.isDelete); err != nil {
 		if err == sql.ErrNoRows {
 			return vou, fmt.Errorf("voucherById %d: no such voucher", id)
 		}
@@ -119,7 +127,7 @@ func voucherByID(id int64) (Voucher, error) {
 }
 
 func addVoucher(vou Voucher) (int64, error) {
-	result, err := db.Exec("INSERT INTO voucher (title, discount, status, description, buyReq, itemFree, voucherType, dateStart, dateEnd, productRange, code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", vou.title, vou.discount, vou.status, vou.description, vou.buyReq, vou.itemFree, vou.voucherType, vou.dateStart, vou.dateEnd, vou.productRage, vou.code)
+	result, err := db.Exec("INSERT INTO voucher (title, discount, status, description, buyReq, itemFree, voucherType, dateStart, dateEnd, productRange, code, isDelete) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", vou.title, vou.discount, vou.status, vou.description, vou.buyReq, vou.itemFree, vou.voucherType, vou.dateStart, vou.dateEnd, vou.productRage, vou.code, vou.isDelete)
 	if err != nil {
 		return 0, fmt.Errorf("addVoucher: %v", err)
 	}
@@ -128,4 +136,18 @@ func addVoucher(vou Voucher) (int64, error) {
 		return 0, fmt.Errorf("addVoucher: %v", err)
 	}
 	return id, nil
+}
+
+func sDeleteVoucherByID(id int64) (Voucher, error) {
+	// An Voucher to hold data from the returned row.
+	var toBeDelete Voucher
+
+	rows := db.QueryRow("UPDATE voucher set isDelete = 1 WHERE id = ?", id)
+	if err := rows.Scan(&toBeDelete.ID, &toBeDelete.title, &toBeDelete.discount, &toBeDelete.status, &toBeDelete.description, &toBeDelete.buyReq, &toBeDelete.itemFree, &toBeDelete.voucherType, &toBeDelete.dateStart, &toBeDelete.dateEnd, &toBeDelete.productRage, &toBeDelete.code, &toBeDelete.isDelete); err != nil {
+		if err == sql.ErrNoRows {
+			return toBeDelete, fmt.Errorf("voucherById %d: no such voucher", id)
+		}
+		return toBeDelete, fmt.Errorf("voucherById %d: %v", id, err)
+	}
+	return toBeDelete, nil
 }
