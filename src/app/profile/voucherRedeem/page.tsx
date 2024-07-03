@@ -166,7 +166,7 @@ export default function Home() {
         marginRight: 45,
 
         paddingLeft: 13,
-        paddingTop : 3,
+        paddingTop: 3,
         marginTop: 10
     }
 
@@ -240,6 +240,8 @@ export default function Home() {
                             </div>
                             <div style={voucherRightStatus}><button type="button" disabled style={buttonVoucherRightStatusActive}>ACTIVE</button></div>
                         </div>
+                        <div style={priceButtonDiv}><p style={priceText}>90 Points</p></div>
+                        <div style={priceButtonDiv}><link rel="stylesheet" href="" /><button style={buttonRedeem}>Redeem</button></div>
                     </div>
 
                 </div>
@@ -267,6 +269,8 @@ export default function Home() {
                                 </div>
                                 <div style={voucherRightStatus}><button type="button" disabled style={buttonVoucherRightStatusNotAvailable}>NOT AVAILABLE</button></div>
                             </div>
+                            <div style={priceButtonDiv}><p style={priceText}>90 Points</p></div>
+                            <div style={priceButtonDiv}><link rel="stylesheet" href="" /><button style={buttonRedeem}>Redeem</button></div>
                         </div>
                         <div style={voucherObject}>
                             <div style={voucherLeftComponent}>
@@ -290,6 +294,8 @@ export default function Home() {
                                 </div>
                                 <div style={voucherRightStatus}><button type="button" disabled style={buttonVoucherRightStatusNotAvailable}>NOT AVAILABLE</button></div>
                             </div>
+                            <div style={priceButtonDiv}><p style={priceText}>90 Points</p></div>
+                            <div style={priceButtonDiv}><link rel="stylesheet" href="" /><button style={buttonRedeem}>Redeem</button></div>
                         </div>
 
                     </div>
