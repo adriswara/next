@@ -91,7 +91,8 @@ export default function Home() {
         fontSize: 13,
         width: 60,
         height: 30,
-        marginLeft: 30
+        marginRight: 60,
+        float: "right"
     }
     const buttonVoucherRightStatusNotAvailable = {
         border: "1px solid lightGrey",
@@ -102,7 +103,19 @@ export default function Home() {
         width: 120,
         height: 30,
     }
+    const buttonRedeem = {
+        border: "1px solid lightGrey",
+        borderRadius: 15,
+        backgroundColor: "slateBlue",
+        color: "white",
+        fontSize: 13,
+        width: 90,
+        height: 30,
+        marginRight: 45,
+        float: "right",
+        marginTop: 10
 
+    }
     const hugetextVoucher1 = {
         fontSize: 30
     }
@@ -134,13 +147,29 @@ export default function Home() {
         marginRight: -70
     }
 
-    const priceDiv = {
-        backgroundColor: "lightgrey"
+    const priceButtonDiv = {
+        backgroundColor: "lightgrey",
+        marginBottom: -20,
+        height: 50,
+        marginTop: 10
+
     }
 
-    const buttonDiv = {
-        backgroundColor: "lightgrey"
+    const priceText = {
+        border: "1px solid lightGrey",
+        borderRadius: 15,
+        backgroundColor: "",
+        color: "black",
+        fontSize: 13,
+        width: 90,
+        height: 30,
+        marginRight: 45,
+
+        paddingLeft: 13,
+        paddingTop : 3,
+        marginTop: 10
     }
+
 
     return (
         <div style={profileCard}>
@@ -186,8 +215,8 @@ export default function Home() {
                             </div>
                             <div style={voucherRightStatus}><button type="button" disabled style={buttonVoucherRightStatusActive}>ACTIVE</button></div>
                         </div>
-                        <div style={priceDiv}>90 Points</div>
-                        <div style={buttonDiv}><link rel="stylesheet" href="" /><button>Redeem</button></div>
+                        <div style={priceButtonDiv}><p style={priceText}>90 Points</p></div>
+                        <div style={priceButtonDiv}><link rel="stylesheet" href="" /><button style={buttonRedeem}>Redeem</button></div>
                     </div>
                     <div style={voucherObject}>
                         <div style={voucherLeftComponent}>
