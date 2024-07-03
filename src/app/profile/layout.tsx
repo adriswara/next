@@ -56,6 +56,7 @@ export default function profile({
           <li style={navCardField}><a href="profile/transactionList"><p style={unselectedNavText}>Transaction</p></a></li>
           <li style={navCardField}><a href="profile/voucherList/"><p style={unselectedNavText}>Voucher List</p></a></li>
           <li style={navCardField}><a href="profile/voucherRedeem/"><p style={unselectedNavText}>Voucher Redeem</p></a></li>
+          <li style={navCardField}><a href="profile/showcase/"><p style={unselectedNavText}>Showcase</p></a></li>
           <li style={navCardField}><a href="profile/logout"><p style={logoutButton}>Logout</p></a></li>
         </ul>
       </div>
