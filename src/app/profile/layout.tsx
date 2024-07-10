@@ -72,30 +72,48 @@ export default function profile({
 
   const profileXpBar = {
     width: "90%",
-    marginTop: "5%",
-    marginBottom: "5%",
-    marginLeft: "5%",
+    marginTop: "4%",
+    marginBottom: "2%",
+    marginLeft: "4%",
     marginRight: "auto",
     borderRadius: 15
-    
+
 
   }
   const profileXpBarField = {
-  
-    background: "linear-gradient(90deg, violet 90%, grey 90%)",
+
+    background: "linear-gradient(90deg, violet 50%, grey 50%)",
     width: "auto",
     borderRadius: 5,
-    textAlign:"center",
-    color:"black",
+    textAlign: "center",
+    color: "black",
     filter: "invert(100%)"
   }
 
-  const profileXpBarProgress ={
-    backgroundColor: "green",
-    width: "auto",
-    borderRadius: 5,
+  const profileXpBarDesc = {
+    textAlign: "center",
+    marginBottom: "2%"
+  }
+
+  const profileStat = {
+    display: "grid",
+    gridTemplateColumns: "auto auto auto",
+    border: "1px solid lightGrey",
+    borderRadius: 8,
+    background: "darkSeaGreen",
+    marginLeft: 24,
+    marginRight: 32,
+    marginBottom: 16    
+  }
+
+  const profileStatText = {
+    height :100,
     textAlign:"center",
-    position: "sticky"
+    color: "white",
+    paddingTop: 40,
+    borderLeft:"1px solid white",
+    borderRight: "1px solid white"
+
   }
 
 
@@ -123,7 +141,13 @@ export default function profile({
         <div>
           <h1 style={profileName}>Level x</h1>
         </div>
-        <div style={profileXpBar}><p style={profileXpBarField}>x%</p></div>
+        <div style={profileXpBar}><p style={profileXpBarField}>50%</p></div>
+        <div style={profileXpBarDesc}>90 xp left to reach lvl 10</div>
+        <div style={profileStat}>
+          <div style={profileStatText}>point</div>
+          <div style={profileStatText}>Showcase</div>
+          <div style={profileStatText}>Level</div>
+        </div>
       </div>
     </div>
   );
