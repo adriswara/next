@@ -2,10 +2,10 @@ import Image from "next/image";
 import { Children } from "react";
 
 export default function profile({
-    children,
+  children,
 }: Readonly<{
-    children: React.ReactNode;
-}>){
+  children: React.ReactNode;
+}>) {
   type logoutcolor = `rgb(${239},${77},${68})`
   const profileStyle = {
     display: "grid",
@@ -18,7 +18,17 @@ export default function profile({
     borderRadius: 10,
     marginLeft: 140,
     marginRight: 850,
-    marginBottom:230
+    marginBottom: 0,
+    paddingBottom:0,
+    height: 255
+  }
+
+  const navProfileXP ={
+      border : "1px solid lightGrey",
+      borderRadius: 10,
+      marginLeft: 140,
+      marginRight : 850,
+      marginTop: -200
   }
   const navCardField = {
     borderTop: "1px solid lightGrey",
@@ -45,7 +55,7 @@ export default function profile({
     width: "100%"
   }
 
- 
+
   return (
     <div style={profileStyle}>
       <div style={navProfileCard}>
@@ -60,6 +70,11 @@ export default function profile({
         </ul>
       </div>
       {children}
+      <div style={navProfileXP}>
+        <p>image`</p>
+        <p>name</p>
+        <p>level</p>
+      </div>
     </div>
   );
 }
