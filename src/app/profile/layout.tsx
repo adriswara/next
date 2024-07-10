@@ -19,16 +19,16 @@ export default function profile({
     marginLeft: 140,
     marginRight: 850,
     marginBottom: 0,
-    paddingBottom:0,
+    paddingBottom: 0,
     height: 255
   }
 
-  const navProfileXP ={
-      border : "1px solid lightGrey",
-      borderRadius: 10,
-      marginLeft: 140,
-      marginRight : 850,
-      marginTop: -200
+  const navProfileXP = {
+    border: "1px solid lightGrey",
+    borderRadius: 10,
+    marginLeft: 140,
+    marginRight: 850,
+    marginTop: -200
   }
   const navCardField = {
     borderTop: "1px solid lightGrey",
@@ -55,6 +55,49 @@ export default function profile({
     width: "100%"
   }
 
+  const profilePicDiv = {
+    marginLeft: " auto",
+    marginRIght: "auto",
+    borderRadius: "50%"
+  }
+  const profilePic = {
+    borderRadius: "60%",
+    margin: "auto"
+  }
+
+  const profileName = {
+    margin: "auto",
+    textAlign: "center"
+  }
+
+  const profileXpBar = {
+    width: "90%",
+    marginTop: "5%",
+    marginBottom: "5%",
+    marginLeft: "5%",
+    marginRight: "auto",
+    borderRadius: 15
+    
+
+  }
+  const profileXpBarField = {
+  
+    background: "linear-gradient(90deg, violet 90%, grey 90%)",
+    width: "auto",
+    borderRadius: 5,
+    textAlign:"center",
+    color:"black",
+    filter: "invert(100%)"
+  }
+
+  const profileXpBarProgress ={
+    backgroundColor: "green",
+    width: "auto",
+    borderRadius: 5,
+    textAlign:"center",
+    position: "sticky"
+  }
+
 
   return (
     <div style={profileStyle}>
@@ -71,9 +114,16 @@ export default function profile({
       </div>
       {children}
       <div style={navProfileXP}>
-        <p>image`</p>
-        <p>name</p>
-        <p>level</p>
+        <div style={profilePicDiv}>
+          <Image style={profilePic} src="/profilePicSq.jpg" width={128} height={13.84} alt="profilePicture" />
+        </div>
+        <div>
+          <h1 style={profileName}>Ajon Doe</h1>
+        </div>
+        <div>
+          <h1 style={profileName}>Level x</h1>
+        </div>
+        <div style={profileXpBar}><p style={profileXpBarField}>x%</p></div>
       </div>
     </div>
   );
