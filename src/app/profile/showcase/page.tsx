@@ -136,27 +136,79 @@ export default function Home() {
         borderBottom: "2px solid transparent",
         transform: "translateX(16px) translateY(-4px) rotate(30deg)",
     }
-    const div19 ={
+    const div19 = {
         marginLeft: "auto",
     }
-    const div20 ={
-        width:0,
+    const div20 = {
+        width: 0,
         borderTop: "8px"
     }
-    const div21={
+    const div21 = {
         backgroundColor: "#F4F4F4",
-        flexGrow:0,
-        height:12,
+        flexGrow: 0,
+        height: 12,
         width: 16,
         transform: "translateY(-4px)"
     }
-    const div22={}
-    const div23={}
-    const div24={}
-    const div25={}
-    const div26={}
-    const div27={}
-    const div28={}
+    const div22 = {
+        width: 0,
+        height: 0,
+        borderTop: "8px solid #F4F4F4",
+        borderLeft: "8px solid transparent",
+        transform: "translateY(-4px) translateX(8px)",
+
+
+    }
+    const div23 = {
+        display: "flex",
+        flexGrow: 1,
+        justifyContent: "center",
+        marginBottom: 24
+    }
+    const div24 = {
+        backgroundColor: "#F4F4F4",
+        borderRadius: 4,
+        flexGrow: 0,
+        height: 14,
+        marginBottom: 6,
+        width: 224
+
+    }
+    const div25 = {
+        backgroundColor: "#F4F4F4",
+        borderRadius: 4,
+        flexGrow: 0,
+        height: 14,
+        width: 144
+    }
+    const div26 = {
+        color: "#C9C8CD",
+        fontFamily: "Arial sans-serif",
+        fontSize: 14,
+        lineHight: 17,
+        marginBottom: 0,
+        marginTop: 8,
+        overflow: "hidden",
+        padding: "8 0 7",
+        textOverflow: "elipsis",
+        whiteSpace: "nowWrap",
+
+
+
+    }
+    const div27 = {
+        color: "#C9C8CD",
+        fontFamily: "arial, sansSerif",
+        fontSize: 14,
+        fontStyle: "normal",
+        lineHight: 17,
+        textDecoration: "none"
+    }
+    const div28 = {
+        fontFamily: "Arial,sansSerif",
+        fontSize: 14,
+        lineHeight: 17
+    }
 
     return (
         <div>
@@ -174,8 +226,7 @@ export default function Home() {
                         <div style={div7}></div>
                         <div style={div8}>
                             <svg width="50px" height="50px"
-                                viewBox="0 0 60 60" version="1.1" xmlns="https://www.w3.org/2000/svg"
-                                xmlns:xlink="https://www.w3.org/1999/xlink">
+                                viewBox="0 0 60 60" version="1.1" xmlns="https://www.w3.org/2000/svg">
                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                     <g transform="translate(-511.000000, -20.000000)" fill="#000000">
                                         <g>
@@ -216,26 +267,24 @@ export default function Home() {
                                     style={div21}>
                                 </div>
                                 <div
-                                    style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);">
+                                    style={div22}>
                                 </div>
                             </div>
                         </div>
                         <div
-                            style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;">
+                            style={div23}>
                             <div
-                                style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;">
+                                style={div24}>
                             </div>
                             <div
-                                style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;">
+                                style={div25}>
                             </div>
                         </div>
                     </a>
                     <p
-                        style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;">
-                        <a href="jonasphotoid"
-                            style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;"
-                            target="_blank">Shared post</a> on <time
-                                style=" font-family:Arial,sans-serif; font-size:14px; line-height:17px;">Time</time>
+                        style={div26}>
+                        <a href="jonasphotoid" style={div27} target="_blank">Shared post</a> on
+                        <time style={div28}>Time</time>
                     </p>
                 </div>
             </blockquote>
