@@ -31,7 +31,7 @@ export default function Home() {
     <table style={profileFieldTable}>
       <thead>
         <tr>
-          <th colSpan={1}><p>Profile</p></th>
+          <th colSpan={1}><p className="text-base font-semibold leading-7 text-gray-900">Profile</p></th>
         </tr>
       </thead>
       <tbody>

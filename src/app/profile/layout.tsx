@@ -25,15 +25,7 @@ export default function profile({
     width: 312
   }
 
-  const navProfileXP = {
-    border: "1px solid lightGrey",
-    borderRadius: 10,
-    marginLeft: 140,
-    marginRight: 0,
-    marginTop: "0",
-    width: "312px",
-    position: ""
-  }
+
   const navCardField = {
     borderTop: "1px solid lightGrey",
     paddingLeft: 0,
@@ -107,15 +99,15 @@ export default function profile({
     background: "darkSeaGreen",
     marginLeft: 24,
     marginRight: 32,
-    marginBottom: 16    
+    marginBottom: 16
   }
 
   const profileStatText = {
-    height :100,
-    textAlign:"center",
+    height: 100,
+    textAlign: "center",
     color: "white",
     paddingTop: 40,
-    borderLeft:"1px solid white",
+    borderLeft: "1px solid white",
     borderRight: "1px solid white"
 
   }
@@ -135,17 +127,25 @@ export default function profile({
         </ul>
       </div>
       {children}
-      <div style={navProfileXP}>
+      {/* nav profile xp */}
+      <div className="border border-[#e5e7eb] rounded-[10px] ml-[140px] mr-0 mt-0 w-[312px]">
         <div style={profilePicDiv}>
           <Image style={profilePic} src="/profilePicSq.jpg" width={128} height={13.84} alt="profilePicture" />
         </div>
         <div>
-          <h1 style={profileName}>Ajon Doe</h1>
+          {/* profile Name */}
+          <h1 className="m-auto text-center " >Ajon Doe</h1>
         </div>
         <div>
-          <h1 style={profileName}>Level x</h1>
+          {/* profile Name */}
+          <h1 className="m-auto text-center " >Level x</h1>
         </div>
-        <div style={profileXpBar}><p style={profileXpBarField}>50%</p></div>
+        {/* profile xp bar */}
+        <div className="overflow-hidden w-[90%] mx-auto rounded-[16px] bg-gray-600 relative" >
+          <div className=" h-full bg-green-700 absolute top-0 left-0 w-[50%]"></div>
+          <p className="w-full h-full text-center text-white relative">50%</p>
+          {/* <p className="bg-gray-600 w-auto rounded-[5px] text-center text-white">50%</p> */}
+        </div>
         <div style={profileXpBarDesc}>90 xp left to reach lvl 10</div>
         <div style={profileStat}>
           <div style={profileStatText}>point</div>
