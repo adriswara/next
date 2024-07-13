@@ -1,11 +1,6 @@
 
 export default function Home() {
-    const profileCard = {
-        border: "1px solid lightGrey",
-        borderRadius: 10,
-        marginLeft: -825,
-        marginRight: 145
-    }
+
 
     const voucherNav = {
         display: "grid",
@@ -172,7 +167,7 @@ export default function Home() {
 
 
     return (
-        <div style={profileCard}>
+        <div className="border-2 border-solid border-jonasBorder rounded-[10px] w-full h-full">
             <div style={voucherNav}>
                 <label style={searchBar}>
                     <svg fill="#000000" width="20px" height="20px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" style={searchBarMagnifier}>
