@@ -1,3 +1,4 @@
+import ProfileXpBar from "@/components/molecules/ProfileXpBar.molecule";
 import Image from "next/image";
 import Link from "next/link";
 import { Children } from "react";
@@ -141,11 +142,7 @@ export default function profile({
           <h1 className="m-auto text-center " >Level x</h1>
         </div>
         {/* profile xp bar */}
-        <div className="overflow-hidden w-[90%] mx-auto rounded-[16px] bg-gray-600 relative" >
-          <div className=" h-full bg-green-700 absolute top-0 left-0 w-[50%]"></div>
-          <p className="w-full h-full text-center text-white relative">50%</p>
-          {/* <p className="bg-gray-600 w-auto rounded-[5px] text-center text-white">50%</p> */}
-        </div>
+       <ProfileXpBar></ProfileXpBar>
         <div style={profileXpBarDesc}>90 xp left to reach lvl 10</div>
         <div style={profileStat}>
           <div style={profileStatText}>point</div>
