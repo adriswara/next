@@ -2,6 +2,12 @@ import ProfileXpBar from "@/components/molecules/ProfileXpBar.molecule";
 import Image from "next/image";
 import Link from "next/link";
 import { Children } from "react";
+import { Poppins } from "next/font/google";
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ["100","200","300","400","500","600","700","800"]
+})
 
 export default function profile({
   children,
@@ -87,35 +93,12 @@ export default function profile({
     filter: "invert(100%)"
   }
 
-  const profileXpBarDesc = {
-    textAlign: "center",
-    marginBottom: "2%"
-  }
 
-  const profileStat = {
-    display: "grid",
-    gridTemplateColumns: "auto auto auto",
-    border: "1px solid lightGrey",
-    borderRadius: 8,
-    background: "darkSeaGreen",
-    marginLeft: 24,
-    marginRight: 32,
-    marginBottom: 16
-  }
-
-  const profileStatText = {
-    height: 100,
-    textAlign: "center",
-    color: "white",
-    paddingTop: 40,
-    borderLeft: "1px solid white",
-    borderRight: "1px solid white"
-
-  }
+ 
 
 
   return (
-    <div style={profileStyle}>
+    <div style={profileStyle} className={poppins.className}>
       <div style={navProfileCard}>
         <ul>
           <li><Link href="/profile"><p style={unselectedNavText}>Profile</p></Link></li>
@@ -142,12 +125,15 @@ export default function profile({
           <h1 className="m-auto text-center " >Level x</h1>
         </div>
         {/* profile xp bar */}
-       <ProfileXpBar></ProfileXpBar>
-        <div style={profileXpBarDesc}>90 xp left to reach lvl 10</div>
-        <div style={profileStat}>
-          <div style={profileStatText}>point</div>
-          <div style={profileStatText}>Showcase</div>
-          <div style={profileStatText}>Level</div>
+        <ProfileXpBar></ProfileXpBar>
+        {/* profile xp bar desc for levelup req */}
+        <div className="text-center mb-1">90 xp left to reach lvl 10</div>
+        {/* profile stat */}
+        <div className="grid grid-cols-3 border-2 border-solid border-[#e5e7eb] rounded-[8px] bg-[#8fbc8f] ml-[24px] mr-[32px] mb-[16px]">
+          {/* profile stat text */}
+          <div className="h-[100px] text-center text-white pt-[40px] border-l-[1px] border-solid border-white ">point</div>
+          <div className="h-[100px] text-center text-white pt-[40px] border-l-[1px] border-solid border-white ">Showcase</div>
+          <div className="h-[100px] text-center text-white pt-[40px] border-l-[1px] border-solid border-white ">Level</div>
         </div>
       </div>
     </div>
