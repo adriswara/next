@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Children } from "react";
 
 export default function profile({
@@ -20,15 +21,18 @@ export default function profile({
     marginRight: 850,
     marginBottom: 0,
     paddingBottom: 0,
-    height: 255
+    height: 255,
+    width: 312
   }
 
   const navProfileXP = {
     border: "1px solid lightGrey",
     borderRadius: 10,
     marginLeft: 140,
-    marginRight: 850,
-    marginTop: -200
+    marginRight: 0,
+    marginTop: "0",
+    width: "312px",
+    position: ""
   }
   const navCardField = {
     borderTop: "1px solid lightGrey",
@@ -58,7 +62,7 @@ export default function profile({
   const profilePicDiv = {
     marginLeft: " auto",
     marginRIght: "auto",
-    borderRadius: "50%"
+    borderRadius: "50%",
   }
   const profilePic = {
     borderRadius: "60%",
@@ -121,13 +125,13 @@ export default function profile({
     <div style={profileStyle}>
       <div style={navProfileCard}>
         <ul>
-          <li><a href="/profile"><p style={unselectedNavText}>Profile</p></a></li>
-          <li style={navCardField}><a href="profile/changePassword"><p style={unselectedNavText}>Change Password</p></a></li>
-          <li style={navCardField}><a href="profile/transactionList"><p style={unselectedNavText}>Transaction</p></a></li>
-          <li style={navCardField}><a href="profile/voucherList/"><p style={unselectedNavText}>Voucher List</p></a></li>
-          <li style={navCardField}><a href="profile/voucherRedeem/"><p style={unselectedNavText}>Voucher Redeem</p></a></li>
-          <li style={navCardField}><a href="profile/showcase/"><p style={unselectedNavText}>Showcase</p></a></li>
-          <li style={navCardField}><a href="profile/logout"><p style={logoutButton}>Logout</p></a></li>
+          <li><Link href="/profile"><p style={unselectedNavText}>Profile</p></Link></li>
+          <li style={navCardField}><Link href="/profile/changePassword"><p style={unselectedNavText}>Change Password</p></Link></li>
+          <li style={navCardField}><Link href="/profile/transactionList"><p style={unselectedNavText}>Transaction</p></Link></li>
+          <li style={navCardField}><Link href="/profile/voucherList"><p style={unselectedNavText}>Voucher List</p></Link></li>
+          <li style={navCardField}><Link href="/profile/voucherRedeem"><p style={unselectedNavText}>Voucher Redeem</p></Link></li>
+          <li style={navCardField}><Link href="/profile/showcase"><p style={unselectedNavText}>Showcase</p></Link></li>
+          <li style={navCardField}><Link href="/profile/logout"><p style={logoutButton}>Logout</p></Link></li>
         </ul>
       </div>
       {children}
