@@ -5,10 +5,12 @@ import Link from "next/link";
 import { Children } from "react";
 import { Poppins } from "next/font/google";
 import ProfileStatText from "@/components/molecules/ProfileStatText.molecule";
+import ProfileName from "@/components/atoms/ProfileName.atom";
+import ProfileLevel from "@/components/atoms/ProfileLevel.atom";
 
 const poppins = Poppins({
   subsets: ['latin'],
-  weight: ["100","200","300","400","500","600","700","800"]
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800"]
 })
 
 export default function profile({
@@ -70,35 +72,6 @@ export default function profile({
     margin: "auto"
   }
 
-  const profileName = {
-    margin: "auto",
-    textAlign: "center"
-  }
-
-  const profileXpBar = {
-    width: "90%",
-    marginTop: "4%",
-    marginBottom: "2%",
-    marginLeft: "4%",
-    marginRight: "auto",
-    borderRadius: 15
-
-
-  }
-  const profileXpBarField = {
-
-    background: "linear-gradient(90deg, violet 50%, grey 50%)",
-    width: "auto",
-    borderRadius: 5,
-    textAlign: "center",
-    color: "black",
-    filter: "invert(100%)"
-  }
-
-
- 
-
-
   return (
     <div style={profileStyle} className={poppins.className}>
       <div style={navProfileCard}>
@@ -118,18 +91,12 @@ export default function profile({
         <div style={profilePicDiv}>
           <Image style={profilePic} src="/profilePicSq.jpg" width={128} height={13.84} alt="profilePicture" />
         </div>
-        <div>
-          {/* profile Name */}
-          <h1 className="m-auto text-center " >Ajon Doe</h1>
-        </div>
-        <div>
-          {/* profile Name */}
-          <h1 className="m-auto text-center " >Level x</h1>
-        </div>
+        {/* profile Name */}
+        <ProfileName></ProfileName>
+        {/* profile level */}
+        <ProfileLevel></ProfileLevel>
         {/* profile xp bar */}
         <ProfileXpBar></ProfileXpBar>
-        {/* profile xp bar desc for levelup req */}
-        <div className="text-center mb-1">90 xp left to reach lvl 10</div>
         {/* profile stat text */}
         <ProfileStatText></ProfileStatText>
       </div>
