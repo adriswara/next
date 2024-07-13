@@ -28,7 +28,7 @@ export default function RootLayout({
 
   }
   const imageHeader = {
-    marginLeft: 130,
+    marginLeft: 300,
     paddingTop: 16
   }
   const headerContent = {

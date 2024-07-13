@@ -1,7 +1,8 @@
+'use client'
 import ProfileXpBar from "@/components/molecules/ProfileXpBar.molecule";
-
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from 'next/navigation'
 import { Children } from "react";
 import { Poppins } from "next/font/google";
 import ProfileStatText from "@/components/molecules/ProfileStatText.molecule";
@@ -35,33 +36,7 @@ export default function profile({
     height: 255,
     width: 312
   }
-
-
-  const navCardField = {
-    borderTop: "1px solid lightGrey",
-    paddingLeft: 0,
-    paddingRight: 0
-  }
-
-  const unselectedNavText = {
-    fontSize: "875 rem",
-    paddingTop: 5,
-    paddingBottom: 5,
-    paddingLeft: 10,
-    paddingRight: "1 rem",
-    width: "100%"
-  }
-
-  const logoutButton = {
-    color: "orange",
-    fontSize: "875 rem",
-    paddingTop: 5,
-    paddingBottom: 5,
-    paddingLeft: 10,
-    paddingRight: "1 rem",
-    width: "100%"
-  }
-
+ 
   const profilePicDiv = {
     marginLeft: " auto",
     marginRIght: "auto",
@@ -71,18 +46,18 @@ export default function profile({
     borderRadius: "60%",
     margin: "auto"
   }
-
+  const pathname = usePathname()
   return (
     <div style={profileStyle} className={poppins.className}>
-      <div style={navProfileCard}>
+      <div className="border rounded-lg border-solid border-[#e5e7eb] ml-[300px] mr-[850px] mb-auto pb-0 h-auto" >
         <ul>
-          <li><Link href="/profile"><p style={unselectedNavText}>Profile</p></Link></li>
-          <li style={navCardField}><Link href="/profile/changePassword"><p style={unselectedNavText}>Change Password</p></Link></li>
-          <li style={navCardField}><Link href="/profile/transactionList"><p style={unselectedNavText}>Transaction</p></Link></li>
-          <li style={navCardField}><Link href="/profile/voucherList"><p style={unselectedNavText}>Voucher List</p></Link></li>
-          <li style={navCardField}><Link href="/profile/voucherRedeem"><p style={unselectedNavText}>Voucher Redeem</p></Link></li>
-          <li style={navCardField}><Link href="/profile/showcase"><p style={unselectedNavText}>Showcase</p></Link></li>
-          <li style={navCardField}><Link href="/profile/logout"><p style={logoutButton}>Logout</p></Link></li>
+          <li className={`link ${pathname === '/profile' ? 'bg-[#e5e7eb]  border-[#e5e7eb] pl-0 pr-0 py-2 px-4 font-semibold' : ' border-[#e5e7eb] pl-0 pr-0 py-2 px-4'}`}><Link href="/profile" className="text-sm pt[8px] pb[5px] pl-[10px] pr-[1rem]">Profile</Link></li>
+          <li className={`link ${pathname === '/profile/changePassword' ? 'bg-[#e5e7eb] border-t-2 border-[#e5e7eb] pl-0 pr-0 py-2 px-4 font-semibold' : 'border-t-2 border-[#e5e7eb] pl-0 pr-0 py-2 px-4'}`}><Link href="/profile/changePassword" className="text-sm pt[8px] pb[5px] pl-[10px] pr-[1rem]">Change Password</Link></li>
+          <li className={`link ${pathname === '/profile/transactionList' ? 'bg-[#e5e7eb] border-t-2 border-[#e5e7eb] pl-0 pr-0 py-2 px-4 font-semibold' : 'border-t-2 border-[#e5e7eb] pl-0 pr-0 py-2 px-4'}`}><Link href="/profile/transactionList" className="text-sm pt[8px] pb[5px] pl-[10px] pr-[1rem]">Transaction</Link></li>
+          <li className={`link ${pathname === '/profile/voucherList' ? 'bg-[#e5e7eb] border-t-2 border-[#e5e7eb] pl-0 pr-0 py-2 px-4 font-semibold' : 'border-t-2 border-[#e5e7eb] pl-0 pr-0 py-2 px-4'}`}><Link href="/profile/voucherList" className="text-sm pt[8px] pb[5px] pl-[10px] pr-[1rem]">Voucher List</Link></li>
+          <li className={`link ${pathname === '/profile/voucherRedeem' ? 'bg-[#e5e7eb] border-t-2 border-[#e5e7eb] pl-0 pr-0 py-2 px-4 font-semibold' : 'border-t-2 border-[#e5e7eb] pl-0 pr-0 py-2 px-4'}`}><Link href="/profile/voucherRedeem" className="text-sm pt[8px] pb[5px] pl-[10px] pr-[1rem]">Voucher Redeem</Link></li>
+          <li className={`link ${pathname === '/profile/showcase' ? 'bg-[#e5e7eb] border-t-2 border-[#e5e7eb] pl-0 pr-0 py-2 px-4 font-semibold' : 'border-t-2 border-[#e5e7eb] pl-0 pr-0 py-2 px-4'}`}><Link href="/profile/showcase" className="text-sm pt[8px] pb[5px] pl-[10px] pr-[1rem]">Showcase</Link></li>
+          <li className={`link ${pathname === '/profile/logout' ? 'bg-[#e5e7eb] border-t-2 border-[#e5e7eb] pl-0 pr-0 py-2 px-4 font-semibold' : 'border-t-2 border-[#e5e7eb] pl-0 pr-0 py-2 px-4'}`}><Link href="/profile/logout" className="text-sm pt[8px] pb[5px] pl-[10px] pr-[1rem] text-red-500 ">Logout</Link></li>
         </ul>
       </div>
       {children}
