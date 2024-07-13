@@ -1,8 +1,10 @@
 import ProfileXpBar from "@/components/molecules/ProfileXpBar.molecule";
+
 import Image from "next/image";
 import Link from "next/link";
 import { Children } from "react";
 import { Poppins } from "next/font/google";
+import ProfileStatText from "@/components/molecules/ProfileStatText.molecule";
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -128,13 +130,8 @@ export default function profile({
         <ProfileXpBar></ProfileXpBar>
         {/* profile xp bar desc for levelup req */}
         <div className="text-center mb-1">90 xp left to reach lvl 10</div>
-        {/* profile stat */}
-        <div className="grid grid-cols-3 border-2 border-solid border-[#e5e7eb] rounded-[8px] bg-[#8fbc8f] ml-[24px] mr-[32px] mb-[16px]">
-          {/* profile stat text */}
-          <div className="h-[100px] text-center text-white pt-[40px] border-l-[1px] border-solid border-white ">point</div>
-          <div className="h-[100px] text-center text-white pt-[40px] border-l-[1px] border-solid border-white ">Showcase</div>
-          <div className="h-[100px] text-center text-white pt-[40px] border-l-[1px] border-solid border-white ">Level</div>
-        </div>
+        {/* profile stat text */}
+        <ProfileStatText></ProfileStatText>
       </div>
     </div>
   );
