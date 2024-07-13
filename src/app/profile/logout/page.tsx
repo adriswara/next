@@ -1,16 +1,11 @@
 import Image from "next/image";
 
 export default function Home() {
-    const profileCard = {
-        border: "1px solid lightGrey",
-        borderRadius: 10,
-        marginLeft: -825,
-        marginRight: 145
-    }
+   
 
 
     return (
-        <div style={profileCard}>
+        <div className="border-2 border-solid border-jonasBorder rounded-[10px] w-full h-full">
             logout
         </div>
     );
