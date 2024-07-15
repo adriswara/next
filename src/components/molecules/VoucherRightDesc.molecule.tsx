@@ -1,6 +1,7 @@
 import { FC } from "react"
 import VoucherListActive from "../atoms/VoucherListStatusActive.atom"
 import VoucherListNotActive from "../atoms/VoucherListStatusNotActive.atom"
+import VoucherListInvalid from "../atoms/VoucherListStatusError.atom"
 
 interface VoucherRightDescCodeStatusProps { voucherCode?: string, status: number }
 const VoucherRightDescCodeStatus: FC<VoucherRightDescCodeStatusProps> = (props) => {
@@ -26,7 +27,7 @@ const VoucherRightDescCodeStatus: FC<VoucherRightDescCodeStatusProps> = (props) 
                     </div>
                 </div>
                 {/* status active */}
-                {status == 1 ? <VoucherListActive></VoucherListActive> : <VoucherListNotActive></VoucherListNotActive>}
+                {status == 1 ? <VoucherListActive></VoucherListActive> : status == 2 ? <VoucherListNotActive></VoucherListNotActive> : <VoucherListInvalid></VoucherListInvalid>}
             </div>
         </div>
     )
