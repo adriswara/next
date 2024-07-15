@@ -1,11 +1,8 @@
 import RedeemButton from "@/components/atoms/RedeemButton.atom"
-import VoucherFilterForm from "@/components/molecules/VoucherFilterForm.molecult"
+import VoucherFilterForm from "@/components/molecules/VoucherFilterForm.molecule"
+import VoucherDescDiscount from "@/components/molecules/VoucherLeftDesc.molecule"
 
 export default function Home() {
-
-    const voucherLeftComponent = {
-        marginLeft: 20
-    }
 
     const voucherRightComponent = {
 
@@ -15,21 +12,6 @@ export default function Home() {
         gridTemplateColumns: "auto auto"
     }
 
-    const hugetextVoucher1 = {
-        fontSize: 30
-    }
-    const hugetextVoucher2 = {
-        fontSize: 30,
-        width: 240
-    }
-
-    const bigTextVoucher = {
-        fontSize: 14
-    }
-    const descTextVoucher = {
-        fontSize: 12,
-        color: "grey"
-    }
 
     const priceText = {
         border: "1px solid lightGrey",
@@ -48,21 +30,17 @@ export default function Home() {
 
     return (
         <div className="border-2 border-solid border-jonasBorder rounded-[10px] w-full h-full">
-              {/* voucher navigation */}
-              <VoucherFilterForm></VoucherFilterForm>
+            {/* voucher navigation */}
+            <VoucherFilterForm></VoucherFilterForm>
             {/* voucher section */}
             <div className="mt-5 mb-5">
                 {/* voucher grid */}
                 <div className="grid grid-cols-2">
                     {/* voucher object left */}
                     <div className="border-2 border-solid border-jonasBorder rounded-[5px] grid grid-cols-2 -mt-px mb-5 pt-5 pb-5 ml-5 mr-5 ">
-                        <div style={voucherLeftComponent}>
-                            <div style={hugetextVoucher1}>X% OFF</div>
-                            <div style={bigTextVoucher}>FOR WHOLE ORDER</div>
-                            <div style={descTextVoucher}>XX/XX/XXXX XX:XX - XX/XX/XXXX XX:XX</div>
-                            <div style={descTextVoucher}>For All products</div>
-                            <div style={descTextVoucher}>Combination: get xx% off when....</div>
-                        </div>
+                        {/* voucher left section */}
+                        <VoucherDescDiscount type={1}></VoucherDescDiscount>
+
                         <div style={voucherRightComponent}>
                             <div style={voucherRightCode}>
                             </div>
@@ -72,13 +50,8 @@ export default function Home() {
                     </div>
                     {/* voucher object left */}
                     <div className="border-2 border-solid border-jonasBorder rounded-[5px] grid grid-cols-2 -mt-px mb-5 pt-5 pb-5 ml-5 mr-5 ">
-                        <div style={voucherLeftComponent}>
-                            <div style={hugetextVoucher1}>X% OFF</div>
-                            <div style={bigTextVoucher}>FOR WHOLE ORDER</div>
-                            <div style={descTextVoucher}>XX/XX/XXXX XX:XX - XX/XX/XXXX XX:XX</div>
-                            <div style={descTextVoucher}>For All products</div>
-                            <div style={descTextVoucher}>Combination: get xx% off when....</div>
-                        </div>
+                        <VoucherDescDiscount type={1}></VoucherDescDiscount>
+
                         <div style={voucherRightComponent}>
                             <div style={voucherRightCode}>
                             </div>
@@ -92,13 +65,8 @@ export default function Home() {
                     <div className="grid grid-cols-2">
                         {/* voucher right */}
                         <div className="border-2 border-solid border-jonasBorder rounded-[5px] grid grid-cols-2 -mt-px mb-5 pt-5 pb-5 ml-5 mr-5 ">
-                            <div style={voucherLeftComponent}>
-                                <div style={hugetextVoucher2}>BUY x GET x FREE</div>
-                                <div style={bigTextVoucher}>FOR WHOLE ORDER</div>
-                                <div style={descTextVoucher}>XX/XX/XXXX XX:XX - XX/XX/XXXX XX:XX</div>
-                                <div style={descTextVoucher}>For All products</div>
-                                <div style={descTextVoucher}>Combination: get xx% off when....</div>
-                            </div>
+                            <VoucherDescDiscount type={2}></VoucherDescDiscount>
+
                             <div style={voucherRightComponent}>
                                 <div style={voucherRightCode}>
                                 </div>
@@ -108,13 +76,8 @@ export default function Home() {
                         </div>
                         {/* voucher right */}
                         <div className="border-2 border-solid border-jonasBorder rounded-[5px] grid grid-cols-2 -mt-px mb-5 pt-5 pb-5 ml-5 mr-5 ">
-                            <div style={voucherLeftComponent}>
-                                <div style={hugetextVoucher2}>BUY x GET x FREE</div>
-                                <div style={bigTextVoucher}>FOR WHOLE ORDER</div>
-                                <div style={descTextVoucher}>XX/XX/XXXX XX:XX - XX/XX/XXXX XX:XX</div>
-                                <div style={descTextVoucher}>For All products</div>
-                                <div style={descTextVoucher}>Combination: get xx% off when....</div>
-                            </div>
+                            <VoucherDescDiscount type={2}></VoucherDescDiscount>
+
                             <div style={voucherRightComponent}>
                                 <div style={voucherRightCode}>
                                 </div>

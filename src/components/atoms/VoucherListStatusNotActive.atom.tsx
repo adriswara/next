@@ -1,0 +1,12 @@
+import { FC } from "react"
+
+interface VoucherListNotActiveProps { label?: string }
+const VoucherListNotActive: FC<VoucherListNotActiveProps> = (props) => {
+    const {
+        label = "NOT AVAILABLE"
+    } = props
+    return (
+        <div className="pt-20 pl-32 w-72 float-right"><button type="button" disabled className="border-2 border-solid border-jonasBorder rounded-[15px] bg-gray-700 text-white text-sm w-32 h-8 ml-0">{label}</button></div>
+    )
+}
+export default VoucherListNotActive
