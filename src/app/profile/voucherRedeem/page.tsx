@@ -1,64 +1,7 @@
+import RedeemButton from "@/components/atoms/RedeemButton.atom"
+import VoucherFilterForm from "@/components/molecules/VoucherFilterForm.molecult"
 
 export default function Home() {
-
-
-    const voucherNav = {
-        display: "grid",
-        gridTemplateColumns: "auto auto auto",
-        marginTop: 10
-    }
-
-    const searchBar = {
-        border: "1px solid lightGrey",
-        borderRadius: 5,
-        display: "grid",
-        gridTemplateColumns: "auto auto",
-        width: 280,
-        height: 40,
-        marginLeft: 20
-
-    }
-
-    const searchBarMagnifier = {
-        marginTop: 9,
-        marginLeft: 12
-    }
-
-    const searchBarInput = {
-        height: 35
-    }
-
-    const dropdown = {
-        border: "1px solid lightGrey",
-        borderRadius: 5,
-        backgroundColor: "white",
-        marginRight: 20,
-        paddingLeft: 10,
-        paddingRight: 10
-    }
-    const voucherList = {
-        marginTop: 20,
-        marginBottom: 20
-    }
-
-    const voucherGrid = {
-        display: "grid",
-        gridTemplateColumns: "auto auto",
-
-    }
-
-    const voucherObject = {
-        border: "1px solid lightGrey",
-        borderRadius: 5,
-        display: "grid",
-        gridTemplateColumns: "auto auto",
-        marginTop: -1,
-        marginBottom: 20,
-        paddingTop: 20,
-        paddingBottom: 20,
-        marginLeft: 20,
-        marginRight: 20
-    }
 
     const voucherLeftComponent = {
         marginLeft: 20
@@ -72,45 +15,6 @@ export default function Home() {
         gridTemplateColumns: "auto auto"
     }
 
-    const voucherRightStatus = {
-        paddingTop: 75,
-        paddingLeft: 130,
-        width: 280,
-        float: "right",
-    }
-    const buttonVoucherRightStatusActive = {
-        border: "1px solid lightGrey",
-        borderRadius: 15,
-        backgroundColor: "darkGreen",
-        color: "white",
-        fontSize: 13,
-        width: 60,
-        height: 30,
-        marginRight: 60,
-        float: "right"
-    }
-    const buttonVoucherRightStatusNotAvailable = {
-        border: "1px solid lightGrey",
-        borderRadius: 15,
-        backgroundColor: "darkGrey",
-        color: "white",
-        fontSize: 13,
-        width: 120,
-        height: 30,
-    }
-    const buttonRedeem = {
-        border: "1px solid lightGrey",
-        borderRadius: 15,
-        backgroundColor: "slateBlue",
-        color: "white",
-        fontSize: 13,
-        width: 90,
-        height: 30,
-        marginRight: 45,
-        float: "right",
-        marginTop: 10
-
-    }
     const hugetextVoucher1 = {
         fontSize: 30
     }
@@ -127,29 +31,6 @@ export default function Home() {
         color: "grey"
     }
 
-    const voucherCodeLine = {
-        color: "darkblue",
-        fontSize: 14,
-        marginLeft: 0,
-        marginRight: -30
-    }
-
-    const voucherCodeCopy = {
-        fontSize: 14,
-        display: "grid",
-        gridTemplateColumns: "auto auto",
-        width: 70,
-        marginRight: -70
-    }
-
-    const priceButtonDiv = {
-        backgroundColor: "lightgrey",
-        marginBottom: -20,
-        height: 50,
-        marginTop: 10
-
-    }
-
     const priceText = {
         border: "1px solid lightGrey",
         borderRadius: 15,
@@ -159,7 +40,6 @@ export default function Home() {
         width: 90,
         height: 30,
         marginRight: 45,
-
         paddingLeft: 13,
         paddingTop: 3,
         marginTop: 10
@@ -168,27 +48,14 @@ export default function Home() {
 
     return (
         <div className="border-2 border-solid border-jonasBorder rounded-[10px] w-full h-full">
-            <div style={voucherNav}>
-                <label style={searchBar}>
-                    <svg fill="#000000" width="20px" height="20px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" style={searchBarMagnifier}>
-                        <path d="M31.707 30.282l-9.717-9.776c1.811-2.169 2.902-4.96 2.902-8.007 0-6.904-5.596-12.5-12.5-12.5s-12.5 5.596-12.5 12.5 5.596 12.5 12.5 12.5c3.136 0 6.002-1.158 8.197-3.067l9.703 9.764c0.39 0.39 1.024 0.39 1.415 0s0.39-1.023 0-1.415zM12.393 23.016c-5.808 0-10.517-4.709-10.517-10.517s4.708-10.517 10.517-10.517c5.808 0 10.516 4.708 10.516 10.517s-4.709 10.517-10.517 10.517z"></path>
-                    </svg>
-                    <input type="text" name="" placeholder="Cari Voucher" style={searchBarInput} />
-                </label>
-                <select name="" id="" style={dropdown}>
-                    <option value="" disabled selected>Jenis Voucher</option>
-                    <option value=""></option>
-                    <option value=""></option>
-                </select>
-                <select name="" id="" style={dropdown}>
-                    <option value="" disabled selected>Recent</option>
-                    <option value=""></option>
-                    <option value=""></option>
-                </select>
-            </div>
-            <div style={voucherList}>
-                <div style={voucherGrid}>
-                    <div style={voucherObject}>
+              {/* voucher navigation */}
+              <VoucherFilterForm></VoucherFilterForm>
+            {/* voucher section */}
+            <div className="mt-5 mb-5">
+                {/* voucher grid */}
+                <div className="grid grid-cols-2">
+                    {/* voucher object left */}
+                    <div className="border-2 border-solid border-jonasBorder rounded-[5px] grid grid-cols-2 -mt-px mb-5 pt-5 pb-5 ml-5 mr-5 ">
                         <div style={voucherLeftComponent}>
                             <div style={hugetextVoucher1}>X% OFF</div>
                             <div style={bigTextVoucher}>FOR WHOLE ORDER</div>
@@ -200,10 +67,11 @@ export default function Home() {
                             <div style={voucherRightCode}>
                             </div>
                         </div>
-                        <div style={priceButtonDiv}><p style={priceText}>90 Points</p></div>
-                        <div style={priceButtonDiv}><link rel="stylesheet" href="" /><button style={buttonRedeem}>Redeem</button></div>
+                        <div className="bg-gray-300 -mb-5 h-12 mt-3"><p style={priceText}>90 Points</p></div>
+                        <div className="bg-gray-300 -mb-5 h-12 mt-3"><link rel="stylesheet" href="" /><RedeemButton></RedeemButton></div>
                     </div>
-                    <div style={voucherObject}>
+                    {/* voucher object left */}
+                    <div className="border-2 border-solid border-jonasBorder rounded-[5px] grid grid-cols-2 -mt-px mb-5 pt-5 pb-5 ml-5 mr-5 ">
                         <div style={voucherLeftComponent}>
                             <div style={hugetextVoucher1}>X% OFF</div>
                             <div style={bigTextVoucher}>FOR WHOLE ORDER</div>
@@ -215,14 +83,15 @@ export default function Home() {
                             <div style={voucherRightCode}>
                             </div>
                         </div>
-                        <div style={priceButtonDiv}><p style={priceText}>90 Points</p></div>
-                        <div style={priceButtonDiv}><link rel="stylesheet" href="" /><button style={buttonRedeem}>Redeem</button></div>
+                        <div className="bg-gray-300 -mb-5 h-12 mt-3"><p style={priceText}>90 Points</p></div>
+                        <div className="bg-gray-300 -mb-5 h-12 mt-3"><link rel="stylesheet" href="" /><RedeemButton></RedeemButton></div>
                     </div>
-
                 </div>
-                <div style={voucherList}>
-                    <div style={voucherGrid}>
-                        <div style={voucherObject}>
+                {/* voucher list */}
+                <div className="mt-5 mb-5">
+                    <div className="grid grid-cols-2">
+                        {/* voucher right */}
+                        <div className="border-2 border-solid border-jonasBorder rounded-[5px] grid grid-cols-2 -mt-px mb-5 pt-5 pb-5 ml-5 mr-5 ">
                             <div style={voucherLeftComponent}>
                                 <div style={hugetextVoucher2}>BUY x GET x FREE</div>
                                 <div style={bigTextVoucher}>FOR WHOLE ORDER</div>
@@ -234,10 +103,11 @@ export default function Home() {
                                 <div style={voucherRightCode}>
                                 </div>
                             </div>
-                            <div style={priceButtonDiv}><p style={priceText}>90 Points</p></div>
-                            <div style={priceButtonDiv}><link rel="stylesheet" href="" /><button style={buttonRedeem}>Redeem</button></div>
+                            <div className="bg-gray-300 -mb-5 h-12 mt-3"><p style={priceText}>90 Points</p></div>
+                            <div className="bg-gray-300 -mb-5 h-12 mt-3"><link rel="stylesheet" href="" /><RedeemButton></RedeemButton></div>
                         </div>
-                        <div style={voucherObject}>
+                        {/* voucher right */}
+                        <div className="border-2 border-solid border-jonasBorder rounded-[5px] grid grid-cols-2 -mt-px mb-5 pt-5 pb-5 ml-5 mr-5 ">
                             <div style={voucherLeftComponent}>
                                 <div style={hugetextVoucher2}>BUY x GET x FREE</div>
                                 <div style={bigTextVoucher}>FOR WHOLE ORDER</div>
@@ -249,10 +119,9 @@ export default function Home() {
                                 <div style={voucherRightCode}>
                                 </div>
                             </div>
-                            <div style={priceButtonDiv}><p style={priceText}>90 Points</p></div>
-                            <div style={priceButtonDiv}><link rel="stylesheet" href="" /><button style={buttonRedeem}>Redeem</button></div>
+                            <div className="bg-gray-300 -mb-5 h-12 mt-3"><p style={priceText}>90 Points</p></div>
+                            <div className="bg-gray-300 -mb-5 h-12 mt-3"><link rel="stylesheet" href="" /><RedeemButton></RedeemButton></div>
                         </div>
-
                     </div>
                 </div>
             </div>
