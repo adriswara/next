@@ -1,18 +1,5 @@
-import Image from "next/image";
 
 export default function Home() {
-
-
-  const profileTableTD = {
-    paddingTop: 25
-  }
-  const profileTableTD2 = {
-    paddingTop: 25,
-    paddingLeft: 300
-  }
-  const profileTableTR = {
-    borderTop: "1px solid lightGrey"
-  }
 
   return (
     // profile card

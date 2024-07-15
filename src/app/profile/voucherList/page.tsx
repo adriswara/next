@@ -1,8 +1,6 @@
 import VoucherFilterForm from "@/components/molecules/VoucherFilterForm.molecule";
-import VoucherDescDiscount from "@/components/molecules/VoucherLeftDesc.molecule";
-import VoucherRightDescCodeStatus from "@/components/molecules/VoucherRightDesc.molecule";
 import VoucherOwned from "@/components/organisms/VoucherOwned";
-import Image from "next/image";
+
 
 export default function Home() {
 
@@ -14,7 +12,7 @@ export default function Home() {
             <div className="mx-5 my-5">
                 {/* voucher items */}
                 <VoucherOwned voucherType={1} voucherStatus={1}></VoucherOwned>
-                <VoucherOwned voucherType={2} voucherStatus={0}></VoucherOwned>
+                <VoucherOwned voucherType={2} voucherStatus={2}></VoucherOwned>
             </div>
         </div>
     );

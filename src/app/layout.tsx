@@ -83,7 +83,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <section>
-          <nav style={headerStyle}>
+          <nav className="grid grid-cols-7 border-2 border-solid border-jonasBorder" style={headerStyle}>
             <div style={imageHeader}>
               <a href="\">
                 <Image src="/header.png" width={128} height={13.84} alt="Picture of the author" />

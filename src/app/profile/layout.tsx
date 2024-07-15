@@ -19,35 +19,10 @@ export default function profile({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  type logoutcolor = `rgb(${239},${77},${68})`
-  const profileStyle = {
-    display: "flex",
-    paddingTop: 20,
-    paddingBottom: 150
-  }
-  const navProfileCard = {
-    border: "1px solid lightGrey",
-    borderRadius: 10,
-    marginLeft: 140,
-    marginRight: 850,
-    marginBottom: 0,
-    paddingBottom: 0,
-    height: 255,
-    width: 312
-  }
-
-  const profilePicDiv = {
-    marginLeft: " auto",
-    marginRIght: "auto",
-    borderRadius: "50%",
-  }
-  const profilePic = {
-    borderRadius: "60%",
-    margin: "auto"
-  }
+  
   const pathname = usePathname()
   return (
-    <div style={profileStyle} className={`${poppins.className} container mx-auto items-start gap-5 `}>
+    <div className={`${poppins.className} flex pt-5 pb-36 container mx-auto items-start gap-5 `}>
       <div className="w-[312px] flex-col flex gap-5 justify-start">
         <div className="border rounded-lg border-solid border-[#e5e7eb] h-auto" >
           <ul>
@@ -62,8 +37,8 @@ export default function profile({
         </div>
         {/* nav profile xp */}
         <div className="border border-[#e5e7eb] rounded-[10px]  w-full relative">
-          <div style={profilePicDiv}>
-            <Image style={profilePic} src="/profilePicSq.jpg" width={128} height={13.84} alt="profilePicture" />
+          <div className="ml-auto mr-auto round-[50%]">
+            <Image className="rounded-[60%] mx-auto my-auto" src="/profilePicSq.jpg" width={128} height={13.84} alt="profilePicture" />
           </div>
           {/* profile Name */}
           <ProfileName></ProfileName>
