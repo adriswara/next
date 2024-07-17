@@ -3,8 +3,8 @@ export default function Home() {
 
 
     return (
-        <>
-            <blockquote data-instgrm-permalink="https://www.instagram.com/jonasphotoid/" className=" instagram-media bg-white border-0 rounded-[3px] mx-1  p-0 max-w-screen-sm">
+        <div>
+            <blockquote data-instgrm-permalink="https://www.instagram.com/jonasphotoid/" className=" instagram-media bg-white border-0 rounded-[3px] mx-1 w-[62.5vw]">
                 <div className="p-4">
                     <a id="main_link" href="jonasphotoid" className="bg-white p-0 text-center w-full" target="_blank">
                         <div className="flex flex-row items-center">
@@ -48,10 +48,9 @@ export default function Home() {
 
                 </div>
             </blockquote>
-
             <script src="https://www.instagram.com/embed.js"></script>
             <script type="text/javascript" src="https://www.embedista.com/j/instagramfeed.js"></script>
-        </>
+        </div>
 
     );
 }
