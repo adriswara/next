@@ -18,6 +18,7 @@ const config: Config = {
     colors: {
       'jonasBorder': "#e5e7eb",
       'slateBlue' : "#6A5ACD",
+      'smokeWhite' : "#F4F4F4",
       ...colors
 
     }
