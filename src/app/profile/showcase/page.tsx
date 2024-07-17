@@ -1,4 +1,4 @@
-
+import Script from 'next/script'
 export default function Home() {
 
 
@@ -48,8 +48,8 @@ export default function Home() {
 
                 </div>
             </blockquote>
-            <script src="https://www.instagram.com/embed.js"></script>
-            <script type="text/javascript" src="https://www.embedista.com/j/instagramfeed.js"></script>
+            <Script src="https://www.instagram.com/embed.js"></Script>
+            <Script type="text/javascript" src="https://www.embedista.com/j/instagramfeed.js"></Script>
         </div>
 
     );
