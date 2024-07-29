@@ -1,0 +1,14 @@
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
+
+const NavLinks = () => {
+  const pathname = usePathname();
+
+  // Your link logic here...
+
+  return (
+    // JSX for rendering links
+  );
+};
+
+export default NavLinks;

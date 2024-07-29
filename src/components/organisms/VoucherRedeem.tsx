@@ -19,7 +19,7 @@ const VoucherRedeem: FC<VoucherRedeemProps> = (props) => {
                     {/* voucher right code leave it blank */}
                 </div>
             </div>
-            <div className="bg-gray-300 -mb-5 h-12 mt-3 pl-3"><p className="border-2 border-solid border-black rounded-[15px] text-sm w-24 h-8 mt-2 pl-3 pt-1">{price} Points</p></div>
+            <div className="bg-gray-300 -mb-5 h-12 mt-3 pl-3"><p className="border-2 border-solid border-black rounded-2xl text-sm w-24 h-8 mt-2 pl-3 pt-1">{price} Points</p></div>
             <div className="bg-gray-300 -mb-5 h-12 mt-3"><link rel="stylesheet" href="" /><RedeemButton></RedeemButton></div>
         </div>
     )

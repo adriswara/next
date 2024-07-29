@@ -19,8 +19,8 @@ export default function profile({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  
   const pathname = usePathname()
+  
   return (
     <div className={`${poppins.className} flex pt-5 pb-36 container mx-auto items-start gap-5 `}>
       <div className="w-[312px] flex-col flex gap-5 justify-start">

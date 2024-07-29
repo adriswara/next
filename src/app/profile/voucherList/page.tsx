@@ -13,6 +13,8 @@ export default function Home() {
                 {/* voucher items */}
                 <VoucherOwned voucherType={1} voucherStatus={1}></VoucherOwned>
                 <VoucherOwned voucherType={2} voucherStatus={2}></VoucherOwned>
+                <VoucherOwned voucherType={2} voucherStatus={1}></VoucherOwned>
+
             </div>
         </div>
     );
