@@ -73,13 +73,7 @@ export default function RootLayout({
     marginBottom: 50,
     marginTop: 50
   }
-  const footerDiv = {
-    paddingLeft: 140,
-    marginTop: 10
-  }
-  const footerDivShared = {
-    marginTop: 10
-  }
+  
 
   return (
     <html lang="en">
