@@ -3,6 +3,8 @@ import { Inter, Source_Sans_3 } from "next/font/google";
 
 import "./globals.css";
 import Image from "next/image";
+import FooterMidRight from "@/components/atoms/FooterMidRight";
+import FooterLeft from "@/components/atoms/FooterLeft";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -98,50 +100,51 @@ export default function RootLayout({
         </section>
         {children}
         <section>
+          {/* footer */}
           <div style={footerMain}>
-            <div><h1 style={footerDiv}>Online Shoping Guide</h1></div>
-            <div><h1 style={footerDivShared}>Store Locator</h1></div>
-            <div><h1 style={footerDivShared}>About</h1></div>
-            <div><h1 style={footerDiv}>Photo Studio Reservation</h1></div>
-            <div><h1 style={footerDivShared}>Jonas Banda</h1></div>
-            <div><h1 style={footerDivShared}>Jonas Photo</h1></div>
-            <div><h1 style={footerDiv}>Photo Printing</h1></div>
-            <div><h1 style={footerDivShared}>Jonas Buah Batu</h1></div>
-            <div><h1 style={footerDivShared}>Term and Condition</h1></div>
-            <div><h1 style={footerDiv}>Photo Frame</h1></div>
-            <div><h1 style={footerDivShared}>Jonas Ciwalk</h1></div>
-            <div><h1 style={footerDivShared}>Privacy Policy</h1></div>
-            <div><h1 style={footerDiv}></h1></div>
-            <div><h1 style={footerDivShared}>Jonas Feslink</h1></div>
-            <div><h1 style={footerDivShared}>FAQs</h1></div>
-            <div><h1 style={footerDiv}></h1></div>
-            <div><h1 style={footerDivShared}>Jonas Jatinangor</h1></div>
-            <div><h1 style={footerDivShared}>Official Account</h1></div>
-            <div><h1 style={footerDiv}></h1></div>
-            <div><h1 style={footerDivShared}>Jonas Cimahi</h1></div>
-            <div><h1 style={footerDivShared}>POSISI LOGO</h1></div>
-            <div><h1 style={footerDiv}></h1></div>
-            <div><h1 style={footerDivShared}>Jonas KBP</h1></div>
-            <div><h1 style={footerDivShared}></h1></div>
-            <div><h1 style={footerDiv}></h1></div>
-            <div><h1 style={footerDivShared}>Jonas Summarecon Mall Serpong</h1></div>
-            <div><h1 style={footerDivShared}></h1></div>
-            <div><h1 style={footerDiv}></h1></div>
-            <div><h1 style={footerDivShared}>Jonas Alam Sutera (Coming Soon)</h1></div>
-            <div><h1 style={footerDivShared}></h1></div>
-            <div><h1 style={footerDiv}></h1></div>
-            <div><h1 style={footerDivShared}>Jonas Semarang</h1></div>
-            <div><h1 style={footerDivShared}></h1></div>
-            <div><h1 style={footerDiv}></h1></div>
-            <div><h1 style={footerDivShared}></h1></div>
-            <div><h1 style={footerDivShared}></h1></div>
-            <div><h1 style={footerDiv}></h1></div>
-            <div><h1 style={footerDivShared}></h1></div>
-            <div><h1 style={footerDivShared}></h1></div>
-            <div><h1 style={footerDiv}></h1></div>
-            <div><h1 style={footerDivShared}></h1></div>
-            <div><h1 style={footerDivShared}></h1></div>
-            <div><h1 style={footerDiv}>2024 Jonasphoto. All Rights reserved.</h1></div>
+            <FooterLeft label={"Online Shoping Guide"}></FooterLeft>
+            <FooterMidRight label={"Store Locator"}></FooterMidRight>
+            <FooterMidRight label={"About"}></FooterMidRight>
+            <FooterLeft label={"Online Shoping Guide"}></FooterLeft>
+            <FooterMidRight label={"Jonas Banda"}></FooterMidRight>
+            <FooterMidRight label={"Jonas Photo"}></FooterMidRight>
+            <FooterLeft label={"Photo Printing"}></FooterLeft>
+            <FooterMidRight label={"Jonas Buah Batu"}></FooterMidRight>
+            <FooterMidRight label={"Term and Condition"}></FooterMidRight>
+            <FooterLeft label={"Photo Frame"}></FooterLeft>
+            <FooterMidRight label={"Jonas Ciwalk"}></FooterMidRight>
+            <FooterMidRight label={"Privacy Policy"}></FooterMidRight>
+            <FooterLeft label={""}></FooterLeft>
+            <FooterMidRight label={"Jonas Feslink"}></FooterMidRight>
+            <FooterMidRight label={"FAQs"}></FooterMidRight>
+            <FooterLeft label={""}></FooterLeft>
+            <FooterMidRight label={"Jonas Jatinangor"}></FooterMidRight>
+            <FooterMidRight label={"Official Account"}></FooterMidRight>
+            <FooterLeft label={""}></FooterLeft>
+            <FooterMidRight label={"Jonas Cimahi"}></FooterMidRight>
+            <FooterMidRight label={"POSISI LOGO"}></FooterMidRight>
+            <FooterLeft label={""}></FooterLeft>
+            <FooterMidRight label={"Jonas KBP"}></FooterMidRight>
+            <FooterMidRight label={""}></FooterMidRight>
+            <FooterLeft label={""}></FooterLeft>
+            <FooterMidRight label={"Jonas Summarecon Mall Serpong"}></FooterMidRight>
+            <FooterMidRight label={""}></FooterMidRight>
+            <FooterLeft label={""}></FooterLeft>
+            <FooterMidRight label={"Jonas Alam Sutera (Coming soon)"}></FooterMidRight>
+            <FooterMidRight label={""}></FooterMidRight>
+            <FooterLeft label={""}></FooterLeft>
+            <FooterMidRight label={"Jonas Semarang"}></FooterMidRight>
+            <FooterMidRight label={""}></FooterMidRight>
+            <FooterLeft label={""}></FooterLeft>
+            <FooterMidRight label={""}></FooterMidRight>
+            <FooterMidRight label={""}></FooterMidRight>
+            <FooterLeft label={""}></FooterLeft>
+            <FooterMidRight label={""}></FooterMidRight>
+            <FooterMidRight label={""}></FooterMidRight>
+            <FooterLeft label={""}></FooterLeft>
+            <FooterMidRight label={""}></FooterMidRight>
+            <FooterMidRight label={""}></FooterMidRight>
+            <div><h1 className="mt-3 pl-36">2024 Jonasphoto. All Rights reserved.</h1></div>
           </div>
         </section>
       </body>
