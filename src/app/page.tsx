@@ -2,7 +2,7 @@
 
 
 async function getData() {
-  const res = await fetch('http://localhost:1323/user')
+  const res = await fetch('http://localhost:1323/test')
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
 
@@ -11,13 +11,14 @@ async function getData() {
     throw new Error('Failed to fetch data')
   }
 
+
   return res.json()
   // return JSON.stringify(res)
 }
 
 
 export default async function Home() {
-  const data = await getData()
+  const data = await getData()  
 
   return (
     <main>
