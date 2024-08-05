@@ -1,8 +1,10 @@
 'use server'
 
+import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal, AwaitedReactNode, Key } from "react"
+
 
 async function getData() {
-  const res = await fetch('http://localhost:1323/test')
+  const res = await fetch('http://localhost:8081/employees')
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
 
@@ -18,18 +20,22 @@ async function getData() {
 
 
 export default async function Home() {
-  const data = await getData()  
+  const datas = await getData()
 
   return (
     <main>
       <div>
 
-        {Object.keys(data).map((key) => (
-          <p key={key}>
-            {key} : {data[key]}
-          </p>
+       
 
+        {datas.employee.map((data: { id: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; employee_name: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined }, index: Key | null | undefined) => (
+          <div key={index}>
+            <span>{data.id}</span>
+            <span>{data.employee_name}</span>
+          </div>
         ))}
+
+
 
       </div>
     </main>
