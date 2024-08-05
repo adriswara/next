@@ -3,16 +3,23 @@ import RedeemButton from "../atoms/RedeemButton.atom";
 import VoucherDescDiscount from "../molecules/VoucherLeftDesc.molecule";
 
 
-interface VoucherRedeemProps { voucherType: number, price: number }
+interface VoucherRedeemProps { voucherType: number, price: number, discount:number, buyReq:number, itemFree:number, title:string, dateStart:string, dateEnd:string, productRange:string, }
 const VoucherRedeem: FC<VoucherRedeemProps> = (props) => {
     const {
         voucherType = 0,
         price = 0,
+        discount=0,
+        buyReq=0,
+        itemFree=0,
+        title="",
+        dateStart="",
+        dateEnd="",
+        productRange=""
     } = props
     return (
         <div className="border-2 border-solid border-jonasBorder rounded-[5px] grid grid-cols-2 -mt-px mb-5 pt-5 pb-5 ml-5 mr-5 ">
             {/* voucher left section */}
-            <VoucherDescDiscount type={voucherType}></VoucherDescDiscount>
+            <VoucherDescDiscount type={voucherType} discount={discount} buyReq={buyReq} itemFree={itemFree} title={title} dateStart={dateStart} dateEnd={dateEnd} productRange={productRange}></VoucherDescDiscount>
             {/* voucher right component */}
             <div>
                 <div className="grid grid-cols-2">

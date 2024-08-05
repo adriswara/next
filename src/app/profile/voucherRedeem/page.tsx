@@ -31,18 +31,18 @@ export default async function Home() {
                 {/* voucher grid */}
                 <div className="grid grid-cols-2">
                     {/* database loop call */}
-                    {datas.voucher.map((data: { id: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; title: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; voucherType: number }) => (
+                    {datas.voucher.map((data: { id: number; title: string; voucherType: number; price: number; discount: number; buyReq: number; itemFree: number; dateStart: string; dateEnd: string; productRange: string }) => (
                         <div>
                             {/* testing purpose only */}
-                            <span>{data.id}</span>
+                            {/* <span>{data.id}</span>
                             <span>{data.title}</span>
-                            <span>{data.voucherType}</span> 
+                            <span>{data.voucherType}</span> */}
                             {/*  */}
-                            <VoucherRedeem voucherType={data.voucherType} price={data.voucherType}></VoucherRedeem>
+                            <VoucherRedeem voucherType={data.voucherType} price={data.voucherType} discount={data.discount} buyReq={data.buyReq} itemFree={data.itemFree} title={data.title} dateStart={data.dateStart} dateEnd={data.dateEnd} productRange={data.productRange}></VoucherRedeem>
                         </div>
                     ))}
                     {/* endloop */}
-                </div>               
+                </div>
             </div>
         </div>
     );
