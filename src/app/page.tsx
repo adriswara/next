@@ -4,7 +4,7 @@ import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal, AwaitedRea
 
 
 async function getData() {
-  const res = await fetch('http://localhost:8081/employees')
+  const res = await fetch('http://localhost:8081/vouchers')
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
 
@@ -28,10 +28,10 @@ export default async function Home() {
 
        
 
-        {datas.employee.map((data: { id: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; employee_name: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined }, index: Key | null | undefined) => (
+        {datas.voucher.map((data: { id: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; title: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined }, index: Key | null | undefined) => (
           <div key={index}>
             <span>{data.id}</span>
-            <span>{data.employee_name}</span>
+            <span>{data.title}</span>
           </div>
         ))}
 

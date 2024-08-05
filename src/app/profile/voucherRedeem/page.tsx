@@ -1,10 +1,26 @@
-import RedeemButton from "@/components/atoms/RedeemButton.atom"
-import VoucherFilterForm from "@/components/molecules/VoucherFilterForm.molecule"
-import VoucherDescDiscount from "@/components/molecules/VoucherLeftDesc.molecule"
-import VoucherOwned from "@/components/organisms/VoucherOwned";
-import VoucherRedeem from "@/components/organisms/VoucherRedeem";
 
-export default function Home() {
+import VoucherFilterForm from "@/components/molecules/VoucherFilterForm.molecule"
+import VoucherRedeem from "@/components/organisms/VoucherRedeem";
+import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal, AwaitedReactNode } from "react";
+
+
+async function getData() {
+    const res = await fetch('http://localhost:8081/vouchers')
+    // The return value is *not* serialized
+    // You can return Date, Map, Set, etc.
+
+    if (!res.ok) {
+        // This will activate the closest `error.js` Error Boundary
+        throw new Error('Failed to fetch data')
+    }
+
+
+    return res.json()
+    // return JSON.stringify(res)
+}
+
+export default async function Home() {
+    const datas = await getData()
 
     return (
         <div className="border-2 border-solid border-jonasBorder rounded-[10px] w-full h-full">
@@ -14,21 +30,19 @@ export default function Home() {
             <div className="mt-5 mb-5">
                 {/* voucher grid */}
                 <div className="grid grid-cols-2">
-                    {/* voucher object left */}
-                    <VoucherRedeem voucherType={1} price={0}></VoucherRedeem>
-                    {/* voucher object left */}
-                    <VoucherRedeem voucherType={1} price={0}></VoucherRedeem>
-                </div>
-                {/* voucher list */}
-                <div className="mt-5 mb-5">
-                    {/* voucher grid */}
-                    <div className="grid grid-cols-2">
-                        {/* voucher object left */}
-                        <VoucherRedeem voucherType={2} price={0}></VoucherRedeem>
-                        {/* voucher object left */}
-                        <VoucherRedeem voucherType={2} price={0}></VoucherRedeem>
-                    </div>
-                </div>
+                    {/* database loop call */}
+                    {datas.voucher.map((data: { id: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; title: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; voucherType: number }) => (
+                        <div>
+                            {/* testing purpose only */}
+                            <span>{data.id}</span>
+                            <span>{data.title}</span>
+                            <span>{data.voucherType}</span> 
+                            {/*  */}
+                            <VoucherRedeem voucherType={data.voucherType} price={data.voucherType}></VoucherRedeem>
+                        </div>
+                    ))}
+                    {/* endloop */}
+                </div>               
             </div>
         </div>
     );
