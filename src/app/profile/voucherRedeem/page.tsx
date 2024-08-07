@@ -1,26 +1,28 @@
 
 import VoucherFilterForm from "@/components/molecules/VoucherFilterForm.molecule"
 import VoucherRedeem from "@/components/organisms/VoucherRedeem";
-import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal, AwaitedReactNode } from "react";
 
 
-async function getData() {
-    const res = await fetch('http://localhost:8081/vouchers')
+async function getData(port: string) {
+  
+    const portlink : string = 'http://localhost:8081/' + port
+  
+    const res = await fetch(portlink)
     // The return value is *not* serialized
     // You can return Date, Map, Set, etc.
-
+  
     if (!res.ok) {
-        // This will activate the closest `error.js` Error Boundary
-        throw new Error('Failed to fetch data')
+      // This will activate the closest `error.js` Error Boundary
+      throw new Error('Failed to fetch data')
     }
-
-
+  
+  
     return res.json()
     // return JSON.stringify(res)
-}
+  }
 
 export default async function Home() {
-    const datas = await getData()
+    const datas = await getData('vouchers')
 
     return (
         <div className="border-2 border-solid border-jonasBorder rounded-[10px] w-full h-full">

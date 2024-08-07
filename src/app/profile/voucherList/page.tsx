@@ -2,23 +2,27 @@ import VoucherFilterForm from "@/components/molecules/VoucherFilterForm.molecule
 import VoucherOwned from "@/components/organisms/VoucherOwned";
 
 
-async function getData() {
-    const res = await fetch('http://localhost:8081/ownedVoucher')
+
+async function getData(port: string) {
+  
+    const portlink : string = 'http://localhost:8081/' + port
+  
+    const res = await fetch(portlink)
     // The return value is *not* serialized
     // You can return Date, Map, Set, etc.
-
+  
     if (!res.ok) {
-        // This will activate the closest `error.js` Error Boundary
-        throw new Error('Failed to fetch data')
+      // This will activate the closest `error.js` Error Boundary
+      throw new Error('Failed to fetch data')
     }
-
-
+  
+  
     return res.json()
     // return JSON.stringify(res)
-}
+  }
 
 export default async function Home() {
-    const datas = await getData()
+    const datas = await getData('ownedVoucher')
 
 
 

@@ -1,7 +1,7 @@
 'use server'
 
 import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal, AwaitedReactNode, Key } from "react"
-
+// import { Data } from "D:/laragon/www/Skripsi/jonas/src/pages/getData.tsx"
 
 async function getData(port: string) {
   
@@ -23,6 +23,7 @@ async function getData(port: string) {
 
 
 export default async function Home() {
+  
   const datas = await getData('vouchers')
 
   return (
