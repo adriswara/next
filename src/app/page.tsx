@@ -3,8 +3,11 @@
 import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal, AwaitedReactNode, Key } from "react"
 
 
-async function getData() {
-  const res = await fetch('http://localhost:8081/vouchers')
+async function getData(port: string) {
+  
+  const portlink : string = 'http://localhost:8081/' + port
+
+  const res = await fetch(portlink)
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
 
@@ -20,7 +23,7 @@ async function getData() {
 
 
 export default async function Home() {
-  const datas = await getData()
+  const datas = await getData('vouchers')
 
   return (
     <main>
