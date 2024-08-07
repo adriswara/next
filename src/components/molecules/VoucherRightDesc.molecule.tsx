@@ -3,11 +3,11 @@ import VoucherListActive from "../atoms/VoucherListStatusActive.atom"
 import VoucherListNotActive from "../atoms/VoucherListStatusNotActive.atom"
 import VoucherListInvalid from "../atoms/VoucherListStatusError.atom"
 
-interface VoucherRightDescCodeStatusProps { voucherCode?: string, status: number }
+interface VoucherRightDescCodeStatusProps { code: string, is_usable: number }
 const VoucherRightDescCodeStatus: FC<VoucherRightDescCodeStatusProps> = (props) => {
     const {
-        voucherCode = "Code: CODE_123sksdiof",
-        status = 0
+        code = "Code: missing",
+        is_usable = 0
     } = props
     return (
         <div>
@@ -15,7 +15,7 @@ const VoucherRightDescCodeStatus: FC<VoucherRightDescCodeStatusProps> = (props) 
                 {/* code div */}
                 <div className="grid grid-cols-2">
                     {/* code */}
-                    <div className="text-blue-800 text-sm ml-35 mr-0">{voucherCode}</div>
+                    <div className="text-blue-800 text-sm ml-35 mr-0">Code: {code}</div>
                     {/* copy logo */}
                     <div className="text-sm grid grid-cols-2 w-12 mr-0">
                         <svg fill="#000000" width="20px" height="20px" viewBox="0 0 36 36" version="1.1" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" >
@@ -27,7 +27,7 @@ const VoucherRightDescCodeStatus: FC<VoucherRightDescCodeStatusProps> = (props) 
                     </div>
                 </div>
                 {/* status active */}
-                {status == 1 ? <VoucherListActive></VoucherListActive> : status == 2 ? <VoucherListNotActive></VoucherListNotActive> : <VoucherListInvalid></VoucherListInvalid>}
+                {is_usable == 1 ? <VoucherListActive></VoucherListActive> : is_usable == 2 ? <VoucherListNotActive></VoucherListNotActive> : <VoucherListInvalid></VoucherListInvalid>}
             </div>
         </div>
     )
