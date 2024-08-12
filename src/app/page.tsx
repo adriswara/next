@@ -1,11 +1,11 @@
-'use server'
+'use client'
 
-import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal, AwaitedReactNode, Key } from "react"
+import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal, AwaitedReactNode, Key, FormEvent } from "react"
 // import { Data } from "D:/laragon/www/Skripsi/jonas/src/pages/getData.tsx"
 
 async function getData(port: string) {
-  
-  const portlink : string = 'http://localhost:8081/' + port
+
+  const portlink: string = 'http://localhost:8081/' + port
 
   const res = await fetch(portlink)
   // The return value is *not* serialized
@@ -21,24 +21,59 @@ async function getData(port: string) {
   // return JSON.stringify(res)
 }
 
+// Example in a Next.js page or API route
+const sendRequest = async () => {
+  const response = await fetch('http://localhost:8081/api/echo', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ message: 'Hello from Next.js!' }),
+  });
 
-export default async function Home() {
-  
-  const datas = await getData('vouchers')
+  const data = await response.json();
+  console.log(data);
+};
+
+
+
+sendRequest();
+
+
+
+export default function Home() {
+
+  // const datas = await getData('vouchers')
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const response = await fetch('http://localhost:8081/api/echo', {
+      method: 'POST',
+      body: formData,
+    });
+    const result = await response.json();
+    console.log(result);
+  };
 
   return (
     <main>
       <div>
 
-       
+        <form onSubmit={handleSubmit}>
+          <input type="text" name="name" placeholder="Enter your name" required />
+          <input type="text" name="password" placeholder="Enter your password" required />
+          <input type="text" name="username" placeholder="Enter your username" required />
+          <button type="submit">Submit</button>
+        </form>
 
+
+        {/* 
         {datas.voucher.map((data: { id: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; title: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined }, index: Key | null | undefined) => (
           <div key={index}>
             <span>{data.id}</span>
             <span>{data.title}</span>
           </div>
-        ))}
-
+        ))} */}
 
 
       </div>
