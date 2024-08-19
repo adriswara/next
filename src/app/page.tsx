@@ -47,7 +47,7 @@ export default function Home() {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    const response = await fetch('/api/submit', {
+    const response = await fetch('http://localhost:8081/employee', {
       method: 'POST',
       body: formData,
     });
@@ -60,8 +60,9 @@ export default function Home() {
       <div>
         <h1>Submit Form</h1>
         <form onSubmit={handleSubmit}>
-          <input type="text" name="name" placeholder="Name" required />
-          <input type="email" name="email" placeholder="Email" required />
+          <input type="text" name="employee_name" placeholder="employee_name" required />
+          <input type="text" name="employee_age" placeholder="employee_age" required />
+          <input type="text" name="employee_salary" placeholder="employee_salary" required />
           <button type="submit">Submit</button>
         </form>
 
