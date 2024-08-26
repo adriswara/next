@@ -47,22 +47,39 @@ export default function Home() {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    const response = await fetch('http://localhost:8081/employee', {
-      method: 'POST',
-      body: formData,
-    });
-    const result = await response.json();
-    console.log(result);
+    const data = {
+      employee_name: formData.get('employee_name'),
+      employee_age: formData.get('employee_age'),
+      employee_salary: formData.get('employee_salary'),
+
+    };
+    try {
+      const response = await fetch('http://localhost:8081/employeePost',{
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {'Content-Type': 'application/json'},
+
+      });
+      if (response.ok) {
+        console.log('ok')
+        console.log(await response.json)
+      }
+      else{
+        console.log("failed")
+      }
+    } catch (error) {
+      console.log("epi error")
+    }
   };
 
   return (
     <main>
       <div>
         <h1>Submit Form</h1>
-        <form onSubmit={handleSubmit}>
-          <input type="text" name="employee_name" placeholder="employee_name" required />
-          <input type="text" name="employee_age" placeholder="employee_age" required />
-          <input type="text" name="employee_salary" placeholder="employee_salary" required />
+        <form method="POST" onSubmit={handleSubmit}>
+          <input type="text" className="employee_name" id="employee_name" name="employee_name" placeholder="employee_name" required />
+          <input type="text" className="employee_age" id="employee_age" name="employee_age" placeholder="employee_age" required />
+          <input type="text" className="employee_salary" id="employee_salary" name="employee_salary" placeholder="employee_salary" required />
           <button type="submit">Submit</button>
         </form>
 
