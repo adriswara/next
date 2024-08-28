@@ -47,24 +47,28 @@ export default function Home() {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
+    console.log(formData.get('fk_user'))
+    console.log(formData.get('fk_voucher'))
+    console.log(formData.get('is_usable'))
     const data = {
-      employee_name: formData.get('employee_name'),
-      employee_age: formData.get('employee_age'),
-      employee_salary: formData.get('employee_salary'),
+      fk_user: formData.get('fk_user'),
+      fK_voucher: formData.get('fk_voucher'),
+      is_usable: formData.get('is_usable'),
 
     };
     try {
-      const response = await fetch('http://localhost:8081/employeePost',{
+      const response = await fetch('http://localhost:8081/insertOwnedVoucher', {
         method: 'POST',
         body: JSON.stringify(data),
-        headers: {'Content-Type': 'application/json'},
+        headers: { 'Content-Type': 'application/json' },
 
       });
+
       if (response.ok) {
         console.log('ok')
         console.log(await response.json)
       }
-      else{
+      else {
         console.log("failed")
       }
     } catch (error) {
@@ -76,13 +80,14 @@ export default function Home() {
     <main>
       <div>
         <h1>Submit Form</h1>
+        {/*  */}
         <form method="POST" onSubmit={handleSubmit}>
-          <input type="text" className="employee_name" id="employee_name" name="employee_name" placeholder="employee_name" required />
-          <input type="text" className="employee_age" id="employee_age" name="employee_age" placeholder="employee_age" required />
-          <input type="text" className="employee_salary" id="employee_salary" name="employee_salary" placeholder="employee_salary" required />
+          <input type="number" className="fk_user" id="fk_user" name="fk_user" placeholder="User Id" required />
+          <input type="number" className="fk_voucher" id="fk_voucher" name="fk_voucher" placeholder="voucher id" required />
+          <input type="number" className="is_usable" id="is_usable" name="is_usable" placeholder="usable" required />
           <button type="submit">Submit</button>
         </form>
-
+        {/*  */}
 
         {/* 
         {datas.voucher.map((data: { id: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; title: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined }, index: Key | null | undefined) => (
