@@ -14,13 +14,14 @@ const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800"]
 })
 
-export default function profile({
+
+
+export default  function profile({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   const pathname = usePathname()
-  
   return (
     <div className={`${poppins.className} flex pt-5 pb-36 container mx-auto items-start gap-5 `}>
       <div className="w-[312px] flex-col flex gap-5 justify-start">
@@ -36,19 +37,21 @@ export default function profile({
           </ul>
         </div>
         {/* nav profile xp */}
-        <div className="border border-[#e5e7eb] rounded-[10px]  w-full relative">
-          <div className="ml-auto mr-auto round-[50%]">
-            <Image className="rounded-[60%] mx-auto my-auto" src="/profilePicSq.jpg" width={128} height={13.84} alt="profilePicture" />
+
+          <div className="border border-[#e5e7eb] rounded-[10px]  w-full relative">
+            <div className="ml-auto mr-auto round-[50%]">
+              <Image className="rounded-[60%] mx-auto my-auto" src="/profilePicSq.jpg" width={128} height={13.84} alt="profilePicture" />
+            </div>
+            {/* profile Name */}
+            <ProfileName name={"Ajon Doe"}></ProfileName>
+            {/* profile level */}
+            <ProfileLevel></ProfileLevel>
+            {/* profile xp bar */}
+            <ProfileXpBar></ProfileXpBar>
+            {/* profile stat text */}
+            <ProfileStatText></ProfileStatText>
           </div>
-          {/* profile Name */}
-          <ProfileName></ProfileName>
-          {/* profile level */}
-          <ProfileLevel></ProfileLevel>
-          {/* profile xp bar */}
-          <ProfileXpBar></ProfileXpBar>
-          {/* profile stat text */}
-          <ProfileStatText></ProfileStatText>
-        </div>
+
       </div>
       {children}
     </div>

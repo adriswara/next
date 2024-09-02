@@ -1,6 +1,6 @@
 import { FC } from "react"
 
-interface ProfileNameProps { name?: string }
+interface ProfileNameProps { name: string }
 const ProfileName: FC<ProfileNameProps> = (props) => {
     const { name = "Ajon Doe" } = props
     return (

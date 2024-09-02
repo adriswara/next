@@ -3,9 +3,9 @@ import VoucherOwned from "@/components/organisms/VoucherOwned";
 
 
 
-async function getData(port: string) {
+async function getData(link: string) {
   
-    const portlink : string = 'http://localhost:8081/' + port
+    const portlink : string = 'http://localhost:8081/' + link
   
     const res = await fetch(portlink)
     // The return value is *not* serialized
