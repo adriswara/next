@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-interface ProfileStatTextProps { point?: number, showcase?: number, level?: number }
+interface ProfileStatTextProps { point: number, showcase: number, level: number }
 const ProfileStatText: FC<ProfileStatTextProps> = (props) => {
     const {
         point = 0,

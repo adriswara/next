@@ -8,6 +8,7 @@ import { Poppins } from "next/font/google";
 import ProfileStatText from "@/components/molecules/ProfileStatText.molecule";
 import ProfileName from "@/components/atoms/ProfileName.atom";
 import ProfileLevel from "@/components/atoms/ProfileLevel.atom";
+import GetData from "@/services/getData.service";
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -15,13 +16,17 @@ const poppins = Poppins({
 })
 
 
-
-export default  function profile({
+export default function profile({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  var data = (async () => { await GetData("userGet/1") })();
+  console.log(data)
+  // const data = await GetData("userGet/1")
   const pathname = usePathname()
+  console.log(pathname)
   return (
     <div className={`${poppins.className} flex pt-5 pb-36 container mx-auto items-start gap-5 `}>
       <div className="w-[312px] flex-col flex gap-5 justify-start">
@@ -38,20 +43,24 @@ export default  function profile({
         </div>
         {/* nav profile xp */}
 
-          <div className="border border-[#e5e7eb] rounded-[10px]  w-full relative">
-            <div className="ml-auto mr-auto round-[50%]">
-              <Image className="rounded-[60%] mx-auto my-auto" src="/profilePicSq.jpg" width={128} height={13.84} alt="profilePicture" />
-            </div>
-            {/* profile Name */}
-            <ProfileName name={"Ajon Doe"}></ProfileName>
-            {/* profile level */}
-            <ProfileLevel></ProfileLevel>
-            {/* profile xp bar */}
-            <ProfileXpBar></ProfileXpBar>
-            {/* profile stat text */}
-            <ProfileStatText></ProfileStatText>
-          </div>
+        {/* {data.User.map((data: { id_user: number; name_user: number; password_user: number, email_user: number; phone_user: number; adress_user: string; point_user: number; isDelete_user: number }) => ( */}
 
+
+        <div className="border border-[#e5e7eb] rounded-[10px]  w-full relative">
+          <div className="ml-auto mr-auto round-[50%]">
+            <Image className="rounded-[60%] mx-auto my-auto" src="/profilePicSq.jpg" width={128} height={13.84} alt="profilePicture" />
+          </div>
+          {/* profile Name */}
+          <ProfileName name={"Ajon Doe"}></ProfileName>
+          {/* profile level */}
+          <ProfileLevel level={0}></ProfileLevel>
+          {/* profile xp bar */}
+          <ProfileXpBar percentage={50} xpLeft={0} nextLevel={0}></ProfileXpBar>
+          {/* profile stat text */}
+          <ProfileStatText point={0} showcase={0} level={0}></ProfileStatText>
+        </div>
+
+        {/* ))} */}
       </div>
       {children}
     </div>

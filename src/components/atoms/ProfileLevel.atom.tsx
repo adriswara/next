@@ -1,6 +1,6 @@
 import { FC } from "react"
 
-interface ProfileLevelProps { level?: number }
+interface ProfileLevelProps { level: number }
 const ProfileLevel: FC<ProfileLevelProps> = (props) => {
     const { level = 0 } = props
     return (
