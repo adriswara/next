@@ -3,23 +3,6 @@
 import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal, AwaitedReactNode, Key, FormEvent } from "react"
 // import { Data } from "D:/laragon/www/Skripsi/jonas/src/pages/getData.tsx"
 
-async function getData(link: string) {
-
-  const portlink: string = 'http://localhost:8081/' + link
-
-  const res = await fetch(portlink)
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
-
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error('Failed to fetch data')
-  }
-
-
-  return res.json()
-  // return JSON.stringify(res)
-}
 
 // Example in a Next.js page or API route
 const sendRequest = async () => {
@@ -43,7 +26,7 @@ const sendRequest = async () => {
 
 export default function Home() {
 
-  // const datas = await getData('vouchers')
+  // const datas = await GetData('vouchers')
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
