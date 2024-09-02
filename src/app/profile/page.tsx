@@ -1,3 +1,5 @@
+
+// get data
 async function getData(link: string) {
 
   const portlink: string = 'http://localhost:8081/' + link
@@ -15,6 +17,7 @@ async function getData(link: string) {
   return res.json()
   // return JSON.stringify(res)
 }
+// end get data
 export default async function Home() {
   const datas = await getData('userGet/1')
 
@@ -28,7 +31,7 @@ export default async function Home() {
             <th colSpan={1}><p className="text-base font-semibold leading-7 text-gray-900">Profile</p></th>
           </tr>
         </thead>
-        {datas.User.map((data: { id_user: number; name_user: number; password_user: number, email_user: number; phone_user: number; adress_user: string; point_user: number; isDelete_user: number }) => (
+        {datas.User.map((data: {name_user: number; email_user: number; phone_user: number}) => (
 
         <tbody className="w-auto">
           <tr className="w-auto">
@@ -49,14 +52,14 @@ export default async function Home() {
       {datas.User.map((data: { id_user: number; name_user: number; password_user: number, email_user: number; phone_user: number; adress_user: string; point_user: number; isDelete_user: number }) => (
         <div>
           <div>
-            <span>{data.id_user}</span>
+            {/* <span>{data.id_user}</span>
             <span>{data.name_user}</span>
             <span>{data.password_user}</span>
             <span>{data.email_user}</span>
             <span>{data.phone_user}</span>
             <span>{data.adress_user}</span>
             <span>{data.point_user}</span>
-            <span>{data.isDelete_user}</span>
+            <span>{data.isDelete_user}</span> */}
           </div>
         </div>
       ))}
