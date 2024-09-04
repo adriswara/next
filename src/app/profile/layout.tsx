@@ -41,11 +41,13 @@ export default function profile({
       setLoading(false);
     }
     catch (error) {
-      setError(error.message);
+      // setError("error");
       setLoading(false);
     }
   };
   // 
+  const objUser = data["User"]
+  console.log(data["User"])
   const pathname = usePathname()
 
   return (
@@ -63,11 +65,13 @@ export default function profile({
           </ul>
         </div>
         {/* nav profile xp */}
-        {data.User.map((item) => (
+        {/* {data['User'].map((item) => (
           <li key={item.id_user}>{item.name_user}</li>
-        ))}
-
+        ))} */}
+        {/* <p>bahkan</p>
+        <p>{data['User']}</p> */}
         {/*  */}
+        
       </div>
       {children}
     </div>

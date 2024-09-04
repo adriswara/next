@@ -9,7 +9,7 @@ import GetData from "@/services/getData.service";
 export default async function Home() {
     const datas = await GetData('ownedVoucher')
 
-
+console.log(datas.voucher_ownership)
 
     return (
         <div className="border-2 border-solid border-jonasBorder rounded-[10px] w-full h-full" >

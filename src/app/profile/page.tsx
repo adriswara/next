@@ -33,20 +33,6 @@ export default async function Home() {
         </tbody>
               ))}
       </table>
-      {datas.User.map((data: { id_user: number; name_user: number; password_user: number, email_user: number; phone_user: number; adress_user: string; point_user: number; isDelete_user: number }) => (
-        <div>
-          <div>
-            {/* <span>{data.id_user}</span>
-            <span>{data.name_user}</span>
-            <span>{data.password_user}</span>
-            <span>{data.email_user}</span>
-            <span>{data.phone_user}</span>
-            <span>{data.adress_user}</span>
-            <span>{data.point_user}</span>
-            <span>{data.isDelete_user}</span> */}
-          </div>
-        </div>
-      ))}
     </div>
   );
 }
