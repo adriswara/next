@@ -1,35 +1,45 @@
 'use client'
 // pages/login.tsx
-import { FormEvent } from 'react';
-import { useRouter } from 'next/navigation'
+import { useState } from 'react';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
-export default function LoginPage() {
-  const router = useRouter();
+const Login = () => {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const router = useRouter();
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const email = formData.get('email');
-    const password = formData.get('password');
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post('http://localhost:8081/login', {
+                username,
+                password,
+            });
+            localStorage.setItem('token', response.data.token);
+            router.push('/restricted');
+        } catch (error) {
+            console.error('Login failed:', error);
+        }
+    };
 
-    const response = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    });
+    return (
+        <form onSubmit={handleSubmit}>
+            <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Username"
+            />
+            <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Password"
+            />
+            <button type="submit">Login</button>
+        </form>
+    );
+};
 
-    if (response.ok) {
-      router.push('/profile');
-    } else {
-      // Handle errors
-    }
-  }
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <input type="email" name="email" placeholder="Email" required />
-      <input type="password" name="password" placeholder="Password" required />
-      <button type="submit">Login</button>
-    </form>
-  );
-}
+export default Login;
