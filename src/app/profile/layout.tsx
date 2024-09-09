@@ -10,6 +10,8 @@ import ProfileLevel from "@/components/atoms/ProfileLevel.atom";
 import GetData from "@/services/getData.service";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
+import ProfileStatCard from "@/components/organisms/ProfileStatCard";
+import GetCard from "@/services/getProfileCard.service";
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -22,32 +24,8 @@ export default function profile({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  // 
-  useEffect(() => {
-    dataFetch();
-  }, []);
 
-  const dataFetch = async () => {
-    try {
-      const destination = "userGet/1"
-      if (!GetData(destination)) {
-        throw new Error("Network response error")
-      }
-      const data = await GetData(destination)
-      setData(data);
-      setLoading(false);
-    }
-    catch (error) {
-      // setError("error");
-      setLoading(false);
-    }
-  };
   // 
-  const objUser = data["User"]
-  console.log(data["User"])
   const pathname = usePathname()
 
   return (
@@ -64,14 +42,9 @@ export default function profile({
             <li className={`link ${pathname === '/profile/logout' ? 'bg-[#e5e7eb] border-t-2 border-[#e5e7eb] pl-0 pr-0 py-2 px-4 font-semibold text-red-500' : 'border-t-2 border-[#e5e7eb] pl-0 pr-0 py-2 px-4 text-red-500'}`}><Link href="/profile/logout" className="text-sm pt[8px] pb[5px] pl-[10px] pr-[1rem] text-red-500 ">Logout</Link></li>
           </ul>
         </div>
-        {/* nav profile xp */}
-        {/* {data['User'].map((item) => (
-          <li key={item.id_user}>{item.name_user}</li>
-        ))} */}
-        {/* <p>bahkan</p>
-        <p>{data['User']}</p> */}
         {/*  */}
-        
+        {GetCard()}
+        {/*  */}
       </div>
       {children}
     </div>
