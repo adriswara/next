@@ -4,13 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from 'next/navigation'
 import { Poppins } from "next/font/google";
-import ProfileStatText from "@/components/molecules/ProfileStatText.molecule";
-import ProfileName from "@/components/atoms/ProfileName.atom";
-import ProfileLevel from "@/components/atoms/ProfileLevel.atom";
-import GetData from "@/services/getData.service";
-import { redirect } from "next/navigation";
-import { useEffect, useState } from "react";
-import ProfileStatCard from "@/components/organisms/ProfileStatCard";
+
 import GetCard from "@/services/getProfileCard.service";
 
 const poppins = Poppins({

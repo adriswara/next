@@ -1,6 +1,6 @@
 
 import VoucherFilterForm from "@/components/molecules/VoucherFilterForm.molecule"
-import VoucherRedeem from "@/components/organisms/VoucherRedeem";
+import VoucherRedeem from "@/components/organisms/VoucherRedeem.organisms";
 import GetData from "@/services/getData.service";
 
 

@@ -1,5 +1,5 @@
 import VoucherFilterForm from "@/components/molecules/VoucherFilterForm.molecule";
-import VoucherOwned from "@/components/organisms/VoucherOwned";
+import VoucherOwned from "@/components/organisms/VoucherOwned.organisms";
 import GetData from "@/services/getData.service";
 
 

@@ -1,4 +1,4 @@
-import ProfileStatCard from "@/components/organisms/ProfileStatCard"
+import ProfileStatCard from "@/components/organisms/ProfileStatCard.organisms";
 import GetData from "./getData.service"
 
 // get data
