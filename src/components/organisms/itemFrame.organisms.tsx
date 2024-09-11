@@ -4,27 +4,26 @@ import Image from "next/image";
 
 
 
-interface ItemFrameProps { voucherType: number, price: number, discount: number, buyReq: number, itemFree: number, title: string, dateStart: string, dateEnd: string, productRange: string, code: string }
+interface ItemFrameProps { itemType: number, itemName: string, itemPrice: number, itemImage: string }
 const ItemFrame: FC<ItemFrameProps> = (props) => {
     const {
-        voucherType = 0,
-        price = 0,
-        discount = 0,
-        buyReq = 0,
-        itemFree = 0,
-        title = "",
-        dateStart = "",
-        dateEnd = "",
-        productRange = "",
-        code = ""
+        itemType = 1,
+        itemName = "Some Product",
+        itemPrice = 0,
+        itemImage = "/product-default.png"
     } = props
     return (
-        <div className="border-2 border-solid border-jonasBorder rounded-[5px] grid grid-cols-1 -mt-px  pb-5 ml-5 mr-5 ">
+        <div>
+            <div className="border-2 border-solid border-jonasBorder rounded-[5px] grid grid-cols-1 -mt-px  pb-5 ml-5 mr-5 ">
 
-            <Image src="/product-default.png" alt={""} width={1000} height={1000} className="w-full object-cover object-center aspect-square" />
+                <Image src={itemImage} alt={itemImage} width={1000} height={1000} className="w-full object-cover object-center aspect-square" />
 
 
-            <div className=" -mb-5 h-12 pl-3"><p className="border-2 border-solid border-black rounded-2xl text-sm w-24 h-8 mt-2 pl-3 pt-1">{price} Points</p></div>
+                <div className=" -mb-5 h-12 pl-3 mt-3"><h6 className="text-gray-400 text-sm">{itemType}</h6></div>
+                <div className=" -mb-5 h-12 pl-3 mb-1"><h5 className="flex-1 font-bold line-clamp-2"><b>{itemName}</b></h5></div>
+                <div className=" -mb-5 h-12 pl-3"><p className="">Start from</p></div>
+                <div className=" -mb-5 h-12 pl-3"><p className="">Rp {itemPrice}</p></div>
+            </div>
         </div>
     )
 }
