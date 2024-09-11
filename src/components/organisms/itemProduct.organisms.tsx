@@ -4,11 +4,11 @@ import Image from "next/image";
 
 
 
-interface ItemFrameProps { itemType: number, itemName: string, itemPrice: number, itemImage: string }
-const ItemFrame: FC<ItemFrameProps> = (props) => {
+interface ItemProductProps { itemType: number, itemName: string, itemPrice: number, itemImage: string }
+const ItemProduct: FC<ItemProductProps> = (props) => {
     const {
-        itemType = 1,
-        itemName = "Some Product",
+        itemType = 0,
+        itemName = "",
         itemPrice = 0,
         itemImage = "/product-default.png"
     } = props
@@ -28,4 +28,4 @@ const ItemFrame: FC<ItemFrameProps> = (props) => {
     )
 }
 
-export default ItemFrame
+export default ItemProduct

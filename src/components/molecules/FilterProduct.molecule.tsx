@@ -1,20 +1,15 @@
+import { FC } from "react";
 
-import Image from "next/image";
-import { Poppins } from "next/font/google";
+import FooterLeft from "../atoms/FooterLeft";
+import FooterMidRight from "../atoms/FooterMidRight";
 
-import GetProductStudio from "@/services/getProductStudio.service";
-
-
-const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800"]
-})
-
-export default async function Home() {
-
-  return (
-
-    <div className={`${poppins.className} flex pt-5 pb-36 container mx-auto items-start gap-5 `}>
+interface FilterProductProps {  }
+const FilterProduct: FC<FilterProductProps> = (props) => {
+    const {
+        
+    } = props
+    return (
+     
       <div className="w-[312px] flex-col flex gap-5 justify-start">
         <div className="border rounded-lg border-solid border-[#e5e7eb] h-auto p-4" >
           <ul>
@@ -29,20 +24,7 @@ export default async function Home() {
           </ul>
         </div>
       </div>
-      {/*  */}
-      <div className="border-2 border-solid border-jonasBorder rounded-[10px] w-full h-full">
-        {/* voucher section */}
-        <div className="mt-5 mb-5">
-          {/* database loop call */}
-          {GetProductStudio()}
-          {/*  */}
-        </div>
-      </div>
-      {/*  */}
-    </div>
 
-
-  );
+    );
 }
-
-
+export default FilterProduct
