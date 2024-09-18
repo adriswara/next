@@ -64,12 +64,12 @@ export default function Home() {
       <div>
         <h1>Submit Form</h1>
         {/*  */}
-        <form method="POST" onSubmit={handleSubmit}>
+        {/* <form method="POST" onSubmit={handleSubmit}>
           <input type="number" className="fk_user" id="fk_user" name="fk_user" placeholder="User Id" required />
           <input type="number" className="fk_voucher" id="fk_voucher" name="fk_voucher" placeholder="voucher id" required />
           <input type="number" className="is_usable" id="is_usable" name="is_usable" placeholder="usable" required />
           <button type="submit">Submit</button>
-        </form>
+        </form> */}
         {/*  */}
 
         {/* 
