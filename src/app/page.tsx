@@ -1,5 +1,6 @@
 'use client'
 
+import AlertStatus from "@/components/organisms/alertStatus.organisms";
 import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal, AwaitedReactNode, Key, FormEvent } from "react"
 // import { Data } from "D:/laragon/www/Skripsi/jonas/src/pages/getData.tsx"
 
@@ -79,7 +80,6 @@ export default function Home() {
             <span>{data.title}</span>
           </div>
         ))} */}
-
 
       </div>
     </main>

@@ -20,7 +20,7 @@ const ItemProduct: FC<ItemProductProps> = (props) => {
 
 
                 <div className=" -mb-5 h-12 pl-3 mt-3"><h6 className="text-gray-400 text-sm">{itemType}</h6></div>
-                <div className=" -mb-5 h-12 pl-3 mb-1"><h5 className="flex-1 font-bold line-clamp-2"><b>{itemName}</b></h5></div>
+                <div className=" -mb-5 h-12 pl-3"><h5 className="flex-1 font-bold line-clamp-2"><b>{itemName}</b></h5></div>
                 <div className=" -mb-5 h-12 pl-3"><p className="">Start from</p></div>
                 <div className=" -mb-5 h-12 pl-3"><p className="">Rp {itemPrice}</p></div>
             </div>
