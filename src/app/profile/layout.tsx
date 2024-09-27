@@ -19,7 +19,6 @@ export default function profile({
   children: React.ReactNode;
 }>) {
 
-  // 
   const pathname = usePathname()
 
   return (
@@ -37,7 +36,7 @@ export default function profile({
           </ul>
         </div>
         {/*  */}
-        {GetCard()}
+        {/* {GetCard()} */}
         {/*  */}
       </div>
       {children}

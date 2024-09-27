@@ -8,7 +8,7 @@ import { useEffect } from "react";
 
 
 // end get data
-export default async function Home() {
+export default function Home() {
   const router = useRouter()
 
 

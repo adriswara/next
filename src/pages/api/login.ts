@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import GetData from '@/services/getData.service';
 import DrawAlert from '@/services/alertDraw.service';
 import { NextResponse } from 'next/server'
+import Cookies from "js-cookie"
 
 // import { encrypt } from '@/app/lib/session';
 // import { withSession } from 'app/lib/session';

@@ -20,8 +20,13 @@ const Login = () => {
       message = DrawAlert(3, "Success", "Login Complete");
       // 
       const { token } = await response.data
-      document.cookie = `token=${token}; path=/`
-      // console.log(document.cookie)
+      var now = new Date();
+      var time = now.getTime();
+      var expireTime = time + 1000*300;
+      now.setTime(expireTime);
+      const expires = "expires=" + now.toUTCString();
+      document.cookie =`token=${token}; ` + expires + "; path=/;";
+   
       router.push('/profile')
     } catch (error) {
       message = DrawAlert(1, "Failed", "Invalid Password or Username");

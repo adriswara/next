@@ -112,7 +112,7 @@ export default function RootLayout({
     }
 
     validateToken()
-  }, [path])
+  }, [])
 
 
 
