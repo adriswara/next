@@ -4,7 +4,7 @@ import GetData from "./getData.service"
 // get data
 async function GetCard() {
     const datas = await GetData("userGet/1")
-    console.log(datas)
+    // console.log(datas)
     return (
         <div>
 

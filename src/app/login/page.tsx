@@ -2,17 +2,27 @@
 import { useState } from 'react';
 import axios from 'axios';
 import DrawAlert from '@/services/alertDraw.service';
+import { useRouter } from 'next/navigation';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const router = useRouter()
   var message = DrawAlert(0, "", "")
+  
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+
+
     try {
       const response = await axios.post('/api/login', { username, password });
-      console.log('Token:', response.data.token);
+      // console.log('Token:', response.data.token);
       message = DrawAlert(3, "Success", "Login Complete");
+      // 
+      const { token } = await response.data
+      document.cookie = `token=${token}; path=/`
+      // console.log(document.cookie)
+      router.push('/profile')
     } catch (error) {
       message = DrawAlert(1, "Failed", "Invalid Password or Username");
       console.error('Login failed:', error);

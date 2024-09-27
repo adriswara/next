@@ -1,3 +1,4 @@
+'use client'
 import type { Metadata } from "next";
 import { Inter, Source_Sans_3 } from "next/font/google";
 
@@ -6,15 +7,19 @@ import Image from "next/image";
 import FooterMidRight from "@/components/atoms/FooterMidRight";
 import FooterLeft from "@/components/atoms/FooterLeft";
 import Footer from "@/components/molecules/Footer.molecule";
+import { useEffect, useState } from "react";
+import Cookies from 'js-cookie'
+import { usePathname, useRouter } from "next/navigation";
+
 
 
 const inter = Inter({ subsets: ["latin"] });
 const sourceSans = Source_Sans_3({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "Jonas",
-  description: "Web transaksi",
-};
+// export const metadata: Metadata = {
+//   title: "Jonas",
+//   description: "Web transaksi",
+// };
 
 export default function RootLayout({
   children,
@@ -71,6 +76,44 @@ export default function RootLayout({
     marginBottom: 50,
     marginTop: 50
   }
+
+  
+  const router = useRouter()
+  const token = Cookies.get('token')
+  const pathname = usePathname()
+  const [path,setPath] = useState<string|null>(pathname)
+
+  useEffect(()=>{setPath(pathname)},[pathname])
+  
+  useEffect(() => {
+    console.log(path)
+    console.log("Token : "+token)
+    if (!token) {
+      router.replace('/login') // If no token is found, redirect to login page
+      console.log("gaada token")
+      return
+    }
+
+    // Validate the token by making an API call
+    const validateToken = async () => {
+      console.log("masuk")
+      try {
+        const res = await fetch('/api/protected', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+
+        if (!res.ok) throw new Error('Token validation failed')
+      } catch (error) {
+        console.error(error)
+        router.replace('/login') // Redirect to login if token validation fails
+      }
+    }
+
+    validateToken()
+  }, [path])
+
 
 
   return (
