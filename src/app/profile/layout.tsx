@@ -36,7 +36,7 @@ export default function profile({
           </ul>
         </div>
         {/*  */}
-        {/* {GetCard()} */}
+        {GetCard()}
         {/*  */}
       </div>
       {children}
