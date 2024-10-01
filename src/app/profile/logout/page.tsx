@@ -10,8 +10,10 @@ export default function Home() {
 
     useEffect(() => {
         document.cookie = "token=;expires=Thu, 01 Jan 1970 00:00:00 GMT"
-        router.push('/login')
+        document.cookie = "username=;expires=Thu, 01 Jan 1970 00:00:00 GMT"
         Cookies.remove('token')
+        Cookies.remove('username')
+        router.push('/login')
 
     }, [])
 

@@ -3,6 +3,8 @@ import Image from "next/image";
 import { Poppins } from "next/font/google";
 
 import GetProductFrame from "@/services/getProductFrame.service";
+import ItemProduct from "@/components/organisms/itemProduct.organisms";
+import GetData from "@/services/getData.service";
 
 
 const poppins = Poppins({
@@ -11,7 +13,8 @@ const poppins = Poppins({
 })
 
 export default async function Home() {
-
+  const datas = await GetData("productFrames")
+  console.log(datas)
   return (
 
     <div className={`${poppins.className} flex pt-5 pb-36 container mx-auto items-start gap-5 `}>
@@ -30,14 +33,7 @@ export default async function Home() {
         </div>
       </div>
       {/*  */}
-      <div className="border-2 border-solid border-jonasBorder rounded-[10px] w-full h-full">
-        {/* voucher section */}
-        <div className="mt-5 mb-5">
-          {/* database loop call */}
-          {GetProductFrame()}
-          {/*  */}
-        </div>
-      </div>
+      <GetProductFrame></GetProductFrame>
       {/*  */}
     </div>
 
