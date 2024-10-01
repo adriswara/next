@@ -1,10 +1,7 @@
 
-import Image from "next/image";
 import { Poppins } from "next/font/google";
 import GetProductPrint from "@/services/getProductPrint.service";
-import GetData from "@/services/getData.service";
 import FilterProduct from "@/components/molecules/FilterProduct.molecule";
-import ItemProduct from "@/components/organisms/itemProduct.organisms";
 
 
 const poppins = Poppins({

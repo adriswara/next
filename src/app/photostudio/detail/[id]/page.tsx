@@ -10,7 +10,7 @@ const poppins = Poppins({
 })
 
 export default async function Home() {
-  const datas = await GetData("productFrames")
+  const datas = await GetData("productStudios")
   console.log(datas)
   return (
 

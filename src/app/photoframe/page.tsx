@@ -1,9 +1,6 @@
 
-import Image from "next/image";
 import { Poppins } from "next/font/google";
-
 import GetProductFrame from "@/services/getProductFrame.service";
-import ItemProduct from "@/components/organisms/itemProduct.organisms";
 import GetData from "@/services/getData.service";
 
 
