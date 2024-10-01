@@ -1,9 +1,8 @@
 "use client"
-import ProfileXpBar from "@/components/molecules/ProfileXpBar.molecule";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from 'next/navigation'
 import { Poppins } from "next/font/google";
+
 
 import GetCard from "@/services/getProfileCard.service";
 
@@ -20,6 +19,7 @@ export default function profile({
 }>) {
 
   const pathname = usePathname()
+
 
   return (
     <div className={`${poppins.className} flex pt-5 pb-36 container mx-auto items-start gap-5 `}>

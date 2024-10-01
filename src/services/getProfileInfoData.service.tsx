@@ -1,11 +1,15 @@
 "use client"
 import { useEffect, useState } from "react"
 import GetData from "./getData.service"
+import Cookies from 'js-cookie'
+
 
 // get data
 function GetProfileInfo() {
+    const userinfo =  Cookies.get('username')
+    const query = 'userGet/' + userinfo
     const [user, setUser] = useState<{ name_user: number; email_user: number; phone_user: number }>()
-    const datas = async () => { GetData('userGet/1').then((resp => { setUser(resp.User[0]) })).catch(resp => console.log(resp)) }
+    const datas = async () => { GetData(query).then((resp => { setUser(resp.User[0]) })).catch(resp => console.log(resp)) }
 
     useEffect(() => { datas() }, [])
 
