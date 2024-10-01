@@ -7,7 +7,7 @@ import ProfileStatText from "../molecules/ProfileStatText.molecule";
 import ProfileXpBar from "../molecules/ProfileXpBar.molecule";
 import ProfilePicCard from "../atoms/ProfilePicCard";
 
-interface ProfileStatCard { picname: string, name: string, level: number, percentage: number, xpLeft: number, nextLevel: number, point: number, showcase: number }
+interface ProfileStatCard { picname?: string, name: string, level: number, percentage: number, xpLeft: number, nextLevel: number, point: number, showcase: number }
 const ProfileStatCard: FC<ProfileStatCard> = (props) => {
     const {
         picname = "/profilePicSq.jpg",
