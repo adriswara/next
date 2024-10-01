@@ -9,7 +9,8 @@ import { useContext, useEffect, useState } from "react";
 import Cookies from 'js-cookie'
 import { usePathname, useRouter } from "next/navigation";
 import { createContext } from "react";
-import ProfileAndLogin from "@/components/molecules/profileAndLogin.molecule";
+import ProfileAndLogin from "@/components/molecules/ProfileAndLogin.molecule";
+
 
 
 

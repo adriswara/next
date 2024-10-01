@@ -1,12 +1,23 @@
-import Image from "next/image";
+'use client'
+import { useRouter } from 'next/navigation';
+import { useEffect } from "react";
+import Cookies from 'js-cookie'
+
 
 export default function Home() {
-   
+    const router = useRouter()
 
+
+    useEffect(() => {
+        document.cookie = "token=;expires=Thu, 01 Jan 1970 00:00:00 GMT"
+        router.push('/login')
+        Cookies.remove('token')
+
+    }, [])
 
     return (
         <div className="border-2 border-solid border-jonasBorder rounded-[10px] w-full h-full">
-            logout
+            logging out your account, please wait
         </div>
     );
 }

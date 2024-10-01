@@ -9,11 +9,8 @@ export default function Home() {
 
   return (
 
-    <main>
-      <div >
-        {GetProfileInfo()}
-      </div>
-
+    <main className="w-full">
+      {GetProfileInfo()}
     </main>
 
   );
