@@ -16,11 +16,11 @@ const poppins = Poppins({
 
 export default function Home() {
   // get product name from link
-  const pathname : string | null = usePathname()
-  const selectedProduct = decodeURI(pathname+"")
+  const pathname: string | null = usePathname()
+  const selectedProduct = decodeURI(pathname + "")
   // 
   const query = selectedProduct
-  const [product, setProduct] = useState<{ type_product: string | undefined, name_product: string | undefined, price_product: number | undefined, description_product: string | undefined, include_product: string|undefined ,display_product: string | undefined }>()
+  const [product, setProduct] = useState<{ type_product: string | undefined, name_product: string | undefined, price_product: number | undefined, description_product: string | undefined, include_product: string | undefined, display_product: string | undefined }>()
   const datas = async () => { GetData(query).then((resp => { setProduct(resp.Product[0]) })).catch(resp => console.log(resp)) }
   useEffect(() => { datas() }, [])
 
