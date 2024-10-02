@@ -76,7 +76,7 @@ export default function RootLayout({
   useEffect(() => {
     console.log(path)
     console.log("Token : " + token)
-    console.log(!token && token == undefined)
+    console.log("token status"+!token && token == undefined)
     if (!token && token == undefined) {
       router.replace('/login') // If no token is found, redirect to login page   
       console.log("gaada token")
