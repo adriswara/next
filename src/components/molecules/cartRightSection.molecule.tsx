@@ -1,9 +1,9 @@
 import { FC } from "react"
 
 
-interface CartRightSectionProps {totalPrice: number|null }
+interface CartRightSectionProps { totalPrice: number | null }
 const CartRightSection: FC<CartRightSectionProps> = (props) => {
-    const {totalPrice = 0} = props
+    const { totalPrice = 0 } = props
     return (
         <div className="basis-1/4">
             <div>

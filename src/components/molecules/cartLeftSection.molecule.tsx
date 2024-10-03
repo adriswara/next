@@ -1,15 +1,33 @@
+'use client'
 import { FC } from "react"
-
 import ItemCart from "../atoms/ItemCart.atom"
+import GetData from "@/services/getData.service";
+import { useEffect, useState } from "react";
+import Cookies from 'js-cookie'
 
-interface CartLeftSectionProps { productName:string, productDescription: string, productQuantity:  number, totalPrice: number }
+interface CartLeftSectionProps { }
 const CartLeftSection: FC<CartLeftSectionProps> = (props) => {
-    const { 
-        productName = "",
-        productDescription ="",
-        productQuantity = 0,
-        totalPrice=0
-     } = props
+    const { } = props
+    // 
+    type cartDataType = {
+        id_cart: number,
+        id_user: number,
+        item_quantity: number,
+        total_price: number
+    }
+    // get user id from cookie
+    const userinfo = Cookies.get('username')
+    const query = 'userGet/' + userinfo
+    const [user, setUser] = useState<{ id_user: number }>()
+    const datas = async () => { GetData(query).then((resp => { setUser(resp.User[0]) })).catch(resp => console.log(resp)) }
+    useEffect(() => { datas() }, [])
+    // 
+    console.log("ini id user" + user?.id_user)
+    const queryCart = 'getCart/' + user?.id_user
+    const [cart, setCart] = useState<cartDataType[]>()
+    const dataCarts = async () => { GetData(queryCart).then((resp => { setCart(resp.Carts) })).catch(resp => console.log(resp)) }
+    useEffect(() => { dataCarts() }, [user])
+    // 
     return (
         <div className="basis-3/4">
             <div>
@@ -55,9 +73,13 @@ const CartLeftSection: FC<CartLeftSectionProps> = (props) => {
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody className="[&amp;_tr:last-child]:border-0"> 
-                                    {/* ini ga si yang di loopnya */}
-                                   <ItemCart productName={productName} productDescription={productDescription} productQuantity={productQuantity} totalPrice={totalPrice}></ItemCart>
+                                <tbody className="[&amp;_tr:last-child]:border-0">
+
+                                    {cart?.map((data: cartDataType) => (
+                                        // <ul>{data.total_price}</ul>
+
+                                        <ItemCart productName={String(data.id_cart)} productDescription={"desc" + data.id_cart} productQuantity={data.item_quantity} totalPrice={data.total_price}></ItemCart>
+                                    ))}
                                 </tbody>
                             </table>
                         </div>

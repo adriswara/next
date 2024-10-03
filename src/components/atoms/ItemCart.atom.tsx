@@ -1,12 +1,12 @@
 import { FC } from "react"
 
-interface ItemCartProps {productName: string, productDescription: string, productQuantity: number, totalPrice: number }
+interface ItemCartProps { productName: string, productDescription: string, productQuantity: number, totalPrice: number }
 const ItemCart: FC<ItemCartProps> = (props) => {
-    const {productName = "Product 1",
+    const { productName = "Product 1",
         productDescription = "This product is colored and second variant",
         productQuantity = 0,
         totalPrice = 0
-     } = props
+    } = props
 
     return (
 

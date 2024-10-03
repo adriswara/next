@@ -30,9 +30,9 @@ const Cart = () => {
     const [grandTotal, setGrandTotal] = useState<number | null | undefined>()
 
     const countGrandTotal = () => {
-        var total:number=0;
+        var total: number = 0;
         cart?.map((data: cartDataType) => {
-            total+=Number(data.total_price)
+            total += Number(data.total_price)
             console.log(total)
         })
         setGrandTotal(total)
@@ -43,7 +43,7 @@ const Cart = () => {
     return (
         <main className="flex-1 flex mt-16">
 
-            
+
             {/* {!cart ?
                 <CartEmpty></CartEmpty> :
                 <>
@@ -54,7 +54,7 @@ const Cart = () => {
                 </>
             } */}
 
-            <ItemCartAvailable totalPrice={0} grandTotalPrice={grandTotal} productName={""} productDescription={""} productQuantity={0}></ItemCartAvailable>
+            <ItemCartAvailable grandTotalPrice={grandTotal}></ItemCartAvailable>
             {/* <p>{grandTotal}</p> */}
         </main>
     );
