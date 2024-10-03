@@ -4,17 +4,17 @@ import Image from "next/image";
 
 
 
-interface ItemProductProps { itemType: number, itemName: string, itemPrice: number, itemImage: string }
+interface ItemProductProps { itemType: number, itemName: string, itemPrice: number, itemImage?: string }
 const ItemProduct: FC<ItemProductProps> = (props) => {
     const {
         itemType = 0,
         itemName = "",
         itemPrice = 0,
-        itemImage = "/product-default.png"
+        itemImage = "/product-default.png",
     } = props
     const link = "photoframe/detail/" + itemName
     return (
-        <div>
+        <div className="">
             <div className="border-2 border-solid border-jonasBorder rounded-[5px] grid grid-cols-1 -mt-px  pb-5 ml-5 mr-5 ">
                 <a href={link}>
                     <Image src={itemImage} alt={itemImage} width={1000} height={1000} className="w-full object-cover object-center aspect-square" />
