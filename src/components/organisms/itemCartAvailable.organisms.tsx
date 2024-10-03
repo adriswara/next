@@ -2,7 +2,7 @@ import { FC } from "react";
 import CartLeftSection from "../molecules/cartLeftSection.molecule";
 import CartRightSection from "../molecules/cartRightSection.molecule";
 
-interface ItemCartAvailableProps { grandTotalPrice: number, productName: string, productDescription: string, productQuantity: number, totalPrice: number }
+interface ItemCartAvailableProps { grandTotalPrice: number|null|undefined, productName: string, productDescription: string, productQuantity: number, totalPrice: number }
 const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
     const {
         totalPrice = 0,

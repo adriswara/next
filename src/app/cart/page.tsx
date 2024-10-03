@@ -27,22 +27,35 @@ const Cart = () => {
     useEffect(() => { dataCarts() }, [user])
     // 
 
+    const [grandTotal, setGrandTotal] = useState<number | null | undefined>()
+
+    const countGrandTotal = () => {
+        var total:number=0;
+        cart?.map((data: cartDataType) => {
+            total+=Number(data.total_price)
+            console.log(total)
+        })
+        setGrandTotal(total)
+    }
+
+    useEffect(() => { countGrandTotal() }, [cart])
 
     return (
         <main className="flex-1 flex mt-16">
 
-            {/* 
-            {!cart ?
+            
+            {/* {!cart ?
                 <CartEmpty></CartEmpty> :
                 <>
                     {cart?.map((data: cartDataType) => (
-                        <ItemCartAvailable totalPrice={0} grandTotalPrice={0} productName={""} productDescription={""} productQuantity={0}></ItemCartAvailable>
+                        // <ul>{data.total_price}</ul>
+                        // <ItemCartAvailable totalPrice={0} grandTotalPrice={0} productName={""} productDescription={""} productQuantity={0}></ItemCartAvailable>
                     ))}
                 </>
             } */}
 
-            <ItemCartAvailable totalPrice={0} grandTotalPrice={0} productName={""} productDescription={""} productQuantity={0}></ItemCartAvailable>
-
+            <ItemCartAvailable totalPrice={0} grandTotalPrice={grandTotal} productName={""} productDescription={""} productQuantity={0}></ItemCartAvailable>
+            {/* <p>{grandTotal}</p> */}
         </main>
     );
 };
