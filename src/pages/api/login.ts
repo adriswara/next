@@ -5,6 +5,7 @@ import DrawAlert from '@/services/alertDraw.service';
 import { NextResponse } from 'next/server'
 import Cookies from "js-cookie"
 
+
 // import { encrypt } from '@/app/lib/session';
 // import { withSession } from 'app/lib/session';
 
@@ -26,7 +27,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         DrawAlert(1,"Failed","Invalid password")
         return res.status(401).json({ message: 'Invalid password' });
     }
-
+  
     const token = jwt.sign({ id: user.id, username: user.username }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
     // console.log(token)

@@ -1,5 +1,8 @@
-import { FC, useState } from "react"
+import GetData from "@/services/getData.service";
+import { FC, useEffect, useState } from "react"
 import { FormEvent } from "react"
+import Cookies from 'js-cookie'
+
 
 
 interface ProductDetailMainProps { itemId: number, productName: string, productPrice: number, productItemInclude: string, productItemClassification: string }
@@ -14,22 +17,32 @@ const ProductDetailMain: FC<ProductDetailMainProps> = (props) => {
     // var quantity = 1;
     const operand = 1;
     var [quantity, setQuantity] = useState<number>(1);
+    // 
+
+    const userinfo = Cookies.get('username')
+    const query = 'userGet/' + userinfo
+    const [user, setUser] = useState<{ id_user: number }>()
+    const datas = async () => { GetData(query).then((resp => { setUser(resp.User[0]) })).catch(resp => console.log(resp)) }
+
+    useEffect(() => { datas() }, [])
+
 
     // 
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
-        console.log(formData.get('fk_user'))
-        console.log(formData.get('fk_voucher'))
-        console.log(formData.get('is_usable'))
+        console.log(formData.get('id_item'))
+        console.log(formData.get('id_user'))
+        console.log(formData.get('item_quantity'))
         const data = {
-            fk_user: formData.get('fk_user'),
-            fK_voucher: formData.get('fk_voucher'),
-            is_usable: formData.get('is_usable'),
+            id_item: formData.get('id_item'),
+            id_user: formData.get('id_user'),
+            item_quantity: formData.get('item_quantity'),
+            total_price: formData.get('total_price')
 
         };
         try {
-            const response = await fetch('http://localhost:8081/insertOwnedVoucher', {
+            const response = await fetch('http://localhost:8081/insertItemCart  ', {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: { 'Content-Type': 'application/json' },
@@ -48,13 +61,13 @@ const ProductDetailMain: FC<ProductDetailMainProps> = (props) => {
         }
     };
     // 
-
+    var totalPrice = quantity <= 0 ? productPrice * 1 : productPrice * quantity
     return (
         <div className="px-4 sm:p-0 flex flex-col justify-between">
             <div>
                 <h2 className="font-semibold text-xl">{productName}</h2>
                 <div className="flex flex-row justify-between items-center">
-                    <div className="text-xl text-gray-500">Rp.{quantity <= 0 ? productPrice * 1 : productPrice * quantity} </div>
+                    <div className="text-xl text-gray-500">Rp.{totalPrice} </div>
                     <div className="text-end">
                         <button onClick={() => setQuantity(quantity - operand)} className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-full px-3 py-1">-</button>
                         <span className="px-3">
@@ -75,10 +88,10 @@ const ProductDetailMain: FC<ProductDetailMainProps> = (props) => {
             </div>
 
             <form method="POST" onSubmit={handleSubmit}>
-                <input type="number" value={itemId} className="id_item" id="id_item" name="id_item" placeholder="User Id" required />
-                <input type="number" className="id_user" id="id_user" name="id_user" placeholder="voucher id" required />
-                <input type="number" className="item_quantity" id="item_quantity" name="item_quantity" placeholder="usable" required />
-                <input type="number" className="total_price" id="total_price" name="total_price" placeholder="usable" required />
+                <input type="number" value={itemId} className="id_item hidden" id="id_item" name="id_item" placeholder="id_item" required />
+                <input type="number" value={user?.id_user} className="id_user hidden" id="id_user" name="id_user" placeholder="id_user" required />
+                <input type="number" value={quantity} className="item_quantity hidden" id="item_quantity" name="item_quantity" placeholder="usable" required />
+                <input type="number" value={totalPrice} className="total_price hidden" id="total_price" name="total_price" placeholder="usable" required />
                 <button type="submit" className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input text-white bg-black hover:bg-black/90 hover:text-white h-10 px-4 py-2 w-full mx-auto md:mx-0 mt-3">Add to Cart</button>
             </form>
         </div>
