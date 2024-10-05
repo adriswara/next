@@ -6,9 +6,9 @@ import GetData from "@/services/getData.service";
 import { useEffect, useState } from "react";
 import Cookies from 'js-cookie'
 
-interface ItemCartAvailableProps { grandTotalPrice: number | null | undefined }
+interface ItemCartAvailableProps { }
 const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
-    const { grandTotalPrice = 0 } = props
+    const {  } = props
     // 
     type cartDataType = {
         id_cart: number,
@@ -16,7 +16,8 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
         item_quantity: number,
         total_price: number,
         name_product: string,
-        description_product: string
+        description_product: string,
+        price_product: number
     }
     // get user id from cookie
     const userinfo = Cookies.get('username')
@@ -28,8 +29,8 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
     console.log("ini id user" + user?.id_user)
     const queryCart = 'getCart/' + user?.id_user
     const [cart, setCart] = useState<cartDataType[]>()
-    const dataCarts = async () => { GetData(queryCart).then((resp => { setCart(resp.Carts);console.log(resp.Carts) })).catch(resp => console.log(resp)) }
-   
+    const dataCarts = async () => { GetData(queryCart).then((resp => { setCart(resp.Carts); console.log(resp.Carts) })).catch(resp => console.log(resp)) }
+
     // 
     const [itemGrandTotal, setTotal] = useState<number>()
 
@@ -38,12 +39,14 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
     const GenerateCartList = () => {
         let total = 0;
         cart?.map((data: cartDataType) => {
-            total += data.total_price * data.item_quantity
+            total += data.price_product * data.item_quantity
+            console.log("harga satuan " + total)
         })
+        console.log("harga total " + total)
         setTotal(total);
     }
 
-    useEffect(()=>{GenerateCartList()},[cart])
+    useEffect(() => { GenerateCartList() }, [cart])
     useEffect(() => { dataCarts() }, [user])
 
     return (
@@ -98,7 +101,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
                                                     </thead>
                                                     <tbody className="[&amp;_tr:last-child]:border-0">
                                                         {cart?.map((data: cartDataType) => (
-                                                            <ItemCart productId={data.id_cart} productName={String(data.name_product)} productDescription={"desc" + data.description_product} productQuantity={data.item_quantity} totalPrice={data.total_price}></ItemCart>
+                                                            <ItemCart productId={data.id_cart} productName={String(data.name_product)} productDescription={"desc" + data.description_product} productQuantity={Number(data.item_quantity)} totalPrice={data.price_product}></ItemCart>
                                                         ))}
                                                     </tbody>
                                                 </table>

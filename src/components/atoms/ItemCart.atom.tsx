@@ -12,7 +12,7 @@ const ItemCart: FC<ItemCartProps> = (props) => {
     } = props
 
     var [quantity, setQuantity] = useState<number>(productQuantity);
-    const operand = 1;
+    const operand:number = 1;
     var totalPricePerItem = quantity <= 0 ? totalPrice * 1 : totalPrice * quantity;
 
     // 
@@ -24,7 +24,8 @@ const ItemCart: FC<ItemCartProps> = (props) => {
 
         const data = {
             id_cart: Number(productId),
-            item_quantity: Number(tempQuantity)
+            item_quantity: Number(tempQuantity),
+            total_price: Number(totalPricePerItem)
         };
         try {
             const response = await fetch('http://localhost:8081/updateItemCartQuantity', {

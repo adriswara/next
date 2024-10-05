@@ -27,22 +27,13 @@ const Cart = () => {
     useEffect(() => { dataCarts() }, [user])
     // 
 
-    const [grandTotal, setGrandTotal] = useState<number | null | undefined>()
 
-    const countGrandTotal = () => {
-        var total: number = 0;
-        cart?.map((data: cartDataType) => {
-            total += Number(data.total_price)
-            console.log(total)
-        })
-        setGrandTotal(total)
-    }
 
-    useEffect(() => { countGrandTotal() }, [cart])
+
 
     return (
         <main className="flex-1 flex mt-16">
-            <ItemCartAvailable grandTotalPrice={grandTotal}></ItemCartAvailable>
+            <ItemCartAvailable></ItemCartAvailable>
         </main>
     );
 };
