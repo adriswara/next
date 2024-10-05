@@ -47,7 +47,7 @@ const ItemCart: FC<ItemCartProps> = (props) => {
         }
     };
     // 
-    useEffect(() => { handleSubmit() }, [quantity])
+    useEffect(() => { handleSubmit().then(resp=>onChange?onChange(totalPricePerItem):{}) }, [quantity])
     // 
     return (
 

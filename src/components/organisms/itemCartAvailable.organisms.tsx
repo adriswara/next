@@ -37,12 +37,11 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
 
 
     const GenerateCartList = () => {
+        console.log("masuk")
         let total = 0;
         cart?.map((data: cartDataType) => {
             total += data.price_product * data.item_quantity
-            console.log("harga satuan " + total)
         })
-        console.log("harga total " + total)
         setTotal(total);
     }
 
@@ -101,7 +100,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
                                                     </thead>
                                                     <tbody className="[&amp;_tr:last-child]:border-0">
                                                         {cart?.map((data: cartDataType) => (
-                                                            <ItemCart productId={data.id_cart} productName={String(data.name_product)} productDescription={"desc" + data.description_product} productQuantity={Number(data.item_quantity)} totalPrice={data.price_product}></ItemCart>
+                                                            <ItemCart onChange={(value)=>{dataCarts()}} productId={data.id_cart} productName={String(data.name_product)} productDescription={"desc" + data.description_product} productQuantity={Number(data.item_quantity)} totalPrice={data.price_product}></ItemCart>
                                                         ))}
                                                     </tbody>
                                                 </table>
