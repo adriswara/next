@@ -1,13 +1,53 @@
-import { FC } from "react"
+import { FC, useEffect, useState } from "react"
+import { FormEvent } from "react"
 
-interface ItemCartProps { productName: string, productDescription: string, productQuantity: number, totalPrice: number }
+interface ItemCartProps { productId: number, productName: string, productDescription: string, productQuantity: number, totalPrice: number, onChange?: (total: number) => void }
 const ItemCart: FC<ItemCartProps> = (props) => {
     const { productName = "Product 1",
         productDescription = "This product is colored and second variant",
         productQuantity = 0,
-        totalPrice = 0
+        totalPrice = 0,
+        productId = 0,
+        onChange
     } = props
 
+    var [quantity, setQuantity] = useState<number>(productQuantity);
+    const operand = 1;
+    var totalPricePerItem = quantity <= 0 ? totalPrice * 1 : totalPrice * quantity;
+
+    // 
+    var tempQuantity = quantity;
+    const handleSubmit = async () => {
+        console.log(quantity)
+        
+        quantity <= 0 ? tempQuantity = 1 : tempQuantity = quantity
+
+        const data = {
+            id_cart: Number(productId),
+            item_quantity: Number(tempQuantity)
+        };
+        try {
+            const response = await fetch('http://localhost:8081/updateItemCartQuantity', {
+                method: 'PUT',
+                body: JSON.stringify(data),
+                headers: { 'Content-Type': 'application/json' },
+
+            });
+
+            if (response.ok) {
+                console.log('ok')
+                console.log(await response.json)
+            }
+            else {
+                console.log("failed")
+            }
+        } catch (error) {
+            console.log("epi error")
+        }
+    };
+    // 
+    useEffect(() => { handleSubmit() }, [quantity])
+    // 
     return (
 
         <tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
@@ -40,21 +80,21 @@ const ItemCart: FC<ItemCartProps> = (props) => {
                 </button>
                 <div className="flex flex-row items-center justify-end gap-2 text-sm mt-6">
                     <div>
-                        <button className="rounded-full p-1 border w-6 h-6 flex items-center justify-center">
+                        <button onClick={() => setQuantity(quantity - operand)} className="rounded-full p-1 border w-6 h-6 flex items-center justify-center">
                             -
                         </button>
                     </div>
                     <div>
-                        {productQuantity}
+                        {quantity <= 0 ? quantity = 1 : quantity}
                     </div>
                     <div>
-                        <button className="rounded-full p-1 border w-6 h-6 flex items-center justify-center">
+                        <button onClick={() => setQuantity(quantity + operand)} className="rounded-full p-1 border w-6 h-6 flex items-center justify-center">
                             +
                         </button>
                     </div>
                 </div>
                 <p className="mt-4">
-                    Rp{totalPrice}
+                    Rp{totalPricePerItem}
                 </p>
             </td>
         </tr>

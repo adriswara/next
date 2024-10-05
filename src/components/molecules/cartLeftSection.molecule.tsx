@@ -13,7 +13,9 @@ const CartLeftSection: FC<CartLeftSectionProps> = (props) => {
         id_cart: number,
         id_user: number,
         item_quantity: number,
-        total_price: number
+        total_price: number,
+        name_product: string,
+        description_product: string
     }
     // get user id from cookie
     const userinfo = Cookies.get('username')
@@ -47,7 +49,7 @@ const CartLeftSection: FC<CartLeftSectionProps> = (props) => {
                                     </div>
                                 </div>
                                 <div className="text-right items-center">
-                                    <a href="https://jonasphoto.co.id/">
+                                    <a href="\photostudio">
                                         <button className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3 rounded-full">
                                             <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" className="me-1" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z">
@@ -77,8 +79,7 @@ const CartLeftSection: FC<CartLeftSectionProps> = (props) => {
 
                                     {cart?.map((data: cartDataType) => (
                                         // <ul>{data.total_price}</ul>
-
-                                        <ItemCart productName={String(data.id_cart)} productDescription={"desc" + data.id_cart} productQuantity={data.item_quantity} totalPrice={data.total_price}></ItemCart>
+                                        <ItemCart productName={String(data.name_product)} productDescription={"desc" + data.description_product} productQuantity={data.item_quantity} totalPrice={data.total_price}></ItemCart>
                                     ))}
                                 </tbody>
                             </table>

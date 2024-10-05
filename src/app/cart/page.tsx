@@ -42,20 +42,7 @@ const Cart = () => {
 
     return (
         <main className="flex-1 flex mt-16">
-
-
-            {/* {!cart ?
-                <CartEmpty></CartEmpty> :
-                <>
-                    {cart?.map((data: cartDataType) => (
-                        // <ul>{data.total_price}</ul>
-                        // <ItemCartAvailable totalPrice={0} grandTotalPrice={0} productName={""} productDescription={""} productQuantity={0}></ItemCartAvailable>
-                    ))}
-                </>
-            } */}
-
             <ItemCartAvailable grandTotalPrice={grandTotal}></ItemCartAvailable>
-            {/* <p>{grandTotal}</p> */}
         </main>
     );
 };
