@@ -5,6 +5,10 @@ import ItemCart from "../atoms/ItemCart.atom"
 import GetData from "@/services/getData.service";
 import { useEffect, useState } from "react";
 import Cookies from 'js-cookie'
+import { useRouter } from 'next/navigation';
+import { format, compareAsc } from "date-fns";
+
+
 
 interface ItemCartAvailableProps { }
 const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
@@ -33,7 +37,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
 
     // 
     const [itemGrandTotal, setTotal] = useState<number>()
-
+    const router = useRouter()
 
 
     const GenerateCartList = () => {
@@ -44,6 +48,65 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
         })
         setTotal(total);
     }
+
+
+    const resetCart = async () => {
+      
+
+        const data = {
+            id_user: Number(user?.id_user),
+        };
+        try {
+            const response = await fetch('http://localhost:8081/cartDel/'+user?.id_user, {
+                method: 'DELETE',
+                body: JSON.stringify(data),
+                headers: { 'Content-Type': 'application/json' },
+
+            });
+
+            if (response.ok) {
+                console.log('ok')
+                router.push('/profile')
+                console.log(await response.json)
+            }
+            else {
+                console.log("failed")
+            }
+        } catch (error) {
+            console.log("epi error")
+        }
+    };
+    // 
+    const handlePurchase = async () => {
+        const now = new Date();
+        const jakartaTime = now.toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
+       
+        const data = {
+            id_user: Number(user?.id_user),
+            item_created :  format(jakartaTime, "yyyy-MM-dd hh:mm:ss")
+        };
+        try {
+            const response = await fetch('http://localhost:8081/insertTransaction', {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: { 'Content-Type': 'application/json' },
+
+            });
+
+            if (response.ok) {
+                console.log('ok')
+                resetCart()
+                console.log(await response.json)
+            }
+            else {
+                console.log("failed")
+            }
+        } catch (error) {
+            console.log("epi error")
+        }
+    };
+    // 
+    
 
     useEffect(() => { GenerateCartList() }, [cart])
     useEffect(() => { dataCarts() }, [user])
@@ -168,7 +231,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
                                                 </h3>
                                                 <p>By clicking the "Continue to Payment button" you agree to our terms and condition</p>
                                                 <a className="text-primary-500" href="https://jonasphoto.co.id/content/term-and-condition">TERMS OF USE</a>
-                                                <button className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input text-white bg-black hover:bg-black/90 hover:text-white h-9 rounded-md px-3 w-full mt-4">
+                                                <button onClick={() => handlePurchase() } className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input text-white bg-black hover:bg-black/90 hover:text-white h-9 rounded-md px-3 w-full mt-4">
                                                     Continue to Payment
                                                 </button>
                                             </div>
