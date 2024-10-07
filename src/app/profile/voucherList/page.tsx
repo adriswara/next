@@ -1,15 +1,47 @@
+'use client'
 import VoucherFilterForm from "@/components/molecules/VoucherFilterForm.molecule";
 import VoucherOwned from "@/components/organisms/VoucherOwned.organisms";
 import GetData from "@/services/getData.service";
+import { useEffect, useState } from "react";
+import Cookies from 'js-cookie'
 
+const OwnedVoucher = () => {
 
+    type ownedVoucherType = {
+        id_voucher_ownership: number,
+        fk_user: number,
+        fk_voucher: number,
+        is_usable: number,
+        name_product: string,
+        description_product: string,
+        price_product: number,
+        title : string,
+        voucherType : number,
+        price: number,
+        discount: number,
+        buyReq: number,
+        itemFree: number,
+        dateStart: string,
+        dateEnd: string,
+        productRace: string,
+        code: string
+        productRange: string
+    }
 
+    // get user id from cookie
+    const userinfo = Cookies.get('username')
+    const query = 'userGet/' + userinfo
+    const [user, setUser] = useState<{ id_user: number }>()
+    const userData = async () => { GetData(query).then((resp => { setUser(resp.User[0]) })).catch(resp => console.log(resp)) }
+  // 
+  console.log("ini id user" + user?.id_user)
+  const querryVoucher = 'ownedVoucher/' + user?.id_user
+  const [ownedVoucher, setOwnedVoucher] = useState<ownedVoucherType[]>()
+  const dataOwnedVouchers = async () => { GetData(querryVoucher).then((resp => { setOwnedVoucher(resp.voucher_ownership); console.log(resp.voucher_ownership) })).catch(resp => console.log(resp)) }
+  // 
+    useEffect(() => { userData() }, [])
+    useEffect(() => { dataOwnedVouchers() }, [user])
 
-
-export default async function Home() {
-    const datas = await GetData('ownedVoucher')
-
-    console.log(datas.voucher_ownership)
 
     return (
         <div className="border-2 border-solid border-jonasBorder rounded-[10px] w-full h-full" >
@@ -19,19 +51,9 @@ export default async function Home() {
             <div className="mx-5 my-5">
                 {/* voucher items */}
 
-                {datas.voucher_ownership.map((data: { id_voucher_ownership: number; fk_user: number; fk_voucher: number, is_usable: number; id: number; title: string; voucherType: number; price: number; discount: number; buyReq: number; itemFree: number; dateStart: string; dateEnd: string; productRange: string; code: string }) => (
+                    {ownedVoucher?.map((data: ownedVoucherType) => (
                     <div>
-
-                        {/* only for testing */}
-
-                        {/* <span>{data.id_voucher_ownership}</span>
-                        <span>{data.title}</span>
-                        <span>{data.is_usable}</span> */}
-                        {/* only for testing */}
-
-
                         <VoucherOwned voucherType={data.voucherType} is_usable={data.is_usable} discount={data.discount} buyReq={data.buyReq} itemFree={data.itemFree} title={data.title} dateStart={data.dateStart} dateEnd={data.dateEnd} productRange={data.productRange} code={data.code}></VoucherOwned>
-
                     </div>
                 ))}
             </div>
@@ -40,3 +62,4 @@ export default async function Home() {
 }
 
 
+export default OwnedVoucher;
