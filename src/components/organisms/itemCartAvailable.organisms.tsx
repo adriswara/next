@@ -12,7 +12,7 @@ import { format, compareAsc } from "date-fns";
 
 interface ItemCartAvailableProps { }
 const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
-    const {  } = props
+    const { } = props
     // 
     type cartDataType = {
         id_cart: number,
@@ -23,25 +23,26 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
         description_product: string,
         price_product: number
     }
+ 
     // get user id from cookie
     const userinfo = Cookies.get('username')
     const query = 'userGet/' + userinfo
-    const [user, setUser] = useState<{ id_user: number }>()
+    const [user, setUser] = useState<{ id_user: number, point_user: number }>()
     const datas = async () => { GetData(query).then((resp => { setUser(resp.User[0]) })).catch(resp => console.log(resp)) }
-    useEffect(() => { datas() }, [])
     // 
-    console.log("ini id user" + user?.id_user)
     const queryCart = 'getCart/' + user?.id_user
     const [cart, setCart] = useState<cartDataType[]>()
     const dataCarts = async () => { GetData(queryCart).then((resp => { setCart(resp.Carts); console.log(resp.Carts) })).catch(resp => console.log(resp)) }
-
-    // 
+    //
+    const querryPoinSetting = 'getPointSetting'
+    const [pointSetting, setPointSetting] = useState<{ transaction: number }>()
+    const dataPointSetting = async () => { GetData(querryPoinSetting).then((resp => { setPointSetting(resp.pointsettings[0]); console.log("point setting:", resp.pointsettings) })).catch(resp => console.log(resp)) }
+    //
     const [itemGrandTotal, setTotal] = useState<number>()
     const router = useRouter()
 
 
     const GenerateCartList = () => {
-        console.log("masuk")
         let total = 0;
         cart?.map((data: cartDataType) => {
             total += data.price_product * data.item_quantity
@@ -51,13 +52,12 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
 
 
     const resetCart = async () => {
-      
 
         const data = {
             id_user: Number(user?.id_user),
         };
         try {
-            const response = await fetch('http://localhost:8081/cartDel/'+user?.id_user, {
+            const response = await fetch('http://localhost:8081/cartDel/' + user?.id_user, {
                 method: 'DELETE',
                 body: JSON.stringify(data),
                 headers: { 'Content-Type': 'application/json' },
@@ -80,11 +80,12 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
     const handlePurchase = async () => {
         const now = new Date();
         const jakartaTime = now.toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
-       
+
         const data = {
             id_user: Number(user?.id_user),
-            item_created :  format(jakartaTime, "yyyy-MM-dd hh:mm:ss")
+            item_created: format(jakartaTime, "yyyy-MM-dd hh:mm:ss")
         };
+        handlePoint()
         try {
             const response = await fetch('http://localhost:8081/insertTransaction', {
                 method: 'POST',
@@ -95,6 +96,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
 
             if (response.ok) {
                 console.log('ok')
+                handlePoint()
                 resetCart()
                 console.log(await response.json)
             }
@@ -105,11 +107,42 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
             console.log("epi error")
         }
     };
-    // 
-    
+    //
+    const handlePoint = async () => {
+
+        var rawPoint = itemGrandTotal && pointSetting?.transaction ? (itemGrandTotal / 100) / 100 * pointSetting?.transaction : null
+        var newPoint = rawPoint && user?.point_user ? Number(rawPoint) + Number(user?.point_user) : null
+
+        const data = {
+            id_user: Number(user?.id_user),
+            point_user: newPoint
+        };
+        try {
+            const response = await fetch('http://localhost:8081/pointTransaction', {
+                method: 'PUT',
+                body: JSON.stringify(data),
+                headers: { 'Content-Type': 'application/json' },
+
+            });
+
+            if (response.ok) {
+                console.log('ok')
+                console.log(await response.json)
+            }
+            else {
+                console.log("failed")
+            }
+        } catch (error) {
+            console.log("epi error")
+        }
+    };
+    //
 
     useEffect(() => { GenerateCartList() }, [cart])
     useEffect(() => { dataCarts() }, [user])
+    useEffect(() => { datas() }, [])
+    useEffect(() => { dataPointSetting() }, [])
+
 
     return (
         <main className="flex-1 flex mt-16">
@@ -163,7 +196,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
                                                     </thead>
                                                     <tbody className="[&amp;_tr:last-child]:border-0">
                                                         {cart?.map((data: cartDataType) => (
-                                                            <ItemCart onChange={(value)=>{dataCarts()}} productId={data.id_cart} productName={String(data.name_product)} productDescription={"desc" + data.description_product} productQuantity={Number(data.item_quantity)} totalPrice={data.price_product}></ItemCart>
+                                                            <ItemCart onChange={(value) => { dataCarts() }} productId={data.id_cart} productName={String(data.name_product)} productDescription={"desc" + data.description_product} productQuantity={Number(data.item_quantity)} totalPrice={data.price_product}></ItemCart>
                                                         ))}
                                                     </tbody>
                                                 </table>
@@ -231,7 +264,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
                                                 </h3>
                                                 <p>By clicking the "Continue to Payment button" you agree to our terms and condition</p>
                                                 <a className="text-primary-500" href="https://jonasphoto.co.id/content/term-and-condition">TERMS OF USE</a>
-                                                <button onClick={() => handlePurchase() } className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input text-white bg-black hover:bg-black/90 hover:text-white h-9 rounded-md px-3 w-full mt-4">
+                                                <button onClick={() => handlePurchase()} className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input text-white bg-black hover:bg-black/90 hover:text-white h-9 rounded-md px-3 w-full mt-4">
                                                     Continue to Payment
                                                 </button>
                                             </div>
