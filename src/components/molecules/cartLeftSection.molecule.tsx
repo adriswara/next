@@ -39,7 +39,7 @@ const CartLeftSection: FC<CartLeftSectionProps> = (props) => {
                             <div className="flex flex-row justify-between">
                                 <div className="flex flex-row items-center gap-2">
                                     <div>
-                                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                        <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z">
                                             </path>
                                         </svg>
@@ -51,7 +51,7 @@ const CartLeftSection: FC<CartLeftSectionProps> = (props) => {
                                 <div className="text-right items-center">
                                     <a href="\photostudio">
                                         <button className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3 rounded-full">
-                                            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" className="me-1" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                            <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 448 512" className="me-1" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z">
                                                 </path>
                                             </svg>
@@ -79,7 +79,7 @@ const CartLeftSection: FC<CartLeftSectionProps> = (props) => {
 
                                     {cart?.map((data: cartDataType) => (
                                         // <ul>{data.total_price}</ul>
-                                        <ItemCart productName={String(data.name_product)} productDescription={"desc" + data.description_product} productQuantity={data.item_quantity} totalPrice={data.total_price}></ItemCart>
+                                        <ItemCart productName={String(data.name_product)} productDescription={"desc" + data.description_product} productQuantity={data.item_quantity} totalPrice={data.total_price} productId={data.id_cart}></ItemCart>
                                     ))}
                                 </tbody>
                             </table>

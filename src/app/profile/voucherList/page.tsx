@@ -15,8 +15,8 @@ const OwnedVoucher = () => {
         name_product: string,
         description_product: string,
         price_product: number,
-        title : string,
-        voucherType : number,
+        title: string,
+        voucherType: number,
         price: number,
         discount: number,
         buyReq: number,
@@ -33,12 +33,12 @@ const OwnedVoucher = () => {
     const query = 'userGet/' + userinfo
     const [user, setUser] = useState<{ id_user: number }>()
     const userData = async () => { GetData(query).then((resp => { setUser(resp.User[0]) })).catch(resp => console.log(resp)) }
-  // 
-  console.log("ini id user" + user?.id_user)
-  const querryVoucher = 'ownedVoucher/' + user?.id_user
-  const [ownedVoucher, setOwnedVoucher] = useState<ownedVoucherType[]>()
-  const dataOwnedVouchers = async () => { GetData(querryVoucher).then((resp => { setOwnedVoucher(resp.voucher_ownership); console.log(resp.voucher_ownership) })).catch(resp => console.log(resp)) }
-  // 
+    // 
+    console.log("ini id user" + user?.id_user)
+    const querryVoucher = 'ownedVoucher/' + user?.id_user
+    const [ownedVoucher, setOwnedVoucher] = useState<ownedVoucherType[]>()
+    const dataOwnedVouchers = async () => { GetData(querryVoucher).then((resp => { setOwnedVoucher(resp.voucher_ownership); console.log(resp.voucher_ownership) })).catch(resp => console.log(resp)) }
+    // 
     useEffect(() => { userData() }, [])
     useEffect(() => { dataOwnedVouchers() }, [user])
 
@@ -51,7 +51,7 @@ const OwnedVoucher = () => {
             <div className="mx-5 my-5">
                 {/* voucher items */}
 
-                    {ownedVoucher?.map((data: ownedVoucherType) => (
+                {ownedVoucher?.map((data: ownedVoucherType) => (
                     <div>
                         <VoucherOwned voucherType={data.voucherType} is_usable={data.is_usable} discount={data.discount} buyReq={data.buyReq} itemFree={data.itemFree} title={data.title} dateStart={data.dateStart} dateEnd={data.dateEnd} productRange={data.productRange} code={data.code}></VoucherOwned>
                     </div>

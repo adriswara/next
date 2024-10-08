@@ -70,7 +70,7 @@ const ItemCart: FC<ItemCartProps> = (props) => {
             </td>
             <td className="p-2 align-middle [&amp;:has([role=checkbox])]:pr-0 text-right">
                 <button type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:r6:" data-state="closed">
-                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" className="text-red-500 text-lg" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                    <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" className="text-red-500 text-lg" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                         <path fill="none" d="M0 0h24v24H0z">
                         </path>
                         <path fill="none" d="M0 0h24v24H0V0z">

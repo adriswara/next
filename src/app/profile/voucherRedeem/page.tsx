@@ -20,16 +20,7 @@ export default async function Home() {
                     {/* database loop call */}
                     {datas.voucher.map((data: { id: number; title: string; voucherType: number; price: number; discount: number; buyReq: number; itemFree: number; dateStart: string; dateEnd: string; productRange: string; code: string }) => (
                         <div>
-
-
-                            {/* testing purpose only */}
-                            {/* <span>{data.id}</span>
-                            <span>{data.title}</span>
-                            <span>{data.voucherType}</span> */}
-                            {/* testing purpose only */}
-
-
-                            <VoucherRedeem voucherType={data.voucherType} price={data.voucherType} discount={data.discount} buyReq={data.buyReq} itemFree={data.itemFree} title={data.title} dateStart={data.dateStart} dateEnd={data.dateEnd} productRange={data.productRange} code={data.code}></VoucherRedeem>
+                            <VoucherRedeem id_voucher={data.id} voucherType={data.voucherType} price={data.voucherType} discount={data.discount} buyReq={data.buyReq} itemFree={data.itemFree} title={data.title} dateStart={data.dateStart} dateEnd={data.dateEnd} productRange={data.productRange} code={data.code}></VoucherRedeem>
                         </div>
                     ))}
                     {/* endloop */}
