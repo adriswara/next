@@ -6,8 +6,9 @@ import GetData from "@/services/getData.service";
 import { useEffect, useState } from "react";
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/navigation';
-import { format, compareAsc } from "date-fns";
+import { format, compareAsc, sub } from "date-fns";
 import Modal from "../molecules/modalTest.molecule";
+import VoucherOwned from "./VoucherOwned.organisms";
 
 
 
@@ -24,7 +25,31 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
         description_product: string,
         price_product: number
     }
-
+    type ownedVoucherType = {
+        id_voucher_ownership: number,
+        fk_user: number,
+        fk_voucher: number,
+        is_usable: number,
+        name_product: string,
+        description_product: string,
+        price_product: number,
+        title: string,
+        voucherType: number,
+        price: number,
+        discount: number,
+        buyReq: number,
+        itemFree: number,
+        dateStart: string,
+        dateEnd: string,
+        productRace: string,
+        code: string
+        productRange: string
+    }
+    //get voucher
+    const usedVoucherinfo = Cookies.get("voucheruse")
+    const querrySelectedVoucher = 'getOwnedVoucherById/' + usedVoucherinfo
+    const [selectedVoucher, setSelectedVoucher] = useState<ownedVoucherType>()
+    const dataSelectedVoucher = async () => { GetData(querrySelectedVoucher).then((resp => { setSelectedVoucher(resp.VoucherOwned[0]); console.log(resp.VoucherOwned[0]) })).catch(resp => console.log(resp)) }
     // get user id from cookie
     const userinfo = Cookies.get('username')
     const query = 'userGet/' + userinfo
@@ -42,12 +67,18 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
     const [itemGrandTotal, setTotal] = useState<number>()
     const router = useRouter()
 
-
     const GenerateCartList = () => {
+        let subTotal = 0;
         let total = 0;
         cart?.map((data: cartDataType) => {
-            total += data.price_product * data.item_quantity
+            subTotal += data.price_product * data.item_quantity
         })
+        var tempDiscount = selectedVoucher?.discount ? selectedVoucher?.discount / 100 * subTotal : null
+        console.log("isi subtotal"+subTotal)
+        console.log("isi discount"+ tempDiscount)
+        
+        total = tempDiscount ? total =  subTotal - tempDiscount : total = subTotal;
+        console.log("isi total"+total)
         setTotal(total);
     }
 
@@ -140,10 +171,10 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
     //
     const [showModal, setShowModal] = useState(false);
 
-
     useEffect(() => { GenerateCartList() }, [cart])
     useEffect(() => { dataCarts() }, [user])
     useEffect(() => { datas() }, [])
+    useEffect(() => { dataSelectedVoucher() }, [usedVoucherinfo])
     useEffect(() => { dataPointSetting() }, [])
 
 
@@ -256,7 +287,9 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
                                                     <button onClick={() => setShowModal(true)} className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 w-full" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:rf:" data-state="closed">
                                                         Select Voucher
                                                     </button>
-                                                 
+                                                    <div>
+                                                        <VoucherOwned idVoucher={selectedVoucher?.id_voucher_ownership} voucherType={selectedVoucher?.voucherType} is_usable={selectedVoucher?.is_usable} discount={selectedVoucher?.discount} buyReq={selectedVoucher?.buyReq} itemFree={selectedVoucher?.itemFree} title={selectedVoucher?.title} dateStart={selectedVoucher?.dateStart} dateEnd={selectedVoucher?.dateEnd} productRange={selectedVoucher?.productRange} code={selectedVoucher?.code}></VoucherOwned>
+                                                    </div>
                                                     <Modal show={showModal} onClose={() => setShowModal(false)} />
                                                 </div>
                                             </div>
