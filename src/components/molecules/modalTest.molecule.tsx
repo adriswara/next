@@ -40,7 +40,7 @@ const Modal = ({ show, onClose }) => {
   const [ownedVoucher, setOwnedVoucher] = useState<ownedVoucherType[]>()
   const dataOwnedVouchers = async () => { GetData(querryVoucher).then((resp => { setOwnedVoucher(resp.voucher_ownership); console.log(resp.voucher_ownership) })).catch(resp => console.log(resp)) }
   // 
- 
+
   // 
 
   useEffect(() => { userData() }, [])
@@ -53,11 +53,11 @@ const Modal = ({ show, onClose }) => {
         <div className='overflow-scroll max-h-[calc(100vh-110px)]'>
           {ownedVoucher?.map((data: ownedVoucherType) => (
             <div>
-              <VoucherOwned idVoucher={data.id_voucher_ownership} voucherType={data.voucherType} is_usable={data.is_usable} discount={data.discount} buyReq={data.buyReq} itemFree={data.itemFree} title={data.title} dateStart={data.dateStart} dateEnd={data.dateEnd} productRange={data.productRange} code={data.code}></VoucherOwned>
+              <VoucherOwned hideButton={0} idVoucher={data.id_voucher_ownership} voucherType={data.voucherType} is_usable={data.is_usable} discount={data.discount} buyReq={data.buyReq} itemFree={data.itemFree} title={data.title} dateStart={data.dateStart} dateEnd={data.dateEnd} productRange={data.productRange} code={data.code}></VoucherOwned>
             </div>
           ))}
         </div>
-        <button onClick={onClose} className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 w-full" >Close</button>
+        <button onClick={onClose} className="bg-red-500 inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 w-full" >Close</button>
 
       </div>
       <style jsx>{`

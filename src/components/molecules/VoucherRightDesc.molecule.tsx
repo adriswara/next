@@ -4,16 +4,17 @@ import VoucherListNotActive from "../atoms/VoucherListStatusNotActive.atom"
 import VoucherListInvalid from "../atoms/VoucherListStatusError.atom"
 import VoucherCodeCopyButton from "../atoms/VoucherCodeCopyButton"
 import VoucherButtonActive from "../atoms/VoucherListButtonActive.atom"
-import { usePathname} from "next/navigation";
-import {useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 
-interface VoucherRightDescCodeStatusProps {idVoucher:number, code: string, is_usable: number }
+interface VoucherRightDescCodeStatusProps { hideButton: number, idVoucher: number, code: string, is_usable: number }
 const VoucherRightDescCodeStatus: FC<VoucherRightDescCodeStatusProps> = (props) => {
     const {
         code = "Code: missing",
         is_usable = 0,
-        idVoucher = 0
+        idVoucher = 0,
+        hideButton = 1
     } = props
     const pathname = usePathname()
     const [path, setPath] = useState<string | null>(pathname)
@@ -31,7 +32,7 @@ const VoucherRightDescCodeStatus: FC<VoucherRightDescCodeStatusProps> = (props) 
                 </div>
                 {/* status active */}
                 {is_usable == 1 ? <VoucherListActive></VoucherListActive> : is_usable == 2 ? <VoucherListNotActive></VoucherListNotActive> : <VoucherListInvalid></VoucherListInvalid>}
-                {is_usable == 1 && path == "/cart" ? <VoucherButtonActive id_voucher={idVoucher}></VoucherButtonActive> : <></>}
+                {is_usable == 1 && path == "/cart" && hideButton == 0 ? <VoucherButtonActive id_voucher={idVoucher} isHidden={hideButton}></VoucherButtonActive> : <></>}
             </div>
         </div>
     )

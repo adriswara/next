@@ -26,7 +26,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
         price_product: number
     }
     type ownedVoucherType = {
-        id_voucher_ownership: number,
+        id_voucher_ownership: number | "undefined",
         fk_user: number,
         fk_voucher: number,
         is_usable: number,
@@ -74,11 +74,11 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
             subTotal += data.price_product * data.item_quantity
         })
         var tempDiscount = selectedVoucher?.discount ? selectedVoucher?.discount / 100 * subTotal : null
-        console.log("isi subtotal"+subTotal)
-        console.log("isi discount"+ tempDiscount)
-        
-        total = tempDiscount ? total =  subTotal - tempDiscount : total = subTotal;
-        console.log("isi total"+total)
+        console.log("isi subtotal" + subTotal)
+        console.log("isi discount" + tempDiscount)
+
+        total = tempDiscount ? total = subTotal - tempDiscount : total = subTotal;
+        console.log("isi total" + total)
         setTotal(total);
     }
 
@@ -169,6 +169,13 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
         }
     };
     //
+    //
+    const removeVoucher = async () => {
+        Cookies.remove('voucheruse')
+        router.refresh()
+    };
+    //
+    //
     const [showModal, setShowModal] = useState(false);
 
     useEffect(() => { GenerateCartList() }, [cart])
@@ -257,7 +264,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
                                                 </div>
                                             </h3>
                                         </div>
-                                        <div className="pt-0 mt-4">
+                                        <div className="pt-0 mt-4 mb-6">
                                             <div className="flex flex-col text-sm">
                                                 <div className="text-justify mt-2">
                                                     <button className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 w-full" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:rf:" data-state="closed">
@@ -270,9 +277,15 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
                                             <h3 className="text-2xl font-semibold leading-none tracking-tight">
                                                 <div className="flex flex-row items-center gap-2">
                                                     <div>
-                                                        <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 640 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M624 352h-16V243.9c0-12.7-5.1-24.9-14.1-33.9L494 110.1c-9-9-21.2-14.1-33.9-14.1H416V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h16c0 53 43 96 96 96s96-43 96-96h128c0 53 43 96 96 96s96-43 96-96h48c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zM160 464c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm320 0c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm80-208H416V144h44.1l99.9 99.9V256z">
-                                                            </path>
+                                                        <svg width="30px" height="30px" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                                                            <g id="Layer_2" data-name="Layer 2">
+                                                                <g id="invisible_box" data-name="invisible box">
+                                                                    <rect width="48" height="48" fill="none" />
+                                                                </g>
+                                                                <g id="Layer_7" data-name="Layer 7">
+                                                                    <path d="M43,7H38a2,2,0,0,0-1.4.6L34,10.2,31.4,7.6A2,2,0,0,0,30,7H5a2.9,2.9,0,0,0-3,3V38a3,3,0,0,0,3,3H30a2,2,0,0,0,1.4-.6L34,37.8l2.6,2.6A2,2,0,0,0,38,41h5a3,3,0,0,0,3-3V10A2.9,2.9,0,0,0,43,7ZM14,18a2,2,0,1,1-2,2A2,2,0,0,1,14,18Zm8,12a2,2,0,1,1,2-2A2,2,0,0,1,22,30Zm2.4-9.6-10,10a1.9,1.9,0,0,1-2.8,0,1.9,1.9,0,0,1,0-2.8l10-10a2,2,0,0,1,2.8,2.8ZM36,33a2,2,0,0,1-4,0V31a2,2,0,0,1,4,0Zm0-8a2,2,0,0,1-4,0V23a2,2,0,0,1,4,0Zm0-8a2,2,0,0,1-4,0V15a2,2,0,0,1,4,0Z" />
+                                                                </g>
+                                                            </g>
                                                         </svg>
                                                     </div>
                                                     <div>
@@ -284,11 +297,12 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
                                         <div className="pt-0 mt-4">
                                             <div className="flex flex-col text-sm">
                                                 <div className="text-justify mt-2">
-                                                    <button onClick={() => setShowModal(true)} className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 w-full" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:rf:" data-state="closed">
+                                                    <button onClick={() => setShowModal(true)} className=" mb-6 inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 w-full" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:rf:" data-state="closed">
                                                         Select Voucher
                                                     </button>
                                                     <div>
-                                                        <VoucherOwned idVoucher={selectedVoucher?.id_voucher_ownership} voucherType={selectedVoucher?.voucherType} is_usable={selectedVoucher?.is_usable} discount={selectedVoucher?.discount} buyReq={selectedVoucher?.buyReq} itemFree={selectedVoucher?.itemFree} title={selectedVoucher?.title} dateStart={selectedVoucher?.dateStart} dateEnd={selectedVoucher?.dateEnd} productRange={selectedVoucher?.productRange} code={selectedVoucher?.code}></VoucherOwned>
+                                                        {selectedVoucher && selectedVoucher.id_voucher_ownership !== "undefined" ? <VoucherOwned hideButton={1} idVoucher={selectedVoucher.id_voucher_ownership} voucherType={selectedVoucher.voucherType} is_usable={selectedVoucher.is_usable} discount={selectedVoucher.discount} buyReq={selectedVoucher.buyReq} itemFree={selectedVoucher.itemFree} title={selectedVoucher.title} dateStart={selectedVoucher.dateStart} dateEnd={selectedVoucher.dateEnd} productRange={selectedVoucher.productRange} code={selectedVoucher.code}></VoucherOwned> : <></>}
+                                                        {selectedVoucher && selectedVoucher.id_voucher_ownership !== "undefined" ? <button onClick={() => removeVoucher()} type="button" className="border-2 border-solid border-jonasBorder rounded-[15px] bg-red-800 text-white text-sm w-40 h-8 ml-7">Remove Voucher</button> : <></>}
                                                     </div>
                                                     <Modal show={showModal} onClose={() => setShowModal(false)} />
                                                 </div>

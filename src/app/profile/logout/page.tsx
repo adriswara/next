@@ -13,6 +13,7 @@ export default function Home() {
         document.cookie = "username=;expires=Thu, 01 Jan 1970 00:00:00 GMT"
         Cookies.remove('token')
         Cookies.remove('username')
+        Cookies.remove('voucheruse')
         router.push('/login')
 
     }, [])
