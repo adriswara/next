@@ -130,6 +130,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
 
             if (response.ok) {
                 console.log('ok')
+                Cookies.remove('voucheruse')
                 handlePoint()
                 resetCart()
                 console.log(await response.json)
