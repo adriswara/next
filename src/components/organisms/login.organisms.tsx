@@ -4,6 +4,7 @@ import DrawAlert from "@/services/alertDraw.service";
 import { UserDataContext } from "../../UserDataContext";
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import ModalLoading from "../molecules/modalLoading.molecule";
 
 
 
@@ -14,6 +15,8 @@ const LoginComponent: FC<LoginComponentProps> = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [submited, setSubmited] = useState(false)
+  const [showModal, setShowModal] = useState(false);
+
   const router = useRouter()
   var message = DrawAlert(0, "", "")
   const { dataUser, setUser } = useContext(UserDataContext);
@@ -99,11 +102,11 @@ const LoginComponent: FC<LoginComponentProps> = (props) => {
                   </div>
                 </div>
               </div>
-              <button
-                className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full"
-                type="submit">Login
+              <button onClick={() => setShowModal(true)} className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full" type="submit">
+                Login
               </button>
             </form>
+            <ModalLoading show={showModal} onClose={() => setShowModal(false)}></ModalLoading>
           </div>
         </div>
       </div>
