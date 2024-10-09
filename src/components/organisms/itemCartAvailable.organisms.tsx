@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import { format, compareAsc, sub } from "date-fns";
 import Modal from "../molecules/modalTest.molecule";
 import VoucherOwned from "./VoucherOwned.organisms";
+import ModalNotification from "../molecules/modalNotification.molecule";
 
 
 
@@ -110,6 +111,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
     };
     // 
     const handlePurchase = async () => {
+        setShowModalNotif(true)
         const now = new Date();
         const jakartaTime = now.toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
 
@@ -177,6 +179,8 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
     //
     //
     const [showModal, setShowModal] = useState(false);
+    const [showModalNotif, setShowModalNotif] = useState(false);
+
 
     useEffect(() => { GenerateCartList() }, [cart])
     useEffect(() => { dataCarts() }, [user])
@@ -343,6 +347,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
                                                 <button onClick={() => handlePurchase()} className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input text-white bg-black hover:bg-black/90 hover:text-white h-9 rounded-md px-3 w-full mt-4">
                                                     Continue to Payment
                                                 </button>
+                                                <ModalNotification show={showModalNotif} onClose={() => setShowModalNotif(false)} notificationType={2} message={"Transaction Complete, Please Wait.."}></ModalNotification>
                                             </div>
                                         </div>
                                     </div>

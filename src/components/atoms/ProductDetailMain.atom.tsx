@@ -2,6 +2,7 @@ import GetData from "@/services/getData.service";
 import { FC, useEffect, useState } from "react"
 import { FormEvent } from "react"
 import Cookies from 'js-cookie'
+import ModalNotification from "../molecules/modalNotification.molecule";
 
 
 
@@ -17,6 +18,8 @@ const ProductDetailMain: FC<ProductDetailMainProps> = (props) => {
     // var quantity = 1;
     const operand = 1;
     var [quantity, setQuantity] = useState<number>(1);
+    const [showModal, setShowModal] = useState(false);
+
     // 
 
     const userinfo = Cookies.get('username')
@@ -92,8 +95,9 @@ const ProductDetailMain: FC<ProductDetailMainProps> = (props) => {
                 <input type="number" value={user?.id_user} className="id_user hidden" id="id_user" name="id_user" placeholder="id_user" required />
                 <input type="number" value={quantity} className="item_quantity hidden" id="item_quantity" name="item_quantity" placeholder="usable" required />
                 <input type="number" value={totalPrice} className="total_price hidden" id="total_price" name="total_price" placeholder="usable" required />
-                <button type="submit" className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input text-white bg-black hover:bg-black/90 hover:text-white h-10 px-4 py-2 w-full mx-auto md:mx-0 mt-3">Add to Cart</button>
+                <button type="submit" onClick={() => setShowModal(true)} className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input text-white bg-black hover:bg-black/90 hover:text-white h-10 px-4 py-2 w-full mx-auto md:mx-0 mt-3">Add to Cart</button>
             </form>
+            <ModalNotification show={showModal} onClose={() => setShowModal(false)} notificationType={1} message={"Product added to cart"}></ModalNotification>
         </div>
     )
 }
