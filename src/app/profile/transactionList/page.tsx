@@ -4,6 +4,7 @@ import VoucherOwned from "@/components/organisms/VoucherOwned.organisms";
 import GetData from "@/services/getData.service";
 import { useEffect, useState } from "react";
 import Cookies from 'js-cookie'
+import TransactionTable from "@/components/molecules/tableTransaksi.molecule";
 
 const Transaction = () => {
 
@@ -36,31 +37,38 @@ const Transaction = () => {
     return (
         <div className="border-2 border-solid border-jonasBorder rounded-[10px] w-full h-full" >
 
-            <div className="mx-5 my-5">
-
-                <div>
-                    <th>
-                        <td>Id</td>
-                        <td>Id Item</td>
-                        <td>Product Name</td>
-                        <td>User</td>
-                        <td>Created</td>
-                        <td>Quantity</td>
-                        <td>Total Price</td>
-                        <td>Type</td>
-                    </th>
-                    {ownedVoucher?.map((data: ownedTransactionType) => (
-                        <tr>
-                            <td>{data.id_cart}</td>
-                            <td>{data.id_item}</td>
-                            <td>{data.name_product}</td>
-                            <td>{data.id_user}</td>
-                            <td>{data.item_created}</td>
-                            <td>{data.item_quantity}</td>
-                            <td>{data.total_price}</td>
-                            <td>{data.type_product}</td>
-                        </tr>
-                    ))}
+            <div className="mx-0 my-0">
+                <div className="w-[312px] flex-col flex gap-5 justify-start">
+                    <div className="border rounded-lg border-solid border-[#e5e7eb] w-screen mr-auto" >
+                        <table className="w-auto p-5 m-5 border-collapse">
+                            <thead>
+                                <tr>
+                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">ID</th>
+                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Id Item</th>
+                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Product Name</th>
+                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">User</th>
+                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Created</th>
+                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Quantity</th>
+                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Total Price</th>
+                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Type</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {ownedVoucher?.map((data: ownedTransactionType) => (
+                                    <tr>
+                                        <td className="p-2 text-left border-b border-solid">{data.id_cart}</td>
+                                        <td className="p-2 text-left border-b border-solid">{data.id_item}</td>
+                                        <td className="p-2 text-left border-b border-solid">{data.name_product}</td>
+                                        <td className="p-2 text-left border-b border-solid">{data.id_user}</td>
+                                        <td className="p-2 text-left border-b border-solid">{data.item_created}</td>
+                                        <td className="p-2 text-left border-b border-solid">{data.item_quantity}</td>
+                                        <td className="p-2 text-left border-b border-solid">{data.total_price}</td>
+                                        <td className="p-2 text-left border-b border-solid">{data.type_product}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
