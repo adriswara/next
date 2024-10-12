@@ -1,7 +1,8 @@
+import GetData from "@/services/getData.service";
 import { FC, useEffect, useState } from "react"
 import { FormEvent } from "react"
 
-interface ItemCartProps {pointReward:number, productId: number, productName: string, productDescription: string, productQuantity: number, totalPrice: number, onChange?: (total: number) => void }
+interface ItemCartProps { pointReward: number, productId: number, productName: string, productDescription: string, productQuantity: number, totalPrice: number, onChange?: (total: number) => void }
 const ItemCart: FC<ItemCartProps> = (props) => {
     const { productName = "Product 1",
         productDescription = "This product is colored and second variant",
@@ -11,23 +12,29 @@ const ItemCart: FC<ItemCartProps> = (props) => {
         pointReward = 0,
         onChange
     } = props
-
+    //
     var [quantity, setQuantity] = useState<number>(productQuantity);
-    const operand:number = 1;
+    const operand: number = 1;
     var totalPricePerItem = quantity <= 0 ? totalPrice * 1 : totalPrice * quantity;
-
     // 
+    const querryPoinSetting = 'getPointSetting'
+    const [pointSetting, setPointSetting] = useState<{ transaction: number }>()
+    const dataPointSetting = async () => { GetData(querryPoinSetting).then((resp => { setPointSetting(resp.pointsettings[0]); console.log("point setting:", resp.pointsettings) })).catch(resp => console.log(resp)) }
+    //
+
     var tempQuantity = quantity;
     const handleSubmit = async () => {
         console.log(quantity)
-        
-        quantity <= 0 ? tempQuantity = 1 : tempQuantity = quantity
 
+        quantity <= 0 ? tempQuantity = 1 : tempQuantity = quantity
+        var newPoint = pointSetting?.transaction ? totalPricePerItem / 100 / 100 * pointSetting?.transaction : 0
+        console.log("ini point setting" + pointSetting?.transaction)
+        console.log("ini total price" + totalPricePerItem)
         const data = {
             id_cart: Number(productId),
             item_quantity: Number(tempQuantity),
             total_price: Number(totalPricePerItem),
-            point_reward: Number(pointReward)
+            point_reward: newPoint
         };
         try {
             const response = await fetch('http://localhost:8081/updateItemCartQuantity', {
@@ -54,7 +61,7 @@ const ItemCart: FC<ItemCartProps> = (props) => {
             id_cart: Number(productId),
         };
         try {
-            const response = await fetch('http://localhost:8081/cartCancel/'+Number(productId), {
+            const response = await fetch('http://localhost:8081/cartCancel/' + Number(productId), {
                 method: 'DELETE',
                 body: JSON.stringify(data),
                 headers: { 'Content-Type': 'application/json' },
@@ -73,7 +80,8 @@ const ItemCart: FC<ItemCartProps> = (props) => {
         }
     };
     // 
-    useEffect(() => { handleSubmit().then(resp=>onChange?onChange(totalPricePerItem):{}) }, [quantity])
+    useEffect(() => { handleSubmit().then(resp => onChange ? onChange(totalPricePerItem) : {}) }, [quantity,pointSetting?.transaction])
+    useEffect(() => { dataPointSetting() }, [])
     // 
     return (
 
