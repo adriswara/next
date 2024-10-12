@@ -5,6 +5,9 @@ import { Poppins } from "next/font/google";
 
 
 import GetCard from "@/services/getProfileCard.service";
+import ModalLoading from "@/components/molecules/modalLoading.molecule";
+import { useEffect, useState } from "react";
+import { count } from "console";
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -17,9 +20,17 @@ export default function profile({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   const pathname = usePathname()
+  const [showModal, setShowModal] = useState(false);
+  // onClick={() => }
 
+  const GenerateCartList = () => {
+    setTimeout(() => {
+      setShowModal(true);
+    }, 2000);
+    setShowModal(false);
+  }
+  useEffect(() => { GenerateCartList() }, [pathname])
 
   return (
     <div className={`${poppins.className} flex pt-5 pb-36 container mx-auto items-start gap-5 `}>
@@ -34,6 +45,7 @@ export default function profile({
             <li className={`link ${pathname === '/profile/showcase' ? 'bg-[#e5e7eb] border-t-2 border-[#e5e7eb] pl-0 pr-0 py-2 px-4 font-semibold' : 'border-t-2 border-[#e5e7eb] pl-0 pr-0 py-2 px-4'}`}><Link href="/profile/showcase" className="text-sm pt[8px] pb[5px] pl-[10px] pr-[1rem]">Instagram Showcase</Link></li>
             <li className={`link ${pathname === '/profile/logout' ? 'bg-[#e5e7eb] border-t-2 border-[#e5e7eb] pl-0 pr-0 py-2 px-4 font-semibold text-red-500' : 'border-t-2 border-[#e5e7eb] pl-0 pr-0 py-2 px-4 text-red-500'}`}><Link href="/profile/logout" className="text-sm pt[8px] pb[5px] pl-[10px] pr-[1rem] text-red-500 ">Logout</Link></li>
           </ul>
+          <ModalLoading show={undefined} onClose={undefined}></ModalLoading>
         </div>
         {/*  */}
         {GetCard()}

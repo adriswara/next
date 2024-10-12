@@ -27,7 +27,15 @@ const ProductDetailMain: FC<ProductDetailMainProps> = (props) => {
     const [user, setUser] = useState<{ id_user: number }>()
     const datas = async () => { GetData(query).then((resp => { setUser(resp.User[0]) })).catch(resp => console.log(resp)) }
 
+    //
+    const querryPoinSetting = 'getPointSetting'
+    const [pointSetting, setPointSetting] = useState<{ transaction: number }>()
+    const dataPointSetting = async () => { GetData(querryPoinSetting).then((resp => { setPointSetting(resp.pointsettings[0]); console.log("point setting:", resp.pointsettings) })).catch(resp => console.log(resp)) }
+    //
+
     useEffect(() => { datas() }, [])
+    useEffect(() => { dataPointSetting() }, [])
+
 
 
     // 
@@ -37,11 +45,16 @@ const ProductDetailMain: FC<ProductDetailMainProps> = (props) => {
         console.log(formData.get('id_item'))
         console.log(formData.get('id_user'))
         console.log(formData.get('item_quantity'))
+        var itemSubTotal = Number(formData.get('total_price'))
+        var rawPoint = itemSubTotal && pointSetting?.transaction ? (itemSubTotal / 100) / 100 * pointSetting?.transaction : null
+        console.log(rawPoint)
+
         const data = {
             id_item: formData.get('id_item'),
             id_user: formData.get('id_user'),
             item_quantity: formData.get('item_quantity'),
-            total_price: formData.get('total_price')
+            total_price: formData.get('total_price'),
+            point_reward: rawPoint
 
         };
         try {

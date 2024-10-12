@@ -1,13 +1,14 @@
 import { FC, useEffect, useState } from "react"
 import { FormEvent } from "react"
 
-interface ItemCartProps { productId: number, productName: string, productDescription: string, productQuantity: number, totalPrice: number, onChange?: (total: number) => void }
+interface ItemCartProps {pointReward:number, productId: number, productName: string, productDescription: string, productQuantity: number, totalPrice: number, onChange?: (total: number) => void }
 const ItemCart: FC<ItemCartProps> = (props) => {
     const { productName = "Product 1",
         productDescription = "This product is colored and second variant",
         productQuantity = 0,
         totalPrice = 0,
         productId = 0,
+        pointReward = 0,
         onChange
     } = props
 
@@ -25,7 +26,8 @@ const ItemCart: FC<ItemCartProps> = (props) => {
         const data = {
             id_cart: Number(productId),
             item_quantity: Number(tempQuantity),
-            total_price: Number(totalPricePerItem)
+            total_price: Number(totalPricePerItem),
+            point_reward: Number(pointReward)
         };
         try {
             const response = await fetch('http://localhost:8081/updateItemCartQuantity', {
@@ -83,7 +85,7 @@ const ItemCart: FC<ItemCartProps> = (props) => {
                     </div>
                     <div>
                         <div className="text-[10px]">
-                            {productDescription}
+                            Description : {productDescription}, point = {pointReward}
                         </div>
                     </div>
                     <div>

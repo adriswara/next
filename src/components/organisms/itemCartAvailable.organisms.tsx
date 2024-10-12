@@ -24,7 +24,8 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
         total_price: number,
         name_product: string,
         description_product: string,
-        price_product: number
+        price_product: number,
+        point_reward: number
     }
     type ownedVoucherType = {
         id_voucher_ownership: number | "undefined",
@@ -117,9 +118,9 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
 
         const data = {
             id_user: Number(user?.id_user),
-            item_created: format(jakartaTime, "yyyy-MM-dd hh:mm:ss")
+            item_created: format(jakartaTime, "yyyy-MM-dd hh:mm:ss"),
         };
-        handlePoint()
+        // handlePoint()
         try {
             const response = await fetch('http://localhost:8081/insertTransaction', {
                 method: 'POST',
@@ -242,7 +243,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
                                                     </thead>
                                                     <tbody className="[&amp;_tr:last-child]:border-0">
                                                         {cart?.map((data: cartDataType) => (
-                                                            <ItemCart onChange={(value) => { dataCarts() }} productId={data.id_cart} productName={String(data.name_product)} productDescription={"desc" + data.description_product} productQuantity={Number(data.item_quantity)} totalPrice={data.price_product}></ItemCart>
+                                                            <ItemCart onChange={(value) => { dataCarts() }} pointReward={data.point_reward} productId={data.id_cart} productName={String(data.name_product)} productDescription={"desc" + data.description_product} productQuantity={Number(data.item_quantity)} totalPrice={data.price_product}></ItemCart>
                                                         ))}
                                                     </tbody>
                                                 </table>
