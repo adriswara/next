@@ -43,8 +43,10 @@ const LoginComponent: FC<LoginComponentProps> = (props) => {
       document.cookie = `username=${username}; ` + expires + "; path=/;";
       router.push('/profile')
     } catch (error) {
+      setShowModal(false)
       message = DrawAlert(1, "Failed", "Invalid Password or Username");
       console.error('Login failed:', error);
+      router.refresh()
     }
   };
 

@@ -14,7 +14,7 @@ export default async function Home() {
   console.log(datas)
   return (
 
-    <ProductDetails itemType={""} itemName={""} itemPrice={0} itemImage={""} descriptionText={""} itemInclude={""}></ProductDetails>
+    <ProductDetails itemType={""} itemName={""} itemPrice={0} itemImage={""} descriptionText={""} itemInclude={""} itemId={undefined}></ProductDetails>
    
   );
 }
