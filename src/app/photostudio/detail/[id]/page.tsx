@@ -11,7 +11,6 @@ const poppins = Poppins({
 
 export default async function Home() {
   const datas = await GetData("productStudios")
-  console.log(datas)
   return (
 
     <ProductDetails itemType={""} itemName={""} itemPrice={0} itemImage={""} descriptionText={""} itemInclude={""} itemId={undefined}></ProductDetails>

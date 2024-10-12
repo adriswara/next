@@ -3,7 +3,6 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 const headersList = headers()
 const pathname = headersList.get('x-pathname');
-console.log(pathname)
 export default function Home() {
     
     return (

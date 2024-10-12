@@ -3,12 +3,10 @@ import { NextResponse } from 'next/server'
 // import { headers } from 'next/headers'
 
 export default async function GET() {
-  console.log("protexted")
   // const headersInstance = headers()
   // const authHeader = headersInstance.get('authorization')
   try {
   
-    // console.log("isi auth header"+authHeader)
 
     // if(authHeader === null){
     //     return
@@ -17,7 +15,6 @@ export default async function GET() {
     // const token = authHeader.split(' ')[1]
 
     // const decoded = jwt.verify(token, process.env.JWT_SECRET)
-    // console.log("Isi Decoded"+decoded)
     // if (!decoded) {
     //   return NextResponse.json(
     //     { message: 'Expired' },

@@ -18,7 +18,6 @@ const VoucherButtonActive: FC<VoucherButtonActiveProps> = (props) => {
         var expireTime = time + hour;
         now.setTime(expireTime);
         const expires = "expires=" + now.toUTCString();
-        console.log("isi id voucher " + id_voucher)
         document.cookie = `voucheruse=${id_voucher}; ` + expires + "; path=/;";
         router.refresh()
 

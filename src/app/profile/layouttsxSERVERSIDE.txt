@@ -22,7 +22,6 @@ export default async function profile({
 }>) {
 
   const data = await GetData("userGet/1")
-  console.log(data)
 
   const headersList = headers()
   // const header_url = headersList.get('x-url') || "";

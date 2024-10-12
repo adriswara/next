@@ -15,7 +15,8 @@ const CartLeftSection: FC<CartLeftSectionProps> = (props) => {
         item_quantity: number,
         total_price: number,
         name_product: string,
-        description_product: string
+        description_product: string,
+        point_reward: number
     }
     // get user id from cookie
     const userinfo = Cookies.get('username')
@@ -24,7 +25,6 @@ const CartLeftSection: FC<CartLeftSectionProps> = (props) => {
     const datas = async () => { GetData(query).then((resp => { setUser(resp.User[0]) })).catch(resp => console.log(resp)) }
     useEffect(() => { datas() }, [])
     // 
-    console.log("ini id user" + user?.id_user)
     const queryCart = 'getCart/' + user?.id_user
     const [cart, setCart] = useState<cartDataType[]>()
     const dataCarts = async () => { GetData(queryCart).then((resp => { setCart(resp.Carts) })).catch(resp => console.log(resp)) }
@@ -79,7 +79,7 @@ const CartLeftSection: FC<CartLeftSectionProps> = (props) => {
 
                                     {cart?.map((data: cartDataType) => (
                                         // <ul>{data.total_price}</ul>
-                                        <ItemCart productName={String(data.name_product)} productDescription={"desc" + data.description_product} productQuantity={data.item_quantity} totalPrice={data.total_price} productId={data.id_cart}></ItemCart>
+                                        <ItemCart productName={String(data.name_product)} productDescription={"desc" + data.description_product} productQuantity={data.item_quantity} totalPrice={data.total_price} productId={data.id_cart} pointReward={0}></ItemCart>
                                     ))}
                                 </tbody>
                             </table>

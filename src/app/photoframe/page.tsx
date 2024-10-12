@@ -11,7 +11,6 @@ const poppins = Poppins({
 
 export default async function Home() {
   const datas = await GetData("productFrames")
-  console.log(datas)
   return (
 
     <div className={`${poppins.className} flex pt-5 pb-36 container mx-auto items-start gap-5 `}>

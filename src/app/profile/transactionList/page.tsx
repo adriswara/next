@@ -25,7 +25,6 @@ const Transaction = () => {
     const [user, setUser] = useState<{ id_user: number }>()
     const userData = async () => { GetData(query).then((resp => { setUser(resp.User[0]) })).catch(resp => console.log(resp)) }
     // 
-    console.log("ini id user" + user?.id_user)
     const querryTransaction = 'showTransaction/' + user?.id_user
     const [ownedVoucher, setOwnedTransaction] = useState<ownedTransactionType[]>()
     const dataOwnedTransaction = async () => { GetData(querryTransaction).then((resp => { setOwnedTransaction(resp.transaction); console.log(resp.transaction) })).catch(resp => console.log(resp)) }

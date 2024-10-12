@@ -34,7 +34,6 @@ const OwnedVoucher = () => {
     const [user, setUser] = useState<{ id_user: number }>()
     const userData = async () => { GetData(query).then((resp => { setUser(resp.User[0]) })).catch(resp => console.log(resp)) }
     // 
-    console.log("ini id user" + user?.id_user)
     const querryVoucher = 'ownedVoucher/' + user?.id_user
     const [ownedVoucher, setOwnedVoucher] = useState<ownedVoucherType[]>()
     const dataOwnedVouchers = async () => { GetData(querryVoucher).then((resp => { setOwnedVoucher(resp.voucher_ownership); console.log(resp.voucher_ownership) })).catch(resp => console.log(resp)) }

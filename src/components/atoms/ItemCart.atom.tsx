@@ -24,12 +24,9 @@ const ItemCart: FC<ItemCartProps> = (props) => {
 
     var tempQuantity = quantity;
     const handleSubmit = async () => {
-        console.log(quantity)
 
         quantity <= 0 ? tempQuantity = 1 : tempQuantity = quantity
         var newPoint = pointSetting?.transaction ? totalPricePerItem / 100 / 100 * pointSetting?.transaction : 0
-        console.log("ini point setting" + pointSetting?.transaction)
-        console.log("ini total price" + totalPricePerItem)
         const data = {
             id_cart: Number(productId),
             item_quantity: Number(tempQuantity),

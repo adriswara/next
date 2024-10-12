@@ -16,7 +16,6 @@ const sendRequest = async () => {
   });
 
   const data = await response.json();
-  console.log(data);
 };
 
 
@@ -31,9 +30,7 @@ export default function Home() {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    console.log(formData.get('fk_user'))
-    console.log(formData.get('fk_voucher'))
-    console.log(formData.get('is_usable'))
+    
     const data = {
       fk_user: formData.get('fk_user'),
       fK_voucher: formData.get('fk_voucher'),

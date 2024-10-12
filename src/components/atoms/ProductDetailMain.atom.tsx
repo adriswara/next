@@ -42,12 +42,9 @@ const ProductDetailMain: FC<ProductDetailMainProps> = (props) => {
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
-        console.log(formData.get('id_item'))
-        console.log(formData.get('id_user'))
-        console.log(formData.get('item_quantity'))
+       
         var itemSubTotal = Number(formData.get('total_price'))
         var rawPoint = itemSubTotal && pointSetting?.transaction ? (itemSubTotal / 100) / 100 * pointSetting?.transaction : null
-        console.log(rawPoint)
 
         const data = {
             id_item: formData.get('id_item'),

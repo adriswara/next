@@ -76,11 +76,11 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
             subTotal += data.price_product * data.item_quantity
         })
         var tempDiscount = selectedVoucher?.discount ? selectedVoucher?.discount / 100 * subTotal : null
-        console.log("isi subtotal" + subTotal)
-        console.log("isi discount" + tempDiscount)
+        console.log("isi subtotal : " + subTotal)
+        console.log("isi discount : " + tempDiscount)
 
-        total = tempDiscount ? total = subTotal - tempDiscount : total = subTotal;
-        console.log("isi total" + total)
+        total = tempDiscount ? subTotal - tempDiscount : subTotal;
+        console.log("isi total : " + total)
         setTotal(total);
     }
 
@@ -184,8 +184,8 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
     const [showModalNotif, setShowModalNotif] = useState(false);
 
 
-    useEffect(() => { GenerateCartList() }, [cart])
-    useEffect(() => { dataCarts() }, [user])
+    useEffect(() => { GenerateCartList() }, [cart,usedVoucherinfo])
+    useEffect(() => { dataCarts() }, [user,usedVoucherinfo])
     useEffect(() => { datas() }, [])
     useEffect(() => { dataSelectedVoucher() }, [usedVoucherinfo])
     useEffect(() => { dataPointSetting() }, [])

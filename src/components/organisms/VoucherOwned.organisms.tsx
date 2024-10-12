@@ -18,7 +18,6 @@ const VoucherOwned: FC<VoucherOwnedProps> = (props) => {
         hideButton = 1,
         code = "CODE_123sksdiof"
     } = props
-    console.log("id yang di komponen"+idVoucher)
     return (
         <div className="border-2 border-solid border-jonasBorder rounded-[5px] grid grid-cols-2 mb-5 pt-5 pb-5">
             {/* left voucher section*/}

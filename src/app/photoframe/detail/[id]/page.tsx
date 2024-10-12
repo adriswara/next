@@ -24,7 +24,6 @@ export default function Home() {
   const datas = async () => { GetData(query).then((resp => { setProduct(resp.Product[0]) })).catch(resp => console.log(resp)) }
   useEffect(() => { datas() }, [])
 
-  console.log(product?.id_product+"adalah id produc")
   return (
 
     <ProductDetails itemId={product?.id_product} itemType={product?.type_product} itemName={product?.name_product} itemPrice={product?.price_product} itemImage={product?.display_product} descriptionText={product?.description_product} itemInclude={product?.include_product}></ProductDetails>
