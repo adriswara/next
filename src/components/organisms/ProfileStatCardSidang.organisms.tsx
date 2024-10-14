@@ -1,14 +1,12 @@
 import { FC } from "react";
-import VoucherDescDiscount from "../molecules/VoucherLeftDesc.molecule";
-import VoucherRightDescCodeStatus from "../molecules/VoucherRightDesc.molecule";
 import ProfileName from "../atoms/ProfileName.atom";
 import ProfileLevel from "../atoms/ProfileLevel.atom";
 import ProfileStatText from "../molecules/ProfileStatText.molecule";
 import ProfileXpBar from "../molecules/ProfileXpBar.molecule";
 import ProfilePicCard from "../atoms/ProfilePicCard";
 
-interface ProfileStatCard { picname?: string, name: string, level: number, percentage: number, xpLeft: number, nextLevel: number, point: number, showcase: number }
-const ProfileStatCard: FC<ProfileStatCard> = (props) => {
+interface ProfileStatCardSidangProps { picname?: string, name: string, level: number, percentage: number, xpLeft: number, nextLevel: number, point: number, showcase: number }
+const ProfileStatCardSidang: FC<ProfileStatCardSidangProps> = (props) => {
     const {
         picname = "/profilePicSq.jpg",
         name = "Ajon Doe",
@@ -39,4 +37,4 @@ const ProfileStatCard: FC<ProfileStatCard> = (props) => {
     )
 }
 
-export default ProfileStatCard
+export default ProfileStatCardSidang

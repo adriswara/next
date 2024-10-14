@@ -48,7 +48,8 @@ export default function profile({
           <ModalLoading show={undefined} onClose={undefined}></ModalLoading>
         </div>
         {/*  */}
-        {GetCard()}
+        {/* {GetCard("sidang")} */}
+        {GetCard("jonas")}
         {/*  */}
       </div>
       {children}
