@@ -8,7 +8,7 @@ const VoucherDiscountType3: FC<VoucherDiscount3Props> = (props) => {
 
     return (
 
-        <div className="text-3xl">VOUCHER ERROR</div>
+        <div className="text-3xl">Redeem Item</div>
     )
 }
 

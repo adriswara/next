@@ -28,7 +28,7 @@ const VoucherRightDescCodeStatus: FC<VoucherRightDescCodeStatusProps> = (props) 
                     {/* code */}
                     <div className="text-blue-800 text-sm ml-35 mr-0">Code: {code}</div>
                     {/* copy logo */}
-                    <VoucherCodeCopyButton></VoucherCodeCopyButton>
+                    {/* <VoucherCodeCopyButton></VoucherCodeCopyButton> */}
                 </div>
                 {/* status active */}
                 {is_usable == 1 ? <VoucherListActive></VoucherListActive> : is_usable == 2 ? <VoucherListNotActive></VoucherListNotActive> : <VoucherListInvalid></VoucherListInvalid>}

@@ -1,6 +1,6 @@
 'use client'
 import { FC, useCallback, useMemo } from "react";
-import CartRightSection from "../molecules/cartRightSection.molecule";
+
 import ItemCart from "../atoms/ItemCart.atom"
 import GetData from "@/services/getData.service";
 import { useEffect, useState } from "react";
@@ -66,6 +66,33 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
     const [pointSetting, setPointSetting] = useState<{ transaction: number }>()
     const dataPointSetting = async () => { GetData(querryPoinSetting).then((resp => { setPointSetting(resp.pointsettings[0]); console.log("point setting:", resp.pointsettings) })).catch(resp => console.log(resp)) }
     //
+    console.log(selectedVoucher?.id_voucher_ownership)
+    //
+    const useVoucher = async () => {
+
+        const data = {
+            id_cart: Number(selectedVoucher?.id_voucher_ownership),
+        };
+        try {
+            const response = await fetch('http://localhost:8081/paidVoucher/' + Number(selectedVoucher?.id_voucher_ownership), {
+                method: 'DELETE',
+                body: JSON.stringify(data),
+                headers: { 'Content-Type': 'application/json' },
+
+            });
+
+            if (response.ok) {
+                console.log('ok')
+                console.log(await response.json)
+            }
+            else {
+                console.log("failed")
+            }
+        } catch (error) {
+            console.log("epi error")
+        }
+    };
+    // 
     const [itemGrandTotal, setTotal] = useState<number>()
     const router = useRouter()
 
@@ -110,6 +137,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
             console.log("epi error")
         }
     };
+    console.log("data voucher dipilih"+usedVoucherinfo?.id_voucher_ownership)
     // 
     const handlePurchase = async () => {
         setShowModalNotif(true)
@@ -133,6 +161,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
                 console.log('ok')
                 Cookies.remove('voucheruse')
                 handlePoint()
+                useVoucher()
                 resetCart()
                 console.log(await response.json)
             }
@@ -184,8 +213,8 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
     const [showModalNotif, setShowModalNotif] = useState(false);
 
 
-    useEffect(() => { GenerateCartList() }, [cart,usedVoucherinfo])
-    useEffect(() => { dataCarts() }, [user,usedVoucherinfo])
+    useEffect(() => { GenerateCartList() }, [cart, usedVoucherinfo])
+    useEffect(() => { dataCarts() }, [user, usedVoucherinfo])
     useEffect(() => { datas() }, [])
     useEffect(() => { dataSelectedVoucher() }, [usedVoucherinfo])
     useEffect(() => { dataPointSetting() }, [])
@@ -303,9 +332,8 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
                                         <div className="pt-0 mt-4">
                                             <div className="flex flex-col text-sm">
                                                 <div className="text-justify mt-2">
-                                                    <button onClick={() => setShowModal(true)} className=" mb-6 inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 w-full" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:rf:" data-state="closed">
-                                                        Select Voucher
-                                                    </button>
+                                                    {/* {selectedVoucher?.id_voucher_ownership != undefined ?   <button onClick={() => setShowModal(true)} className=" mb-6 inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 w-full" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:rf:" data-state="closed"> Select Voucher </button>  : selectedVoucher?.id_voucher_ownership == undefined ? <p>You have no voucher available</p> : <p>You have no voucher available</p>} */}
+                                                     <button onClick={() => setShowModal(true)} className=" mb-6 inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 w-full" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:rf:" data-state="closed"> Select Voucher </button>
                                                     <div>
                                                         {selectedVoucher && selectedVoucher.id_voucher_ownership !== "undefined" ? <VoucherOwned hideButton={1} idVoucher={selectedVoucher.id_voucher_ownership} voucherType={selectedVoucher.voucherType} is_usable={selectedVoucher.is_usable} discount={selectedVoucher.discount} buyReq={selectedVoucher.buyReq} itemFree={selectedVoucher.itemFree} title={selectedVoucher.title} dateStart={selectedVoucher.dateStart} dateEnd={selectedVoucher.dateEnd} productRange={selectedVoucher.productRange} code={selectedVoucher.code}></VoucherOwned> : <></>}
                                                         {selectedVoucher && selectedVoucher.id_voucher_ownership !== "undefined" ? <button onClick={() => removeVoucher()} type="button" className="border-2 border-solid border-jonasBorder rounded-[15px] bg-red-800 text-white text-sm w-40 h-8 ml-7">Remove Voucher</button> : <></>}

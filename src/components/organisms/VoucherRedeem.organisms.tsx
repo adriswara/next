@@ -109,7 +109,7 @@ const VoucherRedeem: FC<VoucherRedeemProps> = (props) => {
             <div>
                 <div className="grid grid-cols-2">
                     <div className="text-blue-800 text-sm ml-35 mr-0">Code: {code}</div>
-                    <VoucherCodeCopyButton></VoucherCodeCopyButton>
+                    {/* <VoucherCodeCopyButton></VoucherCodeCopyButton> */}
                 </div>
             </div>
             <div className="bg-gray-300 -mb-5 h-12 mt-3 pl-3"><p className="border-2 border-solid border-black rounded-2xl text-sm w-24 h-8 mt-2 pl-3 pt-1">{price} Points</p></div>

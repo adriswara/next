@@ -1,15 +1,14 @@
 import { FC } from "react"
 
-interface VoucherDiscount2Props { buyReq: number, itemFree: number }
+interface VoucherDiscount2Props { discount: number }
 const VoucherDiscountType2: FC<VoucherDiscount2Props> = (props) => {
     const {
-        buyReq = 0,
-        itemFree = 0
+        discount = 0
     } = props
 
     return (
 
-        <div className="text-3xl"> BUY {buyReq} GET {itemFree} FREE</div>
+        <div className="text-3xl">{discount}% OFF</div>
     )
 }
 
