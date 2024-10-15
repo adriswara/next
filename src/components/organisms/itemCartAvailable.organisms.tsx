@@ -30,7 +30,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
     type ownedVoucherType = {
         id_voucher_ownership: number | "undefined",
         fk_user: number,
-        fk_voucher: number,
+        fK_voucher: number,
         is_usable: number,
         name_product: string,
         description_product: string,
@@ -137,18 +137,23 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
             console.log("epi error")
         }
     };
-    console.log("data voucher dipilih"+usedVoucherinfo?.id_voucher_ownership)
     // 
     const handlePurchase = async () => {
-        setShowModalNotif(true)
+        // setShowModalNotif(true)
         const now = new Date();
         const jakartaTime = now.toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
+
+        console.log("id jenis voucher : "+selectedVoucher?.fK_voucher)
+
+
+
 
         const data = {
             id_user: Number(user?.id_user),
             item_created: format(jakartaTime, "yyyy-MM-dd hh:mm:ss"),
+            voucher_used: Number(selectedVoucher?.fK_voucher)
+
         };
-        // handlePoint()
         try {
             const response = await fetch('http://localhost:8081/insertTransaction', {
                 method: 'POST',
