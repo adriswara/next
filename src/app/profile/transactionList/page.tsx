@@ -1,10 +1,12 @@
 'use client'
-import VoucherFilterForm from "@/components/molecules/VoucherFilterForm.molecule";
-import VoucherOwned from "@/components/organisms/VoucherOwned.organisms";
+
 import GetData from "@/services/getData.service";
 import { useEffect, useState } from "react";
 import Cookies from 'js-cookie'
-import TransactionTable from "@/components/molecules/tableTransaksi.molecule";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { format, compareAsc, sub } from "date-fns";
+
 
 const Transaction = () => {
 
@@ -17,8 +19,15 @@ const Transaction = () => {
         item_created: string,
         name_product: number,
         type_product: string,
+        point_reward: string,
+        voucher_used: string
     }
-
+    //
+    const [startDate, setStartDate] = useState<Date>();
+    console.log("datepicker : " + format(startDate ? startDate : "1970-01-01", "yyyy-MM-dd"))
+    const day = format(startDate ? startDate : "01", "dd")
+    const month = format(startDate ? startDate : "01", "MM")
+    const year = format(startDate ? startDate : "1970", "yyyy")
     // get user id from cookie
     const userinfo = Cookies.get('username')
     const query = 'userGet/' + userinfo
@@ -28,9 +37,23 @@ const Transaction = () => {
     const querryTransaction = 'showTransaction/' + user?.id_user
     const [ownedVoucher, setOwnedTransaction] = useState<ownedTransactionType[]>()
     const dataOwnedTransaction = async () => { GetData(querryTransaction).then((resp => { setOwnedTransaction(resp.transaction); console.log(resp.transaction) })).catch(resp => console.log(resp)) }
+    //
     // 
+    const querryTransactionByDate = 'showTransactionByDate/' + user?.id_user + '/' + year + '/' + month + '/' + day
+    const dataOwnedTransactionByDate = async () => { GetData(querryTransactionByDate).then((resp => { setOwnedTransaction(resp.transaction); console.log(resp.transaction) })).catch(resp => console.log(resp)) }
+    //
+
+
+
+    //
     useEffect(() => { userData() }, [])
     useEffect(() => { dataOwnedTransaction() }, [user])
+    useEffect(() => { dataOwnedTransactionByDate() }, [startDate])
+
+    
+
+
+
 
 
     return (
@@ -39,17 +62,22 @@ const Transaction = () => {
             <div className="mx-0 my-0">
                 <div className="w-[312px] flex-col flex gap-5 justify-start">
                     <div className="border rounded-lg border-solid border-[#e5e7eb] w-screen mr-auto" >
+                        <span className="ml-5"> Select Transaction Date : </span><DatePicker className="bg-green-200 border-gray-50 mt-5 ml-5 border rounded-lg text-center" selected={startDate} onChange={date => date && setStartDate(date)} /> <button onClick={() =>{setStartDate(undefined); dataOwnedTransaction() }}> clear </button>
                         <table className="w-auto p-5 m-5 border-collapse">
                             <thead>
                                 <tr>
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">ID</th>
-                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Id Item</th>
+                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Item Number</th>
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Product Name</th>
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">User</th>
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Created</th>
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Quantity</th>
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Total Price</th>
-                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Type</th>
+                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Product Type</th>
+                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Point Earned</th>
+                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Voucher Used</th>
+
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -63,6 +91,8 @@ const Transaction = () => {
                                         <td className="p-2 text-left border-b border-solid">{data.item_quantity}</td>
                                         <td className="p-2 text-left border-b border-solid">{data.total_price}</td>
                                         <td className="p-2 text-left border-b border-solid">{data.type_product}</td>
+                                        <td className="p-2 text-left border-b border-solid">{data.point_reward}</td>
+                                        <td className="p-2 text-left border-b border-solid">{data.voucher_used}</td>
                                     </tr>
                                 ))}
                             </tbody>
