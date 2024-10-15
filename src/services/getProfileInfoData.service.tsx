@@ -10,9 +10,13 @@ import { format, compareAsc, sub } from "date-fns";
 function GetProfileInfo() {
     const userinfo = Cookies.get('username')
     const query = 'userGet/' + userinfo
-    const [user, setUser] = useState<{ id_user: Number; name_user: number; email_user: number; phone_user: number; Last_login: string }>()
+    const [user, setUser] = useState<{ id_user: Number; name_user: number; email_user: number; phone_user: number; Last_login: string, point_user: number }>()
     const datas = async () => { GetData(query).then((resp => { setUser(resp.User[0]) })).catch(resp => console.log(resp)) }
-
+    //
+    //
+    const querryPoinSetting = 'getPointSetting'
+    const [pointSetting, setPointSetting] = useState<{ transaction: number, login_daily: number }>()
+    const dataPointSetting = async () => { GetData(querryPoinSetting).then((resp => { setPointSetting(resp.pointsettings[0]); console.log("point setting:", resp.pointsettings) })).catch(resp => console.log(resp)) }
     //
 
     const handleLoginBonus = async () => {
@@ -47,7 +51,37 @@ function GetProfileInfo() {
 
             if (response.ok) {
                 console.log('ok')
+                handlePoint()
+                console.log(await response.json)
+            }
+            else {
+                console.log("failed")
+            }
+        } catch (error) {
+            console.log("epi error")
+        }
+    };
+    //
+    //
+    const handlePoint = async () => {
 
+        var rawPoint = pointSetting?.transaction ? 10 / 100 * pointSetting?.login_daily : null
+        var newPoint = rawPoint && user?.point_user ? Number(rawPoint) + Number(user?.point_user) : null
+
+        const data = {
+            id_user: Number(user?.id_user),
+            point_user: newPoint
+        };
+        try {
+            const response = await fetch('http://localhost:8081/pointTransaction', {
+                method: 'PUT',
+                body: JSON.stringify(data),
+                headers: { 'Content-Type': 'application/json' },
+
+            });
+
+            if (response.ok) {
+                console.log('ok')
                 console.log(await response.json)
             }
             else {
@@ -62,6 +96,7 @@ function GetProfileInfo() {
 
     useEffect(() => { datas() }, [])
     useEffect(() => { handleLoginBonus() }, [user?.id_user])
+    useEffect(() => { dataPointSetting() }, [user?.id_user])
 
     return (
         // profile card

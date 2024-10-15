@@ -1,11 +1,13 @@
+'use client'
 import Script from 'next/script'
 export default function Home() {
 
+    //  onClick={() => console.log("sip")}
 
     return (
         <div>
             <blockquote data-instgrm-permalink="https://www.instagram.com/jonasphotoid/" className=" instagram-media bg-white border-0 rounded-[3px] mx-1 w-[62.5vw]">
-                <div className="p-4">
+                <div className="p-4" >
                     <a id="main_link" href="jonasphotoid" className="bg-white p-0 text-center w-full" target="_blank">
                         <div className="flex flex-row items-center">
                             <div className="bg-smokeWhite rounded-[50%] flex-grow-0 h-10 mr-4 w-10" >

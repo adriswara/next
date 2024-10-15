@@ -21,6 +21,8 @@ function GetCard(mode: string) {
     useEffect(() => { datas() }, [])
     useEffect(() => { dataTransaksi() }, [idUser])
     useEffect(() => { dataVoucher() }, [idUser])
+    console.log("totalTransaksi"+ totalTransaksi?.Count_transaksi)
+    console.log("total voucher"+ totalVoucher?.count_voucher)
 
 
     return (
