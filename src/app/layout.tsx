@@ -10,6 +10,7 @@ import Cookies from 'js-cookie'
 import { usePathname, useRouter } from "next/navigation";
 import { createContext } from "react";
 import ProfileAndLogin from "@/components/molecules/ProfileAndLogin.molecule";
+import GetData from "@/services/getData.service";
 
 
 
@@ -64,19 +65,29 @@ export default function RootLayout({
 
 
   var isLogin = 1
+
+  // get user id from cookie
+  const userinfo = Cookies.get('username')
+  const query = 'userGet/' + userinfo
+  const [user, setUser] = useState<{ id_user: number,name_user: string}>()
+  const datas = async () => { GetData(query).then((resp => { setUser(resp.User[0]) })).catch(resp => console.log(resp)) }
+  // 
+
   const router = useRouter()
-  
   const tokenContext = createContext<string | null>(Cookies.get('token'));
   const pathname = usePathname()
   const [path, setPath] = useState<string | null>(pathname)
   const [logged, setLogged] = useState<number | null>(isLogin)
   var status = ""
   const token = useContext(tokenContext)
+ 
+
+
   useEffect(() => { setPath(pathname) }, [pathname])
   useEffect(() => {
     console.log(path)
     console.log("Token : " + token)
-    console.log("token status"+!token && token == undefined)
+    console.log("token status" + !token && token == undefined)
     if (!token && token == undefined) {
       router.replace('/login') // If no token is found, redirect to login page   
       console.log("gaada token")
@@ -93,8 +104,7 @@ export default function RootLayout({
     }
     console.log("islogin = " + isLogin)
   }, [token])
-
-
+  useEffect(() => { datas() }, [token])
 
   return (
     <html lang="en">
@@ -108,7 +118,7 @@ export default function RootLayout({
             <div className={sourceSans.className} style={photoPrint}><a href="\photoprint">Photo Print</a></div>
             <div className={sourceSans.className} style={headerContent}><a href="\photoframe">Frame</a></div>
             <div className={sourceSans.className} style={checkoutButton}><a href="\cart"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg></a></div>
-          
+
             <ProfileAndLogin logged={logged}></ProfileAndLogin>
 
           </div>

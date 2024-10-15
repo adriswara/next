@@ -2,16 +2,66 @@
 import { useEffect, useState } from "react"
 import GetData from "./getData.service"
 import Cookies from 'js-cookie'
+import { format, compareAsc, sub } from "date-fns";
+
 
 
 // get data
 function GetProfileInfo() {
-    const userinfo =  Cookies.get('username')
+    const userinfo = Cookies.get('username')
     const query = 'userGet/' + userinfo
-    const [user, setUser] = useState<{ name_user: number; email_user: number; phone_user: number }>()
+    const [user, setUser] = useState<{ id_user: Number; name_user: number; email_user: number; phone_user: number; Last_login: string }>()
     const datas = async () => { GetData(query).then((resp => { setUser(resp.User[0]) })).catch(resp => console.log(resp)) }
 
+    //
+
+    const handleLoginBonus = async () => {
+        const now = new Date();
+        const jakartaTime = now.toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
+
+        console.log("username " + userinfo)
+        console.log("isi user " + user?.Last_login)
+        const tempLastLogin = user?.Last_login ? new Date(user?.Last_login) : null;
+        const lastLoginDate = Number(tempLastLogin?.getDate())
+
+        console.log("tanggal akhir " + Number(lastLoginDate))
+        const tanggalBaru = Number(format(jakartaTime, "dd"))
+        console.log("tanggal baru  " + Number(tanggalBaru))
+
+        if (lastLoginDate >= tanggalBaru) {
+            return
+        }
+
+
+        const data = {
+            id_user: Number(user?.id_user),
+            last_login: format(jakartaTime, "yyyy-MM-dd hh:mm:ss"),
+        };
+        try {
+            const response = await fetch('http://localhost:8081/dailyloginCheck', {
+                method: 'PUT',
+                body: JSON.stringify(data),
+                headers: { 'Content-Type': 'application/json' },
+
+            });
+
+            if (response.ok) {
+                console.log('ok')
+
+                console.log(await response.json)
+            }
+            else {
+                console.log("failed")
+            }
+        } catch (error) {
+            console.log("epi error")
+        }
+    };
+    //
+
+
     useEffect(() => { datas() }, [])
+    useEffect(() => { handleLoginBonus() }, [user?.id_user])
 
     return (
         // profile card

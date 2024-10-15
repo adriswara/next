@@ -5,6 +5,7 @@ import { UserDataContext } from "../../UserDataContext";
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import ModalLoading from "../molecules/modalLoading.molecule";
+import { format, compareAsc, sub } from "date-fns";
 
 
 
@@ -20,6 +21,37 @@ const LoginComponent: FC<LoginComponentProps> = (props) => {
   const router = useRouter()
   var message = DrawAlert(0, "", "")
   const { dataUser, setUser } = useContext(UserDataContext);
+
+  const handleLoginBonus = async (username : string) => {
+    var idUser = 0
+    const now = new Date();
+    const jakartaTime = now.toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
+
+    const data = {
+        id_user: Number(idUser),
+        item_created: format(jakartaTime, "yyyy-MM-dd hh:mm:ss"),
+    };
+    // handlePoint()
+    try {
+        const response = await fetch('http://localhost:8081/insertTransaction', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: { 'Content-Type': 'application/json' },
+
+        });
+
+        if (response.ok) {
+            console.log('ok')
+           
+            console.log(await response.json)
+        }
+        else {
+            console.log("failed")
+        }
+    } catch (error) {
+        console.log("epi error")
+    }
+};
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
