@@ -59,7 +59,6 @@ const LoginComponent: FC<LoginComponentProps> = (props) => {
 
     try {
       const response = await axios.post('/api/login', { username, password });
-      // console.log('Token:', response.data.token);
       message = DrawAlert(3, "Success", "Login Complete");
       // 
       const { token } = await response.data

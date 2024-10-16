@@ -2,8 +2,6 @@
 import Script from 'next/script'
 export default function Home() {
 
-    //  onClick={() => console.log("sip")}
-
     return (
         <div>
             <blockquote data-instgrm-permalink="https://www.instagram.com/jonasphotoid/" className=" instagram-media bg-white border-0 rounded-[3px] mx-1 w-[62.5vw]">
@@ -47,7 +45,6 @@ export default function Home() {
                             </div>
                         </div>
                     </a>
-
                 </div>
             </blockquote>
             <Script src="https://www.instagram.com/embed.js"></Script>

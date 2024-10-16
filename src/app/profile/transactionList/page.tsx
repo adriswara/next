@@ -24,7 +24,6 @@ const Transaction = () => {
     }
     //
     const [startDate, setStartDate] = useState<Date>();
-    console.log("datepicker : " + format(startDate ? startDate : "1970-01-01", "yyyy-MM-dd"))
     const day = format(startDate ? startDate : "01", "dd")
     const month = format(startDate ? startDate : "01", "MM")
     const year = format(startDate ? startDate : "1970", "yyyy")
@@ -54,7 +53,6 @@ const Transaction = () => {
                 total += Number(data.total_price)
             })
         
-            console.log("isi total : " + total)
             setTotal(total);
         }
 

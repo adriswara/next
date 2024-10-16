@@ -23,14 +23,11 @@ function GetProfileInfo() {
         const now = new Date();
         const jakartaTime = now.toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
 
-        console.log("username " + userinfo)
-        console.log("isi user " + user?.Last_login)
+    
         const tempLastLogin = user?.Last_login ? new Date(user?.Last_login) : null;
         const lastLoginDate = Number(tempLastLogin?.getDate())
 
-        console.log("tanggal akhir " + Number(lastLoginDate))
         const tanggalBaru = Number(format(jakartaTime, "dd"))
-        console.log("tanggal baru  " + Number(tanggalBaru))
 
         if (lastLoginDate >= tanggalBaru) {
             return
