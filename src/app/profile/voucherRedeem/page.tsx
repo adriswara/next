@@ -18,9 +18,9 @@ export default async function Home() {
                 {/* voucher grid */}
                 <div className="grid grid-cols-2">
                     {/* database loop call */}
-                    {datas.voucher.map((data: { id: number; title: string; voucherType: number; price: number; discount: number; buyReq: number; itemFree: number; dateStart: string; dateEnd: string; productRange: string; code: string }) => (
+                    {datas.voucher.map((data: { id: number; title: string; voucherType: number; price: number; discount: number; buyReq: number; itemFree: number; dateStart: string; dateEnd: string; productRange: string; code: string; point:number }) => (
                         <div>
-                            <VoucherRedeem id_voucher={data.id} voucherType={data.voucherType} price={data.voucherType} discount={data.discount} buyReq={data.buyReq} itemFree={data.itemFree} title={data.title} dateStart={data.dateStart} dateEnd={data.dateEnd} productRange={data.productRange} code={data.code}></VoucherRedeem>
+                            <VoucherRedeem id_voucher={data.id} voucherType={data.voucherType} price={data.voucherType} discount={data.discount} buyReq={data.buyReq} itemFree={data.itemFree} title={data.title} dateStart={data.dateStart} dateEnd={data.dateEnd} productRange={data.productRange} code={data.code} point={data.point}></VoucherRedeem>
                         </div>
                     ))}
                     {/* endloop */}

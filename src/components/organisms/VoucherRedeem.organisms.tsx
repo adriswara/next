@@ -8,7 +8,7 @@ import Cookies from 'js-cookie'
 
 
 
-interface VoucherRedeemProps { id_voucher: number, voucherType: number, price: number, discount: number, buyReq: number, itemFree: number, title: string, dateStart: string, dateEnd: string, productRange: string, code: string }
+interface VoucherRedeemProps { id_voucher: number, voucherType: number, price: number, discount: number, buyReq: number, itemFree: number, title: string, dateStart: string, dateEnd: string, productRange: string, code: string, point: number }
 const VoucherRedeem: FC<VoucherRedeemProps> = (props) => {
     const {
         voucherType = 0,
@@ -21,7 +21,8 @@ const VoucherRedeem: FC<VoucherRedeemProps> = (props) => {
         dateEnd = "",
         productRange = "",
         code = "",
-        id_voucher = 0
+        id_voucher = 0,
+        point = 0
     } = props
     //
     // get user id from cookie
@@ -104,7 +105,7 @@ const VoucherRedeem: FC<VoucherRedeemProps> = (props) => {
     return (
         <div className="border-2 border-solid border-jonasBorder rounded-[5px] grid grid-cols-2 -mt-px mb-5 pt-5 pb-5 ml-5 mr-5 ">
             {/* voucher left section */}
-            <VoucherDescDiscount type={voucherType} discount={discount} buyReq={buyReq} itemFree={itemFree} title={title} dateStart={dateStart} dateEnd={dateEnd} productRange={productRange}></VoucherDescDiscount>
+            <VoucherDescDiscount type={voucherType} discount={discount} buyReq={buyReq} itemFree={itemFree} title={title} dateStart={dateStart} dateEnd={dateEnd} productRange={productRange} point={point}></VoucherDescDiscount>
             {/* voucher right component */}
             <div>
                 <div className="grid grid-cols-2">

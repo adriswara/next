@@ -26,6 +26,7 @@ const OwnedVoucher = () => {
         productRace: string,
         code: string
         productRange: string
+        Point: number
     }
 
     // get user id from cookie
@@ -52,7 +53,7 @@ const OwnedVoucher = () => {
 
                 {ownedVoucher?.map((data: ownedVoucherType) => (
                     <div>
-                        <VoucherOwned voucherType={data.voucherType} is_usable={data.is_usable} discount={data.discount} buyReq={data.buyReq} itemFree={data.itemFree} title={data.title} dateStart={data.dateStart} dateEnd={data.dateEnd} productRange={data.productRange} code={data.code} hideButton={1}></VoucherOwned>
+                        <VoucherOwned voucherType={data.voucherType} is_usable={data.is_usable} discount={data.discount} buyReq={data.buyReq} itemFree={data.itemFree} title={data.title} dateStart={data.dateStart} dateEnd={data.dateEnd} productRange={data.productRange} code={data.code} hideButton={1} point={data.Point}></VoucherOwned>
                     </div>
                 ))}
             </div>

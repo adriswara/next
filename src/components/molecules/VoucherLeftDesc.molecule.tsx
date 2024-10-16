@@ -4,13 +4,14 @@ import VoucherDiscountType2 from "../atoms/DiscountType2.atom"
 import VoucherDiscountType3 from "../atoms/DiscountType3.atom"
 import VoucherDiscountType4 from "../atoms/DiscountType4.atom"
 
-interface VoucherDescDiscountProps { type: number, discount: number, buyReq: number, itemFree: number, title: string, dateStart: string, dateEnd: string, productRange: string, additional1?: string, additional2?: string, additionalDiscount?: string }
+interface VoucherDescDiscountProps { type: number, discount: number, buyReq: number, itemFree: number, title: string, dateStart: string, dateEnd: string, productRange: string, additional1?: string, additional2?: string, additionalDiscount?: string, point:number }
 const VoucherDescDiscount: FC<VoucherDescDiscountProps> = (props) => {
     const {
         type = 0,
         discount = 0,
         buyReq = 0,
         itemFree = 0,
+        point = 0,
         title = "FOR X ORDER",
         dateStart = "01/01/1970 00:00",
         dateEnd = "01/01/1970 00:00",
@@ -23,7 +24,7 @@ const VoucherDescDiscount: FC<VoucherDescDiscountProps> = (props) => {
     return (
         <div className="ml-5">
             {/* huge discount text */}
-            {type == 1 ? <VoucherDiscountType1 discount={discount}></VoucherDiscountType1> : type == 2 ? <VoucherDiscountType2 discount={discount}></VoucherDiscountType2> : type == 3 ? <VoucherDiscountType3></VoucherDiscountType3> : <VoucherDiscountType4></VoucherDiscountType4>}
+            {type == 1 ? <VoucherDiscountType1 discount={discount}></VoucherDiscountType1> : type == 2 ? <VoucherDiscountType2 discount={discount}></VoucherDiscountType2> : type == 3 ? <VoucherDiscountType3 name={title}></VoucherDiscountType3> : <VoucherDiscountType4 nominal={point}></VoucherDiscountType4>}
             {/* title range text */}
             <div className="text-sm">{title}</div>
             {/* date */}
