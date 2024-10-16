@@ -14,15 +14,17 @@ function GetCard(mode: string) {
     const idUser = user?.id_user
     const queryTotalTransaksi = 'totalTransaksi/' + idUser
     const [totalTransaksi, setTotalTransaksi] = useState<{Count_transaksi: number}>()
-    const dataTransaksi = async () => { GetData(queryTotalTransaksi).then((resp => { setTotalTransaksi(resp.Transactions[0]) })).catch(resp => console.log(resp)) }
+    const dataTransaksi = async () => { GetData(queryTotalTransaksi).then((resp => { setTotalTransaksi(resp.Transaction[0]) })).catch(resp => console.log(resp)) }
     const queryTotalVoucher = 'totalVoucher/' + idUser
     const [totalVoucher, setTotalVoucher] = useState<{count_voucher: number}>()
     const dataVoucher = async () => { GetData(queryTotalVoucher).then((resp => { setTotalVoucher(resp.VoucherOwned[0]) })).catch(resp => console.log(resp)) }
     useEffect(() => { datas() }, [])
-    useEffect(() => { dataTransaksi() }, [idUser])
+    useEffect(() => { dataTransaksi() }, [user])
     useEffect(() => { dataVoucher() }, [idUser])
 
-
+    console.log("isi id user "+ idUser)
+    console.log("query "+queryTotalTransaksi)
+    console.log("isi total transaksi "+totalTransaksi?.Count_transaksi)
 
     return (
         <div>
