@@ -26,8 +26,9 @@ const Modal = ({ show, onClose }) => {
     dateStart: string,
     dateEnd: string,
     productRace: string,
-    code: string
-    productRange: string
+    code: string,
+    productRange: string,
+    Point : number
   }
   // get user id from cookie
   const userinfo = Cookies.get('username')
@@ -51,7 +52,7 @@ const Modal = ({ show, onClose }) => {
         <div className='overflow-scroll max-h-[calc(100vh-110px)]'>
           {ownedVoucher?.map((data: ownedVoucherType) => (
             <div>
-              <VoucherOwned hideButton={0} idVoucher={data.id_voucher_ownership} voucherType={data.voucherType} is_usable={data.is_usable} discount={data.discount} buyReq={data.buyReq} itemFree={data.itemFree} title={data.title} dateStart={data.dateStart} dateEnd={data.dateEnd} productRange={data.productRange} code={data.code}></VoucherOwned>
+              <VoucherOwned hideButton={0} idVoucher={data.id_voucher_ownership} voucherType={data.voucherType} is_usable={data.is_usable} discount={data.discount} buyReq={data.buyReq} itemFree={data.itemFree} title={data.title} dateStart={data.dateStart} dateEnd={data.dateEnd} productRange={data.productRange} code={data.code} point={data.Point}></VoucherOwned>
             </div>
           ))}
         </div>
