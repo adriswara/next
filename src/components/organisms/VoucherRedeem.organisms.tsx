@@ -1,10 +1,11 @@
 'use client'
 import { FC, useEffect } from "react";
 import VoucherDescDiscount from "../molecules/VoucherLeftDesc.molecule";
-import VoucherCodeCopyButton from "../atoms/VoucherCodeCopyButton";
 import GetData from "@/services/getData.service";
 import { useState } from "react";
 import Cookies from 'js-cookie'
+import ModalNotification from "../molecules/modalNotification.molecule";
+import { useRouter } from 'next/navigation';
 
 
 
@@ -31,8 +32,13 @@ const VoucherRedeem: FC<VoucherRedeemProps> = (props) => {
     const [user, setUser] = useState<{ id_user: number, point_user: number }>()
     const datas = async () => { GetData(query).then((resp => { setUser(resp.User[0]) })).catch(resp => console.log(resp)) }
     //  
+    const [showModalNotif, setShowModalNotif] = useState(false);
+    const router = useRouter()
+
     //
     const handleRedeem = async () => {
+        setShowModalNotif(true)
+
         var userPoint = user?.point_user
 
         var tempVoucher = userPoint && userPoint > price ? id_voucher  : null
@@ -60,6 +66,7 @@ const VoucherRedeem: FC<VoucherRedeemProps> = (props) => {
             if (response.ok) {
                 console.log('ok')
                 handlePoint()
+                router.push('/profile')
                 console.log(await response.json)
             }
             else {
@@ -115,6 +122,7 @@ const VoucherRedeem: FC<VoucherRedeemProps> = (props) => {
             </div>
             <div className="bg-gray-300 -mb-5 h-12 mt-3 pl-3"><p className="border-2 border-solid border-black rounded-2xl text-sm w-24 h-8 mt-2 pl-3 pt-1">{price} Points</p></div>
             <div className="bg-gray-300 -mb-5 h-12 mt-3"><link rel="stylesheet" href="" /> <button onClick={() => handleRedeem()} className="border-2 border-solid border-slateBlue rounded-[15px] bg-slateBlue text-white text-sm w-24 h-8 mr-11 float-right mt-2" >Redeem</button></div>
+            <ModalNotification show={showModalNotif} onClose={() => setShowModalNotif(false)} notificationType={2} message={"Transaction Complete, Please Wait.."}></ModalNotification>
         </div>
     )
 }

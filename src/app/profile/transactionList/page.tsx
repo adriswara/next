@@ -35,22 +35,34 @@ const Transaction = () => {
     const userData = async () => { GetData(query).then((resp => { setUser(resp.User[0]) })).catch(resp => console.log(resp)) }
     // 
     const querryTransaction = 'showTransaction/' + user?.id_user
-    const [ownedVoucher, setOwnedTransaction] = useState<ownedTransactionType[]>()
+    const [ownedTransaction, setOwnedTransaction] = useState<ownedTransactionType[]>()
     const dataOwnedTransaction = async () => { GetData(querryTransaction).then((resp => { setOwnedTransaction(resp.transaction); console.log(resp.transaction) })).catch(resp => console.log(resp)) }
     //
     // 
     const querryTransactionByDate = 'showTransactionByDate/' + user?.id_user + '/' + year + '/' + month + '/' + day
     const dataOwnedTransactionByDate = async () => { GetData(querryTransactionByDate).then((resp => { setOwnedTransaction(resp.transaction); console.log(resp.transaction) })).catch(resp => console.log(resp)) }
     //
+    const [total, setTotal] = useState<number>()
 
 
+    
+    
+        const GenerateTotalPrice = () => {
+       
+            let total = 0;
+            ownedTransaction?.map((data: ownedTransactionType) => {
+                total += Number(data.total_price)
+            })
+        
+            console.log("isi total : " + total)
+            setTotal(total);
+        }
 
     //
     useEffect(() => { userData() }, [])
     useEffect(() => { dataOwnedTransaction() }, [user])
     useEffect(() => { dataOwnedTransactionByDate() }, [startDate])
-
-    
+    useEffect(() => { GenerateTotalPrice() }, [ownedTransaction,startDate])
 
 
 
@@ -62,7 +74,7 @@ const Transaction = () => {
             <div className="mx-0 my-0">
                 <div className="w-[312px] flex-col flex gap-5 justify-start">
                     <div className="border rounded-lg border-solid border-[#e5e7eb] w-screen mr-auto" >
-                        <span className="ml-5"> Select Transaction Date : </span><DatePicker className="bg-green-200 border-gray-50 mt-5 ml-5 border rounded-lg text-center" selected={startDate} onChange={date => date && setStartDate(date)} /> <button onClick={() =>{setStartDate(undefined); dataOwnedTransaction() }}> clear </button>
+                        <span className="ml-5"> Select Transaction Date : </span><DatePicker className="bg-green-200 border-gray-50 mt-5 ml-5 border rounded-lg text-center" selected={startDate} onChange={date => date && setStartDate(date)} /> <button onClick={() => { setStartDate(undefined); dataOwnedTransaction() }}> clear </button>
                         <table className="w-auto p-5 m-5 border-collapse">
                             <thead>
                                 <tr>
@@ -75,13 +87,11 @@ const Transaction = () => {
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Total Price</th>
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Product Type</th>
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Point Earned</th>
-                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Voucher Used</th>
-
-
+                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">ID Voucher Used</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {ownedVoucher?.map((data: ownedTransactionType) => (
+                                {ownedTransaction?.map((data: ownedTransactionType) => (
                                     <tr>
                                         <td className="p-2 text-left border-b border-solid">{data.id_cart}</td>
                                         <td className="p-2 text-left border-b border-solid">{data.id_item}</td>
@@ -98,6 +108,7 @@ const Transaction = () => {
                             </tbody>
                         </table>
                     </div>
+                        <span className=" mx-5 my-5 px-5 py-5 border rounded-lg text-center bg-gray-100 ">Grand Total : {total}</span>
                 </div>
             </div>
         </div>

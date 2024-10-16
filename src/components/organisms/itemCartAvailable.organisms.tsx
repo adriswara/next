@@ -140,7 +140,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
     };
     // 
     const handlePurchase = async () => {
-        // setShowModalNotif(true)
+        setShowModalNotif(true)
         const now = new Date();
         const jakartaTime = now.toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
 
