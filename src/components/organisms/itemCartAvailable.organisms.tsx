@@ -180,9 +180,9 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
     };
     //
     const handlePoint = async () => {
-
+        var redeemPoint = selectedVoucher?.point ? selectedVoucher.point : 0
         var rawPoint = itemGrandTotal && pointSetting?.transaction ? (itemGrandTotal / 100) / 100 * pointSetting?.transaction : null
-        var newPoint = rawPoint && user?.point_user ? Number(rawPoint) + Number(user?.point_user) : null
+        var newPoint = rawPoint && user?.point_user ? Number(rawPoint) + Number(user?.point_user) + redeemPoint : null
 
         const data = {
             id_user: Number(user?.id_user),
