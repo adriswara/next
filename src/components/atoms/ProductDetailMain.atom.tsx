@@ -6,14 +6,15 @@ import ModalNotification from "../molecules/modalNotification.molecule";
 
 
 
-interface ProductDetailMainProps { itemId: number, productName: string, productPrice: number, productItemInclude: string, productItemClassification: string }
+interface ProductDetailMainProps { point_raw: number, itemId: number, productName: string, productPrice: number, productItemInclude: string, productItemClassification: string }
 const ProductDetailMain: FC<ProductDetailMainProps> = (props) => {
     const {
         productName = "",
         productPrice = 0,
         productItemInclude = "What's included",
         productItemClassification = "What's this",
-        itemId = 0
+        itemId = 0,
+        point_raw = 0
     } = props
     // var quantity = 1;
     const operand = 1;
@@ -35,16 +36,17 @@ const ProductDetailMain: FC<ProductDetailMainProps> = (props) => {
 
     useEffect(() => { datas() }, [])
     useEffect(() => { dataPointSetting() }, [])
-
+    useEffect(() => { console.log(point_raw) }, [quantity])
 
 
     // 
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
-       
+
         var itemSubTotal = Number(formData.get('total_price'))
-        var rawPoint = itemSubTotal && pointSetting?.transaction ? (itemSubTotal / 100) / 100 * pointSetting?.transaction : null
+        // var rawPoint = itemSubTotal && pointSetting?.transaction ? (itemSubTotal / 100) / 100 * pointSetting?.transaction : null
+        var rawPoint = point_raw && pointSetting?.transaction ? point_raw / 100 * pointSetting?.transaction : null
 
         const data = {
             id_item: formData.get('id_item'),
@@ -84,7 +86,7 @@ const ProductDetailMain: FC<ProductDetailMainProps> = (props) => {
                     <div className="text-end">
                         <button onClick={() => setQuantity(quantity - operand)} className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-full px-3 py-1">-</button>
                         <span className="px-3">
-                            {quantity <= 0 ? quantity = 1 : quantity}
+                            {quantity <= 0 ? quantity = 1 : quantity} {point_raw}
                         </span>
                         <button onClick={() => setQuantity(quantity + operand)} className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-full px-3 py-1">+</button>
                     </div>

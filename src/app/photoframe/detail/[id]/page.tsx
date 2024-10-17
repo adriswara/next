@@ -21,13 +21,13 @@ export default function Home() {
   console.log("link ini" + selectedProduct)
   // 
   const query = selectedProduct
-  const [product, setProduct] = useState<{ id_product: number|undefined, type_product: string | undefined, name_product: string | undefined, price_product: number | undefined, description_product: string | undefined, include_product: string | undefined, display_product: string | undefined }>()
+  const [product, setProduct] = useState<{ id_product: number|undefined, type_product: string | undefined, name_product: string | undefined, price_product: number | undefined, description_product: string | undefined, include_product: string | undefined, display_product: string | undefined, point_raw: number | undefined }>()
   const datas = async () => { GetData(query).then((resp => { setProduct(resp.Product[0]) })).catch(resp => console.log(resp)) }
-  useEffect(() => { datas() }, [])
+  useEffect(() => { datas(),console.log("ini point raw "+product?.point_raw) }, [])
 
   return (
 
-    <ProductDetails itemId={product?.id_product} itemType={product?.type_product} itemName={product?.name_product} itemPrice={product?.price_product} itemImage={product?.display_product} descriptionText={product?.description_product} itemInclude={product?.include_product}></ProductDetails>
+    <ProductDetails itemId={product?.id_product} itemType={product?.type_product} itemName={product?.name_product} itemPrice={product?.price_product} itemImage={product?.display_product} descriptionText={product?.description_product} itemInclude={product?.include_product} point_raw={product?.point_raw}></ProductDetails>
 
   );
 }

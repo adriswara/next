@@ -6,7 +6,7 @@ import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal, AwaitedRea
 
 
 
-interface ProductDetailsProps {itemId: number|undefined, itemType: string | undefined, itemName: string | undefined, itemPrice: number | undefined, itemImage: string | undefined, descriptionText: string | undefined, itemInclude: string | undefined }
+interface ProductDetailsProps {point_raw: number|undefined; itemId: number|undefined, itemType: string | undefined, itemName: string | undefined, itemPrice: number | undefined, itemImage: string | undefined, descriptionText: string | undefined, itemInclude: string | undefined }
 const ProductDetails: FC<ProductDetailsProps> = (props) => {
     const {
         itemType = "",
@@ -15,7 +15,8 @@ const ProductDetails: FC<ProductDetailsProps> = (props) => {
         itemImage = "/product-default.png",
         descriptionText = "Lorem Ipsum Dolor sit amet",
         itemInclude = "",
-        itemId=0
+        itemId = 0,
+        point_raw = 0
     } = props
     const link = "photoframe/detail/" + itemName
    
@@ -24,7 +25,7 @@ const ProductDetails: FC<ProductDetailsProps> = (props) => {
         <main className="flex-1 flex mt-16 w-full px-80">
             <div className="flex-1 flex flex-col">
                 <div className="md:wrapper">
-                    <ProductDetailShow itemId={itemId} picname={itemImage} productName={itemName} productPrice={itemPrice} productItemInclude={itemInclude} productItemClassification={itemType}></ProductDetailShow>
+                    <ProductDetailShow itemId={itemId} picname={itemImage} productName={itemName} productPrice={itemPrice} productItemInclude={itemInclude} productItemClassification={itemType} point_raw = {point_raw}></ProductDetailShow>
                     <div data-orientation="horizontal" role="none" className="shrink-0 bg-border h-[1px] w-full my-2 text-gray-400 mt-8">
                     </div>
                     <ProductDetailDesc descriptionText={descriptionText}></ProductDetailDesc>
