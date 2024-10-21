@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Cookies from 'js-cookie'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { format, compareAsc, sub } from "date-fns";
+import { format } from "date-fns";
 
 
 const Transaction = () => {
@@ -15,13 +15,38 @@ const Transaction = () => {
         id_item: number,
         id_user: number,
         item_quantity: number,
-        total_price: string,
+        total_price: number,
         item_created: string,
         name_product: number,
-        type_product: string,
+        type_product: number,
         point_reward: string,
-        voucher_used: string
+        voucher_used: string,
+        discount_voucher: number
     }
+
+    type ownedVoucherType = {
+        id_voucher_ownership: number,
+        fk_user: number,
+        fK_voucher: number,
+        is_usable: number,
+        name_product: string,
+        description_product: string,
+        price_product: number,
+        title: string,
+        voucherType: number,
+        price: number,
+        discount: number,
+        buyReq: number,
+        itemFree: number,
+        dateStart: string,
+        dateEnd: string,
+        productRace: string,
+        code: string,
+        productRange: string,
+        Point: number
+    }
+
+
     //
     const [startDate, setStartDate] = useState<Date>();
     const day = format(startDate ? startDate : "01", "dd")
@@ -37,6 +62,9 @@ const Transaction = () => {
     const [ownedTransaction, setOwnedTransaction] = useState<ownedTransactionType[]>()
     const dataOwnedTransaction = async () => { GetData(querryTransaction).then((resp => { setOwnedTransaction(resp.transaction); console.log(resp.transaction) })).catch(resp => console.log(resp)) }
     //
+    const querryVoucher = 'ownedVoucher/' + user?.id_user
+    const [ownedVoucher, setOwnedVoucher] = useState<ownedVoucherType[]>()
+    const dataOwnedVouchers = async () => { GetData(querryVoucher).then((resp => { setOwnedVoucher(resp.voucher_ownership); console.log(resp.voucher_ownership) })).catch(resp => console.log(resp)) }
     // 
     const querryTransactionByDate = 'showTransactionByDate/' + user?.id_user + '/' + year + '/' + month + '/' + day
     const dataOwnedTransactionByDate = async () => { GetData(querryTransactionByDate).then((resp => { setOwnedTransaction(resp.transaction); console.log(resp.transaction) })).catch(resp => console.log(resp)) }
@@ -44,27 +72,43 @@ const Transaction = () => {
     const [total, setTotal] = useState<number>()
 
 
-    
-    
-        const GenerateTotalPrice = () => {
-       
-            let total = 0;
-            ownedTransaction?.map((data: ownedTransactionType) => {
-                total += Number(data.total_price)
+
+
+    const GenerateTotalPrice = () => {
+
+        let total = 0;
+        ownedTransaction?.map((data: ownedTransactionType) => {
+            total += Number(data.total_price)
+        })
+
+        setTotal(total);
+    }
+
+
+    var tempPrice = 0;
+    const GenerateDiscount = () => {
+
+        ownedTransaction?.map((dataTransaction: ownedTransactionType) => {
+            ownedVoucher?.map((dataVoucher: ownedVoucherType) => {
+                if (dataTransaction.type_product == dataVoucher.itemFree) {
+                    tempPrice = dataTransaction.total_price - (dataVoucher.discount / 100 * dataTransaction.total_price)
+                    console.log("Harga Full "+ dataTransaction.total_price)
+                    console.log("Harga Diskon "+ tempPrice)
+                }
+                else {
+                    console.log("lewat")
+                }
             })
-        
-            setTotal(total);
-        }
+        })
+    }
 
     //
     useEffect(() => { userData() }, [])
     useEffect(() => { dataOwnedTransaction() }, [user])
+    useEffect(() => { dataOwnedVouchers() }, [user])
     useEffect(() => { dataOwnedTransactionByDate() }, [startDate])
-    useEffect(() => { GenerateTotalPrice() }, [ownedTransaction,startDate])
-
-
-
-
+    useEffect(() => { GenerateDiscount() }, [ownedVoucher])
+    useEffect(() => { GenerateTotalPrice() }, [ownedTransaction, startDate])
 
     return (
         <div className="border-2 border-solid border-jonasBorder rounded-[10px] w-full h-full" >
@@ -86,6 +130,7 @@ const Transaction = () => {
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Product Type</th>
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Point Earned</th>
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">ID Voucher Used</th>
+                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Discount</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -101,12 +146,13 @@ const Transaction = () => {
                                         <td className="p-2 text-left border-b border-solid">{data.type_product}</td>
                                         <td className="p-2 text-left border-b border-solid">{data.point_reward}</td>
                                         <td className="p-2 text-left border-b border-solid">{data.voucher_used}</td>
+                                        <td className="p-2 text-left border-b border-solid">{data.discount_voucher}</td>
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
                     </div>
-                        <span className=" mx-5 my-5 px-5 py-5 border rounded-lg text-center bg-gray-100 ">Grand Total : {total}</span>
+                    <span className=" mx-5 my-5 px-5 py-5 border rounded-lg text-center bg-gray-100 ">Grand Total : {total}</span>
                 </div>
             </div>
         </div>
