@@ -70,7 +70,13 @@ export default function RootLayout({
   const userinfo = Cookies.get('username')
   const query = 'userGet/' + userinfo
   const [user, setUser] = useState<{ id_user: number, name_user: string }>()
-  const datas = async () => { GetData(query).then((resp => { setUser(resp.User[0]) })).catch(resp => console.log(resp)) }
+  var datas = async () => { }
+  if (userinfo == null) {
+    console.log("User id is null, user data wont load")
+  }
+  else {
+    datas = async () => { GetData(query).then((resp => { setUser(resp.User[0]) })).catch(resp => console.log(resp)) }
+  }
   // 
 
   const router = useRouter()

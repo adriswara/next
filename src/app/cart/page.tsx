@@ -26,7 +26,14 @@ const Cart = () => {
     // 
     const queryCart = 'getCart/' + user?.id_user
     const [cart, setCart] = useState<cartDataType[]>()
-    const dataCarts = async () => { GetData(queryCart).then((resp => { setCart(resp.Carts); console.log(resp.Carts) })).catch(resp => console.log(resp)) }
+    var dataCarts = async () => { }
+    if (user?.id_user == undefined) {
+        console.log("ID User Is empty, query cart wont load")
+    }
+    else {
+        //
+        dataCarts = async () => { GetData(queryCart).then((resp => { setCart(resp.Carts); console.log(resp.Carts) })).catch(resp => console.log(resp)) }
+    }
     //
     useEffect(() => { datas() }, [])
     useEffect(() => { dataCarts() }, [user])
