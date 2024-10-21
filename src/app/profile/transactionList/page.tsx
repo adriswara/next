@@ -21,7 +21,9 @@ const Transaction = () => {
         type_product: number,
         point_reward: string,
         voucher_used: string,
-        discount_voucher: number
+        discount_voucher: number,
+        title: string,
+        itemFree: number
     }
 
     type ownedVoucherType = {
@@ -83,31 +85,13 @@ const Transaction = () => {
 
         setTotal(total);
     }
-
-
-    var tempPrice = 0;
-    const GenerateDiscount = () => {
-
-        ownedTransaction?.map((dataTransaction: ownedTransactionType) => {
-            ownedVoucher?.map((dataVoucher: ownedVoucherType) => {
-                if (dataTransaction.type_product == dataVoucher.itemFree) {
-                    tempPrice = dataTransaction.total_price - (dataVoucher.discount / 100 * dataTransaction.total_price)
-                    console.log("Harga Full "+ dataTransaction.total_price)
-                    console.log("Harga Diskon "+ tempPrice)
-                }
-                else {
-                    console.log("lewat")
-                }
-            })
-        })
-    }
+    //
 
     //
     useEffect(() => { userData() }, [])
     useEffect(() => { dataOwnedTransaction() }, [user])
     useEffect(() => { dataOwnedVouchers() }, [user])
     useEffect(() => { dataOwnedTransactionByDate() }, [startDate])
-    useEffect(() => { GenerateDiscount() }, [ownedVoucher])
     useEffect(() => { GenerateTotalPrice() }, [ownedTransaction, startDate])
 
     return (
@@ -120,33 +104,29 @@ const Transaction = () => {
                         <table className="w-auto p-5 m-5 border-collapse">
                             <thead>
                                 <tr>
-                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">ID</th>
-                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Item Number</th>
-                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Product Name</th>
-                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">User</th>
+                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Product Name (x Qty)</th>
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Created</th>
-                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Quantity</th>
-                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Total Price</th>
+                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Voucher Used</th>
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Product Type</th>
+                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Item Discounted</th>
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Point Earned</th>
-                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">ID Voucher Used</th>
+                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Total Price</th>
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Discount</th>
+                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Final</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {ownedTransaction?.map((data: ownedTransactionType) => (
                                     <tr>
-                                        <td className="p-2 text-left border-b border-solid">{data.id_cart}</td>
-                                        <td className="p-2 text-left border-b border-solid">{data.id_item}</td>
-                                        <td className="p-2 text-left border-b border-solid">{data.name_product}</td>
-                                        <td className="p-2 text-left border-b border-solid">{data.id_user}</td>
+                                        <td className="p-2 text-left border-b border-solid">{data.name_product} (x) {data.item_quantity}</td>
                                         <td className="p-2 text-left border-b border-solid">{data.item_created}</td>
-                                        <td className="p-2 text-left border-b border-solid">{data.item_quantity}</td>
-                                        <td className="p-2 text-left border-b border-solid">{data.total_price}</td>
-                                        <td className="p-2 text-left border-b border-solid">{data.type_product}</td>
+                                        <td className="p-2 text-left border-b border-solid">{data.title}</td>
+                                        <td className="p-2 text-left border-b border-solid">{data.type_product == 1 ? "Frame" : (data.type_product == 2 ? "Print" : (data.type_product == 3 ? "Studio" : "INVALID DATA"))}</td>
+                                        <td className="p-2 text-left border-b border-solid">{data.itemFree == -1 ? "All Item" : (data.itemFree == 0 ? "No Discount" : (data.itemFree == 1 ? "Frame" : (data.itemFree == 2 ? "Print" : (data.type_product == 3 ? "Studio" : "INVALID DATA"))))}</td>
                                         <td className="p-2 text-left border-b border-solid">{data.point_reward}</td>
-                                        <td className="p-2 text-left border-b border-solid">{data.voucher_used}</td>
-                                        <td className="p-2 text-left border-b border-solid">{data.discount_voucher}</td>
+                                        <td className="p-2 text-left border-b border-solid">{data.discount_voucher}%</td>
+                                        <td className="p-2 text-left border-b border-solid">{data.total_price}</td>
+                                        <td className="p-2 text-left border-b border-solid">{data.type_product == data.itemFree ? data.total_price - (data.discount_voucher / 100 * data.total_price) : data.total_price}</td>
                                     </tr>
                                 ))}
                             </tbody>
