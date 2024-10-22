@@ -6,6 +6,7 @@ import Cookies from 'js-cookie'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { format } from "date-fns";
+import ModalNotification from "@/components/molecules/modalNotification.molecule";
 
 
 const Transaction = () => {
@@ -71,8 +72,8 @@ const Transaction = () => {
     const querryTransactionByDate = 'showTransactionByDate/' + user?.id_user + '/' + year + '/' + month + '/' + day
     const dataOwnedTransactionByDate = async () => { GetData(querryTransactionByDate).then((resp => { setOwnedTransaction(resp.transaction); console.log(resp.transaction) })).catch(resp => console.log(resp)) }
     //
-    const [total, setTotal] = useState<number>()
-
+    const [total, setTotal] = useState<number | null>()
+    const [showModalNotif, setShowModalNotif] = useState(false);
 
 
 
@@ -85,6 +86,15 @@ const Transaction = () => {
 
         setTotal(total);
     }
+    // const GenerateTest = () => {
+    //     var i = 0
+    //     var tempTotal = 0 | null
+    //      tempTotal = total ? total : null
+
+    //     for (i = 0; i < tempTotal ? null; i++) {
+
+    //     }
+    // }
     //
 
     //
@@ -96,10 +106,9 @@ const Transaction = () => {
 
     return (
         <div className="border-2 border-solid border-jonasBorder rounded-[10px] w-full h-full" >
-
             <div className="mx-0 my-0">
                 <div className="w-[312px] flex-col flex gap-5 justify-start">
-                    <div className="border rounded-lg border-solid border-[#e5e7eb] w-screen mr-auto" >
+                    <div className="border rounded-lg border-solid border-[#e5e7eb] mr-auto inline-block overflow-scroll whitespace-nowrap w-[385%]">
                         <span className="ml-5"> Select Transaction Date : </span><DatePicker className="bg-green-200 border-gray-50 mt-5 ml-5 border rounded-lg text-center" selected={startDate} onChange={date => date && setStartDate(date)} /> <button onClick={() => { setStartDate(undefined); dataOwnedTransaction() }}> clear </button>
                         <table className="w-auto p-5 m-5 border-collapse">
                             <thead>
@@ -133,6 +142,7 @@ const Transaction = () => {
                         </table>
                     </div>
                     <span className=" mx-5 my-5 px-5 py-5 border rounded-lg text-center bg-gray-100 ">Grand Total : {total}</span>
+                    <ModalNotification show={showModalNotif} onClose={() => setShowModalNotif(false)} notificationType={2} message={""}></ModalNotification>
                 </div>
             </div>
         </div>
