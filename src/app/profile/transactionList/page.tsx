@@ -86,16 +86,6 @@ const Transaction = () => {
 
         setTotal(total);
     }
-    // const GenerateTest = () => {
-    //     var i = 0
-    //     var tempTotal = 0 | null
-    //      tempTotal = total ? total : null
-
-    //     for (i = 0; i < tempTotal ? null; i++) {
-
-    //     }
-    // }
-    //
 
     //
     useEffect(() => { userData() }, [])
@@ -113,7 +103,8 @@ const Transaction = () => {
                         <table className="w-auto p-5 m-5 border-collapse">
                             <thead>
                                 <tr>
-                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Product Name (x Qty)</th>
+                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Product Name</th>
+                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">(x Qty)</th>
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Created</th>
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Voucher Used</th>
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Product Type</th>
@@ -127,7 +118,8 @@ const Transaction = () => {
                             <tbody>
                                 {ownedTransaction?.map((data: ownedTransactionType) => (
                                     <tr>
-                                        <td className="p-2 text-left border-b border-solid">{data.name_product} (x) {data.item_quantity}</td>
+                                        <td className="p-2 text-left border-b border-solid">{data.name_product}</td>
+                                        <td className="p-2 text-left border-b border-solid">(x) {data.item_quantity}</td>
                                         <td className="p-2 text-left border-b border-solid">{data.item_created}</td>
                                         <td className="p-2 text-left border-b border-solid">{data.title}</td>
                                         <td className="p-2 text-left border-b border-solid">{data.type_product == 1 ? "Frame" : (data.type_product == 2 ? "Print" : (data.type_product == 3 ? "Studio" : "INVALID DATA"))}</td>
