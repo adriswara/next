@@ -19,6 +19,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
     // 
     type cartDataType = {
         id_cart: number,
+        id_item: number,
         id_user: number,
         item_quantity: number,
         total_price: number,
@@ -52,7 +53,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
     const usedVoucherinfo = Cookies.get("voucheruse")
     const querrySelectedVoucher = 'getOwnedVoucherById/' + usedVoucherinfo
     const [selectedVoucher, setSelectedVoucher] = useState<ownedVoucherType>()
-    var dataSelectedVoucher = async () => {}
+    var dataSelectedVoucher = async () => { }
     if (usedVoucherinfo == undefined) {
         console.log("Voucher Is empty, query wont load")
     }
@@ -102,14 +103,23 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
     };
     // 
     const [itemGrandTotal, setTotal] = useState<number>()
+    const [arrayId, setArrayId] = useState<number[]>([])
     const router = useRouter()
+
+    function getDistinctArray<T>(arr: T[]): T[] {
+        return Array.from(new Set(arr));
+    }
 
     const GenerateCartList = () => {
         let subTotal = 0;
         let total = 0;
         cart?.map((data: cartDataType) => {
             subTotal += data.price_product * data.item_quantity
+            arrayId?.push(data.id_item)
+            setArrayId(arrayId)
         })
+        //
+        setArrayId(getDistinctArray(arrayId));
         var tempDiscount = selectedVoucher?.discount ? selectedVoucher?.discount / 100 * subTotal : null
         console.log("isi subtotal : " + subTotal)
         console.log("isi discount : " + tempDiscount)
@@ -348,10 +358,10 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
                                                     {/* {selectedVoucher?.id_voucher_ownership != undefined ?   <button onClick={() => setShowModal(true)} className=" mb-6 inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 w-full" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:rf:" data-state="closed"> Select Voucher </button>  : selectedVoucher?.id_voucher_ownership == undefined ? <p>You have no voucher available</p> : <p>You have no voucher available</p>} */}
                                                     <button onClick={() => setShowModal(true)} className=" mb-6 inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 w-full" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:rf:" data-state="closed"> Select Voucher </button>
                                                     <div>
-                                                        {selectedVoucher && selectedVoucher.id_voucher_ownership !== "undefined" ? <VoucherOwned hideButton={1} idVoucher={selectedVoucher.id_voucher_ownership} voucherType={selectedVoucher.voucherType} is_usable={selectedVoucher.is_usable} discount={selectedVoucher.discount} buyReq={selectedVoucher.buyReq} itemFree={selectedVoucher.itemFree} title={selectedVoucher.title} dateStart={selectedVoucher.dateStart} dateEnd={selectedVoucher.dateEnd} productRange={selectedVoucher.productRange} code={selectedVoucher.code} point={selectedVoucher.point}></VoucherOwned> : <></>}
+                                                        {selectedVoucher && selectedVoucher.id_voucher_ownership !== "undefined" ? <VoucherOwned hideButton={1} idVoucher={selectedVoucher.id_voucher_ownership} voucherType={selectedVoucher.voucherType} is_usable={selectedVoucher.is_usable} discount={selectedVoucher.discount} buyReq={selectedVoucher.buyReq} itemFree={selectedVoucher.itemFree} title={selectedVoucher.title} dateStart={selectedVoucher.dateStart} dateEnd={selectedVoucher.dateEnd} productRange={selectedVoucher.productRange} code={selectedVoucher.code} point={selectedVoucher.point} arrayId={[]}></VoucherOwned> : <></>}
                                                         {selectedVoucher && selectedVoucher.id_voucher_ownership !== "undefined" ? <button onClick={() => removeVoucher()} type="button" className="border-2 border-solid border-jonasBorder rounded-[15px] bg-red-800 text-white text-sm w-40 h-8 ml-7">Remove Voucher</button> : <></>}
                                                     </div>
-                                                    <Modal show={showModal} onClose={() => setShowModal(false)} />
+                                                    <Modal arrayId={arrayId} show={showModal} onClose={() => setShowModal(false)} />
                                                 </div>
                                             </div>
                                         </div>

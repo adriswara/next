@@ -1,24 +1,46 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import VoucherDescDiscount from "../molecules/VoucherLeftDesc.molecule";
 import VoucherRightDescCodeStatus from "../molecules/VoucherRightDesc.molecule";
 
-interface VoucherOwnedProps { hideButton:number, idVoucher?:number, voucherType?: number, discount?: number, buyReq?:number, itemFree?:number, title?:string, dateStart?:string, dateEnd?:string, productRange?:string, is_usable?: number, code?:string, point:number }
+interface VoucherOwnedProps { arrayId: number[], hideButton: number, idVoucher?: number, voucherType?: number, discount?: number, buyReq?: number, itemFree?: number, title?: string, dateStart?: string, dateEnd?: string, productRange?: string, is_usable?: number, code?: string, point: number }
 const VoucherOwned: FC<VoucherOwnedProps> = (props) => {
     const {
         idVoucher = 0,
         voucherType = 0,
-        discount =0,
-        buyReq =0,
-        itemFree=0,
-        title="",
-        dateStart="",
-        dateEnd="",
-        productRange="",
+        discount = 0,
+        buyReq = 0,
+        itemFree = 0,
+        title = "",
+        dateStart = "",
+        dateEnd = "",
+        productRange = "",
         is_usable = 0,
         hideButton = 1,
         point = 0,
-        code = "CODE_123sksdiof"
+        code = "CODE_123sksdiof",
+        arrayId = []
     } = props
+
+    // var aksesVoucher = 0
+    // const init = async () => {
+    //     // console.log("ini isi buy req" + buyReq)
+    //     // console.log("ini isi array di voucher organism " + arrayId)
+
+    //     arrayId?.map((data: number) => (
+            
+    //         console.log("isi data di map "+ data),
+    //         aksesVoucher = data == 6 ? 1 : 0
+
+    //     ))
+
+    //     console.log(aksesVoucher)
+
+    // };
+
+    // // useEffect(() => { init() }, [])
+
+
+
     return (
         <div className="border-2 border-solid border-jonasBorder rounded-[5px] grid grid-cols-2 mb-5 pt-5 pb-5">
             {/* left voucher section*/}

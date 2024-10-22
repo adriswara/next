@@ -1,12 +1,12 @@
 'use client'
 import React from 'react';
-import VoucherFilterForm from "@/components/molecules/VoucherFilterForm.molecule";
 import VoucherOwned from "@/components/organisms/VoucherOwned.organisms";
 import GetData from "@/services/getData.service";
 import { useEffect, useState } from "react";
 import Cookies from 'js-cookie'
+import { stat } from 'fs/promises';
 
-const Modal = ({ show, onClose }) => {
+const Modal = ({ arrayId, show, onClose }) => {
   if (!show) return null;
 
   type ownedVoucherType = {
@@ -28,7 +28,7 @@ const Modal = ({ show, onClose }) => {
     productRace: string,
     code: string,
     productRange: string,
-    Point : number
+    Point: number
   }
   // get user id from cookie
   const userinfo = Cookies.get('username')
@@ -39,12 +39,28 @@ const Modal = ({ show, onClose }) => {
   const querryVoucher = 'ownedVoucher/' + user?.id_user
   const [ownedVoucher, setOwnedVoucher] = useState<ownedVoucherType[]>()
   const dataOwnedVouchers = async () => { GetData(querryVoucher).then((resp => { setOwnedVoucher(resp.voucher_ownership); console.log(resp.voucher_ownership) })).catch(resp => console.log(resp)) }
-  // 
+  //   
 
-  // 
+  var aksesVoucher = 0
+  const init = async () => {
+    // console.log("ini isi buy req" + buyReq)
+    // console.log("ini isi array di voucher organism " + arrayId)
 
+    // arrayId?.map((data: number) => (
+
+    // console.log("isi data di map "+ data),
+    // aksesVoucher = data == 6 ? 1 : 0
+
+    // ))
+
+    console.log(aksesVoucher)
+
+  };
+  var statusButton = 0
+  // 
   useEffect(() => { userData() }, [])
   useEffect(() => { dataOwnedVouchers() }, [user])
+  useEffect(() => { init() }, [])
   return (
     <div className="modal-backdrop">
       <div className="modal-content h-screen">
@@ -52,7 +68,11 @@ const Modal = ({ show, onClose }) => {
         <div className='overflow-scroll max-h-[calc(100vh-110px)]'>
           {ownedVoucher?.map((data: ownedVoucherType) => (
             <div>
-              <VoucherOwned hideButton={0} idVoucher={data.id_voucher_ownership} voucherType={data.voucherType} is_usable={data.is_usable} discount={data.discount} buyReq={data.buyReq} itemFree={data.itemFree} title={data.title} dateStart={data.dateStart} dateEnd={data.dateEnd} productRange={data.productRange} code={data.code} point={data.Point}></VoucherOwned>
+              {arrayId?.map((dataBarang: number) => (
+                console.log("dataBarang"+ dataBarang + "data voucher"+ data.buyReq),
+                console.log(dataBarang==data.buyReq),
+                dataBarang == data.buyReq || data.buyReq == -1 ? <VoucherOwned arrayId={arrayId} hideButton={0} idVoucher={data.id_voucher_ownership} voucherType={data.voucherType} is_usable={data.is_usable} discount={data.discount} buyReq={data.buyReq} itemFree={data.itemFree} title={data.title} dateStart={data.dateStart} dateEnd={data.dateEnd} productRange={data.productRange} code={data.code} point={data.Point}></VoucherOwned>:<VoucherOwned arrayId={arrayId} hideButton={1} idVoucher={data.id_voucher_ownership} voucherType={data.voucherType} is_usable={data.is_usable} discount={data.discount} buyReq={data.buyReq} itemFree={data.itemFree} title={data.title} dateStart={data.dateStart} dateEnd={data.dateEnd} productRange={data.productRange} code={data.code} point={data.Point}></VoucherOwned>
+              ))}
             </div>
           ))}
         </div>

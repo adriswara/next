@@ -40,7 +40,6 @@ const Cart = () => {
     return (
         <main className="flex-1 flex mt-16">
             {cart ? <ItemCartAvailable></ItemCartAvailable> : <CartEmpty></CartEmpty>}
-
         </main>
     );
 };
