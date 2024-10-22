@@ -12,7 +12,7 @@ const ItemProduct: FC<ItemProductProps> = (props) => {
         itemPrice = 0,
         itemImage = "/product-default.png",
     } = props
-    const link = "photoframe/detail/" + itemName
+    const link = "product/detail/" + itemName
     return (
         <div className="">
             <div className="border-2 border-solid border-jonasBorder rounded-[5px] grid grid-cols-1 -mt-px  pb-5 ml-5 mr-5 ">
