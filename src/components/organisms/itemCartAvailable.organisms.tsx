@@ -116,7 +116,8 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
         let total = 0;
         cart?.map((data: cartDataType) => {
             subTotal += data.price_product * data.item_quantity
-            arrayId?.push(data.id_item)
+            // arrayId?.push(data.id_item)
+            arrayId?.push(data.item_type)
             setArrayId(arrayId)
         })
         //
