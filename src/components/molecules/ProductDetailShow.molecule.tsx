@@ -3,14 +3,14 @@ import Image from "next/image";
 import ProductDetailImage from "../atoms/ProductDetailImage.atom";
 import ProductDetailMain from "../atoms/ProductDetailMain.atom";
 
-interface ProductDetailShowProps {point_raw:number, itemId:number, picname:string, productName:string, productPrice: number, productItemInclude:string, productItemClassification:string }
+interface ProductDetailShowProps {point_raw:number, itemId:number, picname:string, productName:string, productPrice: number, productItemInclude:string, productItemClassification:number }
 const ProductDetailShow: FC<ProductDetailShowProps> = (props) => {
     const {
         picname = "",
         productName = "",
         productPrice = 0,
         productItemInclude = "",
-        productItemClassification = "",
+        productItemClassification = 0,
         itemId = 0,
         point_raw = 0
     } = props

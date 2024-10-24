@@ -6,10 +6,10 @@ import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal, AwaitedRea
 
 
 
-interface ProductDetailsProps { point_raw: number | undefined; itemId: number | undefined, itemType: string | undefined, itemName: string | undefined, itemPrice: number | undefined, itemImage: string | undefined, descriptionText: string | undefined, itemInclude: string | undefined }
+interface ProductDetailsProps { point_raw: number | undefined; itemId: number | undefined, itemType: number | undefined, itemName: string | undefined, itemPrice: number | undefined, itemImage: string | undefined, descriptionText: string | undefined, itemInclude: string | undefined }
 const ProductDetails: FC<ProductDetailsProps> = (props) => {
     const {
-        itemType = "",
+        itemType = 0,
         itemName = "",
         itemPrice = 0,
         itemImage = "/product-default.png",

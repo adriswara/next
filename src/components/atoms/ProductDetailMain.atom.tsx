@@ -6,13 +6,13 @@ import ModalNotification from "../molecules/modalNotification.molecule";
 
 
 
-interface ProductDetailMainProps { point_raw: number, itemId: number, productName: string, productPrice: number, productItemInclude: string, productItemClassification: string }
+interface ProductDetailMainProps { point_raw: number, itemId: number, productName: string, productPrice: number, productItemInclude: string, productItemClassification: number }
 const ProductDetailMain: FC<ProductDetailMainProps> = (props) => {
     const {
         productName = "",
         productPrice = 0,
         productItemInclude = "What's included",
-        productItemClassification = "What's this",
+        productItemClassification = 0,
         itemId = 0,
         point_raw = 0
     } = props
@@ -51,6 +51,7 @@ const ProductDetailMain: FC<ProductDetailMainProps> = (props) => {
         const data = {
             id_item: formData.get('id_item'),
             id_user: formData.get('id_user'),
+            item_type: Number(formData.get('item_type')),
             item_quantity: formData.get('item_quantity'),
             total_price: formData.get('total_price'),
             point_reward: rawPoint
@@ -95,16 +96,17 @@ const ProductDetailMain: FC<ProductDetailMainProps> = (props) => {
                 <div className="px-4 sm:p-0 flex flex-col justify-between">
                     <div className="my-2 flex flex-col gap-1">
                         <h6 className="font-normal md:font-semibold">{productItemInclude}</h6>
-                        <div>{productItemClassification}</div>
+                        <div>INI TIPE{productItemClassification}</div>
                     </div>
                 </div>
                 <div>
                 </div>
             </div>
-
+            {/* this */}
             <form method="POST" onSubmit={handleSubmit}>
                 <input type="number" value={itemId} className="id_item hidden" id="id_item" name="id_item" placeholder="id_item" required />
                 <input type="number" value={user?.id_user} className="id_user hidden" id="id_user" name="id_user" placeholder="id_user" required />
+                <input type="number" value={Number(productItemClassification)} className="item_type hidden" id="item_type" name="item_type" placeholder="usable" required />
                 <input type="number" value={quantity} className="item_quantity hidden" id="item_quantity" name="item_quantity" placeholder="usable" required />
                 <input type="number" value={totalPrice} className="total_price hidden" id="total_price" name="total_price" placeholder="usable" required />
                 <button type="submit" onClick={() => setShowModal(true)} className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input text-white bg-black hover:bg-black/90 hover:text-white h-10 px-4 py-2 w-full mx-auto md:mx-0 mt-3">Add to Cart</button>

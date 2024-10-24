@@ -5,14 +5,7 @@ import GetData from "@/services/getData.service";
 import ProductDetails from "@/components/organisms/ProductDetails.organisms";
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import path from "path";
 
-
-
-const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800"]
-})
 
 export default function Home() {
   // get product name from link
@@ -21,7 +14,7 @@ export default function Home() {
   console.log("link ini" + selectedProduct)
   // 
   const query = selectedProduct
-  const [product, setProduct] = useState<{ id_product: number|undefined, type_product: string | undefined, name_product: string | undefined, price_product: number | undefined, description_product: string | undefined, include_product: string | undefined, display_product: string | undefined, point_raw: number | undefined }>()
+  const [product, setProduct] = useState<{ id_product: number|undefined, type_product: number | undefined, name_product: string | undefined, price_product: number | undefined, description_product: string | undefined, include_product: string | undefined, display_product: string | undefined, point_raw: number | undefined }>()
   const datas = async () => { GetData(query).then((resp => { setProduct(resp.Product[0]) })).catch(resp => console.log(resp)) }
   useEffect(() => { datas(),console.log("ini point raw "+product?.point_raw) }, [])
 

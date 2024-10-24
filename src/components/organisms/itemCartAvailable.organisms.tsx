@@ -26,7 +26,8 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
         name_product: string,
         description_product: string,
         price_product: number,
-        point_reward: number
+        point_reward: number,
+        item_type: number
     }
     type ownedVoucherType = {
         id_voucher_ownership: number | "undefined",
@@ -170,7 +171,6 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
             id_user: Number(user?.id_user),
             item_created: format(jakartaTime, "yyyy-MM-dd hh:mm:ss"),
             voucher_used: Number(selectedVoucher?.fK_voucher)
-
         };
         try {
             const response = await fetch('http://localhost:8081/insertTransaction', {
@@ -355,10 +355,9 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
                                         <div className="pt-0 mt-4">
                                             <div className="flex flex-col text-sm">
                                                 <div className="text-justify mt-2">
-                                                    {/* {selectedVoucher?.id_voucher_ownership != undefined ?   <button onClick={() => setShowModal(true)} className=" mb-6 inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 w-full" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:rf:" data-state="closed"> Select Voucher </button>  : selectedVoucher?.id_voucher_ownership == undefined ? <p>You have no voucher available</p> : <p>You have no voucher available</p>} */}
                                                     <button onClick={() => setShowModal(true)} className=" mb-6 inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 w-full" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:rf:" data-state="closed"> Select Voucher </button>
                                                     <div>
-                                                        {selectedVoucher && selectedVoucher.id_voucher_ownership !== "undefined" ? <VoucherOwned hideButton={1} idVoucher={selectedVoucher.id_voucher_ownership} voucherType={selectedVoucher.voucherType} is_usable={selectedVoucher.is_usable} discount={selectedVoucher.discount} buyReq={selectedVoucher.buyReq} itemFree={selectedVoucher.itemFree} title={selectedVoucher.title} dateStart={selectedVoucher.dateStart} dateEnd={selectedVoucher.dateEnd} productRange={selectedVoucher.productRange} code={selectedVoucher.code} point={selectedVoucher.point} arrayId={[]}></VoucherOwned> : <></>}
+                                                        {selectedVoucher && selectedVoucher.id_voucher_ownership !== "undefined" ? <VoucherOwned hideButton={1} idVoucher={selectedVoucher.id_voucher_ownership} voucherType={selectedVoucher.voucherType} is_usable={selectedVoucher.is_usable} discount={selectedVoucher.discount} buyReq={selectedVoucher.buyReq} itemFree={selectedVoucher.itemFree} title={selectedVoucher.title} dateStart={selectedVoucher.dateStart} dateEnd={selectedVoucher.dateEnd} productRange={selectedVoucher.productRange} code={selectedVoucher.code} point={selectedVoucher.point}></VoucherOwned> : <></>}
                                                         {selectedVoucher && selectedVoucher.id_voucher_ownership !== "undefined" ? <button onClick={() => removeVoucher()} type="button" className="border-2 border-solid border-jonasBorder rounded-[15px] bg-red-800 text-white text-sm w-40 h-8 ml-7">Remove Voucher</button> : <></>}
                                                     </div>
                                                     <Modal arrayId={arrayId} show={showModal} onClose={() => setShowModal(false)} />

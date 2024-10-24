@@ -41,26 +41,10 @@ const Modal = ({ arrayId, show, onClose }) => {
   const dataOwnedVouchers = async () => { GetData(querryVoucher).then((resp => { setOwnedVoucher(resp.voucher_ownership); console.log(resp.voucher_ownership) })).catch(resp => console.log(resp)) }
   //   
 
-  var aksesVoucher = 0
-  const init = async () => {
-    // console.log("ini isi buy req" + buyReq)
-    // console.log("ini isi array di voucher organism " + arrayId)
 
-    // arrayId?.map((data: number) => (
-
-    // console.log("isi data di map "+ data),
-    // aksesVoucher = data == 6 ? 1 : 0
-
-    // ))
-
-    console.log(aksesVoucher)
-
-  };
-  var statusButton = 0
   // 
   useEffect(() => { userData() }, [])
   useEffect(() => { dataOwnedVouchers() }, [user])
-  useEffect(() => { init() }, [])
   return (
     <div className="modal-backdrop">
       <div className="modal-content h-screen">
@@ -69,9 +53,9 @@ const Modal = ({ arrayId, show, onClose }) => {
           {ownedVoucher?.map((data: ownedVoucherType) => (
             <div>
               {arrayId?.map((dataBarang: number) => (
-                console.log("dataBarang"+ dataBarang + "data voucher"+ data.buyReq),
-                console.log(dataBarang==data.buyReq),
-                dataBarang == data.buyReq || data.buyReq == -1 ? <VoucherOwned arrayId={arrayId} hideButton={0} idVoucher={data.id_voucher_ownership} voucherType={data.voucherType} is_usable={data.is_usable} discount={data.discount} buyReq={data.buyReq} itemFree={data.itemFree} title={data.title} dateStart={data.dateStart} dateEnd={data.dateEnd} productRange={data.productRange} code={data.code} point={data.Point}></VoucherOwned>:<VoucherOwned arrayId={arrayId} hideButton={1} idVoucher={data.id_voucher_ownership} voucherType={data.voucherType} is_usable={data.is_usable} discount={data.discount} buyReq={data.buyReq} itemFree={data.itemFree} title={data.title} dateStart={data.dateStart} dateEnd={data.dateEnd} productRange={data.productRange} code={data.code} point={data.Point}></VoucherOwned>
+                console.log("dataBarang" + dataBarang + "data voucher" + data.buyReq),
+                console.log(dataBarang == data.buyReq),
+                dataBarang == data.buyReq || data.buyReq == -1 ? <VoucherOwned hideButton={0} idVoucher={data.id_voucher_ownership} voucherType={data.voucherType} is_usable={data.is_usable} discount={data.discount} buyReq={data.buyReq} itemFree={data.itemFree} title={data.title} dateStart={data.dateStart} dateEnd={data.dateEnd} productRange={data.productRange} code={data.code} point={data.Point}></VoucherOwned> : <VoucherOwned hideButton={1} idVoucher={data.id_voucher_ownership} voucherType={data.voucherType} is_usable={data.is_usable} discount={data.discount} buyReq={data.buyReq} itemFree={data.itemFree} title={data.title} dateStart={data.dateStart} dateEnd={data.dateEnd} productRange={data.productRange} code={data.code} point={data.Point}></VoucherOwned>
               ))}
             </div>
           ))}

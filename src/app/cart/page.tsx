@@ -16,7 +16,8 @@ const Cart = () => {
         total_price: number,
         name_product: string,
         description_product: string,
-        price_product: number
+        price_product: number,
+        item_type: number
     }
     // get user id from cookie
     const userinfo = Cookies.get('username')
