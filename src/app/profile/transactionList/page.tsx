@@ -24,7 +24,8 @@ const Transaction = () => {
         voucher_used: string,
         discount_voucher: number,
         title: string,
-        itemFree: number
+        itemFree: number,
+        code: string
     }
 
     type ownedVoucherType = {
@@ -46,7 +47,7 @@ const Transaction = () => {
         productRace: string,
         code: string,
         productRange: string,
-        Point: number
+        Point: number,
     }
 
 
@@ -107,10 +108,11 @@ const Transaction = () => {
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">(x Qty)</th>
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Created</th>
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Voucher Used</th>
+                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Voucher Code</th>
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Product Type</th>
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Item Discounted</th>
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Point Earned</th>
-                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Total Price</th>
+                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Total Discount</th>
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Discount</th>
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Final</th>
                                 </tr>
@@ -121,9 +123,10 @@ const Transaction = () => {
                                         <td className="p-2 text-left border-b border-solid">{data.name_product}</td>
                                         <td className="p-2 text-left border-b border-solid">(x) {data.item_quantity}</td>
                                         <td className="p-2 text-left border-b border-solid">{data.item_created}</td>
-                                        <td className="p-2 text-left border-b border-solid">{data.title}</td>
+                                        <td className="p-2 text-left border-b border-solid">{data.title == "No voucher" ? <p className="text-gray-500">{data.title}</p> : data.title}</td>
+                                        <td className="p-2 text-left border-b border-solid">{data.code == "missing"? "-" : <a href="">{data.code}</a>}</td>
                                         <td className="p-2 text-left border-b border-solid">{data.type_product == 1 ? "Frame" : (data.type_product == 2 ? "Print" : (data.type_product == 3 ? "Studio" : "INVALID DATA"))}</td>
-                                        <td className="p-2 text-left border-b border-solid">{data.itemFree == -1 ? "All Item" : (data.itemFree == 0 ? "No Discount" : (data.itemFree == 1 ? "Frame" : (data.itemFree == 2 ? "Print" : (data.type_product == 3 ? "Studio" : "INVALID DATA"))))}</td>
+                                        <td className="p-2 text-left border-b border-solid">{data.itemFree == -1 ? "All Item" : (data.itemFree == 0 ? "No Discount" : (data.itemFree == 1 ? "Frame" : (data.itemFree == 2 ? "Print" : (data.itemFree == 3 ? "Studio" : "INVAKUD DATA"))))}</td>
                                         <td className="p-2 text-left border-b border-solid">{data.point_reward}</td>
                                         <td className="p-2 text-left border-b border-solid">{data.discount_voucher}%</td>
                                         <td className="p-2 text-left border-b border-solid">{data.total_price}</td>

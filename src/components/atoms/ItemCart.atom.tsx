@@ -1,6 +1,7 @@
 import GetData from "@/services/getData.service";
 import { FC, useEffect, useState } from "react"
 import { FormEvent } from "react"
+import { useRouter } from 'next/navigation';
 
 interface ItemCartProps { pointReward: number, productId: number, productName: string, productDescription: string, productQuantity: number, totalPrice: number, onChange?: (total: number) => void }
 const ItemCart: FC<ItemCartProps> = (props) => {
@@ -12,6 +13,8 @@ const ItemCart: FC<ItemCartProps> = (props) => {
         pointReward = 0,
         onChange
     } = props
+    //
+    const router = useRouter()
     //
     var [quantity, setQuantity] = useState<number>(productQuantity);
     const operand: number = 1;
@@ -26,7 +29,8 @@ const ItemCart: FC<ItemCartProps> = (props) => {
     const handleSubmit = async () => {
 
         quantity <= 0 ? tempQuantity = 1 : tempQuantity = quantity
-        var newPoint = pointSetting?.transaction ? totalPricePerItem / 100 / 100 * pointSetting?.transaction : 0
+        // var newPoint = pointSetting?.transaction ? totalPricePerItem / 100 / 100 * pointSetting?.transaction : 0
+        var newPoint = pointSetting?.transaction ? pointReward / 100 / 100 * pointSetting?.transaction : 0
         const data = {
             id_cart: Number(productId),
             item_quantity: Number(tempQuantity),
@@ -53,7 +57,8 @@ const ItemCart: FC<ItemCartProps> = (props) => {
         }
     };
     const cancelItem = async () => {
-
+        router.refresh()
+        router.push('/cart')
         const data = {
             id_cart: Number(productId),
         };
@@ -76,9 +81,10 @@ const ItemCart: FC<ItemCartProps> = (props) => {
             console.log("epi error")
         }
     };
-    // 
-    useEffect(() => { handleSubmit().then(resp => onChange ? onChange(totalPricePerItem) : {}) }, [quantity,pointSetting?.transaction])
+    //
+    useEffect(() => { handleSubmit().then(resp => onChange ? onChange(totalPricePerItem) : {}) }, [quantity, pointSetting?.transaction])
     useEffect(() => { dataPointSetting() }, [])
+    useEffect(() => { router.push("/cart") }, [productId])
     // 
     return (
 

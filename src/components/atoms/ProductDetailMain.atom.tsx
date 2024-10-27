@@ -34,7 +34,7 @@ const ProductDetailMain: FC<ProductDetailMainProps> = (props) => {
     const dataPointSetting = async () => { GetData(querryPoinSetting).then((resp => { setPointSetting(resp.pointsettings[0]); console.log("point setting:", resp.pointsettings) })).catch(resp => console.log(resp)) }
     //
 
-    useEffect(() => { datas() }, [])
+    useEffect(() => { datas(),    console.log("point raw  "+point_raw)    }, [])
     useEffect(() => { dataPointSetting() }, [])
     useEffect(() => { console.log(point_raw) }, [quantity])
 
