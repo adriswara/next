@@ -105,6 +105,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
     };
     // 
     const [itemGrandTotal, setTotal] = useState<number>()
+    const [pointGrandTotal, setPoint] = useState<number>()
     const [arrayId, setArrayId] = useState<number[]>([])
     const router = useRouter()
 
@@ -115,8 +116,10 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
     const GenerateCartList = () => {
         let subTotal = 0;
         let total = 0;
+        let totalPoint = 0;
         cart?.map((data: cartDataType) => {
             subTotal += data.price_product * data.item_quantity
+            totalPoint += data.point_reward
             // arrayId?.push(data.id_item)
             arrayId?.push(data.item_type)
             setArrayId(arrayId)
@@ -129,6 +132,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
 
         total = tempDiscount ? subTotal - tempDiscount : subTotal;
         console.log("isi total : " + total)
+        setPoint(totalPoint)
         setTotal(total);
     }
 
@@ -200,7 +204,8 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
     //
     const handlePoint = async () => {
         var redeemPoint = selectedVoucher?.point ? selectedVoucher.point : 0
-        var rawPoint = itemGrandTotal && pointSetting?.transaction ? (itemGrandTotal / 100) / 100 * pointSetting?.transaction : null
+        // var rawPoint = itemGrandTotal && pointSetting?.transaction ? (itemGrandTotal / 100) / 100 * pointSetting?.transaction : null
+        var rawPoint = pointGrandTotal
         var newPoint = rawPoint && user?.point_user ? Number(rawPoint) + Number(user?.point_user) + redeemPoint : null
 
         const data = {
@@ -386,10 +391,16 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
                                         <div className="pt-0 mt-4">
                                             <div className="flex flex-col text-xl">
                                                 <div className="text-right font-semibold">
-                                                    Total
+                                                    Total Price
                                                 </div>
                                                 <div className="text-right font-semibold">
                                                     Rp{itemGrandTotal}
+                                                </div>
+                                                <div className="text-right font-semibold">
+                                                    Total Point Reward
+                                                </div>
+                                                <div className="text-right font-semibold">
+                                                    {pointGrandTotal ? pointGrandTotal * 1 : 0}
                                                 </div>
                                             </div>
                                             <div className="flex flex-col gap-1 mt-5">
