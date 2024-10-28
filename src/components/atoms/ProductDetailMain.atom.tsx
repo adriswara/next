@@ -34,7 +34,7 @@ const ProductDetailMain: FC<ProductDetailMainProps> = (props) => {
     const dataPointSetting = async () => { GetData(querryPoinSetting).then((resp => { setPointSetting(resp.pointsettings[0]); console.log("point setting:", resp.pointsettings) })).catch(resp => console.log(resp)) }
     //
 
-    useEffect(() => { datas(),    console.log("point raw  "+point_raw)    }, [])
+    useEffect(() => { datas(), console.log("point raw  " + point_raw) }, [])
     useEffect(() => { dataPointSetting() }, [])
     useEffect(() => { console.log(point_raw) }, [quantity])
 
@@ -46,7 +46,7 @@ const ProductDetailMain: FC<ProductDetailMainProps> = (props) => {
 
         var itemSubTotal = Number(formData.get('total_price'))
         // var rawPoint = itemSubTotal && pointSetting?.transaction ? (itemSubTotal / 100) / 100 * pointSetting?.transaction : null
-        var rawPoint = point_raw && pointSetting?.transaction ? point_raw / 100 * pointSetting?.transaction : null
+        var rawPoint = point_raw && pointSetting?.transaction ? (point_raw / 100) / 10 * pointSetting?.transaction : null
 
         const data = {
             id_item: formData.get('id_item'),

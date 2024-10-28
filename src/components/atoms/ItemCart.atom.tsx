@@ -3,7 +3,7 @@ import { FC, useEffect, useState } from "react"
 import { FormEvent } from "react"
 import { useRouter } from 'next/navigation';
 
-interface ItemCartProps { pointReward: number, productId: number, productName: string, productDescription: string, productQuantity: number, totalPrice: number, onChange?: (total: number) => void }
+interface ItemCartProps { pointReward: number, productId: number, productPoint: number,productName: string, productDescription: string, productQuantity: number, totalPrice: number, onChange?: (total: number) => void }
 const ItemCart: FC<ItemCartProps> = (props) => {
     const { productName = "Product 1",
         productDescription = "This product is colored and second variant",
@@ -11,6 +11,7 @@ const ItemCart: FC<ItemCartProps> = (props) => {
         totalPrice = 0,
         productId = 0,
         pointReward = 0,
+        productPoint = 0,
         onChange
     } = props
     //
@@ -30,7 +31,9 @@ const ItemCart: FC<ItemCartProps> = (props) => {
 
         quantity <= 0 ? tempQuantity = 1 : tempQuantity = quantity
         // var newPoint = pointSetting?.transaction ? totalPricePerItem / 100 / 100 * pointSetting?.transaction : 0
-        var newPoint = pointSetting?.transaction ? pointReward / 100 / 100 * pointSetting?.transaction : 0
+        console.log("raw point + "+productPoint)
+        var newPoint = pointSetting?.transaction ? (productPoint * quantity / 100) / 10 * pointSetting?.transaction : 0
+        console.log("new point + "+newPoint)
         const data = {
             id_cart: Number(productId),
             item_quantity: Number(tempQuantity),

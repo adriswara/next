@@ -27,7 +27,8 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
         description_product: string,
         price_product: number,
         point_reward: number,
-        item_type: number
+        item_type: number,
+        productPoint: number
     }
     type ownedVoucherType = {
         id_voucher_ownership: number | "undefined",
@@ -296,7 +297,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
                                                     </thead>
                                                     <tbody className="[&amp;_tr:last-child]:border-0">
                                                         {cart?.map((data: cartDataType) => (
-                                                            <ItemCart onChange={(value) => { dataCarts() }} pointReward={data.point_reward} productId={data.id_cart} productName={String(data.name_product)} productDescription={"desc" + data.description_product} productQuantity={Number(data.item_quantity)} totalPrice={data.price_product}></ItemCart>
+                                                            <ItemCart onChange={(value) => { dataCarts() }} pointReward={data.point_reward} productId={data.id_cart} productPoint={data.productPoint} productName={String(data.name_product)} productDescription={"desc" + data.description_product} productQuantity={Number(data.item_quantity)} totalPrice={data.price_product}></ItemCart>
                                                         ))}
                                                     </tbody>
                                                 </table>
