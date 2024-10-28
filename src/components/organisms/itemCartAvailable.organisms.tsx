@@ -169,14 +169,20 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
         const jakartaTime = now.toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
 
         console.log("id jenis voucher : " + selectedVoucher?.fK_voucher)
+        let varVoucherId = -1
+        if (selectedVoucher?.fK_voucher == 0 || selectedVoucher?.fK_voucher == undefined) {
+            varVoucherId = -1
+        }
+        else {
+            selectedVoucher?.fK_voucher ? varVoucherId = selectedVoucher.fK_voucher : -1
+        }
 
-
-
+   
 
         const data = {
             id_user: Number(user?.id_user),
             item_created: format(jakartaTime, "yyyy-MM-dd hh:mm:ss"),
-            voucher_used: Number(selectedVoucher?.fK_voucher)
+            voucher_used: varVoucherId
         };
         try {
             const response = await fetch('http://localhost:8081/insertTransaction', {
