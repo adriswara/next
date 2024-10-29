@@ -6,7 +6,7 @@ import ProfileStatCardSidang from "@/components/organisms/ProfileStatCardSidang.
 
 
 // get data
-function GetCard(mode: string) {
+function GetCard(mode: number) {
     const userinfo = Cookies.get('username')
     const query = 'userGet/' + userinfo
     const [user, setUser] = useState<{ id_user: number; name_user: string; password_user: number, email_user: number; phone_user: number; adress_user: string; point_user: number; level_user: number; showcase_user: number; display_user: string; isDelete_user: number }>()
@@ -29,7 +29,7 @@ function GetCard(mode: string) {
     return (
         <div>
             {/* <ProfileStatCardJonas name={String(user?.name_user)} level={Number(user?.level_user)} percentage={50} xpLeft={0} nextLevel={Number(user?.level_user)+1} point={Number(user?.point_user)} showcase={Number(user?.showcase_user)}></ProfileStatCardJonas> */}
-            {mode == "sidang" ? <ProfileStatCardSidang name={String(user?.name_user)} level={Number(user?.level_user)} percentage={50} xpLeft={0} nextLevel={Number(user?.level_user) + 1} point={Number(user?.point_user)} showcase={Number(user?.showcase_user)}></ProfileStatCardSidang> : <ProfileStatCardJonas name={String(user?.name_user)} voucher={Number(totalVoucher?.count_voucher)} point={Number(user?.point_user)} transaksi={Number(totalTransaksi?.Count_transaksi)}></ProfileStatCardJonas>}
+            {mode == 1 ? <ProfileStatCardSidang name={String(user?.name_user)} level={Number(user?.level_user)} percentage={50} xpLeft={0} nextLevel={Number(user?.level_user) + 1} point={Number(user?.point_user)} showcase={Number(user?.showcase_user)}></ProfileStatCardSidang> : <ProfileStatCardJonas name={String(user?.name_user)} voucher={Number(totalVoucher?.count_voucher)} point={Number(user?.point_user)} transaksi={Number(totalTransaksi?.Count_transaksi)}></ProfileStatCardJonas>}
         </div>
     )
 

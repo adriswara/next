@@ -8,6 +8,7 @@ import GetCard from "@/services/getProfileCard.service";
 import ModalLoading from "@/components/molecules/modalLoading.molecule";
 import { useEffect, useState } from "react";
 import { count } from "console";
+import GetData from "@/services/getData.service";
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -24,6 +25,29 @@ export default function profile({
   const [showModal, setShowModal] = useState(false);
   // onClick={() => }
 
+  const queryMode = 'modeGet'
+  const [mode, setMode] = useState<number>()
+  const GetMode = async () => { GetData(queryMode).then((resp => { setMode(resp.presentMode) })).catch(resp => console.log(resp)) }
+  //
+  const [varMode, setVarMode] = useState<string>("")
+
+  const GenerateVarMode = async () => {
+    console.log("mode dalam if = " + mode)
+    if (mode == 0) {
+      console.log("masuk if")
+      setVarMode("jonas")
+    }
+    else if (mode == 1) {
+      console.log("masuk else if")
+
+      setVarMode("sidang")
+    }
+    else {
+      console.log("masuk if")
+      setVarMode("sidang")
+    }
+  }
+
   const GenerateCartList = () => {
     setTimeout(() => {
       setShowModal(true);
@@ -31,6 +55,12 @@ export default function profile({
     setShowModal(false);
   }
   useEffect(() => { GenerateCartList() }, [pathname])
+  useEffect(() => { GetMode() }, [])
+  useEffect(() => { GenerateVarMode() }, [])
+
+  console.log("isi data mode " + mode)
+  console.log(mode == 0)
+  console.log("isi var mode " + varMode)
 
   return (
     <div className={`${poppins.className} flex pt-5 pb-36 container mx-auto items-start gap-5 `}>
@@ -48,8 +78,7 @@ export default function profile({
           <ModalLoading show={undefined} onClose={undefined}></ModalLoading>
         </div>
         {/*  */}
-        {/* {GetCard("sidang")} */}
-        {GetCard("jonas")}
+        {mode != undefined ? GetCard(mode) : GetCard(0)}
         {/*  */}
       </div>
       {children}
