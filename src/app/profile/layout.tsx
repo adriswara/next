@@ -9,6 +9,7 @@ import ModalLoading from "@/components/molecules/modalLoading.molecule";
 import { useEffect, useState } from "react";
 import { count } from "console";
 import GetData from "@/services/getData.service";
+import ProfileNavLink from "@/components/atoms/profileNavLink.atom";
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -67,15 +68,15 @@ export default function profile({
       <div className="w-[312px] flex-col flex gap-5 justify-start">
         <div className="border rounded-lg border-solid border-[#e5e7eb] h-auto" >
           <ul>
-            <li className={`link ${pathname === '/profile' ? 'bg-[#e5e7eb]  border-[#e5e7eb] pl-0 pr-0 py-2 px-4 font-semibold' : ' border-[#e5e7eb] pl-0 pr-0 py-2 px-4'}`}><Link href="/profile" className="text-sm pt[8px] pb[5px] pl-[10px] pr-[1rem]">Profile</Link></li>
-            <li className={`link ${pathname === '/profile/changePassword' ? 'bg-[#e5e7eb] border-t-2 border-[#e5e7eb] pl-0 pr-0 py-2 px-4 font-semibold' : 'border-t-2 border-[#e5e7eb] pl-0 pr-0 py-2 px-4'}`}><Link href="/profile/changePassword" className="text-sm pt[8px] pb[5px] pl-[10px] pr-[1rem]">Change Password</Link></li>
-            <li className={`link ${pathname === '/profile/transactionList' ? 'bg-[#e5e7eb] border-t-2 border-[#e5e7eb] pl-0 pr-0 py-2 px-4 font-semibold' : 'border-t-2 border-[#e5e7eb] pl-0 pr-0 py-2 px-4'}`}><Link href="/profile/transactionList" className="text-sm pt[8px] pb[5px] pl-[10px] pr-[1rem]">Transaction</Link></li>
-            <li className={`link ${pathname === '/profile/voucherList' ? 'bg-[#e5e7eb] border-t-2 border-[#e5e7eb] pl-0 pr-0 py-2 px-4 font-semibold' : 'border-t-2 border-[#e5e7eb] pl-0 pr-0 py-2 px-4'}`}><Link href="/profile/voucherList" className="text-sm pt[8px] pb[5px] pl-[10px] pr-[1rem]">Voucher List</Link></li>
-            <li className={`link ${pathname === '/profile/voucherRedeem' ? 'bg-[#e5e7eb] border-t-2 border-[#e5e7eb] pl-0 pr-0 py-2 px-4 font-semibold' : 'border-t-2 border-[#e5e7eb] pl-0 pr-0 py-2 px-4'}`}><Link href="/profile/voucherRedeem" className="text-sm pt[8px] pb[5px] pl-[10px] pr-[1rem]">Voucher Redeem</Link></li>
-            {mode == 1 ? <li className={`link ${pathname === '/profile/leaderboard' ? 'bg-[#e5e7eb] border-t-2 border-[#e5e7eb] pl-0 pr-0 py-2 px-4 font-semibold' : 'border-t-2 border-[#e5e7eb] pl-0 pr-0 py-2 px-4'}`}><Link href="/profile/leaderboard" className="text-sm pt[8px] pb[5px] pl-[10px] pr-[1rem]">Leaderboard</Link></li> : <></>}
-            {mode == 1 ? <li className={`link ${pathname === '/profile/performanceGraph' ? 'bg-[#e5e7eb] border-t-2 border-[#e5e7eb] pl-0 pr-0 py-2 px-4 font-semibold' : 'border-t-2 border-[#e5e7eb] pl-0 pr-0 py-2 px-4'}`}><Link href="/profile/performanceGraph" className="text-sm pt[8px] pb[5px] pl-[10px] pr-[1rem]">Performance Graph</Link></li> : <></>}
-            <li className={`link ${pathname === '/profile/showcase' ? 'bg-[#e5e7eb] border-t-2 border-[#e5e7eb] pl-0 pr-0 py-2 px-4 font-semibold' : 'border-t-2 border-[#e5e7eb] pl-0 pr-0 py-2 px-4'}`}><Link href="/profile/showcase" className="text-sm pt[8px] pb[5px] pl-[10px] pr-[1rem]">Instagram Showcase</Link></li>
-            <li className={`link ${pathname === '/profile/logout' ? 'bg-[#e5e7eb] border-t-2 border-[#e5e7eb] pl-0 pr-0 py-2 px-4 font-semibold text-red-500' : 'border-t-2 border-[#e5e7eb] pl-0 pr-0 py-2 px-4 text-red-500'}`}><Link href="/profile/logout" className="text-sm pt[8px] pb[5px] pl-[10px] pr-[1rem] text-red-500 ">Logout</Link></li>
+            <ProfileNavLink navigation={"/profile"} label={"Profile"} top={1}></ProfileNavLink>
+            <ProfileNavLink navigation={"/profile/changePassword"} label={"Change Password"}></ProfileNavLink>
+            <ProfileNavLink navigation={"/profile/transactionList"} label={"Transaction"}></ProfileNavLink>
+            <ProfileNavLink navigation={"/profile/voucherList"} label={"Voucher List"}></ProfileNavLink>
+            <ProfileNavLink navigation={"/profile/voucherRedeem"} label={"Voucher Redeem"}></ProfileNavLink>
+            {mode == 1 ? <ProfileNavLink navigation={"/profile/leaderboard"} label={"Leaderboard"}></ProfileNavLink> : <></>}
+            {mode == 1 ? <ProfileNavLink navigation={"/profile/performanceGraph"} label={"Performance Graph"}></ProfileNavLink> : <></>}
+            <ProfileNavLink navigation={"/profile/showcase"} label={"Showcase"}></ProfileNavLink>
+            <ProfileNavLink navigation={"/profile/logout"} label={"Logout"} bottom={1}></ProfileNavLink>
           </ul>
           <ModalLoading show={undefined} onClose={undefined}></ModalLoading>
         </div>
