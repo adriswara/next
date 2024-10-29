@@ -62,6 +62,8 @@ const Transaction = () => {
     const [user, setUser] = useState<{ id_user: number }>()
     const userData = async () => { GetData(query).then((resp => { setUser(resp.User[0]) })).catch(resp => console.log(resp)) }
     // 
+    let userTemp = 0
+    user?.id_user == undefined ? userTemp = 0 : userTemp = user.id_user
     const querryTransaction = 'showTransaction/' + user?.id_user
     const [ownedTransaction, setOwnedTransaction] = useState<ownedTransactionType[]>()
     const dataOwnedTransaction = async () => { GetData(querryTransaction).then((resp => { setOwnedTransaction(resp.transaction); console.log(resp.transaction) })).catch(resp => console.log(resp)) }
@@ -70,7 +72,7 @@ const Transaction = () => {
     const [ownedVoucher, setOwnedVoucher] = useState<ownedVoucherType[]>()
     const dataOwnedVouchers = async () => { GetData(querryVoucher).then((resp => { setOwnedVoucher(resp.voucher_ownership); console.log(resp.voucher_ownership) })).catch(resp => console.log(resp)) }
     // 
-    const querryTransactionByDate = 'showTransactionByDate/' + user?.id_user + '/' + year + '/' + month + '/' + day
+    const querryTransactionByDate = 'showTransactionByDate/' + userTemp + '/' + year + '/' + month + '/' + day
     const dataOwnedTransactionByDate = async () => { GetData(querryTransactionByDate).then((resp => { setOwnedTransaction(resp.transaction); console.log(resp.transaction) })).catch(resp => console.log(resp)) }
     //
     const [total, setTotal] = useState<number | null>()
@@ -124,7 +126,7 @@ const Transaction = () => {
                                         <td className="p-2 text-left border-b border-solid">(x) {data.item_quantity}</td>
                                         <td className="p-2 text-left border-b border-solid">{data.item_created}</td>
                                         <td className="p-2 text-left border-b border-solid">{data.title == "No voucher" ? <p className="text-gray-500">{data.title}</p> : data.title}</td>
-                                        <td className="p-2 text-left border-b border-solid">{data.code == "missing"? "-" : <a href="">{data.code}</a>}</td>
+                                        <td className="p-2 text-left border-b border-solid">{data.code == "missing" ? "-" : <a href="">{data.code}</a>}</td>
                                         <td className="p-2 text-left border-b border-solid">{data.type_product == 1 ? "Frame" : (data.type_product == 2 ? "Print" : (data.type_product == 3 ? "Studio" : "INVALID DATA"))}</td>
                                         <td className="p-2 text-left border-b border-solid">{data.itemFree == -1 ? "All Item" : (data.itemFree == 0 ? "No Discount" : (data.itemFree == 1 ? "Frame" : (data.itemFree == 2 ? "Print" : (data.itemFree == 3 ? "Studio" : "INVAKUD DATA"))))}</td>
                                         <td className="p-2 text-left border-b border-solid">{data.point_reward}</td>

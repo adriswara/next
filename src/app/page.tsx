@@ -53,7 +53,7 @@ export default function Home() {
         console.log("failed")
       }
     } catch (error) {
-      console.log("epi error")
+      console.log("api error")
     }
   };
 

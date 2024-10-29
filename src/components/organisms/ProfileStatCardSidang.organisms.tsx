@@ -4,6 +4,7 @@ import ProfileLevel from "../atoms/ProfileLevel.atom";
 import ProfileStatText from "../molecules/ProfileStatText.molecule";
 import ProfileXpBar from "../molecules/ProfileXpBar.molecule";
 import ProfilePicCard from "../atoms/ProfilePicCard";
+import ProfileStatTextSidang from "../molecules/ProfileStatTextSidang.molecule";
 
 interface ProfileStatCardSidangProps { picname?: string, name: string, level: number, percentage: number, xpLeft: number, nextLevel: number, point: number, showcase: number }
 const ProfileStatCardSidang: FC<ProfileStatCardSidangProps> = (props) => {
@@ -17,6 +18,7 @@ const ProfileStatCardSidang: FC<ProfileStatCardSidangProps> = (props) => {
         point = 0,
         showcase = 0
     } = props
+    console.log("Mode Sidang")
     return (
 
         
@@ -30,7 +32,7 @@ const ProfileStatCardSidang: FC<ProfileStatCardSidangProps> = (props) => {
             {/* profile xp bar */}
             <ProfileXpBar percentage={percentage} xpLeft={xpLeft} nextLevel={nextLevel}></ProfileXpBar>
             {/* profile stat text */}
-            <ProfileStatText point={point} showcase={showcase} level={level}></ProfileStatText>
+            <ProfileStatTextSidang point={point} showcase={showcase} level={level}></ProfileStatTextSidang>
         </div >
 
 
