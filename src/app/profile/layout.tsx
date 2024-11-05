@@ -76,6 +76,7 @@ export default function profile({
             {mode == 1 ? <ProfileNavLink navigation={"/profile/leaderboard"} label={"Leaderboard"}></ProfileNavLink> : <></>}
             {mode == 1 ? <ProfileNavLink navigation={"/profile/performanceGraph"} label={"Performance Graph"}></ProfileNavLink> : <></>}
             <ProfileNavLink navigation={"/profile/showcase"} label={"Showcase"}></ProfileNavLink>
+            <ProfileNavLink navigation={"/profile/showcase2"} label={"Showcase2"}></ProfileNavLink>
             <ProfileNavLink navigation={"/profile/logout"} label={"Logout"} bottom={1}></ProfileNavLink>
           </ul>
           <ModalLoading show={undefined} onClose={undefined}></ModalLoading>

@@ -1,40 +1,52 @@
 'use client'
+import GetData from '@/services/getData.service';
+import { useEffect, useState } from 'react';
 import { InstagramEmbed } from 'react-social-media-embed';
-// import InstagramEmbed from 'react-instagram-embed';
-// import InstagramProfileEmbed from '@/components/InstagramProfileEmbed';
+import { useRouter } from 'next/navigation';
 
 
-import Script from 'next/script'
+
+
+type EmbedType = {
+    id_embed: number;
+    link_embed: string;
+}
+
+
 export default function Home() {
+    const router = useRouter()
 
-    //get link dari main link
-    // const instagramUrl = 'https://www.instagram.com/adriajon/'; // Replace with the actual Instagram post URL
+    const [data, setData] = useState<EmbedType[]>()
 
+    const enterPost = async () => {
+        if (document.getElementById("linkyabahkan")?.onclick) {
+            console.log("klik yah bahkan")
+        }
+        // router.refresh()
+        // router.push('showcase2/')
+        console.log("klik yah bahkan")
+    };
+
+    useEffect(() => { GetData("getEmbed").then((resp) => setData(resp.Embeds)) }, [])
+    useEffect(() => { enterPost() }, [])
 
     return (
         <div>
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <InstagramEmbed url="https://www.instagram.com/p/DB0aJqTxMcR/?utm_source=ig_embed&ig_rid=4cb624ae-ae30-4e41-a709-dfb34110ab42" width={328} captioned />
+            <div onClick={() => console.log("ahbahkan")} id='bahkan' className="grid" style={{ gridTemplateColumns: "auto auto auto" }}>
+                {data?.map((data: EmbedType) => (
+                    <div onClick={() => enterPost()}>
+                        <a onClick={() => enterPost()} id='linkyabahkan'>
+                            <div onClick={() => enterPost()} className='m-2' style={{ display: 'flex', justifyContent: 'center' }}>
+                                <InstagramEmbed onClick={() => enterPost()} url={data.link_embed} width={"100%"} height={450} />
+                            </div>
+                        </a>
+                    </div>
+                ))}
+
             </div>
-            {/* <div>
-                <InstagramEmbed
-                    url='https://instagr.am/p/Zw9o4/'
-                    clientAccessToken='123|456'
-                    maxWidth={320}
-                    hideCaption={false}
-                    containerTagName='div'
-                    protocol=''
-                    injectScript
-                    onLoading={() => { }}
-                    onSuccess={() => { }}
-                    onAfterRender={() => { }}
-                    onFailure={() => { }}
-                />
-            </div> */}
-
-            {/* <h1>Instagram Profile Embed</h1>
-            <InstagramProfileEmbed url={instagramUrl}></InstagramProfileEmbed> */}
-
+            <div className='overflow-hidden'>
+                <iframe src="http://localhost:3000/profile/showcase2/1/lite" className='relative -left-24'></iframe>
+            </div>
 
         </div>
 
