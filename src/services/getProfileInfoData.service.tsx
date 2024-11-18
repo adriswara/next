@@ -12,6 +12,7 @@ function GetProfileInfo() {
     const query = 'userGet/' + userinfo
     const [user, setUser] = useState<{ id_user: Number; name_user: number; email_user: number; phone_user: number; Last_login: string, point_user: number }>()
     const datas = async () => { GetData(query).then((resp => { setUser(resp.User[0]) })).catch(resp => console.log(resp)) }
+    useEffect(() => { datas() }, [])
     //
     //
     const querryPoinSetting = 'getPointSetting'
@@ -23,11 +24,19 @@ function GetProfileInfo() {
         const now = new Date();
         const jakartaTime = now.toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
 
-    
+
         const tempLastLogin = user?.Last_login ? new Date(user?.Last_login) : null;
         const lastLoginDate = Number(tempLastLogin?.getDate())
 
         const tanggalBaru = Number(format(jakartaTime, "dd"))
+
+        // console.log("Handle Login Bonus: ")
+        // console.log("Data Now Date: " + jakartaTime)
+        // console.log("User Data: "+ user?.id_user + user?.name_user)
+        // console.log("User Data last Login:"+ user?.Last_login)
+        // console.log("Temp Last Login: " + tempLastLogin)
+        // console.log("Last Login Date: " + lastLoginDate)
+        // console.log("New Login: " + tanggalBaru)
 
         if (lastLoginDate >= tanggalBaru) {
             return
@@ -91,9 +100,8 @@ function GetProfileInfo() {
     //
 
 
-    useEffect(() => { datas() }, [])
-    useEffect(() => { handleLoginBonus() }, [user?.id_user])
-    useEffect(() => { dataPointSetting() }, [user?.id_user])
+    useEffect(() => { handleLoginBonus() }, [user])
+    useEffect(() => { dataPointSetting() }, [user])
 
     return (
         // profile card
@@ -119,6 +127,10 @@ function GetProfileInfo() {
                     <tr className="w-1 border-t-2 border-solid border-[#e5e7eb]">
                         <td className="pl-3 py-6">Phone</td>
                         <td className="pt-6 pl-72">{user?.phone_user}</td>
+                    </tr>
+                    <tr className="w-1 border-t-2 border-solid border-[#e5e7eb]">
+                        <td className="pl-3 py-6">Date:</td>
+                        <td className="pt-6 pl-72">{user?.Last_login}</td>
                     </tr>
                 </tbody>
 
