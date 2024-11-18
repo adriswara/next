@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react"
 import GetData from "./getData.service"
 import Cookies from 'js-cookie'
-import { format, compareAsc, sub } from "date-fns";
+import { format} from "date-fns";
 
 
 
@@ -113,8 +113,6 @@ function GetProfileInfo() {
                         <th colSpan={1} className="mx-10"><p className="w-full mx-10 text-base font-semibold leading-7 text-gray-900">Profile</p></th>
                     </tr>
                 </thead>
-
-
                 <tbody className="w-auto">
                     <tr className="w-auto">
                         <td className="pl-3 py-6">Name</td>

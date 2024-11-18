@@ -80,8 +80,7 @@ export default function RootLayout({
   const [logged, setLogged] = useState<number | null>(isLogin)
   var status = ""
   const token = useContext(tokenContext)
-  const liteId = pathname.split("/")[3]
-  const liteRoute = "/profile/showcaseLite/"+liteId
+
 
 
 
@@ -108,12 +107,12 @@ export default function RootLayout({
       <body className={inter.className}>
         {/* header */}
         {/* <Header logged={logged}></Header> */}
-        {pathname !== liteRoute && <Header logged={logged}></Header>}
+        {<Header logged={logged}></Header>}
         {/* header */}
         {children}
         {/* footer */}
         {/* <Footer></Footer> */}
-        {pathname !== liteRoute && <Footer></Footer>}
+        {<Footer></Footer>}
         {/* end footer */}
       </body>
     </html>
