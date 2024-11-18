@@ -18,7 +18,7 @@ export default function Home() {
     useEffect(() => { datas() }, [])
     const url = post?.link_embed != undefined ? post?.link_embed : "";
     return (
-        <div>
+        <div className='m-0 left-0 top-0 flex-none'>
             <InstagramEmbed url={url} width={"100%"} height={450}/>
         </div>
     );

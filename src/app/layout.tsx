@@ -1,18 +1,13 @@
 'use client'
-import type { Metadata } from "next";
 import { Inter, Source_Sans_3 } from "next/font/google";
-
 import "./globals.css";
-import Image from "next/image";
 import Footer from "@/components/molecules/Footer.molecule";
 import { useContext, useEffect, useState } from "react";
 import Cookies from 'js-cookie'
 import { usePathname, useRouter } from "next/navigation";
 import { createContext } from "react";
-import ProfileAndLogin from "@/components/molecules/ProfileAndLogin.molecule";
 import GetData from "@/services/getData.service";
 import Header from "@/components/molecules/Header.molecule";
-import { log } from "console";
 
 
 
@@ -80,15 +75,17 @@ export default function RootLayout({
 
   const router = useRouter()
   const tokenContext = createContext<string | null>(Cookies.get('token'));
-  const pathname = usePathname()
-  const [path, setPath] = useState<string | null>(pathname)
+  const pathname = String(usePathname())
+  // const [path, setPath] = useState<string | null>(pathname)
   const [logged, setLogged] = useState<number | null>(isLogin)
   var status = ""
   const token = useContext(tokenContext)
+  const liteId = pathname.split("/")[3]
+  const liteRoute = "/profile/showcaseLite/"+liteId
 
 
 
-  useEffect(() => { setPath(pathname) }, [pathname])
+  // useEffect(() => { setPath(pathname) }, [pathname])
   useEffect(() => {
 
     if (!token && token == undefined) {
@@ -110,14 +107,14 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         {/* header */}
-        <Header logged={logged}></Header>
+        {/* <Header logged={logged}></Header> */}
+        {pathname !== liteRoute && <Header logged={logged}></Header>}
         {/* header */}
         {children}
-        <section>
-          {/* footer */}
-          <Footer></Footer>
-          {/* end footer */}
-        </section>
+        {/* footer */}
+        {/* <Footer></Footer> */}
+        {pathname !== liteRoute && <Footer></Footer>}
+        {/* end footer */}
       </body>
     </html>
   );

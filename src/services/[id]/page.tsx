@@ -15,9 +15,7 @@ export default function Home() {
     const selectedPost = decodeURI(pathname + "")
     console.log("link ini" + selectedPost)
     // 
-    if(selectedPost == "showcase2/lite"){
-
-    }
+    
     const query = selectedPost
     const [post, setPost] = useState<{ id_embed: number | undefined, link_embed: string | undefined }>()
     const datas = async () => { GetData(query).then((resp => { setPost(resp.Embeds[0]) })).catch(resp => console.log(resp)) }

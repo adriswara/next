@@ -1,15 +1,10 @@
 "use client"
-import Link from "next/link";
 import { usePathname } from 'next/navigation'
-import { Poppins } from "next/font/google";
-
-
+import { Literata, Poppins } from "next/font/google";
 import GetCard from "@/services/getProfileCard.service";
-import ModalLoading from "@/components/molecules/modalLoading.molecule";
 import { useEffect, useState } from "react";
-import { count } from "console";
 import GetData from "@/services/getData.service";
-import ProfileNavLink from "@/components/atoms/profileNavLink.atom";
+import ProfileHeader from "@/components/molecules/ProfileHeader.molecule";
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -22,9 +17,8 @@ export default function profile({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const pathname = usePathname()
+  const pathname = String(usePathname())
   const [showModal, setShowModal] = useState(false);
-  // onClick={() => }
 
   const queryMode = 'modeGet'
   const [mode, setMode] = useState<number>()
@@ -55,38 +49,32 @@ export default function profile({
     }, 2000);
     setShowModal(false);
   }
+  const liteId = pathname.split("/")[3]
+  const liteRoute = "/profile/showcaseLite/" + liteId
+  const concatedClass = `${poppins.className} flex pt-5 pb-36 container mx-auto items-start gap-5 `
+
   useEffect(() => { GenerateCartList() }, [pathname])
   useEffect(() => { GetMode() }, [])
   useEffect(() => { GenerateVarMode() }, [])
+  useEffect(() => { console.log() })
 
   console.log("isi data mode " + mode)
   console.log(mode == 0)
   console.log("isi var mode " + varMode)
 
+
   return (
-    <div className={`${poppins.className} flex pt-5 pb-36 container mx-auto items-start gap-5 `}>
+    <div className={concatedClass}>
       <div className="w-[312px] flex-col flex gap-5 justify-start">
-        <div className="border rounded-lg border-solid border-[#e5e7eb] h-auto" >
-          <ul>
-            <ProfileNavLink navigation={"/profile"} label={"Profile"} top={1}></ProfileNavLink>
-            <ProfileNavLink navigation={"/profile/changePassword"} label={"Change Password"}></ProfileNavLink>
-            <ProfileNavLink navigation={"/profile/transactionList"} label={"Transaction"}></ProfileNavLink>
-            <ProfileNavLink navigation={"/profile/voucherList"} label={"Voucher List"}></ProfileNavLink>
-            <ProfileNavLink navigation={"/profile/voucherRedeem"} label={"Voucher Redeem"}></ProfileNavLink>
-            {mode == 1 ? <ProfileNavLink navigation={"/profile/leaderboard"} label={"Leaderboard"}></ProfileNavLink> : <></>}
-            {mode == 1 ? <ProfileNavLink navigation={"/profile/performanceGraph"} label={"Performance Graph"}></ProfileNavLink> : <></>}
-            <ProfileNavLink navigation={"/profile/showcase"} label={"Showcase"}></ProfileNavLink>
-            <ProfileNavLink navigation={"/profile/showcase2"} label={"Showcase2"}></ProfileNavLink>
-            <ProfileNavLink navigation={"/profile/logout"} label={"Logout"} bottom={1}></ProfileNavLink>
-          </ul>
-          <ModalLoading show={undefined} onClose={undefined}></ModalLoading>
-        </div>
+        <ProfileHeader mode={mode} showModal={false}></ProfileHeader>
+        {/* {pathname !== liteRoute && <ProfileHeader mode={mode} showModal={false}></ProfileHeader>} */}
         {/*  */}
-        {mode != undefined ? GetCard(mode) : GetCard(0)}
+        {/* {mode != undefined && pathname != liteRoute ? GetCard(mode) : GetCard(0)} */}
+        {GetCard(0)}
         {/*  */}
       </div>
       {children}
-    </div>
+    </div >
   );
 }
 
