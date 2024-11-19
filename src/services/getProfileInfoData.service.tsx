@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react"
 import GetData from "./getData.service"
 import Cookies from 'js-cookie'
-import { format} from "date-fns";
+import { format } from "date-fns";
 
 
 
@@ -32,16 +32,19 @@ function GetProfileInfo() {
 
         // console.log("Handle Login Bonus: ")
         // console.log("Data Now Date: " + jakartaTime)
-        // console.log("User Data: "+ user?.id_user + user?.name_user)
-        // console.log("User Data last Login:"+ user?.Last_login)
+        // console.log("Isi User Struck : " + user)
+        // console.log("User Data: " + user?.id_user + user?.name_user)
+        // console.log("User Data last Login:" + user?.Last_login)
         // console.log("Temp Last Login: " + tempLastLogin)
         // console.log("Last Login Date: " + lastLoginDate)
         // console.log("New Login: " + tanggalBaru)
 
-        if (lastLoginDate >= tanggalBaru) {
+        if (lastLoginDate >= tanggalBaru || user == undefined) {
+            console.log("Logged In without daily bonus")
             return
         }
 
+        console.log("Daily login bonus triggered")
 
         const data = {
             id_user: Number(user?.id_user),
@@ -73,7 +76,12 @@ function GetProfileInfo() {
 
         var rawPoint = pointSetting?.transaction ? 10 / 100 * pointSetting?.login_daily : null
         var newPoint = rawPoint && user?.point_user ? Number(rawPoint) + Number(user?.point_user) : null
-
+        console.log("Isi raw point :" + rawPoint)
+        if (rawPoint == undefined) {
+            return
+        }
+        console.log("Isi new point :" + Number(rawPoint) + Number(user?.point_user))
+        console.log("Hasil :" + newPoint)
         const data = {
             id_user: Number(user?.id_user),
             point_user: newPoint

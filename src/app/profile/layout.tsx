@@ -49,8 +49,6 @@ export default function profile({
     }, 2000);
     setShowModal(false);
   }
-  const liteId = pathname.split("/")[3]
-  const liteRoute = "/profile/showcaseLite/" + liteId
   const concatedClass = `${poppins.className} flex pt-5 pb-36 container mx-auto items-start gap-5 `
 
   useEffect(() => { GenerateCartList() }, [pathname])
@@ -59,7 +57,7 @@ export default function profile({
   useEffect(() => { console.log() })
 
   console.log("isi data mode " + mode)
-  console.log(mode == 0)
+ 
   console.log("isi var mode " + varMode)
 
 

@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { InstagramEmbed } from 'react-social-media-embed';
 import Cookies from 'js-cookie'
-import {format} from "date-fns";
+import { format } from "date-fns";
 
 
 export default function Home() {
@@ -20,22 +20,27 @@ export default function Home() {
     const [pointSetting, setPointSetting] = useState<{ transaction: number, login_daily: number }>()
     const dataPointSetting = async () => { GetData(querryPoinSetting).then((resp => { setPointSetting(resp.pointsettings[0]); console.log("point setting:", resp.pointsettings) })).catch(resp => console.log(resp)) }
     //
-
     const handleShowcaseBonus = async () => {
+        console.log("handle showcase bonus")
         const now = new Date();
         const jakartaTime = now.toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
-        const tempLastShowcase = user?.Last_login ? new Date(user?.Last_login) : null;
+        const tempLastShowcase = user?.last_showcase ? new Date(user?.last_showcase) : null;
         const lastShowcaseDate = Number(tempLastShowcase?.getDate())
         const tanggalBaru = Number(format(jakartaTime, "dd"))
-        if (lastShowcaseDate >= tanggalBaru) {
+        console.log("Waktu Sekarang : " + jakartaTime)
+        console.log("Waktu Last Showcase : " + tempLastShowcase)
+        console.log("Tanggal Last Showcase : " + lastShowcaseDate)
+        console.log("Tanggal Baru : " + tanggalBaru)
+
+        if (lastShowcaseDate >= tanggalBaru || user == undefined) {
             return
         }
         const data = {
             id_user: Number(user?.id_user),
-            last_login: format(jakartaTime, "yyyy-MM-dd hh:mm:ss"),
+            last_showcase: format(jakartaTime, "yyyy-MM-dd hh:mm:ss"),
         };
         try {
-            const response = await fetch('http://localhost:8081/dailyloginCheck', {
+            const response = await fetch('http://localhost:8081/dailyshowcaseCheck', {
                 method: 'PUT',
                 body: JSON.stringify(data),
                 headers: { 'Content-Type': 'application/json' },
@@ -102,5 +107,3 @@ export default function Home() {
         </div>
     );
 }
-
-
