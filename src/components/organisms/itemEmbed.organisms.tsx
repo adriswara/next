@@ -16,7 +16,7 @@ const ItemEmbed: FC<ItemEmbedProps> = (props) => {
         <div className="">
             <div className="border-2 border-solid border-jonasBorder rounded-[5px] grid grid-cols-1 m-5 h-auto ">
                 <a href={embedLink}>
-                    <Image width={1000} height={1000} src={thumbnail} alt={link}></Image>
+                    <Image className="aspect-square object-cover" width={1000} height={1000} src={thumbnail} alt={link}></Image>
                 </a>
                 <div className="h-12 bg-blue-600"> <a href={embedLink}> <p className="text-center mt-2.5 m-auto text-white">View Post</p></a></div>
             </div>
