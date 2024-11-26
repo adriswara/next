@@ -41,12 +41,16 @@ const VoucherRedeem: FC<VoucherRedeemProps> = (props) => {
 
         var userPoint = user?.point_user
 
-        var tempVoucher = userPoint && userPoint > price ? id_voucher  : null
+        // var tempVoucher = userPoint && userPoint > price ? id_voucher : null
+        var tempVoucher = id_voucher
+        console.log("User Point : " + userPoint)
+        console.log("Price : " + price)
+        console.log("Temp voucher : " + tempVoucher)
 
-        if(tempVoucher!=null){
+        if (tempVoucher != null) {
             console.log("point cukup")
         }
-        else{
+        else {
             console.log("point tidak cukup")
         }
 
@@ -80,7 +84,7 @@ const VoucherRedeem: FC<VoucherRedeemProps> = (props) => {
     //
     const handlePoint = async () => {
 
-        var newPoint =  user?.point_user ? Number(user?.point_user) - price : null
+        var newPoint = user?.point_user ? Number(user?.point_user) - price : null
 
         const data = {
             id_user: Number(user?.id_user),

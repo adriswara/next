@@ -73,6 +73,7 @@ function GetProfileInfo() {
     //
     //
     const handlePoint = async () => {
+        console.log("HANDLE POINT")
 
         var rawPoint = pointSetting?.transaction ? 10 / 100 * pointSetting?.login_daily : null
         var newPoint = rawPoint && user?.point_user ? Number(rawPoint) + Number(user?.point_user) : null

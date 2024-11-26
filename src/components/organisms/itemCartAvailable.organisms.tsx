@@ -182,7 +182,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
         const data = {
             id_user: Number(user?.id_user),
             item_created: format(jakartaTime, "yyyy-MM-dd hh:mm:ss"),
-            voucher_used: varVoucherId
+            voucher_used: Number(varVoucherId)
         };
         try {
             const response = await fetch('http://localhost:8081/insertTransaction', {
