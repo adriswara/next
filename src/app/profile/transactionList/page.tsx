@@ -32,7 +32,7 @@ const Transaction = () => {
         id_voucher_ownership: number,
         fk_user: number,
         fK_voucher: number,
-        is_usable: number,
+        isUsable: number,
         name_product: string,
         description_product: string,
         price_product: number,

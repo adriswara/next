@@ -34,7 +34,7 @@ export default function Home() {
     const data = {
       fk_user: formData.get('fk_user'),
       fK_voucher: formData.get('fk_voucher'),
-      is_usable: formData.get('is_usable'),
+      isUsable: formData.get('isUsable'),
 
     };
     try {
@@ -65,7 +65,7 @@ export default function Home() {
         {/* <form method="POST" onSubmit={handleSubmit}>
           <input type="number" className="fk_user" id="fk_user" name="fk_user" placeholder="User Id" required />
           <input type="number" className="fk_voucher" id="fk_voucher" name="fk_voucher" placeholder="voucher id" required />
-          <input type="number" className="is_usable" id="is_usable" name="is_usable" placeholder="usable" required />
+          <input type="number" className="isUsable" id="isUsable" name="isUsable" placeholder="usable" required />
           <button type="submit">Submit</button>
         </form> */}
         {/*  */}

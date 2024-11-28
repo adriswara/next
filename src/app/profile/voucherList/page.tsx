@@ -4,6 +4,8 @@ import VoucherOwned from "@/components/organisms/VoucherOwned.organisms";
 import GetData from "@/services/getData.service";
 import { useEffect, useState } from "react";
 import Cookies from 'js-cookie'
+import { format } from "date-fns";
+
 
 const OwnedVoucher = () => {
 
@@ -11,7 +13,7 @@ const OwnedVoucher = () => {
         id_voucher_ownership: number,
         fk_user: number,
         fk_voucher: number,
-        is_usable: number,
+        isUsable: number,
         name_product: string,
         description_product: string,
         price_product: number,
@@ -38,7 +40,9 @@ const OwnedVoucher = () => {
     const querryVoucher = 'ownedVoucher/' + user?.id_user
     const [ownedVoucher, setOwnedVoucher] = useState<ownedVoucherType[]>()
     const dataOwnedVouchers = async () => { GetData(querryVoucher).then((resp => { setOwnedVoucher(resp.voucher_ownership); console.log(resp.voucher_ownership) })).catch(resp => console.log(resp)) }
-    // 
+    //
+  
+    //
     useEffect(() => { userData() }, [])
     useEffect(() => { dataOwnedVouchers() }, [user])
 
@@ -53,7 +57,8 @@ const OwnedVoucher = () => {
 
                 {ownedVoucher?.map((data: ownedVoucherType) => (
                     <div>
-                        <VoucherOwned voucherType={data.voucherType} is_usable={data.is_usable} discount={data.discount} buyReq={data.buyReq} itemFree={data.itemFree} title={data.title} dateStart={data.dateStart} dateEnd={data.dateEnd} productRange={data.productRange} code={data.code} hideButton={1} point={data.Point}></VoucherOwned>
+                        {/* {data.isUsable} */}
+                        <VoucherOwned voucherType={data.voucherType} isUsable={data.isUsable} discount={data.discount} buyReq={data.buyReq} itemFree={data.itemFree} title={data.title} dateStart={data.dateStart} dateEnd={data.dateEnd} productRange={data.productRange} code={data.code} hideButton={1} point={data.Point}></VoucherOwned>
                     </div>
                 ))}
             </div>

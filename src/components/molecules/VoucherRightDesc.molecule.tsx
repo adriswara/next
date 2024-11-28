@@ -8,11 +8,11 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 
-interface VoucherRightDescCodeStatusProps { hideButton: number, idVoucher: number, code: string, is_usable: number }
+interface VoucherRightDescCodeStatusProps { hideButton: number, idVoucher: number, code: string, isUsable: number }
 const VoucherRightDescCodeStatus: FC<VoucherRightDescCodeStatusProps> = (props) => {
     const {
         code = "Code: missing",
-        is_usable = 0,
+        isUsable = 0,
         idVoucher = 0,
         hideButton = 1
     } = props
@@ -31,8 +31,9 @@ const VoucherRightDescCodeStatus: FC<VoucherRightDescCodeStatusProps> = (props) 
                     {/* <VoucherCodeCopyButton></VoucherCodeCopyButton> */}
                 </div>
                 {/* status active */}
-                {is_usable == 1 ? <VoucherListActive></VoucherListActive> : is_usable == 2 ? <VoucherListNotActive></VoucherListNotActive> : <VoucherListInvalid></VoucherListInvalid>}
-                {is_usable == 1 && path == "/cart" && hideButton == 0 ? <VoucherButtonActive id_voucher={idVoucher} isHidden={hideButton}></VoucherButtonActive> : <></>}
+                {isUsable == 1 ? <VoucherListActive></VoucherListActive> : isUsable == 2 ? <VoucherListNotActive></VoucherListNotActive> : <VoucherListInvalid></VoucherListInvalid>}
+                {/* {isUsable} */}
+                {isUsable == 1 && path == "/cart" && hideButton == 0 ? <VoucherButtonActive id_voucher={idVoucher} isHidden={hideButton}></VoucherButtonActive> : <></>}
             </div>
         </div>
     )

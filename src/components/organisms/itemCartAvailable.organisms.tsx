@@ -34,7 +34,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
         id_voucher_ownership: number | "undefined",
         fk_user: number,
         fK_voucher: number,
-        is_usable: number,
+        isUsable: number,
         name_product: string,
         description_product: string,
         price_product: number,
@@ -77,7 +77,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
     const [pointSetting, setPointSetting] = useState<{ transaction: number }>()
     const dataPointSetting = async () => { GetData(querryPoinSetting).then((resp => { setPointSetting(resp.pointsettings[0]); console.log("point setting:", resp.pointsettings) })).catch(resp => console.log(resp)) }
     //
-    console.log(selectedVoucher?.id_voucher_ownership)
+    console.log(selectedVoucher)
     //
     const useVoucher = async () => {
 
@@ -119,7 +119,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
         let totalPoint = 0;
         cart?.map((data: cartDataType) => {
             subTotal += data.price_product * data.item_quantity
-            totalPoint += data.point_reward
+            totalPoint = Number(totalPoint) * 1 + Number(data.point_reward) 
             // arrayId?.push(data.id_item)
             arrayId?.push(data.item_type)
             setArrayId(arrayId)
@@ -132,6 +132,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
 
         total = tempDiscount ? subTotal - tempDiscount : subTotal;
         console.log("isi total : " + total)
+        console.log("Total Point :" + totalPoint)
         setPoint(totalPoint)
         setTotal(total);
     }
@@ -177,7 +178,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
             selectedVoucher?.fK_voucher ? varVoucherId = selectedVoucher.fK_voucher : -1
         }
 
-   
+
 
         const data = {
             id_user: Number(user?.id_user),
@@ -213,6 +214,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
         // var rawPoint = itemGrandTotal && pointSetting?.transaction ? (itemGrandTotal / 100) / 100 * pointSetting?.transaction : null
         var rawPoint = pointGrandTotal
         var newPoint = rawPoint && user?.point_user ? Number(rawPoint) + Number(user?.point_user) + redeemPoint : null
+        // console.log("Raw Point : " + rawPoint + " && Point User : " + user?.point_user + " ? Raw Point : " + Number(rawPoint) + " + Point User : " + Number(user?.point_user) + " + Redeem Point : + " + redeemPoint)
 
         const data = {
             id_user: Number(user?.id_user),
@@ -370,7 +372,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
                                                 <div className="text-justify mt-2">
                                                     <button onClick={() => setShowModal(true)} className=" mb-6 inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 w-full" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:rf:" data-state="closed"> Select Voucher </button>
                                                     <div>
-                                                        {selectedVoucher && selectedVoucher.id_voucher_ownership !== "undefined" ? <VoucherOwned hideButton={1} idVoucher={selectedVoucher.id_voucher_ownership} voucherType={selectedVoucher.voucherType} is_usable={selectedVoucher.is_usable} discount={selectedVoucher.discount} buyReq={selectedVoucher.buyReq} itemFree={selectedVoucher.itemFree} title={selectedVoucher.title} dateStart={selectedVoucher.dateStart} dateEnd={selectedVoucher.dateEnd} productRange={selectedVoucher.productRange} code={selectedVoucher.code} point={selectedVoucher.point}></VoucherOwned> : <></>}
+                                                        {selectedVoucher && selectedVoucher.id_voucher_ownership !== "undefined" ? <VoucherOwned hideButton={1} idVoucher={selectedVoucher.id_voucher_ownership} voucherType={selectedVoucher.voucherType} isUsable={1} discount={selectedVoucher.discount} buyReq={selectedVoucher.buyReq} itemFree={selectedVoucher.itemFree} title={selectedVoucher.title} dateStart={selectedVoucher.dateStart} dateEnd={selectedVoucher.dateEnd} productRange={selectedVoucher.productRange} code={selectedVoucher.code} point={selectedVoucher.point}></VoucherOwned> : <></>}
                                                         {selectedVoucher && selectedVoucher.id_voucher_ownership !== "undefined" ? <button onClick={() => removeVoucher()} type="button" className="border-2 border-solid border-jonasBorder rounded-[15px] bg-red-800 text-white text-sm w-40 h-8 ml-7">Remove Voucher</button> : <></>}
                                                     </div>
                                                     <Modal arrayId={arrayId} show={showModal} onClose={() => setShowModal(false)} />
