@@ -2,24 +2,25 @@
 import { useEffect, useState } from "react"
 import GetData from "./getData.service"
 import Cookies from 'js-cookie'
-import { format } from "date-fns";
+import { format, addDays, addMonths, addYears, compareDesc } from "date-fns";
 
-
+var expireTimeView
 
 // get data
 function GetProfileInfo() {
     const userinfo = Cookies.get('username')
     const query = 'userGet/' + userinfo
-    const [user, setUser] = useState<{ id_user: Number; name_user: number; email_user: number; phone_user: number; Last_login: string, point_user: number }>()
+    const [user, setUser] = useState<{ id_user: Number; name_user: number; email_user: number; phone_user: number; Last_login: string, point_user: number, first_transaction: string }>()
     const datas = async () => { GetData(query).then((resp => { setUser(resp.User[0]) })).catch(resp => console.log(resp)) }
     useEffect(() => { datas() }, [])
     //
     //
     const querryPoinSetting = 'getPointSetting'
-    const [pointSetting, setPointSetting] = useState<{ transaction: number, login_daily: number }>()
+    const [pointSetting, setPointSetting] = useState<{ transaction: number, login_daily: number, dayToExpire: number, monthToExpire: number, yearToExpire: number, modeToExpire: number }>()
     const dataPointSetting = async () => { GetData(querryPoinSetting).then((resp => { setPointSetting(resp.pointsettings[0]); console.log("point setting:", resp.pointsettings) })).catch(resp => console.log(resp)) }
     //
-
+    const [expireTime, setExpireTime] = useState<Date>(new Date())
+    //
     const handleLoginBonus = async () => {
         const now = new Date();
         const jakartaTime = now.toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
@@ -71,6 +72,62 @@ function GetProfileInfo() {
         }
     };
     //
+    const handlePointExpireCheck = async () => {
+        var newPoint = 0;
+        const now = new Date();
+        const jakartaTime = now.toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
+
+        const mode = pointSetting?.modeToExpire
+        const firstTransactionRaw = user?.first_transaction ? user?.first_transaction : ""
+        const firstTransaction = new Date(firstTransactionRaw)
+
+        const dayRange = pointSetting?.dayToExpire ? pointSetting?.dayToExpire : 0
+        const monthRange = pointSetting?.monthToExpire ? pointSetting?.monthToExpire : 0
+        const yearRange = pointSetting?.yearToExpire ? pointSetting?.yearToExpire : 0
+        const expireByDate = mode == 1 || mode == 4 ? addDays(firstTransaction, Number(dayRange)) : firstTransaction
+        const expireByMonth = mode == 2 || mode == 4 ? addMonths(expireByDate, Number(monthRange)) : expireByDate
+        const expire = (mode == 3 || mode == 4 ? addYears(expireByMonth, Number(yearRange)) : expireByMonth)
+
+        console.log("Expire  : " + firstTransaction)
+        console.log("Expire date : " + expireByDate)
+        console.log("Expire month : " + expireByMonth)
+        console.log("Expire Time : " + expire)
+        console.log("Expire Time State : " + expireTime)
+        setExpireTime(expire)
+        const descComparison = compareDesc(expire, jakartaTime);
+        if (descComparison < 0) {
+            console.log('point expired');
+        }
+        else if (descComparison > 0) {
+            console.log('Point is secured');
+            newPoint = user?.point_user ? user?.point_user : 0
+        } else {
+            console.log('The day, point expired');
+            newPoint = user?.point_user ? user?.point_user : 0
+        }
+        const data = {
+            id_user: Number(user?.id_user),
+            point_user: newPoint
+        };
+        try {
+            const response = await fetch('http://localhost:8081/pointTransaction', {
+                method: 'PUT',
+                body: JSON.stringify(data),
+                headers: { 'Content-Type': 'application/json' },
+
+            });
+
+            if (response.ok) {
+                console.log('ok')
+                console.log(await response.json)
+            }
+            else {
+                console.log("failed")
+            }
+        } catch (error) {
+            console.log("epi error")
+        }
+    };
     //
     const handlePoint = async () => {
         console.log("HANDLE POINT")
@@ -108,9 +165,9 @@ function GetProfileInfo() {
     };
     //
 
-
-    useEffect(() => { handleLoginBonus() }, [user])
     useEffect(() => { dataPointSetting() }, [user])
+    useEffect(() => { handlePointExpireCheck() }, [user])
+    useEffect(() => { handleLoginBonus() }, [user])
 
     return (
         // profile card
@@ -136,8 +193,12 @@ function GetProfileInfo() {
                         <td className="pt-6 pl-72">{user?.phone_user}</td>
                     </tr>
                     <tr className="w-1 border-t-2 border-solid border-[#e5e7eb]">
-                        <td className="pl-3 py-6">Date:</td>
+                        <td className="pl-3 py-6">Daily Login Date:</td>
                         <td className="pt-6 pl-72">{user?.Last_login}</td>
+                    </tr>
+                    <tr className="w-1 border-t-2 border-solid border-[#e5e7eb]">
+                        <td className="pl-3 py-6">Point Expire Date:</td>
+                        <td className="pt-6 pl-72">{expireTime ? `${expireTime.getFullYear()}-${expireTime.getMonth()}-${expireTime.getDate()}` : ""}</td>
                     </tr>
                 </tbody>
 
