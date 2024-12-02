@@ -28,22 +28,41 @@ function GetProfileInfo() {
 
         const tempLastLogin = user?.Last_login ? new Date(user?.Last_login) : null;
         const lastLoginDate = Number(tempLastLogin?.getDate())
+        const lastLoginMonth = Number(tempLastLogin?.getMonth()) + 1
+        const lastLoginYear = Number(tempLastLogin?.getFullYear())
 
         const tanggalBaru = Number(format(jakartaTime, "dd"))
+        const bulanBaru = Number(format(jakartaTime, "MM"))
+        const tahunBaru = Number(format(jakartaTime, "yyyy"))
 
-        // console.log("Handle Login Bonus: ")
-        // console.log("Data Now Date: " + jakartaTime)
-        // console.log("Isi User Struck : " + user)
-        // console.log("User Data: " + user?.id_user + user?.name_user)
-        // console.log("User Data last Login:" + user?.Last_login)
-        // console.log("Temp Last Login: " + tempLastLogin)
-        // console.log("Last Login Date: " + lastLoginDate)
-        // console.log("New Login: " + tanggalBaru)
+
+
+        console.log("Handle Login Bonus: ")
+        console.log("Data Now Date: " + jakartaTime)
+        console.log("Isi User Struck : " + user)
+        console.log("User Data: " + user?.id_user + user?.name_user)
+        console.log("User Data last Login:" + user?.Last_login)
+        console.log("Temp Last Login: " + tempLastLogin)
+        console.log("Last Login Date: " + lastLoginDate)
+        console.log("Last Login Month: " + lastLoginMonth)
+        console.log("Last Login Year: " + lastLoginYear)
+
+        console.log("New Login Date : " + tanggalBaru)
+        console.log("New Login Month: " + bulanBaru)
+        console.log("New Login Year : " + tahunBaru)
+
 
         if (lastLoginDate >= tanggalBaru || user == undefined) {
-            console.log("Logged In without daily bonus")
-            return
+            if (lastLoginMonth >= bulanBaru || user == undefined) {
+                if (lastLoginYear >= tahunBaru || user == undefined) {
+                    console.log("Logged In without daily bonus")
+                    return
+                }
+            }
         }
+
+
+
 
         console.log("Daily login bonus triggered")
 
@@ -107,7 +126,7 @@ function GetProfileInfo() {
         }
         const data = {
             id_user: Number(user?.id_user),
-            point_user: newPoint
+            point_user: Number(newPoint)
         };
         try {
             const response = await fetch('http://localhost:8081/pointTransaction', {
@@ -142,7 +161,7 @@ function GetProfileInfo() {
         console.log("Hasil :" + newPoint)
         const data = {
             id_user: Number(user?.id_user),
-            point_user: newPoint
+            point_user: Number(newPoint)
         };
         try {
             const response = await fetch('http://localhost:8081/pointTransaction', {
@@ -165,30 +184,7 @@ function GetProfileInfo() {
     };
     //
     //
-    const handleTransactionDate = async () => {
 
-        const data = {
-            id_user: Number(user?.id_user),
-        };
-        try {
-            const response = await fetch('http://localhost:8081/pointTransaction', {
-                method: 'PUT',
-                body: JSON.stringify(data),
-                headers: { 'Content-Type': 'application/json' },
-
-            });
-
-            if (response.ok) {
-                console.log('ok')
-                console.log(await response.json)
-            }
-            else {
-                console.log("failed")
-            }
-        } catch (error) {
-            console.log("epi error")
-        }
-    };
     //
 
 
@@ -225,7 +221,7 @@ function GetProfileInfo() {
                     </tr>
                     <tr className="w-1 border-t-2 border-solid border-[#e5e7eb]">
                         <td className="pl-3 py-6">Point Status :</td>
-                        <td className="pt-6 pl-72">{ Number.isNaN(expireTime.getFullYear()) ? "Point Expired" : (expireTime ? "Valid until : "+`${expireTime.getFullYear()}-${expireTime.getMonth()}-${expireTime.getDate()}` : "")}</td>
+                        <td className="pt-6 pl-72">{Number.isNaN(expireTime.getFullYear()) ? "Point Expired" : (expireTime ? "Valid until : " + `${expireTime.getFullYear()}-${expireTime.getMonth()+1}-${expireTime.getDate()}` : "")}</td>
                     </tr>
                 </tbody>
 
