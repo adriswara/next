@@ -164,6 +164,33 @@ function GetProfileInfo() {
         }
     };
     //
+    //
+    const handleTransactionDate = async () => {
+
+        const data = {
+            id_user: Number(user?.id_user),
+        };
+        try {
+            const response = await fetch('http://localhost:8081/pointTransaction', {
+                method: 'PUT',
+                body: JSON.stringify(data),
+                headers: { 'Content-Type': 'application/json' },
+
+            });
+
+            if (response.ok) {
+                console.log('ok')
+                console.log(await response.json)
+            }
+            else {
+                console.log("failed")
+            }
+        } catch (error) {
+            console.log("epi error")
+        }
+    };
+    //
+
 
     useEffect(() => { dataPointSetting() }, [user])
     useEffect(() => { handlePointExpireCheck() }, [user])
@@ -197,8 +224,8 @@ function GetProfileInfo() {
                         <td className="pt-6 pl-72">{user?.Last_login}</td>
                     </tr>
                     <tr className="w-1 border-t-2 border-solid border-[#e5e7eb]">
-                        <td className="pl-3 py-6">Point Expire Date:</td>
-                        <td className="pt-6 pl-72">{expireTime ? `${expireTime.getFullYear()}-${expireTime.getMonth()}-${expireTime.getDate()}` : ""}</td>
+                        <td className="pl-3 py-6">Point Status :</td>
+                        <td className="pt-6 pl-72">{ Number.isNaN(expireTime.getFullYear()) ? "Point Expired" : (expireTime ? "Valid until : "+`${expireTime.getFullYear()}-${expireTime.getMonth()}-${expireTime.getDate()}` : "")}</td>
                     </tr>
                 </tbody>
 

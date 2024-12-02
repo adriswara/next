@@ -66,7 +66,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
     // get user id from cookie
     const userinfo = Cookies.get('username')
     const query = 'userGet/' + userinfo
-    const [user, setUser] = useState<{ id_user: number, point_user: number }>()
+    const [user, setUser] = useState<{ id_user: number, point_user: number, first_transaction: string }>()
     const datas = async () => { GetData(query).then((resp => { setUser(resp.User[0]) })).catch(resp => console.log(resp)) }
     // 
     const queryCart = 'getCart/' + user?.id_user
@@ -119,7 +119,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
         let totalPoint = 0;
         cart?.map((data: cartDataType) => {
             subTotal += data.price_product * data.item_quantity
-            totalPoint = Number(totalPoint) * 1 + Number(data.point_reward) 
+            totalPoint = Number(totalPoint) * 1 + Number(data.point_reward)
             // arrayId?.push(data.id_item)
             arrayId?.push(data.item_type)
             setArrayId(arrayId)
@@ -179,7 +179,6 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
         }
 
 
-
         const data = {
             id_user: Number(user?.id_user),
             item_created: format(jakartaTime, "yyyy-MM-dd hh:mm:ss"),
@@ -196,6 +195,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
             if (response.ok) {
                 console.log('ok')
                 Cookies.remove('voucheruse')
+                handleInitialTransDate()
                 handlePoint()
                 useVoucher()
                 resetCart()
@@ -215,6 +215,19 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
         var rawPoint = pointGrandTotal
         var newPoint = rawPoint && user?.point_user ? Number(rawPoint) + Number(user?.point_user) + redeemPoint : null
         // console.log("Raw Point : " + rawPoint + " && Point User : " + user?.point_user + " ? Raw Point : " + Number(rawPoint) + " + Point User : " + Number(user?.point_user) + " + Redeem Point : + " + redeemPoint)
+        //
+        const now = new Date();
+        const jakartaTime = now.toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
+        const firstTransactionRaw = user?.first_transaction ? user?.first_transaction : ""
+        const firstTransaction = new Date(firstTransactionRaw)
+
+        console.log("transaction new date : " + jakartaTime)
+        console.log("transaction new date : " + firstTransaction)
+        console.log(user?.first_transaction ? "Not Null" : "null")
+        console.log(user?.first_transaction ? "Not Null" : format(jakartaTime, "yyyy-MM-dd hh:mm:ss"))
+
+
+        //
 
         const data = {
             id_user: Number(user?.id_user),
@@ -246,6 +259,45 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
         router.refresh()
     };
     //
+    const handleInitialTransDate = async () => {
+
+        const now = new Date();
+        const jakartaTime = now.toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
+        const firstTransactionRaw = user?.first_transaction ? user?.first_transaction : ""
+        const firstTransaction = new Date(firstTransactionRaw)
+
+        console.log("transaction new date : " + jakartaTime)
+        console.log("transaction new date : " + firstTransaction)
+        console.log(user?.first_transaction ? "Not Null" : "null")
+        console.log(user?.first_transaction ? "Not Null" : format(jakartaTime, "yyyy-MM-dd"))
+
+
+
+
+        const data = {
+            id_user: Number(user?.id_user),
+            first_transaction: user?.first_transaction ? "Not Null" : format(jakartaTime, "yyyy-MM-dd"),
+        };
+        try {
+            const response = await fetch('http://localhost:8081/firstTransactionCheck', {
+                method: 'PUT',
+                body: JSON.stringify(data),
+                headers: { 'Content-Type': 'application/json' },
+
+            });
+
+            if (response.ok) {
+                console.log('ok')
+                handlePoint()
+                console.log(await response.json)
+            }
+            else {
+                console.log("failed")
+            }
+        } catch (error) {
+            console.log("epi error")
+        }
+    };
     //
     const [showModal, setShowModal] = useState(false);
     const [showModalNotif, setShowModalNotif] = useState(false);
@@ -278,7 +330,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
                                                             </svg>
                                                         </div>
                                                         <div>
-                                                            Cart
+                                                            Cart {user?.first_transaction ? "Not Null" : "null"}
                                                         </div>
                                                     </div>
                                                     <div className="text-right items-center">
