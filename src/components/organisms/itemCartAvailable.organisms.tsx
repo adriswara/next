@@ -210,6 +210,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
     };
     //
     const handlePoint = async () => {
+        //xphere perkalian antara yang di setting master hasil nya ke profil
         var redeemPoint = selectedVoucher?.point ? selectedVoucher.point : 0
         // var rawPoint = itemGrandTotal && pointSetting?.transaction ? (itemGrandTotal / 100) / 100 * pointSetting?.transaction : null
         var rawPoint = pointGrandTotal

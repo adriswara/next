@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react"
 import GetData from "./getData.service"
 import Cookies from 'js-cookie'
-import { format, addDays, addMonths, addYears, compareDesc } from "date-fns";
+import { format, addDays, addMonths, addYears, compareDesc, compareAsc } from "date-fns";
 
 var expireTimeView
 
@@ -10,7 +10,7 @@ var expireTimeView
 function GetProfileInfo() {
     const userinfo = Cookies.get('username')
     const query = 'userGet/' + userinfo
-    const [user, setUser] = useState<{ id_user: Number; name_user: number; email_user: number; phone_user: number; Last_login: string, point_user: number, first_transaction: string }>()
+    const [user, setUser] = useState<{ id_user: Number; name_user: number; email_user: number; phone_user: number; Last_login: string, point_user: number, first_transaction: string, last_showcase }>()
     const datas = async () => { GetData(query).then((resp => { setUser(resp.User[0]) })).catch(resp => console.log(resp)) }
     useEffect(() => { datas() }, [])
     //
@@ -19,7 +19,7 @@ function GetProfileInfo() {
     const [pointSetting, setPointSetting] = useState<{ transaction: number, login_daily: number, dayToExpire: number, monthToExpire: number, yearToExpire: number, modeToExpire: number }>()
     const dataPointSetting = async () => { GetData(querryPoinSetting).then((resp => { setPointSetting(resp.pointsettings[0]); console.log("point setting:", resp.pointsettings) })).catch(resp => console.log(resp)) }
     //
-    const [expireTime, setExpireTime] = useState<Date>(new Date())
+    const [expireTime, setExpireTime] = useState<String>("")
     //
     const handleLoginBonus = async () => {
         const now = new Date();
@@ -37,19 +37,19 @@ function GetProfileInfo() {
 
 
 
-        console.log("Handle Login Bonus: ")
-        console.log("Data Now Date: " + jakartaTime)
-        console.log("Isi User Struck : " + user)
-        console.log("User Data: " + user?.id_user + user?.name_user)
-        console.log("User Data last Login:" + user?.Last_login)
-        console.log("Temp Last Login: " + tempLastLogin)
-        console.log("Last Login Date: " + lastLoginDate)
-        console.log("Last Login Month: " + lastLoginMonth)
-        console.log("Last Login Year: " + lastLoginYear)
+        // console.log("Handle Login Bonus: ")
+        // console.log("Data Now Date: " + jakartaTime)
+        // console.log("Isi User Struck : " + user)
+        // console.log("User Data: " + user?.id_user + user?.name_user)
+        // console.log("User Data last Login:" + user?.Last_login)
+        // console.log("Temp Last Login: " + tempLastLogin)
+        // console.log("Last Login Date: " + lastLoginDate)
+        // console.log("Last Login Month: " + lastLoginMonth)
+        // console.log("Last Login Year: " + lastLoginYear)
 
-        console.log("New Login Date : " + tanggalBaru)
-        console.log("New Login Month: " + bulanBaru)
-        console.log("New Login Year : " + tahunBaru)
+        // console.log("New Login Date : " + tanggalBaru)
+        // console.log("New Login Month: " + bulanBaru)
+        // console.log("New Login Year : " + tahunBaru)
 
 
         if (lastLoginDate >= tanggalBaru || user == undefined) {
@@ -106,27 +106,74 @@ function GetProfileInfo() {
         const expireByDate = mode == 1 || mode == 4 ? addDays(firstTransaction, Number(dayRange)) : firstTransaction
         const expireByMonth = mode == 2 || mode == 4 ? addMonths(expireByDate, Number(monthRange)) : expireByDate
         const expire = (mode == 3 || mode == 4 ? addYears(expireByMonth, Number(yearRange)) : expireByMonth)
+        setExpireTime(expire+"")
 
-        console.log("Expire  : " + firstTransaction)
+        console.log(mode)
+        console.log(firstTransactionRaw)
+        console.log("First Transaction  : " + firstTransaction)
+        console.log("First Transaction add days : " + addDays(firstTransaction, Number(dayRange)))
         console.log("Expire date : " + expireByDate)
+        console.log("First Transaction add months : " + addMonths(expireByDate, Number(monthRange)))
         console.log("Expire month : " + expireByMonth)
         console.log("Expire Time : " + expire)
         console.log("Expire Time State : " + expireTime)
-        setExpireTime(expire)
-        const descComparison = compareDesc(expire, jakartaTime);
-        if (descComparison < 0) {
+
+        console.log(expire + jakartaTime)
+        console.log(compareAsc(expire, jakartaTime))
+        const comparison = compareAsc(expire, jakartaTime);
+        if(firstTransactionRaw.length === 0){
+            console.log("masuk somehow if 1")
+            return
+         }
+        if (comparison < 0 && mode != undefined) {
             console.log('point expired');
+            handleResetTransactionDate()
+            handleResetPoint()
+            console.log("masuk somehow if 2")
         }
-        else if (descComparison > 0) {
+        else if (comparison > 0) {
             console.log('Point is secured');
-            newPoint = user?.point_user ? user?.point_user : 0
-        } else {
+            console.log("masuk somehow if 3")   
+            return
+            
+        } else if (mode != undefined) {
             console.log('The day, point expired');
-            newPoint = user?.point_user ? user?.point_user : 0
+            handleResetTransactionDate()
+            console.log("masuk somehow if 4")
         }
+        console.log("End handle PEC")
+       
+    };
+    //
+    const handleResetTransactionDate = async () => {
         const data = {
             id_user: Number(user?.id_user),
-            point_user: Number(newPoint)
+        };
+        try {
+            const response = await fetch('http://localhost:8081/resetTransactionDate', {
+                method: 'PUT',
+                body: JSON.stringify(data),
+                headers: { 'Content-Type': 'application/json' },
+
+            });
+
+            if (response.ok) {
+                console.log('ok')
+                console.log(await response.json)
+            }
+            else {
+                console.log("failed")
+            }
+        } catch (error) {
+            console.log("epi error")
+        }
+    };
+    //
+     //
+     const handleResetPoint = async () => {
+        const data = {
+            id_user: Number(user?.id_user),
+            point_user: 0
         };
         try {
             const response = await fetch('http://localhost:8081/pointTransaction', {
@@ -220,8 +267,13 @@ function GetProfileInfo() {
                         <td className="pt-6 pl-72">{user?.Last_login}</td>
                     </tr>
                     <tr className="w-1 border-t-2 border-solid border-[#e5e7eb]">
+                        <td className="pl-3 py-6">Last Showcase Visited :</td>
+                        <td className="pt-6 pl-72">{user?.last_showcase}</td>
+                    </tr>
+                    <tr className="w-1 border-t-2 border-solid border-[#e5e7eb]">
                         <td className="pl-3 py-6">Point Status :</td>
-                        <td className="pt-6 pl-72">{Number.isNaN(expireTime.getFullYear()) ? "Point Expired" : (expireTime ? "Valid until : " + `${expireTime.getFullYear()}-${expireTime.getMonth()+1}-${expireTime.getDate()}` : "")}</td>
+                        {/* <td className="pt-6 pl-72">{Number.isNaN(expireTime.getFullYear()) ? "Point Expired" : (expireTime ? "Valid until : " + `${expireTime.getFullYear()}-${expireTime.getMonth()}-${expireTime.getDate()}` : "")}</td> */}
+                        <td className="pt-6 pl-72"> {expireTime == "Invalid Date" ? "Expired" : expireTime } </td>
                     </tr>
                 </tbody>
 
