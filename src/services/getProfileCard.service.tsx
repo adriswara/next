@@ -26,23 +26,52 @@ function GetCard(mode: number | undefined) {
 
     //
     const querryPoinSetting = 'getPointSetting'
-    const [pointSetting, setPointSetting] = useState<{ transaction: number, percentage:number }>()
+    const [pointSetting, setPointSetting] = useState<{ transaction: number, percentage: number, to_progress: number }>()
     const dataPointSetting = async () => { GetData(querryPoinSetting).then((resp => { setPointSetting(resp.pointsettings[0]); console.log("point setting:", resp.pointsettings) })).catch(resp => console.log(resp)) }
     //
-    useEffect(() => { dataPointSetting() }, [])
+    //
+    const [userXpState, setUserXpState] = useState<number>()
+    const [userLevelState, setUserLevelState] = useState<number>()
+    const [userXpLeftState, setUserXpLeftState] = useState<number>()
+    const [userPercentageLeft, setUserPercentageLeft] = useState<number>()
 
+
+    //
+    //
+    const handleCountLevel = () => {
+        console.log("HANDLE COUNT LEVEL")
+        const pointToXpRatio = pointSetting?.percentage ? pointSetting?.percentage : 0
+        const nextLevelXponent = pointSetting?.to_progress ? pointSetting?.to_progress : 0
+        const userPoint = user?.point_user ? user?.point_user : 0
+        const currentXp = userPoint * pointToXpRatio
+        const currentLevel = currentXp / nextLevelXponent
+        const toNextLevel = nextLevelXponent * (Math.floor(currentLevel) + 1)
+        const varxpLeft = toNextLevel - currentXp
+        const percentageLeft = (varxpLeft / toNextLevel) * 100
+        //
+        setUserXpState(currentXp)
+        setUserLevelState(Math.floor(currentLevel))
+        setUserXpLeftState(varxpLeft)
+        setUserPercentageLeft(percentageLeft)
+        //
+    };
+    // 
+    //
+    useEffect(() => { dataPointSetting() }, [])
     useEffect(() => { datas() }, [])
+    useEffect(() => { handleCountLevel() }, [user, pointSetting])
     useEffect(() => { dataTransaksi() }, [user])
     useEffect(() => { dataVoucher() }, [idUser])
 
-    console.log("isi id user " + idUser)
-    console.log("query " + queryTotalTransaksi)
-    console.log("isi total transaksi " + totalTransaksi?.Count_transaksi)
+
+    // console.log("isi id user " + idUser)
+    // console.log("query " + queryTotalTransaksi)
+    // console.log("isi total transaksi " + totalTransaksi?.Count_transaksi)
 
     return (
         <div>
             {/* <ProfileStatCardJonas name={String(user?.name_user)} level={Number(user?.level_user)} percentage={50} xpLeft={0} nextLevel={Number(user?.level_user)+1} point={Number(user?.point_user)} showcase={Number(user?.showcase_user)}></ProfileStatCardJonas> */}
-            {mode == 1 && pathname != liteRoute ? <ProfileStatCardSidang xp={Number(user?.point_user)*Number(pointSetting?.percentage)} name={String(user?.name_user)} level={Number(user?.level_user)} percentage={50} xpLeft={0} nextLevel={Number(user?.level_user) + 1} point={Number(user?.point_user)} transaksi={Number(totalTransaksi?.Count_transaksi)}></ProfileStatCardSidang> : (mode == 0 && pathname != liteRoute ? <ProfileStatCardJonas name={String(user?.name_user)} voucher={Number(totalVoucher?.count_voucher)} point={Number(user?.point_user)} transaksi={Number(totalTransaksi?.Count_transaksi)}></ProfileStatCardJonas> : <></>)}
+            {mode == 1 && pathname != liteRoute ? <ProfileStatCardSidang xp={userXpState ? userXpState : 0} name={String(user?.name_user)} level={userLevelState ? userLevelState : 0} percentage={userPercentageLeft ? userPercentageLeft : 0} xpLeft={userXpLeftState ? userXpLeftState : 0} nextLevel={userLevelState ? userLevelState + 1 : 0 + 1} point={Number(user?.point_user)} transaksi={Number(totalTransaksi?.Count_transaksi)}></ProfileStatCardSidang> : (mode == 0 && pathname != liteRoute ? <ProfileStatCardJonas name={String(user?.name_user)} voucher={Number(totalVoucher?.count_voucher)} point={Number(user?.point_user)} transaksi={Number(totalTransaksi?.Count_transaksi)}></ProfileStatCardJonas> : <></>)}
         </div>
     )
 

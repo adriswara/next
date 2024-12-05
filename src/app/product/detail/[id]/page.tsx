@@ -11,7 +11,7 @@ export default function Home() {
   // get product name from link
   const pathname: string | null = usePathname()
   const selectedProduct = decodeURI(pathname + "")
-  console.log("link ini" + selectedProduct)
+  // console.log("link ini" + selectedProduct)
   // 
   const query = selectedProduct
   const [product, setProduct] = useState<{ id_product: number|undefined, type_product: number | undefined, name_product: string | undefined, price_product: number | undefined, description_product: string | undefined, include_product: string | undefined, display_product: string | undefined, point_raw: number | undefined }>()

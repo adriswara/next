@@ -79,7 +79,7 @@ const CartLeftSection: FC<CartLeftSectionProps> = (props) => {
 
                                     {cart?.map((data: cartDataType) => (
                                         // <ul>{data.total_price}</ul>
-                                        <ItemCart productName={String(data.name_product)} productDescription={"desc" + data.description_product} productQuantity={data.item_quantity} totalPrice={data.total_price} productId={data.id_cart} pointReward={0}></ItemCart>
+                                        <ItemCart productPoint={Number(data.point_reward ? data.point_reward : 0)} productName={String(data.name_product)} productDescription={"desc" + data.description_product} productQuantity={data.item_quantity} totalPrice={data.total_price} productId={data.id_cart} pointReward={0}></ItemCart>
                                     ))}
                                 </tbody>
                             </table>

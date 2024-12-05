@@ -108,40 +108,40 @@ function GetProfileInfo() {
         const expire = (mode == 3 || mode == 4 ? addYears(expireByMonth, Number(yearRange)) : expireByMonth)
         setExpireTime(expire+"")
 
-        console.log(mode)
-        console.log(firstTransactionRaw)
-        console.log("First Transaction  : " + firstTransaction)
-        console.log("First Transaction add days : " + addDays(firstTransaction, Number(dayRange)))
-        console.log("Expire date : " + expireByDate)
-        console.log("First Transaction add months : " + addMonths(expireByDate, Number(monthRange)))
-        console.log("Expire month : " + expireByMonth)
-        console.log("Expire Time : " + expire)
-        console.log("Expire Time State : " + expireTime)
+        // console.log(mode)
+        // console.log(firstTransactionRaw)
+        // console.log("First Transaction  : " + firstTransaction)
+        // console.log("First Transaction add days : " + addDays(firstTransaction, Number(dayRange)))
+        // console.log("Expire date : " + expireByDate)
+        // console.log("First Transaction add months : " + addMonths(expireByDate, Number(monthRange)))
+        // console.log("Expire month : " + expireByMonth)
+        // console.log("Expire Time : " + expire)
+        // console.log("Expire Time State : " + expireTime)
 
-        console.log(expire + jakartaTime)
-        console.log(compareAsc(expire, jakartaTime))
+        // console.log(expire + jakartaTime)
+        // console.log(compareAsc(expire, jakartaTime))
         const comparison = compareAsc(expire, jakartaTime);
         if(firstTransactionRaw.length === 0){
-            console.log("masuk somehow if 1")
+            // console.log("masuk somehow if 1")
             return
          }
         if (comparison < 0 && mode != undefined) {
-            console.log('point expired');
+            // console.log('point expired');
             handleResetTransactionDate()
             handleResetPoint()
-            console.log("masuk somehow if 2")
+            // console.log("masuk somehow if 2")
         }
         else if (comparison > 0) {
-            console.log('Point is secured');
-            console.log("masuk somehow if 3")   
+            // console.log('Point is secured');
+            // console.log("masuk somehow if 3")   
             return
             
         } else if (mode != undefined) {
-            console.log('The day, point expired');
+            // console.log('The day, point expired');
             handleResetTransactionDate()
-            console.log("masuk somehow if 4")
+            // console.log("masuk somehow if 4")
         }
-        console.log("End handle PEC")
+        // console.log("End handle PEC")
        
     };
     //

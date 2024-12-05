@@ -31,9 +31,9 @@ const ItemCart: FC<ItemCartProps> = (props) => {
 
         quantity <= 0 ? tempQuantity = 1 : tempQuantity = quantity
         // var newPoint = pointSetting?.transaction ? totalPricePerItem / 100 / 100 * pointSetting?.transaction : 0
-        console.log("raw point + "+productPoint)
+        // console.log("raw point + "+productPoint)
         var newPoint = pointSetting?.transaction ? (productPoint * quantity / 100) / 10 * pointSetting?.transaction : 0
-        console.log("new point + "+newPoint)
+        // console.log("new point + "+newPoint)
         const data = {
             id_cart: Number(productId),
             item_quantity: Number(tempQuantity),

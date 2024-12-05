@@ -33,15 +33,15 @@ export default function Home() {
         const bulanBaru = Number(format(jakartaTime, "MM"))
         const tahunBaru = Number(format(jakartaTime, "yyyy"))
 
-        console.log("Waktu Sekarang : " + jakartaTime)
-        console.log("Waktu Last Showcase : " + tempLastShowcase)
-        console.log("Tanggal Last Showcase : " + lastShowcaseDate)
-        console.log("Tanggal Baru : " + tanggalBaru)
+        // console.log("Waktu Sekarang : " + jakartaTime)
+        // console.log("Waktu Last Showcase : " + tempLastShowcase)
+        // console.log("Tanggal Last Showcase : " + lastShowcaseDate)
+        // console.log("Tanggal Baru : " + tanggalBaru)
 
         if (lastShowcaseDate >= tanggalBaru || user == undefined) {
             if (lastShowcaseMonth >= bulanBaru || user == undefined) {
                 if (lastShowcaseYear >= tahunBaru || user == undefined) {
-                    console.log("MASUK KE IF")
+                    // console.log("MASUK KE IF")
                     return
                 }
             }
@@ -49,12 +49,12 @@ export default function Home() {
 
 
 
-        console.log("last showcase yang ke db: " + format(jakartaTime, "yyyy-MM-dd hh:mm:ss"))
+        // console.log("last showcase yang ke db: " + format(jakartaTime, "yyyy-MM-dd hh:mm:ss"))
         const data = {
             id_user: Number(user?.id_user),
             last_showcase: format(jakartaTime, "yyyy-MM-dd hh:mm:ss"),
         };
-        console.log("last showcase yang ke db: " + data.last_showcase)
+        // console.log("last showcase yang ke db: " + data.last_showcase)
         try {
             const response = await fetch('http://localhost:8081/dailyshowcaseCheck', {
                 method: 'PUT',
@@ -84,7 +84,7 @@ export default function Home() {
             id_user: Number(user?.id_user),
             point_user: newPoint
         };
-        console.log("point user yang ke db : " + data.point_user)
+        // console.log("point user yang ke db : " + data.point_user)
         try {
             const response = await fetch('http://localhost:8081/pointTransaction', {
                 method: 'PUT',

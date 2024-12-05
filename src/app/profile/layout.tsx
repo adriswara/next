@@ -27,18 +27,18 @@ export default function profile({
   const [varMode, setVarMode] = useState<string>("")
 
   const GenerateVarMode = async () => {
-    console.log("mode dalam if = " + mode)
+    // console.log("mode dalam if = " + mode)
     if (mode == 0) {
-      console.log("masuk if")
+      // console.log("masuk if")
       setVarMode("jonas")
     }
     else if (mode == 1) {
-      console.log("masuk else if")
+      // console.log("masuk else if")
 
       setVarMode("sidang")
     }
     else {
-      console.log("masuk if")
+      // console.log("masuk if")
       setVarMode("sidang")
     }
   }
@@ -56,9 +56,9 @@ export default function profile({
   useEffect(() => { GenerateVarMode() }, [])
   useEffect(() => { console.log() })
 
-  console.log("isi data mode " + mode)
+  // console.log("isi data mode " + mode)
  
-  console.log("isi var mode " + varMode)
+  // console.log("isi var mode " + varMode)
 
 
   return (

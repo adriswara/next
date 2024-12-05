@@ -53,8 +53,8 @@ const Modal = ({ arrayId, show, onClose }) => {
           {ownedVoucher?.map((data: ownedVoucherType) => (
             <div>
               {arrayId?.map((dataBarang: number) => (
-                console.log("dataBarang" + dataBarang + "data voucher" + data.buyReq),
-                console.log(dataBarang == data.buyReq),
+                // console.log("dataBarang" + dataBarang + "data voucher" + data.buyReq),
+                // console.log(dataBarang == data.buyReq),
                 dataBarang == data.buyReq || data.buyReq == -1 ? <VoucherOwned hideButton={0} idVoucher={data.id_voucher_ownership} voucherType={data.voucherType} isUsable={data.isUsable} discount={data.discount} buyReq={data.buyReq} itemFree={data.itemFree} title={data.title} dateStart={data.dateStart} dateEnd={data.dateEnd} productRange={data.productRange} code={data.code} point={data.Point}></VoucherOwned> : <VoucherOwned hideButton={1} idVoucher={data.id_voucher_ownership} voucherType={data.voucherType} isUsable={data.isUsable} discount={data.discount} buyReq={data.buyReq} itemFree={data.itemFree} title={data.title} dateStart={data.dateStart} dateEnd={data.dateEnd} productRange={data.productRange} code={data.code} point={data.Point}></VoucherOwned>
               ))}
             </div>
