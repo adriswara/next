@@ -7,7 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 
 
 // get data
-function GetCard(mode: number| undefined) {
+function GetCard(mode: number | undefined) {
     const userinfo = Cookies.get('username')
     const query = 'userGet/' + userinfo
     const [user, setUser] = useState<{ id_user: number; name_user: string; password_user: number, email_user: number; phone_user: number; adress_user: string; point_user: number; level_user: number; showcase_user: number; display_user: string; isDelete_user: number }>()
@@ -24,6 +24,13 @@ function GetCard(mode: number| undefined) {
     const liteId = pathname.split("/")[3]
     const liteRoute = "/profile/showcaseLite/" + liteId
 
+    //
+    const querryPoinSetting = 'getPointSetting'
+    const [pointSetting, setPointSetting] = useState<{ transaction: number, percentage:number }>()
+    const dataPointSetting = async () => { GetData(querryPoinSetting).then((resp => { setPointSetting(resp.pointsettings[0]); console.log("point setting:", resp.pointsettings) })).catch(resp => console.log(resp)) }
+    //
+    useEffect(() => { dataPointSetting() }, [])
+
     useEffect(() => { datas() }, [])
     useEffect(() => { dataTransaksi() }, [user])
     useEffect(() => { dataVoucher() }, [idUser])
@@ -35,7 +42,7 @@ function GetCard(mode: number| undefined) {
     return (
         <div>
             {/* <ProfileStatCardJonas name={String(user?.name_user)} level={Number(user?.level_user)} percentage={50} xpLeft={0} nextLevel={Number(user?.level_user)+1} point={Number(user?.point_user)} showcase={Number(user?.showcase_user)}></ProfileStatCardJonas> */}
-            {mode == 1 && pathname != liteRoute ? <ProfileStatCardSidang name={String(user?.name_user)} level={Number(user?.level_user)} percentage={50} xpLeft={0} nextLevel={Number(user?.level_user) + 1} point={Number(user?.point_user)} showcase={Number(user?.showcase_user)}></ProfileStatCardSidang> : (mode == 0 && pathname != liteRoute ? <ProfileStatCardJonas name={String(user?.name_user)} voucher={Number(totalVoucher?.count_voucher)} point={Number(user?.point_user)} transaksi={Number(totalTransaksi?.Count_transaksi)}></ProfileStatCardJonas> : <></>)}
+            {mode == 1 && pathname != liteRoute ? <ProfileStatCardSidang xp={Number(user?.point_user)*Number(pointSetting?.percentage)} name={String(user?.name_user)} level={Number(user?.level_user)} percentage={50} xpLeft={0} nextLevel={Number(user?.level_user) + 1} point={Number(user?.point_user)} transaksi={Number(totalTransaksi?.Count_transaksi)}></ProfileStatCardSidang> : (mode == 0 && pathname != liteRoute ? <ProfileStatCardJonas name={String(user?.name_user)} voucher={Number(totalVoucher?.count_voucher)} point={Number(user?.point_user)} transaksi={Number(totalTransaksi?.Count_transaksi)}></ProfileStatCardJonas> : <></>)}
         </div>
     )
 

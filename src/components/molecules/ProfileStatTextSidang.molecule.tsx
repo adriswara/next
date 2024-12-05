@@ -1,11 +1,11 @@
 import { FC } from "react";
 
-interface ProfileStatTextSidangProps { point: number, showcase: number, level: number }
+interface ProfileStatTextSidangProps { point: number, transaksi: number, xp: number }
 const ProfileStatTextSidang: FC<ProfileStatTextSidangProps> = (props) => {
     const {
         point = 0,
-        showcase = 0,
-        level = 0
+        transaksi = 0,
+        xp = 0
 
     } = props
     return (
@@ -15,16 +15,15 @@ const ProfileStatTextSidang: FC<ProfileStatTextSidangProps> = (props) => {
                     {point}
                 </div>
             </div>
-            <div className="h-[100px] text-center text-white pt-[40px] border-l-[1px] border-solid border-white text-sm ">showcase
+            <div className="h-[100px] text-center text-white pt-[40px] border-l-[1px] border-solid border-white text-sm ">Total XP
                 <div>
-                    {showcase}
+                    {xp}
                 </div>
             </div>
-            <div className="h-[100px] text-center text-white pt-[40px] border-l-[1px] border-solid border-white text-sm ">level
+            <div className="h-[100px] text-center text-white pt-[40px] border-l-[1px] border-solid border-white text-sm ">Transaksi
                 <div>
-                    {level}
+                    {transaksi}
                 </div>
-
             </div>
         </div>
     )
