@@ -7,7 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 
 
 // get data
-function GetCard(mode: number) {
+function GetCard(mode: number| undefined) {
     const userinfo = Cookies.get('username')
     const query = 'userGet/' + userinfo
     const [user, setUser] = useState<{ id_user: number; name_user: string; password_user: number, email_user: number; phone_user: number; adress_user: string; point_user: number; level_user: number; showcase_user: number; display_user: string; isDelete_user: number }>()

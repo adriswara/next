@@ -277,7 +277,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
 
         const data = {
             id_user: Number(user?.id_user),
-            first_transaction: user?.first_transaction ? "Not Null" : format(jakartaTime, "yyyy-MM-dd"),
+            first_transaction: user?.first_transaction ? user?.first_transaction : format(jakartaTime, "yyyy-MM-dd"),
         };
         try {
             const response = await fetch('http://localhost:8081/firstTransactionCheck', {
@@ -331,7 +331,9 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
                                                             </svg>
                                                         </div>
                                                         <div>
-                                                            Cart {user?.first_transaction ? "Not Null" : "null"}
+                                                         
+                                                            Cart
+                                                            {/* user?.first_transaction ? user?.first_transaction : "null" */}    {/* for testing first transaction data */}
                                                         </div>
                                                     </div>
                                                     <div className="text-right items-center">

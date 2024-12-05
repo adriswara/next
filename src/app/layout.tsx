@@ -24,38 +24,7 @@ export default function RootLayout({
 }>) {
 
 
-  // header
-  const headerStyle = {
-    display: "grid",
-    gridTemplateColumns: "auto auto auto auto auto auto auto",
-    border: "2px solid lightgrey",
-
-  }
-
-  const headerContent = {
-    paddingTop: 16,
-    paddingBottom: 16,
-    marginLeft: 90,
-    marginRight: 80
-  }
-  const photoStudio = {
-    paddingTop: 16,
-    paddingBottom: 16,
-    marginLeft: 350,
-    marginRight: -160
-  }
-  const photoPrint = {
-    paddingTop: 16,
-    paddingBottom: 16,
-    marginLeft: 90,
-    marginRight: -160
-  }
-  const checkoutButton = {
-    paddingTop: 16,
-    paddingBottom: 16,
-    marginRight: -24,
-    marginLeft: 82
-  }
+  
 
 
   var isLogin = 1

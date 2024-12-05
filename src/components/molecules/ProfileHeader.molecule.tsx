@@ -16,8 +16,8 @@ const ProfileHeader: FC<ProfileHeaderProps> = (props) => {
         <ProfileNavLink navigation={"/profile/transactionList"} label={"Transaction"}></ProfileNavLink>
         <ProfileNavLink navigation={"/profile/voucherList"} label={"Voucher List"}></ProfileNavLink>
         <ProfileNavLink navigation={"/profile/voucherRedeem"} label={"Voucher Redeem"}></ProfileNavLink>
-        {mode == 0 ? <ProfileNavLink navigation={"/profile/leaderboard"} label={"Leaderboard"}></ProfileNavLink> : <></>}
-        {mode == 0 ? <ProfileNavLink navigation={"/profile/performanceGraph"} label={"Performance Graph"}></ProfileNavLink> : <></>}
+        {mode == 1 ? <ProfileNavLink navigation={"/profile/leaderboard"} label={"Leaderboard"}></ProfileNavLink> : <></>}
+        {mode == 1 ? <ProfileNavLink navigation={"/profile/performanceGraph"} label={"Performance Graph"}></ProfileNavLink> : <></>}
         {/* <ProfileNavLink navigation={"/profile/showcase"} label={"Showcase"}></ProfileNavLink> */}
         <ProfileNavLink navigation={"/profile/showcase2"} label={"Showcase"}></ProfileNavLink>
         <ProfileNavLink navigation={"/profile/logout"} label={"Logout"} bottom={1}></ProfileNavLink>

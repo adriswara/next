@@ -68,7 +68,7 @@ export default function profile({
         {/* {pathname !== liteRoute && <ProfileHeader mode={mode} showModal={false}></ProfileHeader>} */}
         {/*  */}
         {/* {mode != undefined && pathname != liteRoute ? GetCard(mode) : GetCard(0)} */}
-        {GetCard(0)}
+        {GetCard(mode)}
         {/*  */}
       </div>
       {children}

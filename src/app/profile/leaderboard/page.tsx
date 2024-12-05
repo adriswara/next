@@ -34,7 +34,6 @@ export default function Home() {
                         <table className="w-auto p-5 m-5 border-collapse">
                             <thead>
                                 <tr>
-                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Id</th>
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Username</th>
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Email</th>
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Phone</th>
@@ -45,7 +44,6 @@ export default function Home() {
                             <tbody>
                                 {userData?.map((data: userDataType) => (
                                     <tr>
-                                        <td className="p-2 text-left border-b border-solid">{data.Id}</td>
                                         <td className="p-2 text-left border-b border-solid">{data.Username}</td>
                                         <td className="p-2 text-left border-b border-solid">{data.Email}</td>
                                         <td className="p-2 text-left border-b border-solid">{data.Phone}</td>
