@@ -5,6 +5,7 @@ import GetData from "@/services/getData.service";
 import { useEffect, useState } from "react";
 import Cookies from 'js-cookie'
 import { format } from "date-fns";
+import CartEmpty from "@/components/atoms/EmptyCart.atom";
 
 
 const OwnedVoucher = () => {
@@ -50,11 +51,12 @@ const OwnedVoucher = () => {
     return (
         <div className="border-2 border-solid border-jonasBorder rounded-[10px] w-full h-full" >
             {/* voucher navigation */}
-            <VoucherFilterForm></VoucherFilterForm>
+            {/* <VoucherFilterForm></VoucherFilterForm> */}
+            <div className="text-3xl m-5">Your Vouchers</div>
             {/* voucher section */}
             <div className="mx-5 my-5">
                 {/* voucher items */}
-
+                {ownedVoucher == undefined || ownedVoucher == null ? <CartEmpty title={"Your Voucher is Empty"}></CartEmpty> : <></>}
                 {ownedVoucher?.map((data: ownedVoucherType) => (
                     <div>
                         {/* {data.isUsable} */}

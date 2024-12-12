@@ -40,7 +40,7 @@ const Cart = () => {
     useEffect(() => { dataCarts() }, [user])
     return (
         <main className="flex-1 flex mt-16">
-            {cart ? <ItemCartAvailable></ItemCartAvailable> : <CartEmpty></CartEmpty>}
+            {cart ? <ItemCartAvailable></ItemCartAvailable> : <CartEmpty title={"Your Cart is Empty"}></CartEmpty>}
         </main>
     );
 };

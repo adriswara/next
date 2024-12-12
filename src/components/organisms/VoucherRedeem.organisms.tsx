@@ -70,7 +70,7 @@ const VoucherRedeem: FC<VoucherRedeemProps> = (props) => {
             if (response.ok) {
                 console.log('ok')
                 handlePoint()
-                router.push('/profile')
+                router.push('profile/voucherList')
                 console.log(await response.json)
             }
             else {
@@ -120,7 +120,7 @@ const VoucherRedeem: FC<VoucherRedeemProps> = (props) => {
             {/* voucher right component */}
             <div>
                 <div className="grid grid-cols-2">
-                    <div className="text-blue-800 text-sm ml-35 mr-0">Code: {code}</div>
+                    {/* <div className="text-blue-800 text-sm ml-35 mr-0">Code: {code}</div> */}
                     {/* <VoucherCodeCopyButton></VoucherCodeCopyButton> */}
                 </div>
             </div>

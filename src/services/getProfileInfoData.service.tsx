@@ -16,7 +16,7 @@ function GetProfileInfo() {
     //
     //
     const querryPoinSetting = 'getPointSetting'
-    const [pointSetting, setPointSetting] = useState<{ transaction: number, login_daily: number, dayToExpire: number, monthToExpire: number, yearToExpire: number, modeToExpire: number }>()
+    const [pointSetting, setPointSetting] = useState<{ transaction: number, login_daily: number, dayToExpire: number, monthToExpire: number, yearToExpire: number, modeToExpire: number, dateToExpire: string }>()
     const dataPointSetting = async () => { GetData(querryPoinSetting).then((resp => { setPointSetting(resp.pointsettings[0]); console.log("point setting:", resp.pointsettings) })).catch(resp => console.log(resp)) }
     //
     const [expireTime, setExpireTime] = useState<String>("")
@@ -24,7 +24,6 @@ function GetProfileInfo() {
     const handleLoginBonus = async () => {
         const now = new Date();
         const jakartaTime = now.toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
-
 
         const tempLastLogin = user?.Last_login ? new Date(user?.Last_login) : null;
         const lastLoginDate = Number(tempLastLogin?.getDate())
@@ -106,7 +105,7 @@ function GetProfileInfo() {
         const expireByDate = mode == 1 || mode == 4 ? addDays(firstTransaction, Number(dayRange)) : firstTransaction
         const expireByMonth = mode == 2 || mode == 4 ? addMonths(expireByDate, Number(monthRange)) : expireByDate
         const expire = (mode == 3 || mode == 4 ? addYears(expireByMonth, Number(yearRange)) : expireByMonth)
-        setExpireTime(expire+"")
+        // setExpireTime(expire + "")
 
         // console.log(mode)
         // console.log(firstTransactionRaw)
@@ -120,29 +119,49 @@ function GetProfileInfo() {
 
         // console.log(expire + jakartaTime)
         // console.log(compareAsc(expire, jakartaTime))
+        //
+
+
+        const expireTime = pointSetting?.dateToExpire ? new Date(pointSetting?.dateToExpire) : null
+        setExpireTime(expireTime+"")
+
+
+        const tanggalExpire = Number(expireTime?.getDate())
+        const bulanExpire = Number(expireTime?.getMonth())
+        const tahunExpire = Number(expireTime?.getFullYear())
+
+        const tanggalBaru = Number(format(jakartaTime, "dd"))
+        const bulanBaru = Number(format(jakartaTime, "MM"))
+        const tahunBaru = Number(format(jakartaTime, "yyyy"))
+
+
+
+        if (tanggalBaru >= tanggalExpire) {
+            if (bulanBaru >= bulanExpire) {
+                if (tahunBaru >= tahunExpire) {
+                    return
+                }
+            }
+        }
+
+
+
+        /* old code
         const comparison = compareAsc(expire, jakartaTime);
         if(firstTransactionRaw.length === 0){
-            // console.log("masuk somehow if 1")
             return
          }
         if (comparison < 0 && mode != undefined) {
-            // console.log('point expired');
             handleResetTransactionDate()
             handleResetPoint()
-            // console.log("masuk somehow if 2")
         }
         else if (comparison > 0) {
-            // console.log('Point is secured');
-            // console.log("masuk somehow if 3")   
             return
             
         } else if (mode != undefined) {
-            // console.log('The day, point expired');
             handleResetTransactionDate()
-            // console.log("masuk somehow if 4")
-        }
-        // console.log("End handle PEC")
-       
+        } 
+        */
     };
     //
     const handleResetTransactionDate = async () => {
@@ -169,8 +188,8 @@ function GetProfileInfo() {
         }
     };
     //
-     //
-     const handleResetPoint = async () => {
+    //
+    const handleResetPoint = async () => {
         const data = {
             id_user: Number(user?.id_user),
             point_user: 0
@@ -273,7 +292,7 @@ function GetProfileInfo() {
                     <tr className="w-1 border-t-2 border-solid border-[#e5e7eb]">
                         <td className="pl-3 py-6">Point Status :</td>
                         {/* <td className="pt-6 pl-72">{Number.isNaN(expireTime.getFullYear()) ? "Point Expired" : (expireTime ? "Valid until : " + `${expireTime.getFullYear()}-${expireTime.getMonth()}-${expireTime.getDate()}` : "")}</td> */}
-                        <td className="pt-6 pl-72"> {expireTime == "Invalid Date" ? "Expired" : expireTime } </td>
+                        <td className="pt-6 pl-72"> {expireTime == "Invalid Date" ? "Expired" : expireTime} </td>
                     </tr>
                 </tbody>
 

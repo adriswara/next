@@ -12,7 +12,8 @@ export default async function Home() {
     return (
         <div className="border-2 border-solid border-jonasBorder rounded-[10px] w-full h-full">
             {/* voucher navigation */}
-            <VoucherFilterForm></VoucherFilterForm>
+            {/* <VoucherFilterForm></VoucherFilterForm> */}
+            <div className="text-3xl m-5">Redeem New Voucher</div>
             {/* voucher section */}
             <div className="mt-5 mb-5">
                 {/* voucher grid */}

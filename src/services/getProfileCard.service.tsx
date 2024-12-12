@@ -41,13 +41,21 @@ function GetCard(mode: number | undefined) {
     const handleCountLevel = () => {
         console.log("HANDLE COUNT LEVEL")
         const pointToXpRatio = pointSetting?.percentage ? pointSetting?.percentage : 0
+        console.log("point setting percentage : " + pointToXpRatio)
         const nextLevelXponent = pointSetting?.to_progress ? pointSetting?.to_progress : 0
+        console.log("point setting to progress : " + nextLevelXponent)
         const userPoint = user?.point_user ? user?.point_user : 0
+        console.log("point user : " + userPoint)
         const currentXp = userPoint * pointToXpRatio
+        console.log("currentxp = userpoint * point setting percentage : " + currentXp)
         const currentLevel = currentXp / nextLevelXponent
+        console.log("current level = current xp / point setting to progress : " + currentLevel)
         const toNextLevel = nextLevelXponent * (Math.floor(currentLevel) + 1)
+        console.log("to next level = to progress * current level +1 : " + toNextLevel)
         const varxpLeft = toNextLevel - currentXp
+        console.log("var xp levt" + varxpLeft)
         const percentageLeft = (varxpLeft / toNextLevel) * 100
+        console.log("precentage = varxplevt(" + varxpLeft + ") / to next level(" + toNextLevel + ") * 100 = " + percentageLeft)
         //
         setUserXpState(currentXp)
         setUserLevelState(Math.floor(currentLevel))
