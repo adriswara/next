@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { InstagramEmbed } from 'react-social-media-embed';
 import Cookies from 'js-cookie'
 import { format } from "date-fns";
+import ModalNotification from '@/components/molecules/modalNotification.molecule';
 
 
 export default function Home() {
@@ -19,6 +20,10 @@ export default function Home() {
     const querryPoinSetting = 'getPointSetting'
     const [pointSetting, setPointSetting] = useState<{ transaction: number, login_daily: number }>()
     const dataPointSetting = async () => { GetData(querryPoinSetting).then((resp => { setPointSetting(resp.pointsettings[0]); console.log("point setting:", resp.pointsettings) })).catch(resp => console.log(resp)) }
+    //
+    //  
+    const [showModalNotif, setShowModalNotif] = useState(false);
+    //
     //
     const handleShowcaseBonus = async () => {
         console.log("handle showcase bonus")
@@ -46,6 +51,8 @@ export default function Home() {
                 }
             }
         }
+
+      
 
 
 
@@ -78,6 +85,8 @@ export default function Home() {
     //
     //
     const handlePoint = async () => {
+          //disini coba 
+          setShowModalNotif(true)
         var rawPoint = pointSetting?.transaction ? 10 / 100 * pointSetting?.login_daily : null
         var newPoint = rawPoint && user?.point_user ? Number(rawPoint) + Number(user?.point_user) : null
         const data = {
@@ -121,6 +130,7 @@ export default function Home() {
             <div id='bahkan dalem' className='ml-52' style={{ display: 'flex', justifyContent: 'center' }}>
                 <InstagramEmbed url={url} width={700} height={1256} captioned />
             </div>
+            <ModalNotification show={showModalNotif} onClose={() => setShowModalNotif(false)} notificationType={1} message={"Congratulation you got points from checking showcase"}></ModalNotification>
         </div>
     );
 }

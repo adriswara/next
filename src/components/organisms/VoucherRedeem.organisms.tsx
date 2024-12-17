@@ -70,7 +70,7 @@ const VoucherRedeem: FC<VoucherRedeemProps> = (props) => {
             if (response.ok) {
                 console.log('ok')
                 handlePoint()
-                router.push('profile/voucherList')
+                router.push('/profile/voucherList')
                 console.log(await response.json)
             }
             else {

@@ -30,7 +30,6 @@ export default function Home() {
             <div className="mx-0 my-0">
                 <div className="w-[312px] flex-col flex gap-5 justify-start">
                     <div className="border rounded-lg border-solid border-[#e5e7eb] mr-auto inline-block overflow-scroll whitespace-nowrap w-[385%]">
-                        <span className="ml-5"> Search name </span>
                         <table className="w-auto p-5 m-5 border-collapse">
                             <thead>
                                 <tr>

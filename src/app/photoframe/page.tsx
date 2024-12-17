@@ -15,7 +15,7 @@ export default async function Home() {
 
     <div className={`${poppins.className} flex pt-5 pb-36 container mx-auto items-start gap-5 `}>
       <div className="w-[312px] flex-col flex gap-5 justify-start">
-        <div className="border rounded-lg border-solid border-[#e5e7eb] h-auto p-4" >
+        {/* <div className="border rounded-lg border-solid border-[#e5e7eb] h-auto p-4" >
           <ul>
             <form action="">
               <li > <h6 className="font-bold mb-3">Filter by category</h6> </li>
@@ -26,7 +26,7 @@ export default async function Home() {
               <li > <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" /> <label htmlFor=""> Fnb </label></li>
             </form>
           </ul>
-        </div>
+        </div> */}
       </div>
       {/*  */}
       <GetProductFrame></GetProductFrame>

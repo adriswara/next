@@ -46,7 +46,7 @@ export default function Home() {
         labels: varLabels,
         datasets: [
             {
-                label: 'GeeksforGeeks Line Chart',
+                label: 'Transaction Performance Line Chart',
                 data: varData,
                 fill: false,
                 borderColor: 'rgb(75, 192, 192)',

@@ -122,29 +122,36 @@ function GetProfileInfo() {
         //
 
 
-        const expireTime = pointSetting?.dateToExpire ? new Date(pointSetting?.dateToExpire) : null
-        setExpireTime(expireTime+"")
-
-
-        const tanggalExpire = Number(expireTime?.getDate())
-        const bulanExpire = Number(expireTime?.getMonth())
-        const tahunExpire = Number(expireTime?.getFullYear())
-
-        const tanggalBaru = Number(format(jakartaTime, "dd"))
-        const bulanBaru = Number(format(jakartaTime, "MM"))
-        const tahunBaru = Number(format(jakartaTime, "yyyy"))
-
-
-
-        if (tanggalBaru >= tanggalExpire) {
-            if (bulanBaru >= bulanExpire) {
-                if (tahunBaru >= tahunExpire) {
-                    return
-                }
-            }
+        var expireTime = pointSetting?.dateToExpire ? new Date(pointSetting?.dateToExpire) : null
+        
+        
+        
+        
+        
+        const compare = compareAsc(expireTime ? expireTime : "", jakartaTime)
+        
+        console.log(expireTime + " : Adalah Expire Time")
+        console.log(jakartaTime + " : Adalah Jakarta Time")
+        console.log(compare + " : Hasil compare expire time atau jakarta")
+        
+        setExpireTime(expireTime + "")
+        if (compare < 0) {
+            setExpireTime("Expired")
+            console.log("expire")
+            handleResetTransactionDate()
+            handleResetPoint()
         }
+        
 
+        // if (tanggalBaru >= tanggalExpire) {
+        //     if (bulanBaru >= bulanExpire) {
+        //         if (tahunBaru >= tahunExpire) {
+        //             return
+        //         }
+        //     }
+        // }
 
+        console.log("expire")
 
         /* old code
         const comparison = compareAsc(expire, jakartaTime);
@@ -292,7 +299,7 @@ function GetProfileInfo() {
                     <tr className="w-1 border-t-2 border-solid border-[#e5e7eb]">
                         <td className="pl-3 py-6">Point Status :</td>
                         {/* <td className="pt-6 pl-72">{Number.isNaN(expireTime.getFullYear()) ? "Point Expired" : (expireTime ? "Valid until : " + `${expireTime.getFullYear()}-${expireTime.getMonth()}-${expireTime.getDate()}` : "")}</td> */}
-                        <td className="pt-6 pl-72"> {expireTime == "Invalid Date" ? "Expired" : expireTime} </td>
+                        <td className="pt-6 pl-72"> {expireTime != null ? (expireTime == "Invalid Date" ? "Expired" : expireTime) : "Null"} </td>
                     </tr>
                 </tbody>
 
