@@ -26,7 +26,7 @@ export default function Home() {
     const dataPBM = async () => { GetData(querryPBM).then((resp => { setPBM(resp.pointByMonth); console.log(resp.pointByMonth) })).catch(resp => console.log(resp)) }
     useEffect(() => { dataPBM() }, [])
     // 
-    const Line = dynamic(() => import('react-chartjs-2').then((mod) => mod.Line), {
+    const Bar = dynamic(() => import('react-chartjs-2').then((mod) => mod.Bar), {
         ssr: false,
     });
     const month = ["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -46,7 +46,7 @@ export default function Home() {
         labels: varLabels,
         datasets: [
             {
-                label: 'Transaction Performance Line Chart',
+                label: 'Transaction Performance Bar Chart For last 5 months since first transaction',
                 data: varData,
                 fill: false,
                 borderColor: 'rgb(75, 192, 192)',
@@ -61,7 +61,7 @@ export default function Home() {
             <div className="border-gray-100 mt-2">
                 <div style={{ width: '700px', height: '700px' }}>
                     <h1>Performa dalam  bulan  </h1>
-                    <Line data={data} />
+                    <Bar data={data} />
                 </div>
             </div>
         </div>

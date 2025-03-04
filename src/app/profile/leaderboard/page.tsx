@@ -14,7 +14,8 @@ type userDataType = {
     Phone: string,
     Address: string,
     Point: number,
-    totalXpUser: number
+    totalXpUser: number,
+    Total_Transaction_User: number
 }
 export default function Home() {
     //
@@ -22,7 +23,11 @@ export default function Home() {
     const [userData, setUserData] = useState<userDataType[]>()
     const dataUser = async () => { GetData(querryUser).then((resp => { setUserData(resp.User); console.log(resp.transaction) })).catch(resp => console.log(resp)) }
     //
-    useEffect(() => { dataUser()}, [])
+    const [convertionRate, setconvertionRate] = useState<number>()
+    //
+
+
+    useEffect(() => { dataUser() }, [])
 
 
     return (
@@ -38,6 +43,10 @@ export default function Home() {
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Phone</th>
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Address</th>
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Point</th>
+                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Transaction</th>
+                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Total Score</th>
+
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -48,6 +57,9 @@ export default function Home() {
                                         <td className="p-2 text-left border-b border-solid">{data.Phone}</td>
                                         <td className="p-2 text-left border-b border-solid">{data.Address}</td>
                                         <td className="p-2 text-left border-b border-solid">{data.Point}</td>
+                                        <td className="p-2 text-left border-b border-solid">{data.Total_Transaction_User}</td>
+                                        <td className="p-2 text-left border-b border-solid">{data.Total_Transaction_User * 10 + data.Point}</td>
+
                                     </tr>
                                 ))}
                             </tbody>
