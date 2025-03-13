@@ -12,7 +12,7 @@ export default function Home() {
     // 
     const userinfo = Cookies.get('username')
     const queryName = 'userGet/' + userinfo
-    const [user, setUser] = useState<{ id_user: Number; name_user: number; email_user: number; phone_user: number; Last_login: string, point_user: number, last_showcase: string }>()
+    const [user, setUser] = useState<{ id_user: Number; name_user: number; email_user: number; phone_user: number; Last_login: string, point_user: number, totalxpUser: number,last_showcase: string }>()
     const datanames = async () => { GetData(queryName).then((resp => { setUser(resp.User[0]) })).catch(resp => console.log(resp)) }
     useEffect(() => { datanames() }, [])
     //
@@ -89,9 +89,12 @@ export default function Home() {
           setShowModalNotif(true)
         var rawPoint = pointSetting?.transaction ? 10 / 100 * pointSetting?.login_daily : null
         var newPoint = rawPoint && user?.point_user ? Number(rawPoint) + Number(user?.point_user) : null
+        var newXp = rawPoint && user?.totalxpUser ? Number(rawPoint) + Number(user?.totalxpUser) : null
+
         const data = {
             id_user: Number(user?.id_user),
-            point_user: newPoint
+            point_user: newPoint,
+            totalxpUser: newXp
         };
         // console.log("point user yang ke db : " + data.point_user)
         try {

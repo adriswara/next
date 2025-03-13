@@ -60,7 +60,7 @@ export default function Home() {
             <h3 className="text-base font-semibold leading-7 text-gray-900">Performance Graph</h3>
             <div className="border-gray-100 mt-2">
                 <div style={{ width: '700px', height: '700px' }}>
-                    <h1>Performa dalam  bulan  </h1>
+                    <h1>Performa transaksi dalam kategori bulan  </h1>
                     <Bar data={data} />
                 </div>
             </div>
