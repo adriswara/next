@@ -27,7 +27,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
         description_product: string,
         price_product: number,
         point_reward: number,
-        item_type: number,
+        type_product: number,
         productPoint: number
     }
     type ownedVoucherType = {
@@ -66,7 +66,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
     // get user id from cookie
     const userinfo = Cookies.get('username')
     const query = 'userGet/' + userinfo
-    const [user, setUser] = useState<{ id_user: number, point_user: number, first_transaction: string }>()
+    const [user, setUser] = useState<{ id_user: number, point_user: number, first_transaction: string, totalxpUser: number }>()
     const datas = async () => { GetData(query).then((resp => { setUser(resp.User[0]) })).catch(resp => console.log(resp)) }
     // 
     const queryCart = 'getCart/' + user?.id_user
@@ -121,7 +121,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
             subTotal += data.price_product * data.item_quantity
             totalPoint = Number(totalPoint) * 1 + Number(data.point_reward)
             // arrayId?.push(data.id_item)
-            arrayId?.push(data.item_type)
+            arrayId?.push(data.type_product)
             setArrayId(arrayId)
         })
         //
@@ -215,6 +215,11 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
         // var rawPoint = itemGrandTotal && pointSetting?.transaction ? (itemGrandTotal / 100) / 100 * pointSetting?.transaction : null
         var rawPoint = pointGrandTotal
         var newPoint = rawPoint && user?.point_user ? Number(rawPoint) + Number(user?.point_user) + redeemPoint : null
+        var newXp = rawPoint && user?.totalxpUser ? Number(rawPoint) + Number(user?.totalxpUser) : null
+        console.log("isi user xp user "+ user?.totalxpUser)
+        console.log("isi raw point "+ rawPoint)
+        console.log("isi xp" + " " + newXp)
+
         // console.log("Raw Point : " + rawPoint + " && Point User : " + user?.point_user + " ? Raw Point : " + Number(rawPoint) + " + Point User : " + Number(user?.point_user) + " + Redeem Point : + " + redeemPoint)
         //
         const now = new Date();
@@ -232,7 +237,8 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
 
         const data = {
             id_user: Number(user?.id_user),
-            point_user: newPoint
+            point_user: newPoint,
+            totalxpUser: newXp
         };
         try {
             const response = await fetch('http://localhost:8081/pointTransaction', {
@@ -331,7 +337,7 @@ const ItemCartAvailable: FC<ItemCartAvailableProps> = (props) => {
                                                             </svg>
                                                         </div>
                                                         <div>
-                                                         
+
                                                             Cart
                                                             {/* user?.first_transaction ? user?.first_transaction : "null" */}    {/* for testing first transaction data */}
                                                         </div>

@@ -10,7 +10,7 @@ import { usePathname, useRouter } from "next/navigation";
 function GetCard(mode: number | undefined) {
     const userinfo = Cookies.get('username')
     const query = 'userGet/' + userinfo
-    const [user, setUser] = useState<{ id_user: number; name_user: string; password_user: number, email_user: number; phone_user: number; adress_user: string; point_user: number; totalxpUser: number;level_user: number; showcase_user: number; display_user: string; isDelete_user: number }>()
+    const [user, setUser] = useState<{ id_user: number; name_user: string; password_user: number, email_user: number; phone_user: number; adress_user: string; point_user: number; totalxpUser: number; level_user: number; showcase_user: number; display_user: string; isDelete_user: number }>()
     const datas = async () => { GetData(query).then((resp => { setUser(resp.User[0]) })).catch(resp => console.log(resp)) }
     const idUser = user?.id_user
     const queryTotalTransaksi = 'totalTransaksi/' + idUser
@@ -29,6 +29,9 @@ function GetCard(mode: number | undefined) {
     const [pointSetting, setPointSetting] = useState<{ transaction: number, percentage: number, to_progress: number }>()
     const dataPointSetting = async () => { GetData(querryPoinSetting).then((resp => { setPointSetting(resp.pointsettings[0]); console.log("point setting:", resp.pointsettings) })).catch(resp => console.log(resp)) }
     //
+    const querryLevelMaster = 'getLevelMaster'
+    const [levelMaster, setLevelMaster] = useState<{ id_LevelMaster: number, level_LevelMaster: number, xp_LevelMaster: number }>()
+    const datalevelMaster = async () => { GetData(querryLevelMaster).then((resp => { setLevelMaster(resp.levelMaster[0]); console.log("point setting:", resp.levelMaster) })).catch(resp => console.log(resp)) }
     //
     const [userXpState, setUserXpState] = useState<number>()
     const [userLevelState, setUserLevelState] = useState<number>()
@@ -43,12 +46,14 @@ function GetCard(mode: number | undefined) {
         // const pointToXpRatio = pointSetting?.percentage ? pointSetting?.percentage : 0
         // console.log("point setting percentage : " + pointToXpRatio)
         const nextLevelXponent = pointSetting?.to_progress ? pointSetting?.to_progress : 0
+        // const dbLevelBarrier = levelMaster?.level_LevelMaster
         console.log("point setting to progress : " + nextLevelXponent)
         const userPoint = user?.point_user ? user?.point_user : 0
-        const userXp = user?.totalxpUser ? user.totalxpUser	: 0
+        const userXp = user?.totalxpUser ? user.totalxpUser : 0
         console.log("point user : " + userPoint)
         const currentXp = userXp
         console.log("currentxp = userpoint * point setting percentage : " + currentXp)
+        const showlevel = currentXp > 4000 ? 5 : (currentXp > 3000 ? 4 : (currentXp > 2000 ? 3 : (currentXp > 1000 ? 2 : 1)))
         const currentLevel = currentXp / nextLevelXponent
         console.log("current level = current xp / point setting to progress : " + currentLevel)
         const toNextLevel = nextLevelXponent * (Math.floor(currentLevel) + 1)
@@ -59,9 +64,11 @@ function GetCard(mode: number | undefined) {
         console.log("precentage = varxplevt(" + varxpLeft + ") / to next level(" + toNextLevel + ") * 100 = " + percentageLeft)
         //
         setUserXpState(currentXp)
-        setUserLevelState(Math.floor(currentLevel))
+        // setUserLevelState(Math.floor(currentLevel))
+        setUserLevelState(showlevel)
         setUserXpLeftState(varxpLeft)
-        setUserPercentageLeft(percentageLeft)
+        setUserPercentageLeft(currentLevel * 100 % 100) // currentlevel = current xp
+        console.log(currentLevel)
         //
     };
     // 
