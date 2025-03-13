@@ -10,7 +10,7 @@ import { usePathname, useRouter } from "next/navigation";
 function GetCard(mode: number | undefined) {
     const userinfo = Cookies.get('username')
     const query = 'userGet/' + userinfo
-    const [user, setUser] = useState<{ id_user: number; name_user: string; password_user: number, email_user: number; phone_user: number; adress_user: string; point_user: number; level_user: number; showcase_user: number; display_user: string; isDelete_user: number }>()
+    const [user, setUser] = useState<{ id_user: number; name_user: string; password_user: number, email_user: number; phone_user: number; adress_user: string; point_user: number; totalxpUser: number;level_user: number; showcase_user: number; display_user: string; isDelete_user: number }>()
     const datas = async () => { GetData(query).then((resp => { setUser(resp.User[0]) })).catch(resp => console.log(resp)) }
     const idUser = user?.id_user
     const queryTotalTransaksi = 'totalTransaksi/' + idUser
@@ -40,13 +40,14 @@ function GetCard(mode: number | undefined) {
     //
     const handleCountLevel = () => {
         console.log("HANDLE COUNT LEVEL")
-        const pointToXpRatio = pointSetting?.percentage ? pointSetting?.percentage : 0
-        console.log("point setting percentage : " + pointToXpRatio)
+        // const pointToXpRatio = pointSetting?.percentage ? pointSetting?.percentage : 0
+        // console.log("point setting percentage : " + pointToXpRatio)
         const nextLevelXponent = pointSetting?.to_progress ? pointSetting?.to_progress : 0
         console.log("point setting to progress : " + nextLevelXponent)
         const userPoint = user?.point_user ? user?.point_user : 0
+        const userXp = user?.totalxpUser ? user.totalxpUser	: 0
         console.log("point user : " + userPoint)
-        const currentXp = userPoint * pointToXpRatio
+        const currentXp = userXp
         console.log("currentxp = userpoint * point setting percentage : " + currentXp)
         const currentLevel = currentXp / nextLevelXponent
         console.log("current level = current xp / point setting to progress : " + currentLevel)

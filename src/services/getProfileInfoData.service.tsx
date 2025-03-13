@@ -299,7 +299,7 @@ function GetProfileInfo() {
                     <tr className="w-1 border-t-2 border-solid border-[#e5e7eb]">
                         <td className="pl-3 py-6">Point Status :</td>
                         {/* <td className="pt-6 pl-72">{Number.isNaN(expireTime.getFullYear()) ? "Point Expired" : (expireTime ? "Valid until : " + `${expireTime.getFullYear()}-${expireTime.getMonth()}-${expireTime.getDate()}` : "")}</td> */}
-                        <td className="pt-6 pl-72"> {expireTime != null ? (expireTime == "Invalid Date" ? "Expired" : expireTime) : "Null"} </td>
+                        <td className="pt-6 pl-72"> {expireTime != null ? (expireTime == "Invalid Date" ? "Expired" : expireTime) : "No Expire Date"} </td>
                     </tr>
                 </tbody>
 
