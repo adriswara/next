@@ -29,7 +29,7 @@ const VoucherRedeem: FC<VoucherRedeemProps> = (props) => {
     // get user id from cookie
     const userinfo = Cookies.get('username')
     const query = 'userGet/' + userinfo
-    const [user, setUser] = useState<{ id_user: number, point_user: number }>()
+    const [user, setUser] = useState<{ id_user: number, point_user: number,totalxpUser: number }>()
     const datas = async () => { GetData(query).then((resp => { setUser(resp.User[0]) })).catch(resp => console.log(resp)) }
     //  
     const [showModalNotif, setShowModalNotif] = useState(false);
@@ -85,10 +85,12 @@ const VoucherRedeem: FC<VoucherRedeemProps> = (props) => {
     const handlePoint = async () => {
 
         var newPoint = user?.point_user ? Number(user?.point_user) - price : null
+        var newXp = user?.totalxpUser ? + Number(user?.totalxpUser) : null
 
         const data = {
             id_user: Number(user?.id_user),
-            point_user: newPoint
+            point_user: newPoint,
+            totalxpUser: newXp
         };
         try {
             const response = await fetch('http://localhost:8081/pointTransaction', {
