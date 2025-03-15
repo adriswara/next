@@ -24,8 +24,7 @@ export default function Home() {
     const dataUser = async () => { GetData(querryUser).then((resp => { setUserData(resp.User); console.log(resp.transaction) })).catch(resp => console.log(resp)) }
     //
     const [convertionRate, setconvertionRate] = useState<number>()
-    //
-
+   
 
     useEffect(() => { dataUser() }, [])
 
@@ -58,7 +57,7 @@ export default function Home() {
                                         <td className="p-2 text-left border-b border-solid">{data.Address}</td>
                                         <td className="p-2 text-left border-b border-solid">{data.totalxpUser}</td>
                                         <td className="p-2 text-left border-b border-solid">{data.Total_Transaction_User}</td>
-                                        <td className="p-2 text-left border-b border-solid">{data.Total_Transaction_User * 10 + data.totalxpUser}</td>
+                                        <td className="p-2 text-left border-b border-solid">{data.Total_Transaction_User * 10 + Number(data.totalxpUser)}</td>
 
                                     </tr>
                                 ))}

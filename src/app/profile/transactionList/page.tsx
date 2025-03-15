@@ -115,7 +115,6 @@ const Transaction = () => {
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Item Discounted</th>
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Point Earned</th>
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Total Discount</th>
-                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Pre Discount</th>
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Final</th>
                                 </tr>
                             </thead>
@@ -131,7 +130,6 @@ const Transaction = () => {
                                         <td className="p-2 text-left border-b border-solid">{data.itemFree == -1 ? "All Item" : (data.itemFree == 0 ? "No Discount" : (data.itemFree == 1 ? "Frame" : (data.itemFree == 2 ? "Print" : (data.itemFree == 3 ? "Studio" : "INVAKUD DATA"))))}</td>
                                         <td className="p-2 text-left border-b border-solid">{data.point_reward}</td>
                                         <td className="p-2 text-left border-b border-solid">{data.discount_voucher}%</td>
-                                        <td className="p-2 text-left border-b border-solid">{data.total_price}</td>
                                         <td className="p-2 text-left border-b border-solid">{data.type_product == data.itemFree ? data.total_price - (data.discount_voucher / 100 * data.total_price) : data.total_price}</td>
                                     </tr>
                                 ))}
