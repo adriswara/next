@@ -10,7 +10,7 @@ var expireTimeView
 function GetProfileInfo() {
     const userinfo = Cookies.get('username')
     const query = 'userGet/' + userinfo
-    const [user, setUser] = useState<{ id_user: Number; name_user: number; email_user: number; phone_user: number; Last_login: string, point_user: number, first_transaction: string, last_showcase }>()
+    const [user, setUser] = useState<{ id_user: Number; name_user: number; email_user: number; phone_user: number; Last_login: string, point_user: number, first_transaction: string, last_showcase: string, totalxpUser: number }>()
     const datas = async () => { GetData(query).then((resp => { setUser(resp.User[0]) })).catch(resp => console.log(resp)) }
     useEffect(() => { datas() }, [])
     //
@@ -226,6 +226,7 @@ function GetProfileInfo() {
 
         var rawPoint = pointSetting?.transaction ? 10 / 100 * pointSetting?.login_daily : null
         var newPoint = rawPoint && user?.point_user ? Number(rawPoint) + Number(user?.point_user) : null
+        var newXp = rawPoint && user?.totalxpUser ? Number(rawPoint) + Number(user?.totalxpUser) : null
         console.log("Isi raw point :" + rawPoint)
         if (rawPoint == undefined) {
             return
@@ -234,7 +235,8 @@ function GetProfileInfo() {
         console.log("Hasil :" + newPoint)
         const data = {
             id_user: Number(user?.id_user),
-            point_user: Number(newPoint)
+            point_user: Number(newPoint),
+            totalxpUser: newXp
         };
         try {
             const response = await fetch('http://localhost:8081/pointTransaction', {

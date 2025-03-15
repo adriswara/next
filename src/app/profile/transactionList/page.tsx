@@ -115,7 +115,7 @@ const Transaction = () => {
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Item Discounted</th>
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Point Earned</th>
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Total Discount</th>
-                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Discount</th>
+                                    <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Pre Discount</th>
                                     <th className="p-2 text-left border-b border-solid bg-['#f2f2f2']">Final</th>
                                 </tr>
                             </thead>

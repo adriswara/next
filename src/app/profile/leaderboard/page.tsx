@@ -14,7 +14,7 @@ type userDataType = {
     Phone: string,
     Address: string,
     Point: number,
-    totalXpUser: number,
+    totalxpUser: number,
     Total_Transaction_User: number
 }
 export default function Home() {
@@ -56,9 +56,9 @@ export default function Home() {
                                         <td className="p-2 text-left border-b border-solid">{data.Email}</td>
                                         <td className="p-2 text-left border-b border-solid">{data.Phone}</td>
                                         <td className="p-2 text-left border-b border-solid">{data.Address}</td>
-                                        <td className="p-2 text-left border-b border-solid">{data.Point}</td>
+                                        <td className="p-2 text-left border-b border-solid">{data.totalxpUser}</td>
                                         <td className="p-2 text-left border-b border-solid">{data.Total_Transaction_User}</td>
-                                        <td className="p-2 text-left border-b border-solid">{data.Total_Transaction_User * 10 + data.Point}</td>
+                                        <td className="p-2 text-left border-b border-solid">{data.Total_Transaction_User * 10 + data.totalxpUser}</td>
 
                                     </tr>
                                 ))}
